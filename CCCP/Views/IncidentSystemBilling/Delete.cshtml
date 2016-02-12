@@ -1,0 +1,240 @@
+﻿@model CCCP.Models.IncidentSystemBilling
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>IncidentSystemBilling</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChecklistBatchId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChecklistBatchId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChatRoomId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChatRoomId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GeneralEnquiryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeneralEnquiryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CrisisId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CrisisId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotificationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotificationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueById)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueById)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssueDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CloseById)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CloseById)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CloseDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CloseDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelOfSeverity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LevelOfSeverity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentBackground)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentBackground)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDrillMode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDrillMode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProblemArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProblemArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PossibleCause)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PossibleCause)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingErrorSeriousness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillingErrorSeriousness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedAffectedCustomerBill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Impact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Impact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusUpdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireMitigatingAction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireMitigatingAction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MitigatingAction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MitigatingAction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedDateTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

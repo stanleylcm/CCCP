@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CCCPDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="IncidentSystemBilling">
+          <Key>
+            <PropertyRef Name="IncidentSystemBillingId" />
+          </Key>
+          <Property Name="IncidentSystemBillingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="int" Nullable="false" />
+          <Property Name="CrisisId" Type="int" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="IssueById" Type="int" />
+          <Property Name="IssueDateTime" Type="datetime" />
+          <Property Name="CloseById" Type="int" />
+          <Property Name="CloseDateTime" Type="datetime" />
+          <Property Name="IncidentNo" Type="varchar" MaxLength="50" />
+          <Property Name="LevelOfSeverity" Type="varchar" MaxLength="10" />
+          <Property Name="IncidentStatus" Type="varchar" MaxLength="20" />
+          <Property Name="IncidentBackground" Type="nvarchar(max)" />
+          <Property Name="IsDrillMode" Type="bit" />
+          <Property Name="ProblemArea" Type="nvarchar" MaxLength="255" />
+          <Property Name="PossibleCause" Type="nvarchar" MaxLength="255" />
+          <Property Name="BillingErrorSeriousness" Type="nvarchar" MaxLength="255" />
+          <Property Name="ExpectedAffectedCustomerBill" Type="nvarchar" MaxLength="255" />
+          <Property Name="ContactedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Impact" Type="nvarchar" MaxLength="255" />
+          <Property Name="StatusUpdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="RequireMitigatingAction" Type="nvarchar" MaxLength="255" />
+          <Property Name="MitigatingAction" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IncidentSystemInvoicing">
+          <Key>
+            <PropertyRef Name="IncidentSystemInvoicingId" />
+          </Key>
+          <Property Name="IncidentSystemInvoicingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="int" Nullable="false" />
+          <Property Name="CrisisId" Type="int" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="IssueById" Type="int" />
+          <Property Name="IssueDateTime" Type="datetime" />
+          <Property Name="CloseById" Type="int" />
+          <Property Name="CloseDateTime" Type="datetime" />
+          <Property Name="IncidentNo" Type="varchar" MaxLength="50" />
+          <Property Name="LevelOfSeverity" Type="varchar" MaxLength="10" />
+          <Property Name="IncidentStatus" Type="varchar" MaxLength="20" />
+          <Property Name="IncidentBackground" Type="nvarchar(max)" />
+          <Property Name="IsDrillMode" Type="bit" />
+          <Property Name="ProblemArea" Type="nvarchar" MaxLength="255" />
+          <Property Name="PossibleCause" Type="nvarchar" MaxLength="255" />
+          <Property Name="ExpectedAffectedNoOfBill" Type="int" />
+          <Property Name="ExpectedAffectedBillingDay" Type="int" />
+          <Property Name="ContactedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Impact" Type="nvarchar" MaxLength="255" />
+          <Property Name="StatusUpdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="RequireMitigatingAction" Type="nvarchar" MaxLength="255" />
+          <Property Name="MitigatingAction" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <Function Name="usp_IncidentSystemBilling_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="CCCPDataModelStoreContainer">
+          <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncidentSystemInvoicing" EntityType="Self.IncidentSystemInvoicing" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCCPDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IncidentSystemBilling">
+          <Key>
+            <PropertyRef Name="IncidentSystemBillingId" />
+          </Key>
+          <Property Name="IncidentSystemBillingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="ProblemArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BillingErrorSeriousness" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedAffectedCustomerBill" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ContactedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RequireMitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CCCPData" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" />
+          <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCPDataModel.IncidentSystemInvoicing" />
+          <FunctionImport Name="usp_IncidentSystemBilling_Test" ReturnType="Collection(CCCPDataModel.usp_IncidentSystemBilling_Test_Result)" />
+        </EntityContainer>
+        <EntityType Name="IncidentSystemInvoicing">
+          <Key>
+            <PropertyRef Name="IncidentSystemInvoicingId" />
+          </Key>
+          <Property Name="IncidentSystemInvoicingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="ProblemArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedAffectedNoOfBill" Type="Int32" />
+          <Property Name="ExpectedAffectedBillingDay" Type="Int32" />
+          <Property Name="ContactedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RequireMitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="usp_IncidentSystemBilling_Test_Result">
+          <Property Type="Int32" Name="IncidentSystemBillingId" Nullable="false" />
+          <Property Type="Int32" Name="ChecklistBatchId" Nullable="false" />
+          <Property Type="Int32" Name="ChatRoomId" Nullable="false" />
+          <Property Type="Int32" Name="GeneralEnquiryId" Nullable="false" />
+          <Property Type="Int32" Name="CrisisId" Nullable="true" />
+          <Property Type="Int32" Name="NotificationId" Nullable="false" />
+          <Property Type="Int32" Name="IssueById" Nullable="true" />
+          <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CloseById" Nullable="true" />
+          <Property Type="DateTime" Name="CloseDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IncidentNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LevelOfSeverity" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IncidentStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IncidentBackground" Nullable="true" />
+          <Property Type="Boolean" Name="IsDrillMode" Nullable="true" />
+          <Property Type="String" Name="ProblemArea" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PossibleCause" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BillingErrorSeriousness" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ExpectedAffectedCustomerBill" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ContactedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Impact" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="StatusUpdate" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="RequireMitigatingAction" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MitigatingAction" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="LastUpdatedDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CCCPDataModelStoreContainer" CdmEntityContainer="CCCPData">
+          <EntitySetMapping Name="IncidentSystemBilling">
+            <EntityTypeMapping TypeName="CCCPDataModel.IncidentSystemBilling">
+              <MappingFragment StoreEntitySet="IncidentSystemBilling">
+                <ScalarProperty Name="IncidentSystemBillingId" ColumnName="IncidentSystemBillingId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="ProblemArea" ColumnName="ProblemArea" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="BillingErrorSeriousness" ColumnName="BillingErrorSeriousness" />
+                <ScalarProperty Name="ExpectedAffectedCustomerBill" ColumnName="ExpectedAffectedCustomerBill" />
+                <ScalarProperty Name="ContactedBy" ColumnName="ContactedBy" />
+                <ScalarProperty Name="Impact" ColumnName="Impact" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="RequireMitigatingAction" ColumnName="RequireMitigatingAction" />
+                <ScalarProperty Name="MitigatingAction" ColumnName="MitigatingAction" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentSystemInvoicing">
+            <EntityTypeMapping TypeName="CCCPDataModel.IncidentSystemInvoicing">
+              <MappingFragment StoreEntitySet="IncidentSystemInvoicing">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MitigatingAction" ColumnName="MitigatingAction" />
+                <ScalarProperty Name="RequireMitigatingAction" ColumnName="RequireMitigatingAction" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="Impact" ColumnName="Impact" />
+                <ScalarProperty Name="ContactedBy" ColumnName="ContactedBy" />
+                <ScalarProperty Name="ExpectedAffectedBillingDay" ColumnName="ExpectedAffectedBillingDay" />
+                <ScalarProperty Name="ExpectedAffectedNoOfBill" ColumnName="ExpectedAffectedNoOfBill" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="ProblemArea" ColumnName="ProblemArea" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="IncidentSystemInvoicingId" ColumnName="IncidentSystemInvoicingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_IncidentSystemBilling_Test" FunctionName="CCCPDataModel.Store.usp_IncidentSystemBilling_Test">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCPDataModel.usp_IncidentSystemBilling_Test_Result">
+                <ScalarProperty Name="IncidentSystemBillingId" ColumnName="IncidentSystemBillingId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="ProblemArea" ColumnName="ProblemArea" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="BillingErrorSeriousness" ColumnName="BillingErrorSeriousness" />
+                <ScalarProperty Name="ExpectedAffectedCustomerBill" ColumnName="ExpectedAffectedCustomerBill" />
+                <ScalarProperty Name="ContactedBy" ColumnName="ContactedBy" />
+                <ScalarProperty Name="Impact" ColumnName="Impact" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="RequireMitigatingAction" ColumnName="RequireMitigatingAction" />
+                <ScalarProperty Name="MitigatingAction" ColumnName="MitigatingAction" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
