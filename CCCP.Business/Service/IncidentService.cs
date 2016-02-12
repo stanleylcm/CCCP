@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CCCP.Common;
-using CCCP.Common.Declaration;
-using CCCP.EF;
+using CCCP.Common;
+using CCCP.Models;
 
 namespace CCCP.Business.Service
 {

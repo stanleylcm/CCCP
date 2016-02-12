@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.EF
+namespace CCCP.Models
 {
     using System;
     using System.Data.Entity;
@@ -29,6 +29,7 @@ namespace CCCP.EF
     
         public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
+        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

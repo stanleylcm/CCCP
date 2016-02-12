@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCCP.Common", "CCCP.Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCCP.Business", "CCCP.Business\CCCP.Business.csproj", "{9D85B915-7F6C-4498-A6B9-3C880B67E363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCCP.EF", "CCCP.EF\CCCP.EF.csproj", "{7AF3703E-1CF2-42D1-BAE3-5BBBDA0F6047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCCP.Models", "CCCP.EF\CCCP.Models.csproj", "{7AF3703E-1CF2-42D1-BAE3-5BBBDA0F6047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

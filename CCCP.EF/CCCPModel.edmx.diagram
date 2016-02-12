@@ -7,6 +7,7 @@
       <Diagram DiagramId="8ef109ace8a84efab7db92448116b250" Name="Diagram1">
         <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemBilling" Width="2.375" PointX="0.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemInvoicing" Width="2.375" PointX="0.75" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemCallCentre" Width="2.375" PointX="0.75" PointY="2" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

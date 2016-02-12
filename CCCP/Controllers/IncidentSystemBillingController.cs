@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CCCP.EF;
+using CCCP.Models;
 
 namespace CCCP.Controllers
 {

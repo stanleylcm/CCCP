@@ -12,9 +12,9 @@ namespace CCCP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IncidentSystemBilling
+    public partial class IncidentSystemCallCentre
     {
-        public int IncidentSystemBillingId { get; set; }
+        public int IncidentSystemCallCentreId { get; set; }
         public int ChecklistBatchId { get; set; }
         public int ChatRoomId { get; set; }
         public int GeneralEnquiryId { get; set; }
@@ -29,15 +29,13 @@ namespace CCCP.Models
         public string IncidentStatus { get; set; }
         public string IncidentBackground { get; set; }
         public Nullable<bool> IsDrillMode { get; set; }
-        public string ProblemArea { get; set; }
-        public string PossibleCause { get; set; }
-        public string BillingErrorSeriousness { get; set; }
-        public string ExpectedAffectedCustomerBill { get; set; }
-        public string ContactedBy { get; set; }
         public string Impact { get; set; }
-        public string StatusUpdate { get; set; }
+        public string PossibleCause { get; set; }
+        public Nullable<short> ExpectedRestorationTime { get; set; }
         public string RequireMitigatingAction { get; set; }
         public string MitigatingAction { get; set; }
+        public string StatusUpdate { get; set; }
+        public Nullable<System.DateTime> FullRestoration { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

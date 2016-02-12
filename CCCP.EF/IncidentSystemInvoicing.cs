@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.EF
+namespace CCCP.Models
 {
     using System;
     using System.Collections.Generic;

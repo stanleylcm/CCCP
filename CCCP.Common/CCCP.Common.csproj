@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Declaration\Enumeration.cs" />
+    <Compile Include="Enumeration.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="ExtensionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

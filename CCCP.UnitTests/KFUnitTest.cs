@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CCCP.EF;
+using CCCP.Models;
 using System.Data.Entity.Core.Objects;
 
 namespace CCCP.UnitTests

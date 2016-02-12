@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CCCP.Common.Declaration
+namespace CCCP.Common
 {
     public enum IncidentLevel
     {
