@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.Models
+namespace CCCP.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class IncidentSystemBilling
+    public partial class IncidentSystemInvoicing
     {
-        public int IncidentSystemBillingId { get; set; }
+        public int IncidentSystemInvoicingId { get; set; }
         public int ChecklistBatchId { get; set; }
         public int ChatRoomId { get; set; }
         public int GeneralEnquiryId { get; set; }
@@ -31,8 +31,8 @@ namespace CCCP.Models
         public Nullable<bool> IsDrillMode { get; set; }
         public string ProblemArea { get; set; }
         public string PossibleCause { get; set; }
-        public string BillingErrorSeriousness { get; set; }
-        public string ExpectedAffectedCustomerBill { get; set; }
+        public Nullable<int> ExpectedAffectedNoOfBill { get; set; }
+        public Nullable<int> ExpectedAffectedBillingDay { get; set; }
         public string ContactedBy { get; set; }
         public string Impact { get; set; }
         public string StatusUpdate { get; set; }

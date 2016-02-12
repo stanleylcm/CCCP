@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.Models
+namespace CCCP.EF
 {
     using System;
     

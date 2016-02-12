@@ -119,36 +119,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BusinessService\IncidentService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
-    <Compile Include="Declaration\Enumeration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CCCPModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CCCPModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CCCPModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CCCPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CCCPModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CCCPModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IncidentSystemBilling.cs">
-      <DependentUpon>CCCPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IncidentSystemInvoicing.cs">
-      <DependentUpon>CCCPModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usp_IncidentSystemBilling_Test_Result.cs">
-      <DependentUpon>CCCPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,23 +135,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\CCCPModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CCCPModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CCCPModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CCCPModel.edmx</DependentUpon>
-      <LastGenOutput>CCCPModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CCCPModel.edmx.diagram">
-      <DependentUpon>CCCPModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\CCCPModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CCCPModel.edmx</DependentUpon>
-      <LastGenOutput>CCCPModel.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -213,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -225,9 +183,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CCCP.Business\CCCP.Business.csproj">
+      <Project>{9d85b915-7f6c-4498-a6b9-3c880b67e363}</Project>
+      <Name>CCCP.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CCCP.Common\CCCP.Common.csproj">
       <Project>{253311ae-0a07-455f-9e61-0bda9d1db9e3}</Project>
       <Name>CCCP.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CCCP.EF\CCCP.EF.csproj">
+      <Project>{7af3703e-1cf2-42d1-bae3-5bbbda0f6047}</Project>
+      <Name>CCCP.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
