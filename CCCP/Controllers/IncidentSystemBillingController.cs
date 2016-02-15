@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CCCP.ViewModel;
+using CCCP.Business.Model;
 
 namespace CCCP.Controllers
 {
@@ -124,13 +125,28 @@ namespace CCCP.Controllers
             base.Dispose(disposing);
         }
 
-        private void loadCheckLists(int checklistBatchID)
+        public void loadCheckLists(ref IncidentSystemBillingModel incident, int checklistBatchID)
         {
-            //List<ChecklistBatch> checkListBatchs
+            // load checklists
+            incident.Checklists = (from cb in db.ChecklistBatch
+                              join c in db.Checklist on cb.ChecklistId equals c.ChecklistId
+                              where cb.ChecklistBatchId.Equals(checklistBatchID)
+                              select c).ToList<Checklist>();
+            
+
+
+
+
+            // load checklists from checklistBatch
+            //List<ChecklistAction> checkListActions = from cb in db.ChecklistBatch
+            //                   join ca in db.ChecklistAction on cb.ChecklistId equals ca.ChecklistId
+            //                   where cb.ChecklistBatchId.Equals(checklistBatchID)
+            //                   select new ChecklistAction
+                              
 
             // load checklist actions
-            int checklistID = 1;
-            List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(checklistID).ToList();
+            //int checklistID = 1;
+            //List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(checklistID).ToList();
         }
 
     }
