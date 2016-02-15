@@ -23,6 +23,7 @@ namespace CCCP.Business.Model
         public IncidentSystemBilling Entity = new IncidentSystemBilling();
         public IncidentStatus IncidentStatus = IncidentStatus.Pending;
         public List<Checklist> Checklists = new List<Checklist>();
-     
+
+
     }
 }

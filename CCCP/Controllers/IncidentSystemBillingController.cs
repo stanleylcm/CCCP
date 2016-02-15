@@ -115,11 +115,6 @@ namespace CCCP.Controllers
             return RedirectToAction("Index");
         }
 
-        private void loadCheckList()
-        {
-            List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(1).ToList();
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -128,5 +123,15 @@ namespace CCCP.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void loadCheckLists(int checklistBatchID)
+        {
+            //List<ChecklistBatch> checkListBatchs
+
+            // load checklist actions
+            int checklistID = 1;
+            List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(checklistID).ToList();
+        }
+
     }
 }

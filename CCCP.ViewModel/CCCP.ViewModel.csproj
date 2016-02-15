@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7AF3703E-1CF2-42D1-BAE3-5BBBDA0F6047}</ProjectGuid>
+    <ProjectGuid>{B352F7D3-AC1E-4F7D-ADE8-2D6689690149}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCCP.ViewModel</RootNamespace>
@@ -48,10 +48,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCCPDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CCCPDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CCCPDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CCCPDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CCCPDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Checklist.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChecklistAction.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChecklistBatch.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemBilling.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemCallCentre.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemInvoicing.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="usp_ChecklistBatch_LoadData_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Checklist_LoadData_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_IncidentSystemBilling_Test_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="CCCPDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CCCPDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CCCPDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CCCPDataModel.edmx</DependentUpon>
+      <LastGenOutput>CCCPDataModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="CCCPDataModel.edmx.diagram">
+      <DependentUpon>CCCPDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="CCCPDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CCCPDataModel.edmx</DependentUpon>
+      <LastGenOutput>CCCPDataModel.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

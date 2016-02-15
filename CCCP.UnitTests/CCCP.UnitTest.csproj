@@ -109,8 +109,8 @@
       <Project>{253311ae-0a07-455f-9e61-0bda9d1db9e3}</Project>
       <Name>CCCP.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CCCP.EF\CCCP.ViewModel.csproj">
-      <Project>{7af3703e-1cf2-42d1-bae3-5bbbda0f6047}</Project>
+    <ProjectReference Include="..\CCCP.ViewModel\CCCP.ViewModel.csproj">
+      <Project>{b352f7d3-ac1e-4f7d-ade8-2d6689690149}</Project>
       <Name>CCCP.ViewModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\CCCP\CCCP.csproj">

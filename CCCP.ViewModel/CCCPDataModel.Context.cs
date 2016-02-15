@@ -18,7 +18,7 @@ namespace CCCP.ViewModel
     public partial class CCCPDbContext : DbContext
     {
         public CCCPDbContext()
-            : base("name=CCCPData")
+            : base("name=CCCPDbContext")
         {
         }
     
@@ -27,17 +27,12 @@ namespace CCCP.ViewModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
-        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
-        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<Checklist> Checklist { get; set; }
         public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
         public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
-    
-        public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_IncidentSystemBilling_Test_Result>("usp_IncidentSystemBilling_Test");
-        }
+        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
+        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
+        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
     
         public virtual ObjectResult<ChecklistAction> usp_Checklist_LoadData(Nullable<int> checklistId)
         {
@@ -55,6 +50,29 @@ namespace CCCP.ViewModel
                 new ObjectParameter("ChecklistId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistAction>("usp_Checklist_LoadData", mergeOption, checklistIdParameter);
+        }
+    
+        public virtual ObjectResult<ChecklistBatch> usp_ChecklistBatch_LoadData(Nullable<int> checklistBatchId)
+        {
+            var checklistBatchIdParameter = checklistBatchId.HasValue ?
+                new ObjectParameter("ChecklistBatchId", checklistBatchId) :
+                new ObjectParameter("ChecklistBatchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistBatch>("usp_ChecklistBatch_LoadData", checklistBatchIdParameter);
+        }
+    
+        public virtual ObjectResult<ChecklistBatch> usp_ChecklistBatch_LoadData(Nullable<int> checklistBatchId, MergeOption mergeOption)
+        {
+            var checklistBatchIdParameter = checklistBatchId.HasValue ?
+                new ObjectParameter("ChecklistBatchId", checklistBatchId) :
+                new ObjectParameter("ChecklistBatchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistBatch>("usp_ChecklistBatch_LoadData", mergeOption, checklistBatchIdParameter);
+        }
+    
+        public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_IncidentSystemBilling_Test_Result>("usp_IncidentSystemBilling_Test");
         }
     }
 }
