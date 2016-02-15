@@ -43,6 +43,9 @@
     <Compile Include="Model\ChecklistActionModel.cs" />
     <Compile Include="Model\ChecklistModel.cs" />
     <Compile Include="Model\IncidentSystemBillingModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Service\AccessControlService.cs" />
+    <Compile Include="Service\AuditTrailService.cs" />
     <Compile Include="Service\IncidentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,6 +14,7 @@ namespace CCCP.Controllers
     public class IncidentSystemBillingController : Controller
     {
         private CCCPDbContext db = new CCCPDbContext();
+        public IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
 
         // GET: IncidentSystemBillings
         public ActionResult Index()
@@ -62,16 +63,15 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
-            if (incidentSystemBilling == null)
+            if (incidentSystemBilling == null) return HttpNotFound();
+            else
             {
-                return HttpNotFound();
+                LoadData(id.Value);
+                return View(incidentSystemBilling);
             }
-            return View(incidentSystemBilling);
         }
 
         // POST: IncidentSystemBillings/Edit/5
@@ -83,8 +83,31 @@ namespace CCCP.Controllers
         {
             if (ModelState.IsValid)
             {
+                // prepare history etc. before save
+                incident.PrepareSave();
+
                 db.Entry(incidentSystemBilling).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    foreach (var failure in ex.EntityValidationErrors)
+                    {
+                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                        foreach (var error in failure.ValidationErrors)
+                        {
+                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                            sb.AppendLine();
+                        }
+                    }
+
+                    // output validation errors
+                    Console.WriteLine(sb.ToString());
+                }
+
                 return RedirectToAction("Index");
             }
             return View(incidentSystemBilling);
@@ -125,29 +148,37 @@ namespace CCCP.Controllers
             base.Dispose(disposing);
         }
 
-        public void loadCheckLists(ref IncidentSystemBillingModel incident, int checklistBatchID)
+        public void LoadData(int incidentId)
         {
+            incident = new IncidentSystemBillingModel();
+
+            // load incident details
+            incident.Entity = db.IncidentSystemBilling.Find(incidentId);
+
             // load checklists
-            incident.Checklists = (from cb in db.ChecklistBatch
-                              join c in db.Checklist on cb.ChecklistId equals c.ChecklistId
-                              where cb.ChecklistBatchId.Equals(checklistBatchID)
-                              select c).ToList<Checklist>();
-            
-
-
-
-
-            // load checklists from checklistBatch
-            //List<ChecklistAction> checkListActions = from cb in db.ChecklistBatch
-            //                   join ca in db.ChecklistAction on cb.ChecklistId equals ca.ChecklistId
-            //                   where cb.ChecklistBatchId.Equals(checklistBatchID)
-            //                   select new ChecklistAction
-                              
+            int checklistBatchID = incident.Entity.ChecklistBatchId;
+            incident.ChecklistEntities = (from cb in db.ChecklistBatch
+                                          join c in db.Checklist on cb.ChecklistId equals c.ChecklistId
+                                          where cb.ChecklistBatchId.Equals(checklistBatchID)
+                                          orderby c.SortingOrder
+                                          select c).ToList<Checklist>();
 
             // load checklist actions
-            //int checklistID = 1;
-            //List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(checklistID).ToList();
+            foreach (ChecklistModel checklist in incident.Checklists)
+            {
+                List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
+                                                        where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                        select ca).ToList<ChecklistAction>();
+                checklist.ChecklistActionEntities = actionEntities;
+            }
+
+            // load chat room
+
         }
 
+        public void Test()
+        {
+            incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();
+        }
     }
 }

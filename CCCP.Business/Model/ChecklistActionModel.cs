@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CCCP.Common;
 using CCCP.ViewModel;
+using CCCP.Business.Service;
 
 namespace CCCP.Business.Model
 {
@@ -12,6 +13,10 @@ namespace CCCP.Business.Model
     {
         public ChecklistActionModel()
         { 
+        }
+        public ChecklistActionModel(ChecklistAction entity)
+        {
+            this.Entity = entity;
         }
 
         public ChecklistAction Entity = new ChecklistAction();
@@ -39,12 +44,18 @@ namespace CCCP.Business.Model
         {
             switch (ActionStatus)
             {
-                case CheckListActionStatus.Pending: { ActionStatus = CheckListActionStatus.In_Progress; return; }
-                case CheckListActionStatus.In_Progress: { ActionStatus = CheckListActionStatus.Completed; return; }
-                case CheckListActionStatus.Completed: { ActionStatus = CheckListActionStatus.Pending; return; }
+                case CheckListActionStatus.Pending: { ActionStatus = CheckListActionStatus.In_Progress; break; }
+                case CheckListActionStatus.In_Progress: { ActionStatus = CheckListActionStatus.Completed; break; }
+                case CheckListActionStatus.Completed: { ActionStatus = CheckListActionStatus.Pending; break; }
             }
 
             HasUpdate = true;
+
+        }
+        public void PrepareSave(DateTime updateDateTime)
+        {
+            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            Entity.LastUpdatedDateTime = updateDateTime;
         }
     }
 }

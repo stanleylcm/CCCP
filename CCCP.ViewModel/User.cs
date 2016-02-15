@@ -12,10 +12,16 @@ namespace CCCP.ViewModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Checklist
+    public partial class User
     {
-        public int ChecklistId { get; set; }
-        public Nullable<short> SortingOrder { get; set; }
+        public int UserId { get; set; }
+        public int DepartmentId { get; set; }
+        public string StaffCode { get; set; }
+        public string UserName { get; set; }
+        public string DisplayName { get; set; }
+        public string Title { get; set; }
+        public string LoginName { get; set; }
+        public string Password { get; set; }
         public string History { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

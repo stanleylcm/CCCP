@@ -27,29 +27,21 @@ namespace CCCP.ViewModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Checklist> Checklist { get; set; }
-        public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
         public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
         public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Checklist> Checklist { get; set; }
+        public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
     
-        public virtual ObjectResult<ChecklistAction> usp_Checklist_LoadData(Nullable<int> checklistId)
+        public virtual int usp_Checklist_LoadData(Nullable<int> checklistId)
         {
             var checklistIdParameter = checklistId.HasValue ?
                 new ObjectParameter("ChecklistId", checklistId) :
                 new ObjectParameter("ChecklistId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistAction>("usp_Checklist_LoadData", checklistIdParameter);
-        }
-    
-        public virtual ObjectResult<ChecklistAction> usp_Checklist_LoadData(Nullable<int> checklistId, MergeOption mergeOption)
-        {
-            var checklistIdParameter = checklistId.HasValue ?
-                new ObjectParameter("ChecklistId", checklistId) :
-                new ObjectParameter("ChecklistId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistAction>("usp_Checklist_LoadData", mergeOption, checklistIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Checklist_LoadData", checklistIdParameter);
         }
     
         public virtual ObjectResult<ChecklistBatch> usp_ChecklistBatch_LoadData(Nullable<int> checklistBatchId)

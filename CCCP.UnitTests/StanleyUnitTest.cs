@@ -4,6 +4,8 @@ using System.Data.Entity.Core.Objects;
 using CCCP.ViewModel;
 using CCCP.Common;
 using CCCP.Business;
+using CCCP.Controllers;
+using CCCP.Business.Service;
 
 namespace CCCP.UnitTest
 {
@@ -32,6 +34,24 @@ namespace CCCP.UnitTest
             string s = "Corporate Image";
             bool result = false;
             IncidentSubType subtype1 = s.ToEnum<IncidentSubType>(out result);
+        }
+
+        [TestMethod]
+        public void TestMisc()
+        {
+            string a = DateTime.Now.ToString("yyyy-MM-dd tthh:mm:ss");
+        }
+
+        [TestMethod]
+        public void TestIncidentSystemBilling()
+        {
+            AccessControlService.CurrentUser.Entity.LoginName = "stanleylam";
+            AccessControlService.CurrentUser.Entity.DisplayName = "Stanley Lam";
+            
+            IncidentSystemBillingController controller = new IncidentSystemBillingController();
+            controller.Edit(1);
+            controller.Test();
+            controller.Edit(controller.incident.Entity);
         }
     }
 }
