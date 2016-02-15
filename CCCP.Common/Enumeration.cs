@@ -70,4 +70,36 @@ namespace CCCP.Common
         Ready_For_Close,
         Closed
     }
+
+    public enum MenuItem
+    {
+        RoleMaintainenance = 0,
+        UserAccountMaintenance,
+        Home_Index, // Home_Dashboard;
+        GeneralEnquiry,
+        IncidentManagement,
+        IncidentQualityNetwork,
+        IncidentQualityGeneration,
+        IncidentQualityCorporateImage,
+        IncidentEnvironmentLeakage,
+        IncidentEnvironmentAirEmission,
+        IncidentOHS,
+        IncidentSystemInvoicing,
+        IncidentSystemBilling,
+        IncidentSystemCallCentre,
+        IncidentSystemNetworkConnectivity,
+        IncidentSystemITSystem,
+        IncidentSystemOTSystem,
+        IncidentSystemSecurity,
+        OMSEvent,
+        CrisisManagement,
+        CrisisApproval,
+        BusinessDataMainteneance,
+        ChecklistMaintenance,
+        AuditTrial,
+        Report,
+        Report_IncidentSummary,
+        Report_IncidentDetails,
+        Report_IncidentDetailsForCOT
+    }
 }
