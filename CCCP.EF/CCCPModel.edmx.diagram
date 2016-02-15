@@ -5,9 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8ef109ace8a84efab7db92448116b250" Name="Diagram1">
-        <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemBilling" Width="2.375" PointX="0.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemInvoicing" Width="2.375" PointX="0.75" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCPDataModel.IncidentSystemCallCentre" Width="2.375" PointX="0.75" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.IncidentSystemBilling" Width="2.375" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.IncidentSystemInvoicing" Width="2.375" PointX="0.75" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.IncidentSystemCallCentre" Width="2.375" PointX="0.75" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.Checklist" Width="1.5" PointX="4.75" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.ChecklistAction" Width="1.5" PointX="4.75" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCPViewModel.ChecklistBatch" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

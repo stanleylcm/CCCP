@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.Models
+namespace CCCP.ViewModel
 {
     using System;
     using System.Collections.Generic;

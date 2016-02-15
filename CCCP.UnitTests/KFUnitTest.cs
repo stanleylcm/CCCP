@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CCCP.Models;
+using CCCP.ViewModel;
 using System.Data.Entity.Core.Objects;
 
-namespace CCCP.UnitTests
+namespace CCCP.UnitTest
 {
     [TestClass]
     public class KFUnitTest

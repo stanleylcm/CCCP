@@ -9,8 +9,8 @@
     <ProjectGuid>{9C744786-9356-40C6-B8E9-5854E7C14FB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CCCP.UnitTests</RootNamespace>
-    <AssemblyName>CCCP.UnitTests</AssemblyName>
+    <RootNamespace>CCCP.UnitTest</RootNamespace>
+    <AssemblyName>CCCP.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -109,9 +109,9 @@
       <Project>{253311ae-0a07-455f-9e61-0bda9d1db9e3}</Project>
       <Name>CCCP.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CCCP.EF\CCCP.Models.csproj">
+    <ProjectReference Include="..\CCCP.EF\CCCP.ViewModel.csproj">
       <Project>{7af3703e-1cf2-42d1-bae3-5bbbda0f6047}</Project>
-      <Name>CCCP.Models</Name>
+      <Name>CCCP.ViewModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\CCCP\CCCP.csproj">
       <Project>{26B0BDCA-23B7-4191-AD2E-B88EC656F361}</Project>

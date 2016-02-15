@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCCP.Models
+namespace CCCP.ViewModel
 {
     using System;
     using System.Data.Entity;
@@ -30,10 +30,31 @@ namespace CCCP.Models
         public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
+        public virtual DbSet<Checklist> Checklist { get; set; }
+        public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
+        public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_IncidentSystemBilling_Test_Result>("usp_IncidentSystemBilling_Test");
+        }
+    
+        public virtual ObjectResult<ChecklistAction> usp_Checklist_LoadData(Nullable<int> checklistId)
+        {
+            var checklistIdParameter = checklistId.HasValue ?
+                new ObjectParameter("ChecklistId", checklistId) :
+                new ObjectParameter("ChecklistId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistAction>("usp_Checklist_LoadData", checklistIdParameter);
+        }
+    
+        public virtual ObjectResult<ChecklistAction> usp_Checklist_LoadData(Nullable<int> checklistId, MergeOption mergeOption)
+        {
+            var checklistIdParameter = checklistId.HasValue ?
+                new ObjectParameter("ChecklistId", checklistId) :
+                new ObjectParameter("ChecklistId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChecklistAction>("usp_Checklist_LoadData", mergeOption, checklistIdParameter);
         }
     }
 }

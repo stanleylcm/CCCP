@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CCCP.Models;
 using System.Data.Entity.Core.Objects;
+using CCCP.ViewModel;
+using CCCP.Common;
+using CCCP.Business;
 
-namespace CCCP.UnitTests
+namespace CCCP.UnitTest
 {
     [TestClass]
     public class StanleyUnitTest
@@ -17,6 +19,19 @@ namespace CCCP.UnitTests
             {
                 // iterate record
             }
+        }
+
+        [TestMethod]
+        public void TestEnumExtensionMethod()
+        {
+            // enum to caption
+            IncidentSubType subtype = IncidentSubType.Corporate_Image;
+            Console.WriteLine(subtype.ToEnumString());
+
+            // string to enum
+            string s = "Corporate Image";
+            bool result = false;
+            IncidentSubType subtype1 = s.ToEnum<IncidentSubType>(out result);
         }
     }
 }

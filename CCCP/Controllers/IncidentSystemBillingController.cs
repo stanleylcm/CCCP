@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CCCP.Models;
+using CCCP.ViewModel;
 
 namespace CCCP.Controllers
 {
@@ -113,6 +113,11 @@ namespace CCCP.Controllers
             db.IncidentSystemBilling.Remove(incidentSystemBilling);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void loadCheckList()
+        {
+            List<ChecklistAction> checkListActions = db.usp_Checklist_LoadData(1).ToList();
         }
 
         protected override void Dispose(bool disposing)

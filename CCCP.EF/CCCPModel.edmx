@@ -5,6 +5,47 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CCCPDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Checklist">
+          <Key>
+            <PropertyRef Name="ChecklistId" />
+          </Key>
+          <Property Name="ChecklistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
+          <Property Name="SortingOrder" Type="smallint" />
+          <Property Name="History" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChecklistAction">
+          <Key>
+            <PropertyRef Name="ChecklistActionId" />
+          </Key>
+          <Property Name="ChecklistActionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistId" Type="int" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="255" />
+          <Property Name="ActionStatus" Type="char" MaxLength="1" />
+          <Property Name="IsCompulsory" Type="bit" />
+          <Property Name="AlertThreshold" Type="smallint" />
+          <Property Name="SortingOrder" Type="smallint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChecklistBatch">
+          <Key>
+            <PropertyRef Name="ChecklistBatchId" />
+            <PropertyRef Name="ChecklistId" />
+          </Key>
+          <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
+          <Property Name="ChecklistId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="IncidentSystemBilling">
           <Key>
             <PropertyRef Name="IncidentSystemBillingId" />
@@ -102,8 +143,14 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <Function Name="usp_Checklist_LoadData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ChecklistId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_IncidentSystemBilling_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CCCPDataModelStoreContainer">
+          <EntitySet Name="Checklist" EntityType="Self.Checklist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChecklistAction" EntityType="Self.ChecklistAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemCallCentre" EntityType="Self.IncidentSystemCallCentre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemInvoicing" EntityType="Self.IncidentSystemInvoicing" Schema="dbo" store:Type="Tables" />
@@ -111,7 +158,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CCCPDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CCCPViewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="IncidentSystemBilling">
           <Key>
             <PropertyRef Name="IncidentSystemBillingId" />
@@ -147,9 +194,15 @@
         </EntityType>
         <EntityContainer Name="CCCPData" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" />
-          <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCPDataModel.IncidentSystemInvoicing" />
-          <FunctionImport Name="usp_IncidentSystemBilling_Test" ReturnType="Collection(CCCPDataModel.usp_IncidentSystemBilling_Test_Result)" />
-          <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCPDataModel.IncidentSystemCallCentre" />
+          <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCPViewModel.IncidentSystemInvoicing" />
+          <FunctionImport Name="usp_IncidentSystemBilling_Test" ReturnType="Collection(CCCPViewModel.usp_IncidentSystemBilling_Test_Result)" />
+          <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCPViewModel.IncidentSystemCallCentre" />
+          <EntitySet Name="Checklist" EntityType="CCCPViewModel.Checklist" />
+          <EntitySet Name="ChecklistAction" EntityType="CCCPViewModel.ChecklistAction" />
+          <EntitySet Name="ChecklistBatch" EntityType="CCCPViewModel.ChecklistBatch" />
+          <FunctionImport Name="usp_Checklist_LoadData" EntitySet="ChecklistAction" ReturnType="Collection(CCCPViewModel.ChecklistAction)">
+            <Parameter Name="ChecklistId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="IncidentSystemInvoicing">
           <Key>
@@ -245,6 +298,60 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Checklist">
+          <Key>
+            <PropertyRef Name="ChecklistId" />
+          </Key>
+          <Property Name="ChecklistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChecklistAction">
+          <Key>
+            <PropertyRef Name="ChecklistActionId" />
+          </Key>
+          <Property Name="ChecklistActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistId" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ActionStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsCompulsory" Type="Boolean" />
+          <Property Name="AlertThreshold" Type="Int16" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChecklistBatch">
+          <Key>
+            <PropertyRef Name="ChecklistBatchId" />
+            <PropertyRef Name="ChecklistId" />
+          </Key>
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChecklistId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="usp_Checklist_LoadData_Result">
+          <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
+          <Property Type="Int32" Name="ChecklistId" Nullable="false" />
+          <Property Type="String" Name="Action" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ActionStatus" Nullable="true" MaxLength="1" />
+          <Property Type="Boolean" Name="IsCompulsory" Nullable="true" />
+          <Property Type="Int16" Name="AlertThreshold" Nullable="true" />
+          <Property Type="Int16" Name="SortingOrder" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="LastUpdatedDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -252,7 +359,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CCCPDataModelStoreContainer" CdmEntityContainer="CCCPData">
           <EntitySetMapping Name="IncidentSystemBilling">
-            <EntityTypeMapping TypeName="CCCPDataModel.IncidentSystemBilling">
+            <EntityTypeMapping TypeName="CCCPViewModel.IncidentSystemBilling">
               <MappingFragment StoreEntitySet="IncidentSystemBilling">
                 <ScalarProperty Name="IncidentSystemBillingId" ColumnName="IncidentSystemBillingId" />
                 <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
@@ -286,7 +393,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IncidentSystemInvoicing">
-            <EntityTypeMapping TypeName="CCCPDataModel.IncidentSystemInvoicing">
+            <EntityTypeMapping TypeName="CCCPViewModel.IncidentSystemInvoicing">
               <MappingFragment StoreEntitySet="IncidentSystemInvoicing">
                 <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
@@ -321,7 +428,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_IncidentSystemBilling_Test" FunctionName="CCCPDataModel.Store.usp_IncidentSystemBilling_Test">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="CCCPDataModel.usp_IncidentSystemBilling_Test_Result">
+              <ComplexTypeMapping TypeName="CCCPViewModel.usp_IncidentSystemBilling_Test_Result">
                 <ScalarProperty Name="IncidentSystemBillingId" ColumnName="IncidentSystemBillingId" />
                 <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
                 <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
@@ -354,7 +461,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="IncidentSystemCallCentre">
-            <EntityTypeMapping TypeName="CCCPDataModel.IncidentSystemCallCentre">
+            <EntityTypeMapping TypeName="CCCPViewModel.IncidentSystemCallCentre">
               <MappingFragment StoreEntitySet="IncidentSystemCallCentre">
                 <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
@@ -385,6 +492,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Checklist">
+            <EntityTypeMapping TypeName="CCCPViewModel.Checklist">
+              <MappingFragment StoreEntitySet="Checklist">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="ChecklistId" ColumnName="ChecklistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChecklistAction">
+            <EntityTypeMapping TypeName="CCCPViewModel.ChecklistAction">
+              <MappingFragment StoreEntitySet="ChecklistAction">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="AlertThreshold" ColumnName="AlertThreshold" />
+                <ScalarProperty Name="IsCompulsory" ColumnName="IsCompulsory" />
+                <ScalarProperty Name="ActionStatus" ColumnName="ActionStatus" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ChecklistId" ColumnName="ChecklistId" />
+                <ScalarProperty Name="ChecklistActionId" ColumnName="ChecklistActionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChecklistBatch">
+            <EntityTypeMapping TypeName="CCCPViewModel.ChecklistBatch">
+              <MappingFragment StoreEntitySet="ChecklistBatch">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ChecklistId" ColumnName="ChecklistId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Checklist_LoadData" FunctionName="CCCPDataModel.Store.usp_Checklist_LoadData">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

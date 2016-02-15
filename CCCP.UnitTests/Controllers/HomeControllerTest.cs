@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CCCP;
 using CCCP.Controllers;
 
-namespace CCCP.UnitTests.Controllers
+namespace CCCP.UnitTest.Controllers
 {
     [TestClass]
     public class HomeControllerTest
