@@ -18,7 +18,11 @@ namespace CCCP.Common
             return string.IsNullOrEmpty(self);
         }
 
-        // Enum
+        public static bool IsContains(this string self, string compareStr)
+        {
+            return (self.Trim().ToUpper().IndexOf(compareStr.Trim().ToUpper()) >= 0);
+        }
+
         public static string ToEnumString(this Enum self)
         {
             return self.ToString().Replace("_", " ");

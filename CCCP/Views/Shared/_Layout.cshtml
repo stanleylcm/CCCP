@@ -3,42 +3,239 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - CCCP</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <style>
+        label.error {
+            color: red;
+        }
 
-                    <li>@Html.ActionLink("Incident -> System Billing", "Index", "IncidentSystemBilling")</li>
+        input.error {
+            border: 1px solid red;
+        }
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        div.rightTool {
+            float: right;
+            margin-left: 10px;
+        }
+
+            div.rightTool .form-control {
+                width: auto;
+            }
+
+        div.leftTool {
+            float: left;
+        }
+    </style>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@using CCCP.Common;
+@{
+    string curAction = ViewContext.RouteData.Values["action"].ToString();
+    string curController = ViewContext.RouteData.Values["controller"].ToString();
+
+    bool[] bActiveClass = new bool[28] { false, false, false, false, false, false, false, false, false, false,
+                                         false, false, false, false, false, false, false, false, false, false,
+                                         false, false, false, false, false, false, false, false};
+                                         
+    if (curController.IsEquals("Home"))
+    {
+        bActiveClass[Convert.ToInt32((curController + " " + curAction).ToEnum<MenuItem>())] = true;
+    }
+    else if (curController.IsEquals("Report"))
+    {
+        bActiveClass[Convert.ToInt32(curController.ToEnum<MenuItem>())] = true;
+        bActiveClass[Convert.ToInt32((curController + " " + curAction).ToEnum<MenuItem>())] = true;
+    }
+    else if (curController.IsContains("Incident"))
+    {
+
+        bActiveClass[Convert.ToInt32(("IncidentManagement").ToEnum<MenuItem>())] = true;
+        bActiveClass[Convert.ToInt32(curController.ToEnum<MenuItem>())] = true;
+    }
+    else
+    {
+        bActiveClass[Convert.ToInt32(curController.ToEnum<MenuItem>())] = true;
+    }
+}
+
+<body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="@Url.Action("Index", "Home")" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>CCCP</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>CCCP</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu" style="width:280px; height:50px; align-content:center">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="@Url.Content("~/Images/user3-128x128.jpg")" class="user-image" alt="User Image" />
+                                <span class="hidden-xs">Alex Pierce</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="@Url.Content("~/Images/user3-128x128.jpg")" class="img-circle" alt="User Image" />
+                                    <p>
+                                        Alex Pierce - Web Developer
+                                        <small>Member since Nov. 2015</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <!--<li class="header">MAIN NAVIGATION</li>-->
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.RoleMaintainenance)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "RoleMaintanence")">
+                            <i class="fa fa-gears"></i> <span>Role Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.UserAccountMaintenance)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "UserAccountMaintanence")">
+                            <i class="fa fa-user"></i> <span>User Account Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.Home_Index)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.GeneralEnquiry)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "GeneralEnquiry")">
+                            <i class="fa fa-comments-o"></i> <span>General Enquiry</span>
+                        </a>
+                    </li>
+
+                    <li class="treeview @(bActiveClass[Convert.ToInt32(MenuItem.IncidentManagement)] ? "active" : "")">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i> <span>Incident Management</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityNetwork)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityNetwork")"><i class="fa fa-circle-o"></i> Quality(Network)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityGeneration)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityGeneration")"><i class="fa fa-circle-o"></i> Quality(Generation)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityCorporateImage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityCorporateImage")"><i class="fa fa-circle-o"></i> Quality(Corporate Image)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentLeakage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentLeakage")"><i class="fa fa-circle-o"></i> Environment(Leakage)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentAirEmission)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentAirEmission")"><i class="fa fa-circle-o"></i> Environment(Air Emission)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentOHS)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentOHS")"><i class="fa fa-circle-o"></i> OHS</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemInvoicing)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemInvoicing")"><i class="fa fa-circle-o"></i> System(Invoicing)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemBilling)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemBilling")"><i class="fa fa-circle-o"></i> System(Billing)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemCallCentre)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemCallCentre")"><i class="fa fa-circle-o"></i> System(Call Centre)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemNetworkConnectivity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemNetworkConnectivity")"><i class="fa fa-circle-o"></i> System(Network Connectivity)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemITSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemITSystem")"><i class="fa fa-circle-o"></i> System(IT System)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemOTSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemOTSystem")"><i class="fa fa-circle-o"></i> System(OT System)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemSecurity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemSecurity")"><i class="fa fa-circle-o"></i> System(Security)</a></li>
+                        </ul>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.OMSEvent)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "OMSEvent")">
+                            <i class="fa fa-share"></i> <span>OMS Event Management</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.ChecklistMaintenance)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "CrisisManagement")">
+                            <i class="fa fa-gears"></i> <span>Crisis Management</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.CrisisApproval)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "CrisisApproval")">
+                            <i class="fa fa-check"></i> <span>Crisis Approval</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.BusinessDataMainteneance)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "BusinessDataMaintanence")">
+                            <i class="fa fa-edit"></i> <span>Business Data Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.ChecklistMaintenance)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "ChecklistMaintenance")">
+                            <i class="fa fa-check-square-o"></i> <span>Checklist Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li @(bActiveClass[Convert.ToInt32(MenuItem.AuditTrial)] ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "AuditTrail")">
+                            <i class="fa fa-download"></i> <span>Audit Trail Export</span>
+                        </a>
+                    </li>
+
+                    <li class="treeview @(bActiveClass[Convert.ToInt32(MenuItem.Report)] ? "active" : "")">
+                        <a href="#">
+                            <i class="fa fa-book"></i> <span>Report</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentSummary)] ? "class=active" : "")><a href="@Url.Action("IncidentSummary", "Report")"><i class="fa fa-circle-o"></i> Incident Summary</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetails)] ? "class=active" : "")><a href="@Url.Action("IncidentDetails", "Report")"><i class="fa fa-circle-o"></i> Incident Details</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetailsForCOT)] ? "class=active" : "")><a href="@Url.Action("IncidentDetailsForCOT", "Report")"><i class="fa fa-circle-o"></i> Incident Details for COT</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            @RenderBody()
+            <hr />
+            <section class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        &copy; @DateTime.Now.Year - CCCP
+                    </div>
+                </div>
+            </section>
+        </div><!-- /.content-wrapper -->
+
+    </div><!-- ./wrapper -->
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
