@@ -42,7 +42,7 @@ namespace CCCP.Business.Service
             // Level 2
             if (incident.ExpectedAffectedNoOfBill > 50 &&
                 (incident.ExpectedAffectedBillingDay >= 4 && incident.ExpectedAffectedBillingDay <= 5)
-                ) return IncidentLevel.Level3;
+                ) return IncidentLevel.Level2;
 
             // else
             return IncidentLevel.None;
