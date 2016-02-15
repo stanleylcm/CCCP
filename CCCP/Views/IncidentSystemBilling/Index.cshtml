@@ -1,192 +1,80 @@
 ﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemBilling>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "System(Billing)";
 }
 
-<h2>Index</h2>
+<script>
+    $(document).ready(function () {
+        $('#IncidentList').DataTable();
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div style="overflow: auto; overflow-y: hidden;">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ChecklistBatchId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChatRoomId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GeneralEnquiryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CrisisId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotificationId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueById)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CloseById)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CloseDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IncidentNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LevelOfSeverity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IncidentStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IncidentBackground)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDrillMode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProblemArea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PossibleCause)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BillingErrorSeriousness)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Impact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusUpdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequireMitigatingAction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MitigatingAction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdatedDateTime)
-            </th>
-            <th></th>
-        </tr>
+        $('.dataTables_length').parent().attr("class", "col-sm-5");
+    });
+</script>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ChecklistBatchId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ChatRoomId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GeneralEnquiryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CrisisId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NotificationId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IssueById)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IssueDateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CloseById)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CloseDateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncidentNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LevelOfSeverity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncidentStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncidentBackground)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDrillMode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProblemArea)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PossibleCause)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BillingErrorSeriousness)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExpectedAffectedCustomerBill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContactedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Impact)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StatusUpdate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RequireMitigatingAction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MitigatingAction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdatedDateTime)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IncidentSystemBillingId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IncidentSystemBillingId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IncidentSystemBillingId })
-                </td>
-            </tr>
-        }
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Incident - System(Billing)
+    </h1>
 
-    </table>
-</div>
+    <!--
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+    -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- content -->
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-clipboard"></i>
+
+                    <h3 class="box-title">Incident - System(Billing)</h3>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body">
+
+                    <div class="pull-left"><button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemBilling")';">Create</button></div>
+                    <table id="IncidentList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.IncidentNo)</th>
+                                <th>Incident Type</th>
+                                <th>@Html.DisplayNameFor(model => model.LevelOfSeverity)</th>
+                                <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
+                                <th>@Html.DisplayNameFor(model => model.IncidentBackground)</th>
+                                <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            { 
+                            <tr>
+                                <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
+                                <td>System(Billing)</td>
+                                <td>@Html.DisplayFor(modelItem => item.LevelOfSeverity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.IncidentStatus)</td>
+                                <td>@Html.DisplayFor(modelItem => item.IncidentBackground)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>
+                                <td>@Html.ActionLink("Details", "Details", new { id = item.IncidentSystemBillingId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.IncidentSystemBillingId })</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+</section><!-- /.content -->
