@@ -29,6 +29,7 @@
     </style>
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="/signalr/hubs"></script>
     @Scripts.Render("~/bundles/modernizr")
 </head>
 @using CCCP.Common;
@@ -233,7 +234,7 @@
     </div><!-- ./wrapper -->
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-      $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
 
     @Scripts.Render("~/bundles/bootstrap")
