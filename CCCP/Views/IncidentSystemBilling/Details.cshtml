@@ -1,35 +1,37 @@
 ﻿@model CCCP.ViewModel.IncidentSystemBilling
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "System(Billing)";
     string IncidentType = "System(Billing)";
 }
 
-<script>
-	$(function() {
-		$('#accordion').on('show.bs.collapse', function () {
-			$('#HistoryIcon').removeClass("fa-angle-left");
-			$('#HistoryIcon').addClass("fa-angle-down");
-		});
-		$('#accordion').on('hide.bs.collapse', function () {
-			$('#HistoryIcon').removeClass("fa-angle-down");
-			$('#HistoryIcon').addClass("fa-angle-left");
-		});
+@section Scripts {
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
 
-		$('input[type="checkbox"]').each(function() {
-			value = $(this).val();
-			$(this).checkbox().chbxChecked(value == '1' ? true : (value == '0' ? false : null));
-		});
+		    $('input[type="checkbox"]').each(function() {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '1' ? true : (value == '0' ? false : null));
+		    });
 
-		$('div[id="list"] table td:nth-child(5),th:nth-child(5)').hide();
-		$('div[id="list"] table th:nth-child(5),td:nth-child(5)').hide();
-	});
-</script>
+            // read mode, disabled change state functionality for the tri-state checkbox
+		    $('.bootstrap-checkbox').off('click');
+	    });
+    </script>
+}
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <a href="@Url.Action("Index", "IncidentSystemBilling")">Incident - @IncidentType</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemBilling")">Incident - @IncidentType</a>
     </h1>
 </section>
 
@@ -77,10 +79,6 @@
         <div class="col-lg-12">
             <!-- content -->
 
-            <div class="pull-right">
-                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.IncidentSystemBillingId })';">Edit</button>
-            </div>
-
             <ul class="nav nav-pills">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
@@ -94,81 +92,84 @@
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.IssueDateTime)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.IssueDateTime)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.IssueDateTime)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.IssueDateTime)</div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.LevelOfSeverity)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.LevelOfSeverity)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.LevelOfSeverity)</label></div>
+                                <div class="col-lg-1">@Html.DisplayFor(model => model.LevelOfSeverity)</div>
+                                <div class="col-lg-5">
+                                    <button class="btn btn-primary" type="button" onclick="window.location = '#';">Escalate to Crisis</button>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.IncidentStatus)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.IncidentStatus)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.IncidentStatus)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.IncidentStatus)</div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.CrisisId)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.CrisisId)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.CrisisId)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.CrisisId)</div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.IncidentBackground)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.IncidentBackground)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.IncidentBackground)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.IncidentBackground)</div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.IsDrillMode)</label></div></div>
-                                <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.IsDrillMode)</div></div>
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.IsDrillMode)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.IsDrillMode)</div>
                             </div>
 
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">Details</legend>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.ProblemArea)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.ProblemArea)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.ProblemArea)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.ProblemArea)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.PossibleCause)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.PossibleCause)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.PossibleCause)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.PossibleCause)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.BillingErrorSeriousness)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.BillingErrorSeriousness)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.ExpectedAffectedCustomerBill)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.ExpectedAffectedCustomerBill)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.ContactedBy)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.ContactedBy)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.Impact)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.Impact)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Impact)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Impact)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.StatusUpdate)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.StatusUpdate)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.StatusUpdate)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.StatusUpdate)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.RequireMitigatingAction)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.RequireMitigatingAction)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.RequireMitigatingAction)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.RequireMitigatingAction)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6"><div class="pull-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div></div>
-                                    <div class="col-lg-6"><div class="pull-left">@Html.DisplayFor(model => model.MitigatingAction)</div></div>
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.MitigatingAction)</div>
                                 </div>
                             </fieldset>
 
@@ -412,17 +413,25 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="LinkedIncident"><div class="box box-primary">
-                    <div class="box-body">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
-                            <div style="height: 400px">
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
                         </div>
-                        <div class="col-lg-2"></div>
                     </div>
                 </div>
+
             </div>
+
+            <div>
+                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.IncidentSystemBillingId })';">Edit</button>
+            </div>
+            <br/>
 
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
