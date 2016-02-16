@@ -15,6 +15,8 @@ namespace CCCP.ViewModel
     public partial class Checklist
     {
         public int ChecklistId { get; set; }
+        public int ChecklistBatchId { get; set; }
+        public string Department { get; set; }
         public Nullable<short> SortingOrder { get; set; }
         public string History { get; set; }
         public string CreatedBy { get; set; }

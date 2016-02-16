@@ -15,7 +15,6 @@ namespace CCCP.ViewModel
     public partial class ChecklistBatch
     {
         public int ChecklistBatchId { get; set; }
-        public int ChecklistId { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

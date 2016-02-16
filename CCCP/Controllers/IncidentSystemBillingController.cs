@@ -157,9 +157,8 @@ namespace CCCP.Controllers
 
             // load checklists
             int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from cb in db.ChecklistBatch
-                                          join c in db.Checklist on cb.ChecklistId equals c.ChecklistId
-                                          where cb.ChecklistBatchId.Equals(checklistBatchID)
+            incident.ChecklistEntities = (from c in db.Checklist                                          
+                                          where c.ChecklistBatchId.Equals(checklistBatchID)
                                           orderby c.SortingOrder
                                           select c).ToList<Checklist>();
 
@@ -168,6 +167,7 @@ namespace CCCP.Controllers
             {
                 List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
                                                         where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                        orderby ca.SortingOrder
                                                         select ca).ToList<ChecklistAction>();
                 checklist.ChecklistActionEntities = actionEntities;
             }
