@@ -62,12 +62,16 @@
                             <tr>
                                 <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
                                 <td>System(Billing)</td>
-                                <td>@Html.DisplayFor(modelItem => item.LevelOfSeverity)</td>
-                                <td>@Html.DisplayFor(modelItem => item.IncidentStatus)</td>
-                                <td>@Html.DisplayFor(modelItem => item.IncidentBackground)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>
-                                <td>@Html.ActionLink("Details", "Details", new { id = item.IncidentSystemBillingId }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.IncidentSystemBillingId })</td>
+                                <td>@Html.DisplayFor(model => item.LevelOfSeverity)</td>
+                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
+                                <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
+                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                <td>
+                                    <div class="tools">
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })"><i class="fa fa-sliders"></i></a>
+                                        <a href="@Url.Action("Delete", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                </td>
                             </tr>
                             }
                         </tbody>

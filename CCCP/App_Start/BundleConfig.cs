@@ -9,13 +9,12 @@ namespace CCCP
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        //"~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-1.11.1.min.js",
-                        "~/Scripts/jquery-migrate-1.2.1.min.js",
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui.min.js",
                         "~/Scripts/jquery.dataTables.min.js",
                         "~/Scripts/dataTables.tableTools.js",
-                        "~/Scripts/dataTables.bootstrap.js"));
+                        "~/Scripts/dataTables.bootstrap.js",
+                        "~/Scripts/jquery.signalR-2.2.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
