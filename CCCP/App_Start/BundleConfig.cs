@@ -15,7 +15,11 @@ namespace CCCP
                         "~/Scripts/dataTables.tableTools.js",
                         "~/Scripts/dataTables.bootstrap.js",
                         "~/Scripts/jquery.signalR-2.2.0.js",
-                        "~/Scripts/bootstrap-checkbox.js"));
+                        "~/Scripts/bootstrap-checkbox.js",
+                        "~/Scripts/input-mask/jquery.inputmask.js",
+                        "~/Scripts/input-mask/jquery.inputmask.date.extensions.js",
+                        "~/Scripts/input-mask/jquery.inputmask.extensions.js",
+                        "~/Scripts/timepicker/bootstrap-timepicker.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -33,10 +37,11 @@ namespace CCCP
                       "~/Scripts/app.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-3.3.0.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/ionicons.min.css",
-                      "~/Content/site.css",
+                      "~/Content/AdminLTE.min.css",
+                      "~/Content/Site.css",
                       "~/Content/skins/_all-skins.min.css",
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/bootstrap-switch.min.css",
@@ -45,7 +50,8 @@ namespace CCCP
                       "~/Content/jquery-ui.theme.css",
                       "~/Content/dataTables.bootstrap.css",
                       "~/Content/dataTables.tableTools.css",
-                      "~/Content/bootstrap-checkbox.css"));
+                      "~/Content/bootstrap-checkbox.css",
+                      "~/Scripts/timepicker/bootstrap-timepicker.min.css"));
         }
     }
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title>@ViewBag.Title - CCCP</title>
     @Styles.Render("~/Content/css")
     <style>
@@ -82,10 +82,10 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu" style="width:280px; height:50px; align-content:center">
+                        <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="@Url.Content("~/Images/user3-128x128.jpg")" class="user-image" alt="User Image" />
-                                <span class="hidden-xs">Alex Pierce</span>
+                                <span class="hidden-xs" style="height:auto">Alex Pierce</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
