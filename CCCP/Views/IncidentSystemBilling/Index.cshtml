@@ -11,6 +11,7 @@
             $('#IncidentList').DataTable();
 
             $('.dataTables_length').parent().attr("class", "col-sm-5");
+            $('.dataTables_filter').parent().addClass("pull-right");
         });
     </script>
 }
@@ -58,8 +59,8 @@
                                 <td>@Html.DisplayFor(model => item.CreatedBy)</td>
                                 <td>
                                     <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })"><i class="fa fa-sliders"></i></a>
-                                        <a href="@Url.Action("Delete", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })"><i class="fa fa-trash-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })" title="Edit"><i class="fa fa-sliders"></i></a>
+                                        <a href="@Url.Action("Delete", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })" class="text-red" title="Delete"><i class="fa fa-trash-o"></i></a>
                                     </div>
                                 </td>
                             </tr>

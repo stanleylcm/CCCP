@@ -149,6 +149,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminLTE.css" />
+    <Content Include="Content\AdminLTE.min.css" />
+    <Content Include="Content\bootstrap-3.3.0.css" />
+    <Content Include="Content\bootstrap-3.3.0.min.css" />
     <Content Include="Content\bootstrap-checkbox.css" />
     <Content Include="Content\bootstrap-slider.css" />
     <Content Include="Content\bootstrap-slider.min.css" />
@@ -319,6 +323,9 @@
     <Content Include="fonts\ionicons.eot" />
     <Content Include="fonts\ionicons.ttf" />
     <Content Include="fonts\ionicons.woff" />
+    <Content Include="Scripts\input-mask\phone-codes\phone-be.json" />
+    <Content Include="Scripts\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatable.fixedColumn.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
@@ -585,6 +592,13 @@
     <Content Include="Scripts\icheck.js" />
     <Content Include="Scripts\icheck.min.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.date.extensions.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.extensions.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.phone.extensions.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.regex.extensions.js" />
+    <Content Include="Scripts\input-mask\phone-codes\readme.txt" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -726,6 +740,10 @@
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\spin.min.js" />
+    <Content Include="Scripts\timepicker\bootstrap-timepicker.css" />
+    <Content Include="Scripts\timepicker\bootstrap-timepicker.js" />
+    <Content Include="Scripts\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="Scripts\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
