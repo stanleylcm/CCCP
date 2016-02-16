@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "System(Billing)";
+    string IncidentType = "System(Billing)";
 }
 
 <script>
@@ -37,7 +38,7 @@
                 <div class="box-header">
                     <i class="fa fa-clipboard"></i>
 
-                    <h3 class="box-title">Incident - System(Billing)</h3>
+                    <h3 class="box-title">Incident - @IncidentType</h3>
                 </div>
                 <!-- /.box-header -->
 
@@ -61,7 +62,7 @@
                             { 
                             <tr>
                                 <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
-                                <td>System(Billing)</td>
+                                <td>@IncidentType</td>
                                 <td>@Html.DisplayFor(model => item.LevelOfSeverity)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentBackground)</td>

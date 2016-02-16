@@ -14,7 +14,8 @@ namespace CCCP
                         "~/Scripts/jquery.dataTables.min.js",
                         "~/Scripts/dataTables.tableTools.js",
                         "~/Scripts/dataTables.bootstrap.js",
-                        "~/Scripts/jquery.signalR-2.2.0.js"));
+                        "~/Scripts/jquery.signalR-2.2.0.js",
+                        "~/Scripts/bootstrap-checkbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -43,7 +44,8 @@ namespace CCCP
                       "~/Content/jquery-ui.structure.css",
                       "~/Content/jquery-ui.theme.css",
                       "~/Content/dataTables.bootstrap.css",
-                      "~/Content/dataTables.tableTools.css"));
+                      "~/Content/dataTables.tableTools.css",
+                      "~/Content/bootstrap-checkbox.css"));
         }
     }
 }
