@@ -53,15 +53,6 @@ namespace CCCP.Business.Model
             }
             return true;
         }
-        public void PrepareSave(DateTime updateDateTime)
-        {
-            // check list actions
-            foreach (ChecklistActionModel action in ChecklistActions) if (action.HasUpdate) action.PrepareSave(updateDateTime);
-
-            // last updated
-            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
-            Entity.LastUpdatedDateTime = updateDateTime;
-        }
 
         #endregion
 

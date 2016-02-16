@@ -27,14 +27,14 @@ namespace CCCP.ViewModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
-        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
-        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Checklist> Checklist { get; set; }
         public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
         public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
         public virtual DbSet<AuditLog> AuditLog { get; set; }
+        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
+        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
+        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
     
         public virtual int usp_Checklist_LoadData(Nullable<int> checklistId)
         {

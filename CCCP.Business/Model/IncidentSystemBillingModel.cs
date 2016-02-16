@@ -65,16 +65,8 @@ namespace CCCP.Business.Model
         }
         public void PrepareSave()
         {
-            DateTime updateDateTime = DateTime.Now;
-
-            // incident details
-            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
-            Entity.LastUpdatedDateTime = updateDateTime;
-
-            // check lists
-            foreach (ChecklistModel checklist in Checklists) if (checklist.HasUpdate()) checklist.PrepareSave(updateDateTime);
-
-            // chat room
+            DateTime now = DateTime.Now;
+            Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now);
         }
 
         #endregion

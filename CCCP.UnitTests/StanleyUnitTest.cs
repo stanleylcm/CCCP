@@ -57,7 +57,7 @@ namespace CCCP.UnitTest
         [TestMethod]
         public void TestAuditLog()
         {
-            string userName = AccessControlService.CurrentUser.Entity.UserName;
+            string userName = AccessControlService.CurrentUser.GetLastUpdatedBy();
             userName = "test";
             CCCPDbContext db = new CCCPDbContext();
             ChecklistBatch x = db.ChecklistBatch.Find(1);
