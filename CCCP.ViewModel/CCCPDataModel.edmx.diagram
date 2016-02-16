@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.Checklist" Width="1.5" PointX="3.875" PointY="1.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistAction" Width="1.5" PointX="3.875" PointY="1.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistBatch" Width="1.5" PointX="3.875" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.AuditLog" Width="1.5" PointX="8.5" PointY="0.625" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

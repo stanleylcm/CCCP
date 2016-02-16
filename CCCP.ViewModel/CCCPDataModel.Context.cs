@@ -34,6 +34,7 @@ namespace CCCP.ViewModel
         public virtual DbSet<Checklist> Checklist { get; set; }
         public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
         public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
+        public virtual DbSet<AuditLog> AuditLog { get; set; }
     
         public virtual int usp_Checklist_LoadData(Nullable<int> checklistId)
         {

@@ -53,5 +53,16 @@ namespace CCCP.UnitTest
             controller.Test();
             controller.Edit(controller.incident.Entity);
         }
+
+        [TestMethod]
+        public void TestAuditLog()
+        {
+            string userName = AccessControlService.CurrentUser.Entity.UserName;
+            userName = "test";
+            CCCPDbContext db = new CCCPDbContext();
+            ChecklistBatch x = db.ChecklistBatch.Find(1);
+            x.CreatedBy += "1";
+            db.SaveChanges(userName);
+        }
     }
 }
