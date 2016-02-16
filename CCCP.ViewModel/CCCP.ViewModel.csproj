@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLog.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CCCPDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,7 +66,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CCCPDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="CCCPDBContextExtend.cs" />
+    <Compile Include="CCCPDBContext_Audit.cs" />
     <Compile Include="Checklist.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -119,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CCCP.Common\CCCP.Common.csproj">
+      <Project>{253311ae-0a07-455f-9e61-0bda9d1db9e3}</Project>
+      <Name>CCCP.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

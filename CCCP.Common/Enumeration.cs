@@ -102,4 +102,11 @@ namespace CCCP.Common
         Report_IncidentDetails,
         Report_IncidentDetailsForCOT
     }
+
+    public enum AuditLogEventType
+    {
+        Add,
+        Delete,
+        Modifiy
+    }
 }

@@ -52,10 +52,5 @@ namespace CCCP.Business.Model
             HasUpdate = true;
 
         }
-        public void PrepareSave(DateTime updateDateTime)
-        {
-            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
-            Entity.LastUpdatedDateTime = updateDateTime;
-        }
     }
 }

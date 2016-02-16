@@ -29,6 +29,7 @@ namespace CCCP.ViewModel
         public string IncidentStatus { get; set; }
         public string IncidentBackground { get; set; }
         public Nullable<bool> IsDrillMode { get; set; }
+        public string History { get; set; }
         public string Impact { get; set; }
         public string PossibleCause { get; set; }
         public Nullable<short> ExpectedRestorationTime { get; set; }

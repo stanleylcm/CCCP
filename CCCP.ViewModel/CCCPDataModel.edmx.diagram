@@ -5,13 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3a88fd1bb8df40578dee7e4ea774513f" Name="Diagram1">
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.125" PointX="0.875" PointY="0.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.125" PointX="0.875" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemInvoicing" Width="2.125" PointX="0.875" PointY="1.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.User" Width="1.5" PointX="6.5" PointY="0.625" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.Checklist" Width="1.5" PointX="3.875" PointY="1.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistAction" Width="1.5" PointX="3.875" PointY="1.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistBatch" Width="1.5" PointX="3.875" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.AuditLog" Width="1.5" PointX="8.5" PointY="0.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.125" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.125" PointX="0.75" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemInvoicing" Width="2.125" PointX="0.75" PointY="2" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

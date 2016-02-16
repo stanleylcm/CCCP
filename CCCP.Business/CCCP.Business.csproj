@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HistoryHelper.cs" />
     <Compile Include="Model\ChecklistActionModel.cs" />
     <Compile Include="Model\ChecklistModel.cs" />
     <Compile Include="Model\IncidentSystemBillingModel.cs" />
