@@ -15,7 +15,7 @@ namespace CCCP.Business.Service
         {
             string result = "";
 
-            string historyStr =  string.Format("Last updated by {} at {}", updateUser, updateDateTime.ToString("yyyy-MM-dd tthh:mm:ss"));
+            string historyStr =  string.Format("Last updated by {0} at {1}", updateUser, updateDateTime.ToString("yyyy-MM-dd tthh:mm:ss"));
             if (originalHistory.IsNullOrEmpty()) result = historyStr;
             else result = historyStr + "\r\n" + originalHistory;
 
