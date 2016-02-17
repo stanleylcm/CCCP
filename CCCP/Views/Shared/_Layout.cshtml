@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <title>@ViewBag.Title - CCCP</title>
+    <title>@ViewBag.Title - @Resources.global.SiteTitle</title>
     @Styles.Render("~/Content/css")
     <style>
         label.error {
@@ -31,6 +31,30 @@
     @Scripts.Render("~/bundles/jquery")
     <script src="/signalr/hubs"></script>
     @Scripts.Render("~/bundles/modernizr")
+    <script>
+        $(document).ready(function () {
+            $("input[name='languageToggle']").bootstrapSwitch().on('switchChange.bootstrapSwitch', function () {
+                var name = "en-US";
+                if ($("input[name='languageToggle']").bootstrapSwitch('state') == false) {
+                    name = "zh-TW";
+                }
+                
+                $.ajax({
+                    url: "/Home/SetLanguage",
+                    type: "POST",
+                    data: JSON.stringify({ 'name': name, 'currentUrl': '@Request.Url.AbsoluteUri' }),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        window.location = '@Request.Url.AbsoluteUri';
+                    },
+                    error: function () {
+                        alert("An error has occured!!!");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 @using CCCP.Common;
 @{
@@ -69,9 +93,9 @@
             <!-- Logo -->
             <a href="@Url.Action("Index", "Home")" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>CCCP</b></span>
+                <span class="logo-mini"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>@Resources.global.SiteTitle</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>CCCP</b></span>
+                <span class="logo-lg"><img src="@Url.Content("~/Images/cem.png")" width="50px" height="50px" alt="CEM" title="CCCP" /> <b>@Resources.global.SiteTitle</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -100,13 +124,17 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-default btn-flat">@Resources.global.UserMenu_Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="#" class="btn btn-default btn-flat">@Resources.global.UserMenu_Signout</a>
                                     </div>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -122,93 +150,93 @@
                     <!--<li class="header">MAIN NAVIGATION</li>-->
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.RoleMaintainenance)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "RoleMaintanence")">
-                            <i class="fa fa-gears"></i> <span>Role Maintenance</span>
+                            <i class="fa fa-users"></i> <span>@Resources.global.Menu_RoleMaintenance</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.UserAccountMaintenance)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "UserAccountMaintanence")">
-                            <i class="fa fa-user"></i> <span>User Account Maintenance</span>
+                            <i class="fa fa-user"></i> <span>@Resources.global.Menu_UserAccountMaintenance</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.Home_Index)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "Home")">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard"></i> <span>@Resources.global.Menu_Dashboard</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.GeneralEnquiry)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "GeneralEnquiry")">
-                            <i class="fa fa-comments-o"></i> <span>General Enquiry</span>
+                            <i class="fa fa-comments-o"></i> <span>@Resources.global.Menu_GeneralEnquiry</span>
                         </a>
                     </li>
 
                     <li class="treeview @(bActiveClass[Convert.ToInt32(MenuItem.IncidentManagement)] ? "active" : "")">
                         <a href="#">
-                            <i class="fa fa-laptop"></i> <span>Incident Management</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-laptop"></i> <span>@Resources.global.Menu_IncidentManagement</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityNetwork)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityNetwork")"><i class="fa fa-circle-o"></i> Quality(Network)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityGeneration)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityGeneration")"><i class="fa fa-circle-o"></i> Quality(Generation)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityCorporateImage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityCorporateImage")"><i class="fa fa-circle-o"></i> Quality(Corporate Image)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentLeakage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentLeakage")"><i class="fa fa-circle-o"></i> Environment(Leakage)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentAirEmission)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentAirEmission")"><i class="fa fa-circle-o"></i> Environment(Air Emission)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentOHS)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentOHS")"><i class="fa fa-circle-o"></i> OHS</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemInvoicing)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemInvoicing")"><i class="fa fa-circle-o"></i> System(Invoicing)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemBilling)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemBilling")"><i class="fa fa-circle-o"></i> System(Billing)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemCallCentre)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemCallCentre")"><i class="fa fa-circle-o"></i> System(Call Centre)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemNetworkConnectivity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemNetworkConnectivity")"><i class="fa fa-circle-o"></i> System(Network Connectivity)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemITSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemITSystem")"><i class="fa fa-circle-o"></i> System(IT System)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemOTSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemOTSystem")"><i class="fa fa-circle-o"></i> System(OT System)</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemSecurity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemSecurity")"><i class="fa fa-circle-o"></i> System(Security)</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityNetwork)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityNetwork")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentQualityNetwork</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityGeneration)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityGeneration")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentQualityGeneration</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentQualityCorporateImage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentQualityCorporateImage")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentQualityCorporateImage</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentLeakage)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentLeakage")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentEnvironmentLeakage</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentEnvironmentAirEmission)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentEnvironmentAirEmission")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentEnvironmentAirEmission</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentOHS)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentOHS")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentOHS</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemInvoicing)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemInvoicing")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemInvoicing</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemBilling)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemBilling")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemBilling</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemCallCentre)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemCallCentre")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemCallCentre</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemNetworkConnectivity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemNetworkConnectivity")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemNetworkConnectivity</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemITSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemITSystem")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemITSystem</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemOTSystem)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemOTSystem")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemOTSystem</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.IncidentSystemSecurity)] ? "class=active" : "")><a href="@Url.Action("Index", "IncidentSystemSecurity")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_IncidentSystemSecurity</a></li>
                         </ul>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.OMSEvent)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "OMSEvent")">
-                            <i class="fa fa-share"></i> <span>OMS Event Management</span>
+                            <i class="fa fa-share"></i> <span>@Resources.global.Menu_OMSEventManagement</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.ChecklistMaintenance)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "CrisisManagement")">
-                            <i class="fa fa-gears"></i> <span>Crisis Management</span>
+                            <i class="fa fa-gears"></i> <span>@Resources.global.Menu_CrisisManagement</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.CrisisApproval)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "CrisisApproval")">
-                            <i class="fa fa-check"></i> <span>Crisis Approval</span>
+                            <i class="fa fa-check"></i> <span>@Resources.global.Menu_CrisisApproval</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.BusinessDataMainteneance)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "BusinessDataMaintanence")">
-                            <i class="fa fa-edit"></i> <span>Business Data Maintenance</span>
+                            <i class="fa fa-edit"></i> <span>@Resources.global.Menu_BusinessDataMaintenance</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.ChecklistMaintenance)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "ChecklistMaintenance")">
-                            <i class="fa fa-check-square-o"></i> <span>Checklist Maintenance</span>
+                            <i class="fa fa-check-square-o"></i> <span>@Resources.global.Menu_ChecklistMaintenance</span>
                         </a>
                     </li>
 
                     <li @(bActiveClass[Convert.ToInt32(MenuItem.AuditTrial)] ? "class=active" : "")>
                         <a href="@Url.Action("Index", "AuditTrail")">
-                            <i class="fa fa-download"></i> <span>Audit Trail Export</span>
+                            <i class="fa fa-download"></i> <span>@Resources.global.Menu_AuditTrailExport</span>
                         </a>
                     </li>
 
                     <li class="treeview @(bActiveClass[Convert.ToInt32(MenuItem.Report)] ? "active" : "")">
                         <a href="#">
-                            <i class="fa fa-book"></i> <span>Report</span> <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-book"></i> <span>@Resources.global.Menu_Report</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentSummary)] ? "class=active" : "")><a href="@Url.Action("IncidentSummary", "Report")"><i class="fa fa-circle-o"></i> Incident Summary</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetails)] ? "class=active" : "")><a href="@Url.Action("IncidentDetails", "Report")"><i class="fa fa-circle-o"></i> Incident Details</a></li>
-                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetailsForCOT)] ? "class=active" : "")><a href="@Url.Action("IncidentDetailsForCOT", "Report")"><i class="fa fa-circle-o"></i> Incident Details for COT</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentSummary)] ? "class=active" : "")><a href="@Url.Action("IncidentSummary", "Report")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_ReportIncidentSummary</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetails)] ? "class=active" : "")><a href="@Url.Action("IncidentDetails", "Report")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_ReportIncidentDetails</a></li>
+                            <li @(bActiveClass[Convert.ToInt32(MenuItem.Report_IncidentDetailsForCOT)] ? "class=active" : "")><a href="@Url.Action("IncidentDetailsForCOT", "Report")"><i class="fa fa-circle-o"></i> @Resources.global.Menu_ReportIncidentDetailsForCOT</a></li>
                         </ul>
                     </li>
 
@@ -225,11 +253,44 @@
             <section class="content">
                 <div class="row">
                     <div class="col-lg-12">
-                        &copy; @DateTime.Now.Year - CCCP
+                        &copy; @DateTime.Now.Year - @Resources.global.SiteTitle
                     </div>
                 </div>
             </section>
         </div><!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li class="active"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Settings tab content -->
+                <div class="tab-pane active" id="control-sidebar-settings-tab">
+                    <h3 class="control-sidebar-heading">@Resources.global.Sidebar_GeneralSettings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            @Resources.global.Sidebar_Language
+                        </label>
+
+                        <p>
+                            <input type="checkbox" name="languageToggle"
+                                   data-on-text="English"
+                                   data-off-text="中文" @(System.Globalization.CultureInfo.CurrentUICulture.Name == "en-US" ? "checked" : "") />
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
 
     </div><!-- ./wrapper -->
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

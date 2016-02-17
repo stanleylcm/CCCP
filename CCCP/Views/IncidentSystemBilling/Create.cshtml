@@ -1,14 +1,13 @@
 ﻿@model CCCP.ViewModel.IncidentSystemBilling
 
 @{
-    ViewBag.Title = "System(Billing)";
-    string IncidentType = "System(Billing)";
+    ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> Create Incident - @IncidentType
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentSystemBilling
     </h1>
 </section>
 
@@ -181,8 +180,8 @@
 
                     <div class="box-footer">
                         <div class="btn-group">
-                            <button class="btn btn-primary" type="submit">Create</button>
-                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemBilling")';">Cancel</button>
+                            <button class="btn btn-primary" type="submit">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemBilling")';">@Resources.global.Func_Cancel</button>
                         </div>
                     </div>
                     }

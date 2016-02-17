@@ -17,5 +17,22 @@ namespace CCCP
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_BeginRequest(Object source, EventArgs e)
+        {
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
+            if (HttpContext.Current.Request.Cookies["CCCP"] != null)
+            {
+                string langName;
+                if (HttpContext.Current.Request.Cookies["CCCP"]["Language"] != null)
+                {
+                    langName = HttpContext.Current.Request.Cookies["CCCP"]["Language"];
+
+                    System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo(langName);
+                }
+            }
+
+        }
     }
 }

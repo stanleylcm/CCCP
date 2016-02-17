@@ -26,5 +26,26 @@ namespace CCCP.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult SetLanguage(string name, string currentUrl)
+        {
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo(name);
+
+            //HttpContext.Current.Session["culture"] = name;
+
+            if (Response.Cookies["CCCP"] == null)
+            {
+                HttpCookie myCookie = new HttpCookie("CCCP");
+                myCookie["Language"] = name;
+                myCookie.Expires = DateTime.Now.AddYears(1);
+                Response.Cookies.Add(myCookie);
+            } else
+            {
+                Response.Cookies["CCCP"]["Language"] = name;
+            }
+
+            return Redirect(currentUrl);
+        }
     }
 }

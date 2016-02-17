@@ -1,8 +1,7 @@
 ﻿@model CCCP.Business.Model.IncidentSystemBillingModel
 
 @{
-    ViewBag.Title = "System(Billing)";
-    string IncidentType = "System(Billing)";
+    ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
 
 @section Scripts {
@@ -24,6 +23,10 @@
 
             // read mode, disabled change state functionality for the tri-state checkbox
 		    $('.bootstrap-checkbox').off('click');
+
+		    $('input[type=checkbox]').click(function(event) {
+		        event.preventDefault();
+		    });
 	    });
     </script>
 }
@@ -31,7 +34,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemBilling")">Incident - @IncidentType</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemBilling")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemBilling</a>
     </h1>
 </section>
 
@@ -120,7 +123,7 @@
 
                             <div class="row">
                                 <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
-                                <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" disabled="disabled" /></div>
+                                <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
                             </div>
 
                             <fieldset class="scheduler-border">
@@ -296,7 +299,7 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">Edit</button>
+                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Edit</button>
             </div>
             <br/>
 

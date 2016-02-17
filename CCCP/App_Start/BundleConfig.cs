@@ -19,7 +19,8 @@ namespace CCCP
                         "~/Scripts/input-mask/jquery.inputmask.js",
                         "~/Scripts/input-mask/jquery.inputmask.date.extensions.js",
                         "~/Scripts/input-mask/jquery.inputmask.extensions.js",
-                        "~/Scripts/timepicker/bootstrap-timepicker.min.js"));
+                        "~/Scripts/timepicker/bootstrap-timepicker.min.js",
+                        "~/Scripts/bootstrap-switch.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -51,7 +52,8 @@ namespace CCCP
                       "~/Content/dataTables.bootstrap.css",
                       "~/Content/dataTables.tableTools.css",
                       "~/Content/bootstrap-checkbox.css",
-                      "~/Scripts/timepicker/bootstrap-timepicker.min.css"));
+                      "~/Scripts/timepicker/bootstrap-timepicker.min.css",
+                      "~/Content/bootstrap-switch.css"));
         }
     }
 }
