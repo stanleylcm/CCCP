@@ -18,274 +18,173 @@
         <div class="col-lg-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "IncidentSystemBilling", FormMethod.Post, new { onsubmit="validateForm()" }))
                     {
                         @Html.AntiForgeryToken()
 
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ChecklistBatchId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ChecklistBatchId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ChecklistBatchId, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IssueDateTime)</label></div>
+                        <div class="col-lg-4">
+                            @Html.EditorFor(model => model.IssueDateTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                            @Html.ValidationMessageFor(model => model.IssueDateTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IncidentBackground)</label></div>
+                        <div class="col-lg-4">
+                            @Html.EditorFor(model => model.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                            @Html.ValidationMessageFor(model => model.IncidentBackground, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IsDrillMode)</label></div>
+                        <div class="col-lg-4">
+                            <div class="checkbox">
+                                <input id="IsDrillMode" name="IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                @Html.ValidationMessageFor(model => model.IsDrillMode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Details</legend>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ProblemArea)</label></div>
+                            <div class="col-lg-6">
+                                <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
+                                    <option value=""></option>
+                                    <option value="System Bug">System Bug</option>
+                                    <option value="Imperfect Business Logic">Imperfect Business Logic</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.ProblemArea, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ChatRoomId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ChatRoomId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ChatRoomId, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.PossibleCause)</label></div>
+                            <div class="col-lg-6">
+                                <select id="PossibleCause" name="PossibleCause" class="form-control thin-control">
+                                    <option value=""></option>
+                                    <option value="Undefined Scenario">Undefined Scenario</option>
+                                    <option value="Not Yet Confirmed">Not Yet Confirmed</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.PossibleCause, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.GeneralEnquiryId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.GeneralEnquiryId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.GeneralEnquiryId, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div>
+                            <div class="col-lg-6">
+                                <select id="BillingErrorSeriousness" name="BillingErrorSeriousness" class="form-control thin-control">
+                                    <option value=""></option>
+                                    <option value="Comfort Zone">Comfort Zone</option>
+                                    <option value="Manageable Zone">Manageable Zone</option>
+                                    <option value="Danger Zone">Danger Zone</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.BillingErrorSeriousness, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CrisisId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CrisisId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CrisisId, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                @Html.ValidationMessageFor(model => model.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.NotificationId, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.NotificationId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NotificationId, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
+                            <div class="col-lg-6">
+                                <input id="ContactedBy1" type="checkbox" value="Customer" /><label for="ContactedBy1"> Customer</label><br />
+                                <input id="ContactedBy2" type="checkbox" value="Consumer Council" /><label for="ContactedBy2"> Consumer Council</label><br />
+                                <input id="ContactedBy3" type="checkbox" value="Government" /><label for="ContactedBy3"> Government</label><br />
+                                <input id="ContactedBy4" type="checkbox" value="Media" /><label for="ContactedBy4"> Media</label>
+                                <input type="hidden" id="ContactedBy" name="ContactedBy" value="" />
+                                @Html.ValidationMessageFor(model => model.ContactedBy, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IssueById, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IssueById, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IssueById, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Impact)</label></div>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                @Html.ValidationMessageFor(model => model.Impact, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IssueDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IssueDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IssueDateTime, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.StatusUpdate)</label></div>
+                            <div class="col-lg-6">
+                                <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
+                                    <option value=""></option>
+                                    <option value="Under Investigation">Under Investigation</option>
+                                    <option value="Defining Mitigating Actions">Defining Mitigating Actions</option>
+                                    <option value="Defining Resolution">Defining Resolution</option>
+                                    <option value="Implementing Mitigating Actions">Implementing Mitigating Actions</option>
+                                    <option value="Implementing Resolution">Implementing Resolution</option>
+                                    <option value="Closing Communication">Closing Communication</option>
+                                    <option value="Manageable Zone">Manageable Zone</option>
+                                    <option value="Case Close">Case Close</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.StatusUpdate, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CloseById, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CloseById, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CloseById, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.RequireMitigatingAction)</label></div>
+                            <div class="col-lg-6">
+                                <select id="RequireMitigatingAction" name="RequireMitigatingAction" class="form-control thin-control">
+                                    <option value=""></option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Not Yet Confirmed">Not Yet Confirmed</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.RequireMitigatingAction, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CloseDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CloseDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CloseDateTime, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div>
+                            <div class="col-lg-6">
+                                <input id="MitigatingAction1" type="checkbox" value="Create Temp. Tools for Manual Control & Correction" /><label for="MitigatingAction1"> Create Temp. Tools for Manual Control & Correction</label><br />
+                                <input id="MitigatingAction2" type="checkbox" value="Suspend Bill Generation" /><label for="MitigatingAction2"> Suspend Bill Generation</label><br />
+                                <input id="MitigatingAction3" type="checkbox" value="Others" /><label for="MitigatingAction3"> Others (please specify)</label><input id="MitigatingAction3More" name="MitigatingAction3More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                <input type="hidden" id="MitigatingAction" name="MitigatingAction" value="" />
+                                @Html.ValidationMessageFor(model => model.MitigatingAction, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </fieldset>
+    
+                    <input type="hidden" id="IncidentSystemBillingId" value="" />
+                    <input type="hidden" id="ChecklistBatchId" value="" />
+                    <input type="hidden" id="ChatRoomId" value="" />
+                    <input type="hidden" id="GeneralEnquiryId" value="" />
+                    <input type="hidden" id="CrisisId" value="" />
+                    <input type="hidden" id="NotificationId" value="" />
+                    <input type="hidden" id="IssueById" value="" />
+                    <input type="hidden" id="CloseById" value="" />
+                    <input type="hidden" id="CloseDateTime" value="" />
+                    <input type="hidden" id="IncidentNo" value="" />
+                    <input type="hidden" id="LevelOfSeverity" value="" />
+                    <input type="hidden" id="IncidentStatus" value="" />
+                    <input type="hidden" id="CreatedBy" value="" />
+                    <input type="hidden" id="CreatedDateTime" value="" />
+                    <input type="hidden" id="LastUpdatedBy" value="" />
+                    <input type="hidden" id="LastUpdatedDateTime" value="" />
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IncidentNo, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IncidentNo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IncidentNo, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="box-footer">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="submit">Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemBilling")';">Cancel</button>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LevelOfSeverity, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LevelOfSeverity, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LevelOfSeverity, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IncidentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IncidentStatus, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IncidentStatus, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IncidentBackground, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IncidentBackground, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IncidentBackground, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IsDrillMode, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.IsDrillMode)
-                                    @Html.ValidationMessageFor(model => model.IsDrillMode, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CreatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CreatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CreatedDateTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LastUpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LastUpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LastUpdatedBy, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LastUpdatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LastUpdatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LastUpdatedDateTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Details</legend>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ProblemArea)</label></div>
-                                <div class="col-lg-6">
-                                    <select id="ProblemArea" class="form-control thin-control">
-                                        <option value=""></option>
-                                        <option value="System Bug">System Bug</option>
-                                        <option value="Imperfect Business Logic">Imperfect Business Logic</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(model => model.ProblemArea, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.PossibleCause)</label></div>
-                                <div class="col-lg-6">
-                                    <select id="PossibleCause" class="form-control thin-control">
-                                        <option value=""></option>
-                                        <option value="Undefined Scenario">Undefined Scenario</option>
-                                        <option value="Not Yet Confirmed">Not Yet Confirmed</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(model => model.PossibleCause, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div>
-                                <div class="col-lg-6">
-                                    <select id="PossibleCause" class="form-control thin-control">
-                                        <option value=""></option>
-                                        <option value="Comfort Zone">Comfort Zone</option>
-                                        <option value="Manageable Zone">Manageable Zone</option>
-                                        <option value="Danger Zone">Danger Zone</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(model => model.BillingErrorSeriousness, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div>
-                                <div class="col-lg-6">
-                                    @Html.EditorFor(model => model.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                    @Html.ValidationMessageFor(model => model.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
-                                <div class="col-lg-6">
-                                    <input id="ContactedBy1" type="checkbox" value="Customer" /><label for="ContactedBy1">Customer</label><br/>
-                                    <input id="ContactedBy2" type="checkbox" value="Consumer Council" /><label for="ContactedBy2">Consumer Council</label><br />
-                                    <input id="ContactedBy3" type="checkbox" value="Government" /><label for="ContactedBy3">Government</label><br />
-                                    <input id="ContactedBy4" type="checkbox" value="Media" /><label for="ContactedBy4">Media</label>
-                                    <input type="hidden" id="ContactedBy" value="" />
-                                    @Html.ValidationMessageFor(model => model.ContactedBy, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Impact)</label></div>
-                                <div class="col-lg-6">
-                                    @Html.EditorFor(model => model.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                    @Html.ValidationMessageFor(model => model.Impact, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.StatusUpdate)</label></div>
-                                <div class="col-lg-6">
-                                    <select id="PossibleCause" class="form-control thin-control">
-                                        <option value=""></option>
-                                        <option value="Under Investigation">Under Investigation</option>
-                                        <option value="Defining Mitigating Actions">Defining Mitigating Actions</option>
-                                        <option value="Defining Resolution">Defining Resolution</option>
-                                        <option value="Implementing Mitigating Actions">Implementing Mitigating Actions</option>
-                                        <option value="Implementing Resolution">Implementing Resolution</option>
-                                        <option value="Closing Communication">Closing Communication</option>
-                                        <option value="Manageable Zone">Manageable Zone</option>
-                                        <option value="Case Close">Case Close</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(model => model.StatusUpdate, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.RequireMitigatingAction)</label></div>
-                                <div class="col-lg-6">
-                                    <select id="PossibleCause" class="form-control thin-control">
-                                        <option value=""></option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Not Yet Confirmed">Not Yet Confirmed</option>
-                                    </select>
-                                    @Html.ValidationMessageFor(model => model.RequireMitigatingAction, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div>
-                                <div class="col-lg-6">
-                                    <input id="MitigatingAction1" type="checkbox" value="Create Temp. Tools for Manual Control & Correction" /><label for="MitigatingAction1">Create Temp. Tools for Manual Control & Correction</label><br />
-                                    <input id="MitigatingAction2" type="checkbox" value="Suspend Bill Generation" /><label for="MitigatingAction2">Suspend Bill Generation</label><br />
-                                    <input id="MitigatingAction3" type="checkbox" value="Others" /><label for="MitigatingAction3">Others (please specify)</label><input id="MitigatingAction3More" name="MitigatingAction3More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
-                                    <input type="hidden" id="MitigatingAction" value="" />
-                                    @Html.ValidationMessageFor(model => model.MitigatingAction, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <div class="box-footer">
-                            <div class="btn-group">
-                                <button class="btn btn-primary" type="submit">Create</button>
-                                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemBilling")';">Cancel</button>
-                            </div>
-                        </div>
+                    </div>
                     }
                 </div>
             </div>
@@ -350,5 +249,24 @@
             });
             $("#MitigatingAction").val(sList);
         });
+
+        $("#IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        function validateForm(event) {
+            event = event || window.event || event.srcElement;
+            alert($("form").serialize());
+            /*
+            if (~~newMonoReading < ~~initialMonoReading) {
+                $('#MonoErrorMessage').text("New Mono Readings must be MORE than existing");
+                $('#MonoErrorMessage').show();
+                event.preventDefault();
+            }
+            else {
+                $('#MonoErrorMessage').hide();
+            }
+            */
+        }
     </script>
 }

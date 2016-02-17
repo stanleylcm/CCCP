@@ -54,6 +54,7 @@ namespace CCCP.Controllers
             {
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
                 db.SaveChanges();
+                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, "KF", "Pending");
                 return RedirectToAction("Index");
             }
 
