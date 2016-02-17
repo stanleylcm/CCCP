@@ -34,7 +34,8 @@ namespace CCCP.Controllers
             {
                 return HttpNotFound();
             }
-            return View(incidentSystemBilling);
+            LoadData(id.Value);
+            return View(incident);
         }
 
         // GET: IncidentSystemBillings/Create

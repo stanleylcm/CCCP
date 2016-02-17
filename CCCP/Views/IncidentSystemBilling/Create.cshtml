@@ -173,7 +173,7 @@
                     <input type="hidden" id="CloseDateTime" value="" />
                     <input type="hidden" id="IncidentNo" value="" />
                     <input type="hidden" id="LevelOfSeverity" value="" />
-                    <input type="hidden" id="IncidentStatus" value="" />
+                    <input type="hidden" id="IncidentStatus" value="@CCCP.Common.IncidentStatus.Pending" />
                     <input type="hidden" id="CreatedBy" value="" />
                     <input type="hidden" id="CreatedDateTime" value="" />
                     <input type="hidden" id="LastUpdatedBy" value="" />
@@ -268,5 +268,13 @@
             }
             */
         }
+
+        $(function () {
+            $('#form').submit(function () {
+                // DO STUFF
+                alert($("form").serialize());
+                return true; // return false to cancel form action
+            });
+        });
     </script>
 }
