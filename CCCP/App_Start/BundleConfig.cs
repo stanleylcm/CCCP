@@ -40,7 +40,7 @@ namespace CCCP
                       "~/Content/bootstrap-3.3.0.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/ionicons.min.css",
-                      "~/Content/AdminLTE.min.css",
+                      "~/Content/AdminLTE.css",
                       "~/Content/Site.css",
                       "~/Content/skins/_all-skins.min.css",
                       "~/Content/bootstrap-theme.min.css",

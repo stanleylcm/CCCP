@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-lg-3 pull-left">
                     <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.GeneralEnquiryId)</span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.GeneralEnquiryId)</span></a>
+                    <a href="#"><span class="pull-right">@(Model.Entity.GeneralEnquiryId == 0 ? "" : Model.Entity.GeneralEnquiryId.ToString())</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span>
@@ -182,26 +182,24 @@
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2">
-                                <div style="border:1px solid black; padding: 5px 10px 5px 10px;">
-                                    <fieldset class="scheduler-border">
-                                        <legend class="scheduler-border">Legend</legend>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
 
-                                        <div class="row">
-                                            <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
-                                            <div class="col-lg-10">Pending</div>
-                                        </div>
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
-                                            <div class="col-lg-10">In Progress</div>
-                                        </div>
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
-                                            <div class="col-lg-10">Completed</div>
-                                        </div>
-                                    </fieldset>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
                             </div>
                             <div class="col-lg-8">
                                 <ul class="nav nav-pills">
@@ -234,8 +232,8 @@
                                                 <tr>
                                                     <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
                                                     <td>@((action.IsCompulsory ? "* " : "") + action.Entity.Action)</td>
-                                                    <td>@action.Entity.LastUpdatedBy</td>
-                                                    <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                                    <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
+                                                    <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
                                                 </tr>
                                                 countChecklistAction++;
                                             }
