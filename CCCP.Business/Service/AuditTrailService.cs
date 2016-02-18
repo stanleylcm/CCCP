@@ -11,11 +11,11 @@ namespace CCCP.Business.Service
 {
     public class AuditTrailService
     {
-        public static string GetHistory(string originalHistory, string updateUser, DateTime updateDateTime)
+        public static string GetHistory(string originalHistory, string updateUser, DateTime updateDateTime, string saveMode = "Last updated")
         {
             string result = "";
 
-            string historyStr =  string.Format("Last updated by {0} at {1}", updateUser, updateDateTime.ToString("yyyy-MM-dd tthh:mm:ss"));
+            string historyStr =  string.Format("{0} by {1} at {2}", saveMode, updateUser, updateDateTime.ToString("yyyy-MM-dd tthh:mm:ss"));
             if (originalHistory.IsNullOrEmpty()) result = historyStr;
             else result = historyStr + "\r\n" + originalHistory;
 

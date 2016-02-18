@@ -109,4 +109,56 @@ namespace CCCP.Common
         Delete,
         Modifiy
     }
+
+    public enum IncidentSystemBillingProblemArea
+    {
+        System_Bug,
+        Imperfect_Business_Logic
+    }
+
+    public enum IncidentSystemBillingPossibleCause
+    {
+        Undefined_Scenario,
+        Not_Yet_Confirmed
+    }
+
+    public enum IncidentSystemBillingBillingErrorSeriousness
+    {
+        Comfort_Zone,
+        Manageable_Zone,
+        Danger_Zone
+    }
+
+    public enum IncidentSystemBillingContactedBy
+    {
+        Customer,
+        Consumer_Council,
+        Government,
+        Media
+    }
+
+    public enum IncidentSystemBillingStatusUpdate
+    {
+        Under_Investigation,
+        Defining_Mitigating_Actions,
+        Defining_Resolution,
+        Implementing_Mitigating_Actions,
+        Implementing_Resolution,
+        Closing_Communication,
+        Case_Close
+    }
+
+    public enum IncidentSystemBillingRequireMitigatingAction
+    {
+        Yes,
+        No,
+        Not_Yet_Confirmed
+    }
+
+    public enum IncidentSystemBillingMitigatingAction
+    {
+        Create_Temp_Tools_for_Manual_Control_and_Correction,
+        Suspend_Bill_Generation,
+        Others
+    }
 }

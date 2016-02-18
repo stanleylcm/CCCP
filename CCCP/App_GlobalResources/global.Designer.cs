@@ -115,6 +115,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this incident?.
+        /// </summary>
+        internal static string Label_DeleteIncident {
+            get {
+                return ResourceManager.GetString("Label_DeleteIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        internal static string Label_History {
+            get {
+                return ResourceManager.GetString("Label_History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audit Trail Export.
         /// </summary>
         internal static string Menu_AuditTrailExport {

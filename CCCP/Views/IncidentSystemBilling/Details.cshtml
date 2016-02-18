@@ -18,7 +18,7 @@
 
 		    $('#Checklists input[type="checkbox"]').each(function () {
 			    value = $(this).val();
-			    $(this).checkbox().chbxChecked(value == '1' ? true : (value == '0' ? false : null));
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
 		    });
 
             // read mode, disabled change state functionality for the tri-state checkbox
@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
+                                <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
                                 <div class="col-lg-1">@Html.DisplayFor(model => model.Entity.LevelOfSeverity)</div>
                                 <div class="col-lg-5">
                                     <button class="btn btn-primary" type="button" onclick="window.location = '#';">Escalate to Crisis</button>
@@ -130,37 +130,37 @@
                                 <legend class="scheduler-border">Details</legend>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ProblemArea)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.BillingErrorSeriousness)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.BillingErrorSeriousness)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.BillingErrorSeriousness)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedCustomerBill)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedCustomerBill)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedAffectedCustomerBill)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ContactedBy)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
                                 </div>
 
@@ -234,7 +234,7 @@
                                             {
                                                 <tr>
                                                     <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
-                                                    <td>@((action.IsCompulsory ? "* " : "") + action.Entity.Action)</td>
+                                                    <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
                                                     <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
                                                     <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
                                                 </tr>
@@ -308,12 +308,12 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#History">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
                             </h4>
                         </div>
                     </a>
                     <div id="History" class="panel-collapse collapse">
-                        <div class="panel-body">
+                        <div class="panel-body multiline">
                             @Html.Raw(Model.Entity.History)
                         </div>
                     </div>

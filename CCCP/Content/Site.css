@@ -1,4 +1,25 @@
-﻿.chat {
+﻿label.error {
+    color: red;
+}
+
+input.error {
+    border: 1px solid red;
+}
+
+div.rightTool {
+    float: right;
+    margin-left: 10px;
+}
+
+    div.rightTool .form-control {
+        width: auto;
+    }
+
+div.leftTool {
+    float: left;
+}
+
+.chat {
 	width: 1200px;
 }
 
@@ -72,4 +93,9 @@ legend.scheduler-border {
 
 input[type='checkbox'] {
     margin-right: 10px;
+}
+
+.multiline
+{
+   white-space: pre-line;
 }

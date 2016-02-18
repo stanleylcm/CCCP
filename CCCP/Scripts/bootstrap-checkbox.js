@@ -13,7 +13,9 @@
         className = element.attr('class'),
         style = element.attr('style'),
         checked = !!element[0].checked,
-        welNew = $('<div></div>');
+        welNew = $('<div></div>'),
+        checklist = element.attr('data-checklist'),
+        checklistAction = element.attr('data-checklistaction');
 
     element.replaceWith(welNew);
 
@@ -22,6 +24,8 @@
     welNew.addClass('bootstrap-checkbox');
     if (style) { welNew.attr('style', style); }
     if (checked) { welNew.addClass('checked'); }
+    if (checklist) { welNew.attr('data-checklist', checklist); }
+    if (checklistAction) { welNew.attr('data-checklistaction', checklistAction); }
 
     checkbox.value = value;
     checkbox.checked = checked;

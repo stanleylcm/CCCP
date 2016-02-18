@@ -234,4 +234,10 @@
   <data name="UserMenu_Signout" xml:space="preserve">
     <value>登出</value>
   </data>
+  <data name="Label_DeleteIncident" xml:space="preserve">
+    <value>你確定要刪除?</value>
+  </data>
+  <data name="Label_History" xml:space="preserve">
+    <value>歷史</value>
+  </data>
 </root>
