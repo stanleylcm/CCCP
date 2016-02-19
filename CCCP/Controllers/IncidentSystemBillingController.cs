@@ -55,7 +55,7 @@ namespace CCCP.Controllers
             {
                 incident.Entity = incidentSystemBilling;
                 incident.PrepareSave("Created");
-                incidentSystemBilling.History = incident.Entity.History;
+                incidentSystemBilling = incident.Entity;
                 incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
 
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
@@ -93,15 +93,15 @@ namespace CCCP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
         {
+            if (Session != null && Session["incident"] != null)
+            {
+                incident = Session["incident"] as IncidentSystemBillingModel;
+                incident.Entity = incidentSystemBilling;
+            }
+
             if (ModelState.IsValid)
             {
                 // prepare history etc. before save
-                if (Session != null && Session["incident"] != null)
-                {
-                    incident = Session["incident"] as IncidentSystemBillingModel;
-                    incident.Entity = incidentSystemBilling;
-                }
-                
                 incident.PrepareSave();
 
                 if (Session != null && Session["incident"] != null)

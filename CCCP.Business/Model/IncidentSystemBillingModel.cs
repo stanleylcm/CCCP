@@ -67,6 +67,21 @@ namespace CCCP.Business.Model
         {
             DateTime now = DateTime.Now;
             Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now, saveMode);
+
+            switch (saveMode.ToUpper())
+            {
+                case "CREATED":
+                    Entity.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+                    Entity.CreatedDateTime = now;
+                    Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+                    Entity.LastUpdatedDateTime = now;
+                    break;
+                case "LAST UPDATED":
+                    Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+                    Entity.LastUpdatedDateTime = now;
+                    break;
+
+            }
         }
 
         #endregion
