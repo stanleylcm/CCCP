@@ -5,28 +5,6 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title>@ViewBag.Title - @Resources.global.SiteTitle</title>
     @Styles.Render("~/Content/css")
-    <style>
-        label.error {
-            color: red;
-        }
-
-        input.error {
-            border: 1px solid red;
-        }
-
-        div.rightTool {
-            float: right;
-            margin-left: 10px;
-        }
-
-            div.rightTool .form-control {
-                width: auto;
-            }
-
-        div.leftTool {
-            float: left;
-        }
-    </style>
 
     @Scripts.Render("~/bundles/jquery")
     <script src="/signalr/hubs"></script>
@@ -53,6 +31,8 @@
                     }
                 });
             });
+
+            $(".mandatory-field").before("<i class='fa fa-star text-yellow'></i> ");
         });
     </script>
 </head>

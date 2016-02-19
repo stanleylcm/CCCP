@@ -234,4 +234,10 @@
   <data name="UserMenu_Signout" xml:space="preserve">
     <value>Sign Out</value>
   </data>
+  <data name="Label_DeleteIncident" xml:space="preserve">
+    <value>Are you sure you want to delete this incident?</value>
+  </data>
+  <data name="Label_History" xml:space="preserve">
+    <value>History</value>
+  </data>
 </root>

@@ -1,239 +1,239 @@
-﻿@model CCCP.ViewModel.IncidentSystemBilling
+﻿@model CCCP.Business.Model.IncidentSystemBillingModel
 
+@using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
+
+    CCCP.ViewModel.IncidentSystemBilling incidentSystemBilling = Model.Entity;
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>IncidentSystemBilling</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IncidentSystemBillingId)
+        @Html.HiddenFor(model => incidentSystemBilling.IncidentSystemBillingId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ChecklistBatchId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.ChecklistBatchId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ChecklistBatchId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ChecklistBatchId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.ChecklistBatchId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.ChecklistBatchId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ChatRoomId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.ChatRoomId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ChatRoomId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ChatRoomId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.ChatRoomId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.ChatRoomId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GeneralEnquiryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.GeneralEnquiryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.GeneralEnquiryId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GeneralEnquiryId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.GeneralEnquiryId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.GeneralEnquiryId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CrisisId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.CrisisId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CrisisId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CrisisId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.CrisisId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.CrisisId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NotificationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.NotificationId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NotificationId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NotificationId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.NotificationId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.NotificationId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IssueById, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IssueById, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IssueById, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IssueById, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.IssueById, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.IssueById, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IssueDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IssueDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IssueDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IssueDateTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.IssueDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.IssueDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CloseById, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.CloseById, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CloseById, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CloseById, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.CloseById, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.CloseById, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CloseDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.CloseDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CloseDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CloseDateTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.CloseDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.CloseDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncidentNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IncidentNo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IncidentNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IncidentNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.IncidentNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentNo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LevelOfSeverity, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.LevelOfSeverity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LevelOfSeverity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LevelOfSeverity, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.LevelOfSeverity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.LevelOfSeverity, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncidentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IncidentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IncidentStatus, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IncidentStatus, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.IncidentStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentStatus, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncidentBackground, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IncidentBackground, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IncidentBackground, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IncidentBackground, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.IncidentBackground, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentBackground, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsDrillMode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.IsDrillMode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDrillMode)
-                    @Html.ValidationMessageFor(model => model.IsDrillMode, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => incidentSystemBilling.IsDrillMode)
+                    @Html.ValidationMessageFor(model => incidentSystemBilling.IsDrillMode, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProblemArea, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.ProblemArea, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProblemArea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProblemArea, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.ProblemArea, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.ProblemArea, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PossibleCause, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.PossibleCause, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PossibleCause, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PossibleCause, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.PossibleCause, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BillingErrorSeriousness, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.BillingErrorSeriousness, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BillingErrorSeriousness, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BillingErrorSeriousness, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.BillingErrorSeriousness, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.BillingErrorSeriousness, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ExpectedAffectedCustomerBill, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContactedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.ContactedBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactedBy, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.ContactedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.ContactedBy, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Impact, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.Impact, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Impact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Impact, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.Impact, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.Impact, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StatusUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.StatusUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StatusUpdate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StatusUpdate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.StatusUpdate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.StatusUpdate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RequireMitigatingAction, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.RequireMitigatingAction, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RequireMitigatingAction, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RequireMitigatingAction, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.RequireMitigatingAction, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.RequireMitigatingAction, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MitigatingAction, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.MitigatingAction, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MitigatingAction, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MitigatingAction, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.MitigatingAction, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.CreatedBy, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.CreatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDateTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.CreatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.CreatedDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastUpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.LastUpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LastUpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastUpdatedBy, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.LastUpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.LastUpdatedBy, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastUpdatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => incidentSystemBilling.LastUpdatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LastUpdatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastUpdatedDateTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => incidentSystemBilling.LastUpdatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => incidentSystemBilling.LastUpdatedDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @Html.HiddenFor(model => incidentSystemBilling.History)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -243,10 +243,418 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+		    $('.bootstrap-checkbox').on('click', function(evnet){
+
+		        $.ajax({
+		            url: "/IncidentSystemBilling/ToggleActionStatus",
+		            type: "POST",
+		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+		            dataType: "html",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (data) {
+		                return true;
+		            },
+		            error: function () {
+		                alert("An error has occured!!!");
+		            }
+		        });
+		    });
+	    });
+    </script>
 }
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemBilling")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentSystemBilling</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.GeneralEnquiryId)</span>
+                    <a href="#"><span class="pull-right">@(Model.Entity.GeneralEnquiryId == 0 ? "" : Model.Entity.GeneralEnquiryId.ToString())</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</label></div>
+                                <div class="col-lg-4">
+                                    @Html.EditorFor(model => model.Entity.IncidentNo, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                    @Html.ValidationMessageFor(model => model.Entity.IncidentNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+                                <div class="col-lg-4">
+                                    @Html.EditorFor(model => model.Entity.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                    @Html.ValidationMessageFor(model => model.Entity.IncidentBackground, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
+                                <div class="col-lg-4">
+                                    <div class="checkbox">
+                                        <input id="IsDrillMode" name="IsDrillMode" type="checkbox" value="" @(Model.Entity.IsDrillMode != null && Model.Entity.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                        @Html.ValidationMessageFor(model => model.Entity.IsDrillMode, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Details</legend>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentSystemBillingProblemArea one in Enum.GetValues(typeof(IncidentSystemBillingProblemArea)))
+                                            {
+                                                <option value="@one.ToEnumString()" @(one.ToEnumString()==Model.Entity.ProblemArea ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Entity.ProblemArea, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="PossibleCause" name="PossibleCause" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentSystemBillingPossibleCause one in Enum.GetValues(typeof(IncidentSystemBillingPossibleCause)))
+                                            {
+                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == Model.Entity.PossibleCause ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Entity.PossibleCause, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.BillingErrorSeriousness)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="BillingErrorSeriousness" name="BillingErrorSeriousness" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentSystemBillingBillingErrorSeriousness one in Enum.GetValues(typeof(IncidentSystemBillingBillingErrorSeriousness)))
+                                            {
+                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == Model.Entity.BillingErrorSeriousness ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Entity.BillingErrorSeriousness, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedCustomerBill)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => model.Entity.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => model.Entity.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
+                                    <div class="col-lg-6">
+                                        @{
+                                            int countContactedBy = 0;
+                                            foreach (IncidentSystemBillingContactedBy one in Enum.GetValues(typeof(IncidentSystemBillingContactedBy)))
+                                            {
+                                                <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one.ToEnumString()" @(Model.Entity.ContactedBy.IsContains(one.ToEnumString()) ? "checked" : "") /><label for="ContactedBy@(countContactedBy.ToString())"> @one.ToEnumString()</label><br />
+                                                countContactedBy++;
+                                            }
+                                        }
+                                        <input type="hidden" id="ContactedBy" name="ContactedBy" value="" />
+                                        @Html.ValidationMessageFor(model => model.Entity.ContactedBy, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => model.Entity.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => model.Entity.Impact, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentSystemBillingStatusUpdate one in Enum.GetValues(typeof(IncidentSystemBillingStatusUpdate)))
+                                            {
+                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == Model.Entity.StatusUpdate ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Entity.StatusUpdate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RequireMitigatingAction)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="RequireMitigatingAction" name="RequireMitigatingAction" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentSystemBillingRequireMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingRequireMitigatingAction)))
+                                            {
+                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == Model.Entity.RequireMitigatingAction ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Entity.RequireMitigatingAction, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
+                                    <div class="col-lg-6">
+                                            @{
+                                                int countMitigatingAction = 0;
+                                                foreach (IncidentSystemBillingMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingMitigatingAction)))
+                                                {
+                                                    <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one.ToEnumString()" @(Model.Entity.MitigatingAction.IsContains(one.ToEnumString()) ? "checked" : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one.ToEnumString()</label>
+                                                if (one != IncidentSystemBillingMitigatingAction.Others)
+                                                {
+                                                    <br />
+                                                }
+                                                else
+                                                {
+                                                    string sMore = "";
+                                                    if (Model.Entity.MitigatingAction.IsContains(one.ToEnumString()))
+                                                    {
+                                                        
+                                                    }
+                                                    <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="@sMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                }
+                                                countMitigatingAction++;
+                                                }
+}
+                                        <input type="hidden" id="MitigatingAction" name="MitigatingAction" value="" />
+                                        @Html.ValidationMessageFor(model => model.Entity.MitigatingAction, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills">
+                                    @{
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
+                                            <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <th></th>
+                                                    <th>Action</th>
+                                                    <th>Completed By</th>
+                                                    <th>Completed Datetime</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                        {
+                                                            <tr>
+                                                                <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                                                <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                                <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
+                                                                <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                            </tr>
+                                                            countChecklistAction++;
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                                        countChecklist++;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" type="submit">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Cancel</button>
+                </div>
+            </div>
+            <br />
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(Model.Entity.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->

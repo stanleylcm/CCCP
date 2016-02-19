@@ -63,10 +63,10 @@ namespace CCCP.Business.Model
 
             return result;
         }
-        public void PrepareSave()
+        public void PrepareSave(string saveMode = "Last updated")
         {
             DateTime now = DateTime.Now;
-            Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now);
+            Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now, saveMode);
         }
 
         #endregion

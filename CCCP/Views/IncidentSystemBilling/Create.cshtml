@@ -1,5 +1,6 @@
 ﻿@model CCCP.ViewModel.IncidentSystemBilling
 
+@using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
@@ -20,6 +21,7 @@
                     @using (Html.BeginForm("Create", "IncidentSystemBilling", FormMethod.Post, new { onsubmit="validateForm()" }))
                     {
                         @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="row">
                         <div class="col-lg-1"></div>
@@ -58,8 +60,10 @@
                             <div class="col-lg-6">
                                 <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
                                     <option value=""></option>
-                                    <option value="System Bug">System Bug</option>
-                                    <option value="Imperfect Business Logic">Imperfect Business Logic</option>
+                                    @foreach (IncidentSystemBillingProblemArea one in Enum.GetValues(typeof(IncidentSystemBillingProblemArea)))
+                                    {
+                                    <option value="@one.ToEnumString()">@one.ToEnumString()</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => model.ProblemArea, "", new { @class = "text-danger" })
                             </div>
@@ -70,8 +74,10 @@
                             <div class="col-lg-6">
                                 <select id="PossibleCause" name="PossibleCause" class="form-control thin-control">
                                     <option value=""></option>
-                                    <option value="Undefined Scenario">Undefined Scenario</option>
-                                    <option value="Not Yet Confirmed">Not Yet Confirmed</option>
+                                    @foreach (IncidentSystemBillingPossibleCause one in Enum.GetValues(typeof(IncidentSystemBillingPossibleCause)))
+                                    {
+                                    <option value="@one.ToEnumString()">@one.ToEnumString()</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => model.PossibleCause, "", new { @class = "text-danger" })
                             </div>
@@ -82,9 +88,10 @@
                             <div class="col-lg-6">
                                 <select id="BillingErrorSeriousness" name="BillingErrorSeriousness" class="form-control thin-control">
                                     <option value=""></option>
-                                    <option value="Comfort Zone">Comfort Zone</option>
-                                    <option value="Manageable Zone">Manageable Zone</option>
-                                    <option value="Danger Zone">Danger Zone</option>
+                                    @foreach (IncidentSystemBillingBillingErrorSeriousness one in Enum.GetValues(typeof(IncidentSystemBillingBillingErrorSeriousness)))
+                                    {
+                                    <option value="@one.ToEnumString()">@one.ToEnumString()</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => model.BillingErrorSeriousness, "", new { @class = "text-danger" })
                             </div>
@@ -101,10 +108,14 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
                             <div class="col-lg-6">
-                                <input id="ContactedBy1" type="checkbox" value="Customer" /><label for="ContactedBy1"> Customer</label><br />
-                                <input id="ContactedBy2" type="checkbox" value="Consumer Council" /><label for="ContactedBy2"> Consumer Council</label><br />
-                                <input id="ContactedBy3" type="checkbox" value="Government" /><label for="ContactedBy3"> Government</label><br />
-                                <input id="ContactedBy4" type="checkbox" value="Media" /><label for="ContactedBy4"> Media</label>
+                                @{
+                                    int countContactedBy = 0;
+                                    foreach (IncidentSystemBillingContactedBy one in Enum.GetValues(typeof(IncidentSystemBillingContactedBy)))
+                                    {
+                                <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one.ToEnumString()" /><label for="ContactedBy@(countContactedBy.ToString())"> @one.ToEnumString()</label><br />
+                                        countContactedBy++;
+                                    }
+                                }
                                 <input type="hidden" id="ContactedBy" name="ContactedBy" value="" />
                                 @Html.ValidationMessageFor(model => model.ContactedBy, "", new { @class = "text-danger" })
                             </div>
@@ -123,14 +134,10 @@
                             <div class="col-lg-6">
                                 <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
                                     <option value=""></option>
-                                    <option value="Under Investigation">Under Investigation</option>
-                                    <option value="Defining Mitigating Actions">Defining Mitigating Actions</option>
-                                    <option value="Defining Resolution">Defining Resolution</option>
-                                    <option value="Implementing Mitigating Actions">Implementing Mitigating Actions</option>
-                                    <option value="Implementing Resolution">Implementing Resolution</option>
-                                    <option value="Closing Communication">Closing Communication</option>
-                                    <option value="Manageable Zone">Manageable Zone</option>
-                                    <option value="Case Close">Case Close</option>
+                                    @foreach (IncidentSystemBillingStatusUpdate one in Enum.GetValues(typeof(IncidentSystemBillingStatusUpdate)))
+                                    {
+                                    <option value="@one.ToEnumString()">@one.ToEnumString()</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => model.StatusUpdate, "", new { @class = "text-danger" })
                             </div>
@@ -141,9 +148,10 @@
                             <div class="col-lg-6">
                                 <select id="RequireMitigatingAction" name="RequireMitigatingAction" class="form-control thin-control">
                                     <option value=""></option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                    <option value="Not Yet Confirmed">Not Yet Confirmed</option>
+                                    @foreach (IncidentSystemBillingRequireMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingRequireMitigatingAction)))
+                                    {
+                                    <option value="@one.ToEnumString()">@one.ToEnumString()</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => model.RequireMitigatingAction, "", new { @class = "text-danger" })
                             </div>
@@ -152,31 +160,44 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div>
                             <div class="col-lg-6">
-                                <input id="MitigatingAction1" type="checkbox" value="Create Temp. Tools for Manual Control & Correction" /><label for="MitigatingAction1"> Create Temp. Tools for Manual Control & Correction</label><br />
-                                <input id="MitigatingAction2" type="checkbox" value="Suspend Bill Generation" /><label for="MitigatingAction2"> Suspend Bill Generation</label><br />
-                                <input id="MitigatingAction3" type="checkbox" value="Others" /><label for="MitigatingAction3"> Others (please specify)</label><input id="MitigatingAction3More" name="MitigatingAction3More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                @{
+                                    int countMitigatingAction = 0;
+                                    foreach (IncidentSystemBillingMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingMitigatingAction)))
+                                    {
+                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one.ToEnumString()" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one.ToEnumString()</label>
+                                        if (one != IncidentSystemBillingMitigatingAction.Others)
+                                        { 
+                                        <br />
+                                        }
+                                        else
+                                        {
+                                        <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                        }
+                                        countMitigatingAction++;
+                                    }
+}
                                 <input type="hidden" id="MitigatingAction" name="MitigatingAction" value="" />
                                 @Html.ValidationMessageFor(model => model.MitigatingAction, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </fieldset>
-    
-                    <input type="hidden" id="IncidentSystemBillingId" value="" />
-                    <input type="hidden" id="ChecklistBatchId" value="" />
-                    <input type="hidden" id="ChatRoomId" value="" />
-                    <input type="hidden" id="GeneralEnquiryId" value="" />
-                    <input type="hidden" id="CrisisId" value="" />
-                    <input type="hidden" id="NotificationId" value="" />
-                    <input type="hidden" id="IssueById" value="" />
-                    <input type="hidden" id="CloseById" value="" />
-                    <input type="hidden" id="CloseDateTime" value="" />
-                    <input type="hidden" id="IncidentNo" value="" />
-                    <input type="hidden" id="LevelOfSeverity" value="" />
-                    <input type="hidden" id="IncidentStatus" value="@CCCP.Common.IncidentStatus.Pending" />
-                    <input type="hidden" id="CreatedBy" value="" />
-                    <input type="hidden" id="CreatedDateTime" value="" />
-                    <input type="hidden" id="LastUpdatedBy" value="" />
-                    <input type="hidden" id="LastUpdatedDateTime" value="" />
+                            
+                    @Html.HiddenFor(model => model.IncidentSystemBillingId, new { @Value = 0 })
+                    @Html.HiddenFor(model => model.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => model.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => model.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => model.CrisisId)
+                    @Html.HiddenFor(model => model.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => model.IssueById)
+                    @Html.HiddenFor(model => model.CloseById)
+                    @Html.HiddenFor(model => model.CloseDateTime)
+                    @Html.HiddenFor(model => model.IncidentNo)
+                    @Html.HiddenFor(model => model.LevelOfSeverity)
+                    @Html.HiddenFor(model => model.IncidentStatus)
+                    @Html.HiddenFor(model => model.CreatedBy)
+                    @Html.HiddenFor(model => model.CreatedDateTime)
+                    @Html.HiddenFor(model => model.LastUpdatedBy)
+                    @Html.HiddenFor(model => model.LastUpdatedDateTime)
 
                     <div class="box-footer">
                         <div class="btn-group">
@@ -221,8 +242,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "Others") {
-                        sList = sList + " (" + $("#MitigatingAction3More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
                     }
                     i++;
                 }
@@ -230,7 +251,7 @@
             $("#MitigatingAction").val(sList);
         });
 
-        $("#MitigatingAction3More").change(function () {
+        $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)ore").change(function () {
             var sList = "";
             var i = 0;
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
@@ -240,8 +261,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "Others") {
-                        sList = sList + " (" + $("#MitigatingAction3More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
                     }
                     i++;
                 }
@@ -275,5 +296,5 @@
                 return true; // return false to cancel form action
             });
         });
-    </script>
+</script>
 }
