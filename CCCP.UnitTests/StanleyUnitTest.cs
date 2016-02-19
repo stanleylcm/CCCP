@@ -64,5 +64,13 @@ namespace CCCP.UnitTest
             x.CreatedBy += "1";
             db.SaveChanges(userName);
         }
+
+        [TestMethod]
+        public void TestErrorHandle()
+        {
+            IncidentSystemBillingController controller = new IncidentSystemBillingController();
+            controller.Test();
+
+        }
     }
 }
