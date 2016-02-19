@@ -209,7 +209,7 @@
                                 <legend class="scheduler-border">Details</legend>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.ProblemArea)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ProblemArea)</label></div>
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_ProblemArea" name="incidentSystemBilling.ProblemArea" class="form-control thin-control">
                                             <option value=""></option>
@@ -223,7 +223,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.PossibleCause)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.PossibleCause)</label></div>
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_PossibleCause" name="incidentSystemBilling.PossibleCause" class="form-control thin-control">
                                             <option value=""></option>
@@ -237,7 +237,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.BillingErrorSeriousness)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.BillingErrorSeriousness)</label></div>
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_BillingErrorSeriousness" name="incidentSystemBilling.BillingErrorSeriousness" class="form-control thin-control">
                                             <option value=""></option>
@@ -251,7 +251,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill)</label></div>
                                     <div class="col-lg-6">
                                         @Html.EditorFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
@@ -259,7 +259,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.ContactedBy)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ContactedBy)</label></div>
                                     <div class="col-lg-6">
                                         @{
                                     int countContactedBy = 0;
@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.Impact)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.Impact)</label></div>
                                     <div class="col-lg-6">
                                         @Html.EditorFor(model => incidentSystemBilling.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.Impact, "", new { @class = "text-danger" })
@@ -283,7 +283,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.StatusUpdate)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.StatusUpdate)</label></div>
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_StatusUpdate" name="incidentSystemBilling.StatusUpdate" class="form-control thin-control">
                                             <option value=""></option>

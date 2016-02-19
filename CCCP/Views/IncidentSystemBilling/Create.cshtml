@@ -56,7 +56,7 @@
                         <legend class="scheduler-border">Details</legend>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ProblemArea)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.ProblemArea)</label></div>
                             <div class="col-lg-6">
                                 <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
                                     <option value=""></option>
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.PossibleCause)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.PossibleCause)</label></div>
                             <div class="col-lg-6">
                                 <select id="PossibleCause" name="PossibleCause" class="form-control thin-control">
                                     <option value=""></option>
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.BillingErrorSeriousness)</label></div>
                             <div class="col-lg-6">
                                 <select id="BillingErrorSeriousness" name="BillingErrorSeriousness" class="form-control thin-control">
                                     <option value=""></option>
@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.ExpectedAffectedCustomerBill)</label></div>
                             <div class="col-lg-6">
                                 @Html.EditorFor(model => model.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
                                 @Html.ValidationMessageFor(model => model.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
@@ -106,7 +106,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.ContactedBy)</label></div>
                             <div class="col-lg-6">
                                 @{
                                     int countContactedBy = 0;
@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Impact)</label></div>
+                            <div class="col-lg-3 text-right"><labe class="mandatory-field" l>@Html.DisplayNameFor(model => model.Impact)</label></div>
                             <div class="col-lg-6">
                                 @Html.EditorFor(model => model.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
                                 @Html.ValidationMessageFor(model => model.Impact, "", new { @class = "text-danger" })
@@ -130,7 +130,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.StatusUpdate)</label></div>
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.StatusUpdate)</label></div>
                             <div class="col-lg-6">
                                 <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
                                     <option value=""></option>
