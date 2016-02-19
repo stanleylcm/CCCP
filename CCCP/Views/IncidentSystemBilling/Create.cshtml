@@ -165,17 +165,17 @@
                                     foreach (IncidentSystemBillingMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingMitigatingAction)))
                                     {
                                         <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one.ToEnumString()" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one.ToEnumString()</label>
-                                        if (countMitigatingAction < 2)
+                                        if (one != IncidentSystemBillingMitigatingAction.Others)
                                         { 
                                         <br />
                                         }
                                         else
                                         {
-                                        <input id="MitigatingAction2More" name="MitigatingAction2More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                        <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
                                         }
                                         countMitigatingAction++;
                                     }
-                                }
+}
                                 <input type="hidden" id="MitigatingAction" name="MitigatingAction" value="" />
                                 @Html.ValidationMessageFor(model => model.MitigatingAction, "", new { @class = "text-danger" })
                             </div>
@@ -242,8 +242,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "Others") {
-                        sList = sList + " (" + $("#MitigatingAction2More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
                     }
                     i++;
                 }
@@ -251,7 +251,7 @@
             $("#MitigatingAction").val(sList);
         });
 
-        $("#MitigatingAction2ore").change(function () {
+        $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)ore").change(function () {
             var sList = "";
             var i = 0;
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
@@ -261,8 +261,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "Others") {
-                        sList = sList + " (" + $("#MitigatingAction2More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
                     }
                     i++;
                 }
@@ -296,5 +296,5 @@
                 return true; // return false to cancel form action
             });
         });
-    </script>
+</script>
 }
