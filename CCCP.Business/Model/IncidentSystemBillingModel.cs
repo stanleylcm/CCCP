@@ -95,11 +95,20 @@ namespace CCCP.Business.Model
 
         public void CheckLevel()
         {
+            if (Entity.LevelOfSeverity.IsNullOrEmpty())
+            {
+                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level1).ToString();
+            }
+
             IncidentLevel level = (IncidentLevel)Convert.ToInt32(Entity.LevelOfSeverity);
+
+            // ContactedBy = Media -> L3
             if (level < IncidentLevel.Level3 && Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Media.ToEnumString()))
             {
                 Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level3).ToString();
             }
+
+            // ContactedBy = Government or Consumer Council and BillingErrorSeriousness = Danger Zone -> L2
             else if (level < IncidentLevel.Level2 && Entity.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) && 
                 (
                     Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Consumer_Council.ToEnumString()) ||
