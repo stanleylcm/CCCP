@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemBilling>
 
+@using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
@@ -43,19 +44,28 @@
                                 <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
                                 <th>@Html.DisplayNameFor(model => model.IncidentBackground)</th>
                                 <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.IssueDateTime)</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach(var item in Model)
                             { 
+                                string sLevelOfSeverity = "";
+                                if (item.LevelOfSeverity != null)
+                                {
+                                    int level = Convert.ToInt32(item.LevelOfSeverity);
+                                    IncidentLevel iLevel = (IncidentLevel)level;
+                                    sLevelOfSeverity = iLevel.ToEnumString();
+                                }
                             <tr>
                                 <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
                                 <td>@Resources.global.Menu_IncidentSystemBilling</td>
-                                <td>@Html.DisplayFor(model => item.LevelOfSeverity)</td>
+                                <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
                                 <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
                                 <td>
                                     <div class="tools">
                                         <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>

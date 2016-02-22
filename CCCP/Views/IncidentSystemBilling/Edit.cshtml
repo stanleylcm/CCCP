@@ -100,7 +100,41 @@
 
         $("#incidentSystemBilling_IsDrillMode").on("click", function () {
 	        $(this).val(this.checked);
-	    });
+        });
+
+        $('#incidentSystemBilling_RequireMitigatingAction').on("change", function () {
+            if ($(this).val().toUpperCase() == "YES") {
+                $('#EditMitigatingAction').show();
+
+                var sList = "";
+                var i = 0;
+                $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+                    if (this.checked) {
+                        if (i == 0) {
+                            sList = $(this).val();
+                        } else {
+                            sList = sList + ", " + $(this).val();
+                        }
+                        if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                            sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                        }
+                        i++;
+                    }
+                });
+                $("#incidentSystemBilling_MitigatingAction").val(sList);
+            } else {
+                $('#EditMitigatingAction').hide();
+                $('#incidentSystemBilling_MitigatingAction').val('');
+            }
+        });
+
+        $(document).ready(function () {
+            if ($('#incidentSystemBilling_RequireMitigatingAction').val().toUpperCase() == "YES") {
+                $('#EditMitigatingAction').show();
+            } else {
+                $('#EditMitigatingAction').hide();
+            }
+        });
     </script>
 }
 
@@ -175,11 +209,11 @@
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></div>
                                 <div class="col-lg-4">
-                                    <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
-                                    @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
-                                    {
-                                        <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemBilling.IncidentStatus ? "selected" : "" )>@one.ToEnumString()</option>
-                                    }
+                                    <select id="incidentSystemBilling_IncidentStatus" name="incidentSystemBilling.IncidentStatus" class="form-control thin-control">
+                                        @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+                                        {
+                                            <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemBilling.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+                                        }
                                     </select>
                                     @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentStatus, "", new { @class = "text-danger" })
 </div>
@@ -233,20 +267,6 @@
                                             }
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.BillingErrorSeriousness)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentSystemBilling_BillingErrorSeriousness" name="incidentSystemBilling.BillingErrorSeriousness" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (IncidentSystemBillingBillingErrorSeriousness one in Enum.GetValues(typeof(IncidentSystemBillingBillingErrorSeriousness)))
-                                            {
-                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == incidentSystemBilling.BillingErrorSeriousness ? "selected" : "")>@one.ToEnumString()</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.BillingErrorSeriousness, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -310,7 +330,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" id="EditMitigatingAction">
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.MitigatingAction)</label></div>
                                     <div class="col-lg-6">
                                         @{
@@ -347,15 +367,17 @@
                             @Html.HiddenFor(model => incidentSystemBilling.CrisisId, new { @Value = incidentSystemBilling.CrisisId })
                             @Html.HiddenFor(model => incidentSystemBilling.NotificationId, new { @Value = incidentSystemBilling.NotificationId })
                             @Html.HiddenFor(model => incidentSystemBilling.IssueById, new { @Value = incidentSystemBilling.IssueById })
+                            @Html.HiddenFor(model => incidentSystemBilling.IssueDateTime, new { @Value = incidentSystemBilling.IssueDateTime == null ? "" : incidentSystemBilling.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemBilling.CloseById, new { @Value = incidentSystemBilling.CloseById })
-                            @Html.HiddenFor(model => incidentSystemBilling.CloseDateTime, new { @Value = incidentSystemBilling.CloseDateTime == null ? "" : incidentSystemBilling.CloseDateTime.Value.ToString("yyyy-MM-dd hh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemBilling.CloseDateTime, new { @Value = incidentSystemBilling.CloseDateTime == null ? "" : incidentSystemBilling.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemBilling.CreatedBy, new { @Value = incidentSystemBilling.CreatedBy })
-                            @Html.HiddenFor(model => incidentSystemBilling.CreatedDateTime, new { @Value = incidentSystemBilling.CreatedDateTime == null ? "" : incidentSystemBilling.CreatedDateTime.Value.ToString("yyyy-MM-dd hh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemBilling.CreatedDateTime, new { @Value = incidentSystemBilling.CreatedDateTime == null ? "" : incidentSystemBilling.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedBy, new { @Value = incidentSystemBilling.LastUpdatedBy })
-                            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedDateTime, new { @Value = incidentSystemBilling.LastUpdatedDateTime == null ? "" : incidentSystemBilling.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd hh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedDateTime, new { @Value = incidentSystemBilling.LastUpdatedDateTime == null ? "" : incidentSystemBilling.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemBilling.History, new { @Value = incidentSystemBilling.History })
                             @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
                             @Html.HiddenFor(model => incidentSystemBilling.LevelOfSeverity, new { @Value = incidentSystemBilling.LevelOfSeverity })
+                            @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
                         </div>
                         <!-- /.box-body -->
                     </div>

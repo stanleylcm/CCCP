@@ -25,10 +25,28 @@
 
                     <div class="row">
                         <div class="col-lg-1"></div>
-                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IssueDateTime)</label></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IncidentNo)</label></div>
                         <div class="col-lg-4">
-                            @Html.EditorFor(model => model.IssueDateTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                            @Html.ValidationMessageFor(model => model.IssueDateTime, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.IncidentNo, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                            @Html.ValidationMessageFor(model => model.IncidentNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.LevelOfSeverity)</label></div>
+                        <div class="col-lg-4">
+                            <select id="LevelOfSeverity" name="LevelOfSeverity" class="form-control thin-control">
+                                <option value=""></option>
+                                @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                {
+                                    if (one != IncidentLevel.None)
+                                    { 
+                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                    }
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.LevelOfSeverity, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -157,7 +175,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="CreateMitigatingAction">
                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.MitigatingAction)</label></div>
                             <div class="col-lg-6">
                                 @{
@@ -189,10 +207,9 @@
                     @Html.HiddenFor(model => model.CrisisId)
                     @Html.HiddenFor(model => model.NotificationId, new { @Value = 0 })
                     @Html.HiddenFor(model => model.IssueById)
+                    @Html.HiddenFor(model => model.IssueDateTime)
                     @Html.HiddenFor(model => model.CloseById)
                     @Html.HiddenFor(model => model.CloseDateTime)
-                    @Html.HiddenFor(model => model.IncidentNo)
-                    @Html.HiddenFor(model => model.LevelOfSeverity)
                     @Html.HiddenFor(model => model.IncidentStatus)
                     @Html.HiddenFor(model => model.CreatedBy)
                     @Html.HiddenFor(model => model.CreatedDateTime)
@@ -272,6 +289,22 @@
 
         $("#IsDrillMode").on("click", function () {
             $(this).val(this.checked);
+        });
+
+        $('#RequireMitigatingAction').on("change", function () {
+            if ($(this).val().toUpperCase() == "YES") {
+                $('#CreateMitigatingAction').show();
+            } else {
+                $('#CreateMitigatingAction').hide();
+            }
+        });
+
+        $(document).ready(function () {
+            if ($('#RequireMitigatingAction').val().toUpperCase() == "YES") {
+                $('#CreateMitigatingAction').show();
+            } else {
+                $('#CreateMitigatingAction').hide();
+            }
         });
 </script>
 }

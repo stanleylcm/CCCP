@@ -75,12 +75,38 @@ namespace CCCP.Business.Model
                     Entity.CreatedDateTime = now;
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
+                    Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
+                    Entity.IssueDateTime = now;
+
+                    CheckLevel();
                     break;
                 case "LAST UPDATED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     break;
+                case "CLOSED":
+                    Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+                    Entity.LastUpdatedDateTime = now;
+                    Entity.CloseById = AccessControlService.CurrentUser.Entity.UserId;
+                    Entity.CloseDateTime = now;
+                    break;
+            }
+        }
 
+        public void CheckLevel()
+        {
+            IncidentLevel level = (IncidentLevel)Convert.ToInt32(Entity.LevelOfSeverity);
+            if (level < IncidentLevel.Level3 && Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Media.ToEnumString()))
+            {
+                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level3).ToString();
+            }
+            else if (level < IncidentLevel.Level2 && Entity.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) && 
+                (
+                    Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Consumer_Council.ToEnumString()) ||
+                    Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Government.ToEnumString())
+                ))
+            {
+                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level2).ToString();
             }
         }
 

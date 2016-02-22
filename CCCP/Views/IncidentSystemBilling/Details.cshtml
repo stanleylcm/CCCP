@@ -1,5 +1,6 @@
 ﻿@model CCCP.Business.Model.IncidentSystemBillingModel
 
+@using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
@@ -27,6 +28,12 @@
 		    $('input[type=checkbox]').click(function(event) {
 		        event.preventDefault();
 		    });
+
+		    if ("Yes" == "@(Model.Entity.RequireMitigatingAction)") {
+		        $('#DetailsMitigatingAction').show();
+		    } else {
+		        $('#DetailsMitigatingAction').hide();
+		    }
 	    });
     </script>
 }
@@ -98,9 +105,18 @@
                                 <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
                             </div>
 
+                            @{
+                                string sLevelOfSeverity = "";
+                                if (Model.Entity.LevelOfSeverity != null)
+                                {
+                                    int level = Convert.ToInt32(Model.Entity.LevelOfSeverity);
+                                    IncidentLevel iLevel = (IncidentLevel)level;
+                                    sLevelOfSeverity = iLevel.ToEnumString();
+                                }
+                            }
                             <div class="row">
                                 <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
-                                <div class="col-lg-1">@Html.DisplayFor(model => model.Entity.LevelOfSeverity)</div>
+                                <div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
                                 <div class="col-lg-5">
                                     <button class="btn btn-primary" type="button" onclick="window.location = '#';">Escalate to Crisis</button>
                                 </div>
@@ -169,7 +185,7 @@
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RequireMitigatingAction)</div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" id="DetailsMitigatingAction">
                                     <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
                                     <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MitigatingAction)</div>
                                 </div>

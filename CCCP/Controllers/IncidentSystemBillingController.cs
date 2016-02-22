@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CCCP.ViewModel;
 using CCCP.Business.Model;
+using CCCP.Common;
 
 namespace CCCP.Controllers
 {
@@ -60,7 +61,7 @@ namespace CCCP.Controllers
 
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
                 db.SaveChanges();
-                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, "KF", Common.CheckListActionStatus.Pending.ToString());
+                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
                 return RedirectToAction("Index");
             }
 
@@ -102,7 +103,15 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 // prepare history etc. before save
-                incident.PrepareSave();
+                CCCP.Common.IncidentStatus closed = CCCP.Common.IncidentStatus.Closed;
+                if (incident.Entity.IncidentStatus == closed.ToEnumString())
+                {
+                    incident.PrepareSave("Closed");
+                }
+                else
+                {
+                    incident.PrepareSave();
+                }
 
                 if (Session != null && Session["incident"] != null)
                 {
