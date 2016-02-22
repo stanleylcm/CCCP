@@ -110,6 +110,7 @@ namespace CCCP.Common
         Modifiy
     }
 
+    #region Enum for Incident - System (Billing)
     public enum IncidentSystemBillingProblemArea
     {
         System_Bug,
@@ -161,4 +162,5 @@ namespace CCCP.Common
         Suspend_Bill_Generation,
         Others
     }
+    #endregion
 }
