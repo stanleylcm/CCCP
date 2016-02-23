@@ -94,12 +94,12 @@ namespace CCCP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
         {
-            if (Session != null && Session["incident"] != null)
-            {
-                incident = Session["incident"] as IncidentSystemBillingModel;
-                incident.Entity = incidentSystemBilling;
-            }
-
+                if (Session != null && Session["incident"] != null)
+                {
+                    incident = Session["incident"] as IncidentSystemBillingModel;
+                    incident.Entity = incidentSystemBilling;
+                }
+                
             if (ModelState.IsValid)
             {
                 // prepare history etc. before save
@@ -110,7 +110,7 @@ namespace CCCP.Controllers
                 }
                 else
                 {
-                    incident.PrepareSave();
+                incident.PrepareSave();
                 }
 
                 if (Session != null && Session["incident"] != null)

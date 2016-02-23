@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using log4net;
+using System.Diagnostics;
 
 namespace CCCP.Common
 {
@@ -50,6 +52,28 @@ namespace CCCP.Common
         {
             foreach (PropertyInfo p in self) if (p.Name.IsEquals(comparer)) return true;
             return false;
+        }
+
+        // Exception
+        public static void LogError(this Exception self, string sourceData = "")
+        {
+            StackTrace stackTrace = new StackTrace();
+            StackFrame frame = new StackFrame(1);
+            var currentMethod = frame.GetMethod(); //Gets the current method name
+            var type = currentMethod.DeclaringType;
+
+            ILog logger = LogManager.GetLogger(type + "-" + currentMethod.Name);
+
+            log4net.LogicalThreadContext.Properties["SourceData"] = sourceData;
+            log4net.LogicalThreadContext.Properties["ExceptionMessage"] = self.Message;
+            log4net.LogicalThreadContext.Properties["StackTrace"] = self.StackTrace;
+            log4net.LogicalThreadContext.Properties["CreatedBy"] = "";
+
+            logger.Error(type + "-" + currentMethod.Name, self);
+
+            logger = null;
+            frame = null;
+            stackTrace = null;
         }
     }
 }
