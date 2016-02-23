@@ -78,11 +78,15 @@ namespace CCCP.Business.Model
                     Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
                     Entity.IssueDateTime = now;
 
+                    Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
+
                     CheckLevel();
                     break;
                 case "LAST UPDATED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
+
+                    CheckLevel();
                     break;
                 case "CLOSED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
