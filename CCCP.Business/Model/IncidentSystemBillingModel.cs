@@ -88,7 +88,6 @@ namespace CCCP.Business.Model
                     Entity.IssueDateTime = now;
 
                     Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
-                    Entity.IncidentStatus = GetIncidentStatus().ToEnumString();
 
                     EscalateIncidentLevel();
                     break;
