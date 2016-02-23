@@ -47,5 +47,28 @@ namespace CCCP.Controllers
 
             return Redirect(currentUrl);
         }
+
+        [HttpPost]
+        public ActionResult ToggleSidebarCollapse()
+        {
+            int sidebarCollapse = 0;
+
+            if (Response.Cookies["CCCP"] == null)
+            {
+                HttpCookie myCookie = new HttpCookie("CCCP");
+                myCookie["SidebarCollapse"] = ((sidebarCollapse + 1) % 2).ToString();
+                myCookie.Expires = DateTime.Now.AddYears(1);
+                Response.Cookies.Add(myCookie);
+            }
+            else
+            {
+                sidebarCollapse = Convert.ToInt32(Request.Cookies["CCCP"]["SidebarCollapse"]);
+                Response.Cookies["CCCP"]["SidebarCollapse"] = ((sidebarCollapse + 1) % 2).ToString();
+            }
+
+            Session["SidebarCollapse"] = Response.Cookies["CCCP"]["SidebarCollapse"];
+
+            return Json (new { result = (sidebarCollapse == 1) });
+        }
     }
 }
