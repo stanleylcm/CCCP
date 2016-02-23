@@ -36,6 +36,11 @@ namespace CCCP.Controllers
                 return HttpNotFound();
             }
             LoadData(id.Value);
+            if (Session != null)
+            {
+                Session["incident"] = incident;
+            }
+
             return View(incident);
         }
 
@@ -54,10 +59,10 @@ namespace CCCP.Controllers
         {
             if (ModelState.IsValid)
             {
+                incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
                 incident.Entity = incidentSystemBilling;
                 incident.PrepareSave("Created");
                 incidentSystemBilling = incident.Entity;
-                incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
 
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
                 db.SaveChanges();
@@ -103,14 +108,13 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 // prepare history etc. before save
-                CCCP.Common.IncidentStatus closed = CCCP.Common.IncidentStatus.Closed;
-                if (incident.Entity.IncidentStatus == closed.ToEnumString())
+                if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
                 {
                     incident.PrepareSave("Closed");
                 }
                 else
                 {
-                incident.PrepareSave();
+                    incident.PrepareSave();
                 }
 
                 if (Session != null && Session["incident"] != null)
@@ -231,6 +235,17 @@ namespace CCCP.Controllers
             }
 
             return Json(new { result = true });
+        }
+
+        public ActionResult CloseIncident()
+        {
+            if (Session != null && Session["incident"] != null)
+            {
+                incident = Session["incident"] as IncidentSystemBillingModel;
+            }
+            incident.Entity.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            return Edit(incident.Entity);
         }
 
         public void Test()

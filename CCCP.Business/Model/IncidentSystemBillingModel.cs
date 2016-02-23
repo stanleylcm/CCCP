@@ -79,14 +79,17 @@ namespace CCCP.Business.Model
                     Entity.IssueDateTime = now;
 
                     Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
+                    Entity.IncidentStatus = GetIncidentStatus().ToEnumString();
 
-                    CheckLevel();
+                    EscalateIncidentLevel();
                     break;
                 case "LAST UPDATED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
 
-                    CheckLevel();
+                    Entity.IncidentStatus = GetIncidentStatus().ToEnumString();
+
+                    EscalateIncidentLevel();
                     break;
                 case "CLOSED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
@@ -97,7 +100,7 @@ namespace CCCP.Business.Model
             }
         }
 
-        public void CheckLevel()
+        public void EscalateIncidentLevel()
         {
             if (Entity.LevelOfSeverity.IsNullOrEmpty())
             {

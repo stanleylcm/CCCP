@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Incident.
+        /// </summary>
+        internal static string Func_CloseIncident {
+            get {
+                return ResourceManager.GetString("Func_CloseIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         internal static string Func_Create {
@@ -97,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Escalate to Crisis.
+        /// </summary>
+        internal static string Func_EscalateToCrisis {
+            get {
+                return ResourceManager.GetString("Func_EscalateToCrisis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Func_Save {
@@ -111,6 +129,15 @@ namespace Resources {
         internal static string Func_Update {
             get {
                 return ResourceManager.GetString("Func_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to you want to close this Incident?.
+        /// </summary>
+        internal static string Label_CloseIncident {
+            get {
+                return ResourceManager.GetString("Label_CloseIncident", resourceCulture);
             }
         }
         

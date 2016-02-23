@@ -240,4 +240,13 @@
   <data name="Label_History" xml:space="preserve">
     <value>History</value>
   </data>
+  <data name="Func_CloseIncident" xml:space="preserve">
+    <value>Close Incident</value>
+  </data>
+  <data name="Func_EscalateToCrisis" xml:space="preserve">
+    <value>Escalate to Crisis</value>
+  </data>
+  <data name="Label_CloseIncident" xml:space="preserve">
+    <value>Are you sure to you want to close this Incident?</value>
+  </data>
 </root>
