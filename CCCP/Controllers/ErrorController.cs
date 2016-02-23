@@ -4,8 +4,9 @@ namespace CCCP.Controllers
 {
     public class ErrorController : Controller
     {
-        public ActionResult Error()
+        public ActionResult Error(string errorMessage)
         {
+            ViewBag.Message = errorMessage;
             return View();
         }
 

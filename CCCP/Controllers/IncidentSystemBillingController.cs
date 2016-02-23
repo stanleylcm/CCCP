@@ -19,6 +19,7 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings
         public ActionResult Index()
         {
+            Test();
             return View(db.IncidentSystemBilling.ToList());
         }
 
@@ -101,7 +102,7 @@ namespace CCCP.Controllers
                     incident = Session["incident"] as IncidentSystemBillingModel;
                     incident.Entity = incidentSystemBilling;
                 }
-                
+
                 incident.PrepareSave();
 
                 if (Session != null && Session["incident"] != null)
@@ -188,7 +189,7 @@ namespace CCCP.Controllers
 
             // load checklists
             int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from c in db.Checklist                                          
+            incident.ChecklistEntities = (from c in db.Checklist
                                           where c.ChecklistBatchId.Equals(checklistBatchID)
                                           orderby c.SortingOrder
                                           select c).ToList<Checklist>();
@@ -226,7 +227,7 @@ namespace CCCP.Controllers
 
         public void Test()
         {
-            incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();
+            incident.Checklists[1].ChecklistActions[10].ToggleActionStatus();
         }
     }
 }
