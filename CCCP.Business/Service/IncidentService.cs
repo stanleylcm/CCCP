@@ -18,11 +18,13 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemBilling incident)
         {
             // Level 3
-            if (incident.ContactedBy.IsEquals("Media")) return IncidentLevel.Level3;
+            //if (incident.ContactedBy.IsEquals("Media")) return IncidentLevel.Level3;
+            if (incident.ContactedBy.IsContains("Media")) return IncidentLevel.Level3;
 
             // Level 2
             if (incident.BillingErrorSeriousness.IsEquals("Danger Zone") &&
-                (incident.ContactedBy.IsEquals("Consumer Council") || incident.ContactedBy.IsEquals("Government"))
+                //(incident.ContactedBy.IsEquals("Consumer Council") || incident.ContactedBy.IsEquals("Government"))
+                (incident.ContactedBy.IsContains("Consumer Council") || incident.ContactedBy.IsContains("Government"))
                 ) return IncidentLevel.Level2;
 
             // else

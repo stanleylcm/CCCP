@@ -89,7 +89,7 @@ namespace CCCP.Business.Model
 
                     Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
 
-                    EscalateIncidentLevel();
+                    Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
                     break;
                 case "LAST UPDATED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
@@ -97,7 +97,7 @@ namespace CCCP.Business.Model
 
                     Entity.IncidentStatus = GetIncidentStatus().ToEnumString();
 
-                    EscalateIncidentLevel();
+                    Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
                     break;
                 case "CLOSED":
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
@@ -105,32 +105,6 @@ namespace CCCP.Business.Model
                     Entity.CloseById = AccessControlService.CurrentUser.Entity.UserId;
                     Entity.CloseDateTime = now;
                     break;
-            }
-        }
-
-        public void EscalateIncidentLevel()
-        {
-            if (Entity.LevelOfSeverity.IsNullOrEmpty())
-            {
-                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level1).ToString();
-            }
-
-            IncidentLevel level = (IncidentLevel)Convert.ToInt32(Entity.LevelOfSeverity);
-
-            // ContactedBy = Media -> L3
-            if (level < IncidentLevel.Level3 && Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Media.ToEnumString()))
-            {
-                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level3).ToString();
-            }
-
-            // ContactedBy = Government or Consumer Council and BillingErrorSeriousness = Danger Zone -> L2
-            else if (level < IncidentLevel.Level2 && Entity.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) &&
-                (
-                    Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Consumer_Council.ToEnumString()) ||
-                    Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Government.ToEnumString())
-                ))
-            {
-                Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level2).ToString();
             }
         }
 
