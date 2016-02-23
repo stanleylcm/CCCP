@@ -37,6 +37,11 @@ namespace CCCP.Common
         Security
     }
 
+    public enum SequenceType
+    {
+        Incident
+    }
+
     public enum IncidentStatus
     {
         Pending,

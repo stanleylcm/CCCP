@@ -177,6 +177,10 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <Function Name="usp_GetNextSequenceNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SequenceType" Type="varchar" Mode="In" />
+          <Parameter Name="Year" Type="smallint" Mode="In" />
+        </Function>
         <Function Name="usp_Incident_PostCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IncidentId" Type="int" Mode="In" />
           <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
@@ -199,12 +203,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CCCP.ViewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CCCPDbContext" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="usp_Checklist_LoadData">
-          <Parameter Name="ChecklistId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="usp_ChecklistBatch_LoadData">
-          <Parameter Name="ChecklistBatchId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="usp_IncidentSystemBilling_Test" ReturnType="Collection(CCCP.ViewModel.usp_IncidentSystemBilling_Test_Result)" />
           <EntitySet Name="User" EntityType="CCCP.ViewModel.User" />
           <FunctionImport Name="usp_Incident_PostCreate">
@@ -220,6 +218,10 @@
           <EntitySet Name="IncidentSystemBilling" EntityType="CCCP.ViewModel.IncidentSystemBilling" />
           <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCP.ViewModel.IncidentSystemCallCentre" />
           <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCP.ViewModel.IncidentSystemInvoicing" />
+          <FunctionImport Name="usp_GetNextSequenceNo" ReturnType="Collection(Int32)">
+            <Parameter Name="SequenceType" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="Int16" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -665,6 +667,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetNextSequenceNo" FunctionName="CCCP.ViewModel.Store.usp_GetNextSequenceNo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

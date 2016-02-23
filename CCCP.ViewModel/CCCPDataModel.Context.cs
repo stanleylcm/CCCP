@@ -36,24 +36,6 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
     
-        public virtual int usp_Checklist_LoadData(Nullable<int> checklistId)
-        {
-            var checklistIdParameter = checklistId.HasValue ?
-                new ObjectParameter("ChecklistId", checklistId) :
-                new ObjectParameter("ChecklistId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Checklist_LoadData", checklistIdParameter);
-        }
-    
-        public virtual int usp_ChecklistBatch_LoadData(Nullable<int> checklistBatchId)
-        {
-            var checklistBatchIdParameter = checklistBatchId.HasValue ?
-                new ObjectParameter("ChecklistBatchId", checklistBatchId) :
-                new ObjectParameter("ChecklistBatchId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ChecklistBatch_LoadData", checklistBatchIdParameter);
-        }
-    
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_IncidentSystemBilling_Test_Result>("usp_IncidentSystemBilling_Test");
@@ -78,6 +60,19 @@ namespace CCCP.ViewModel
                 new ObjectParameter("DefaultActionStatus", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Incident_PostCreate", incidentIdParameter, incidentTypeIdParameter, createdByParameter, defaultActionStatusParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_GetNextSequenceNo(string sequenceType, Nullable<short> year)
+        {
+            var sequenceTypeParameter = sequenceType != null ?
+                new ObjectParameter("SequenceType", sequenceType) :
+                new ObjectParameter("SequenceType", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetNextSequenceNo", sequenceTypeParameter, yearParameter);
         }
     }
 }

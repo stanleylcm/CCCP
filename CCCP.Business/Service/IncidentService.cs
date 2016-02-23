@@ -48,5 +48,17 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        public static string GetNewIncidentNo(SequenceType type, int year)
+        {
+            string Result = "";
+            string sequenceType = type.ToEnumString();
+
+            // Get new sequence no from SP
+            CCCPDbContext db = new CCCPDbContext();
+            int seqNo = db.usp_GetNextSequenceNo(sequenceType, (short)year).FirstOrDefault().Value;
+
+            Result = string.Format("{0}{1}", year.ToString().Right(2), seqNo.ToString("00000"));
+            return Result;
+        }
     }
 }

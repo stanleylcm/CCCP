@@ -40,6 +40,13 @@ namespace CCCP.UnitTest
         public void TestMisc()
         {
             string a = DateTime.Now.ToString("yyyy-MM-dd tthh:mm:ss");
+
+            int b = 999;
+            string bb = b.ToString("00000");
+
+            string c = "abcdefg";
+            string c1 = c.Left(2);
+            string c2 = c.Right(3);
         }
 
         [TestMethod]
@@ -71,6 +78,12 @@ namespace CCCP.UnitTest
             IncidentSystemBillingController controller = new IncidentSystemBillingController();
             controller.Test();
 
+        }
+
+        [TestMethod]
+        public void TestGetNewIncidentNo()
+        {
+            string newIncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, 2016);
         }
     }
 }

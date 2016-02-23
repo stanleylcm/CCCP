@@ -24,6 +24,24 @@ namespace CCCP.Common
         {
             return (self.Trim().ToUpper().IndexOf(comparer.Trim().ToUpper()) >= 0);
         }
+        public static string Left(this string self, int length)
+        {
+            if (length >= 0)
+            {
+                if (length >= self.Length) return self;
+                else return self.Substring(0, length);
+            }
+            else return "";
+        }
+        public static string Right(this string self, int length)
+        {
+            if (length >= 0)
+            {
+                if (length >= self.Length) return self;
+                else return self.Substring(self.Length - length, length);
+            }
+            else return "";
+        }
 
         // Enum
         public static string ToEnumString(this Enum self)
