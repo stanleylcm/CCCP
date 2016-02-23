@@ -14,16 +14,18 @@ namespace CCCP.Business.Model
         #region Constructor
 
         public IncidentSystemBillingModel()
-        { 
+        {
+            init();
         }
         public IncidentSystemBillingModel(IncidentSystemBilling viewModel)
         {
+            init();
             this.Entity = viewModel;
         }
 
         private void init()
         {
-            this.IncidentStatus = Entity.IncidentStatus.ToEnum<IncidentStatus>();
+            initOptions();
         }
 
         #endregion
@@ -31,7 +33,6 @@ namespace CCCP.Business.Model
         #region Declaration
 
         public IncidentSystemBilling Entity = new IncidentSystemBilling();
-        public IncidentStatus IncidentStatus = IncidentStatus.Pending;
         public List<ChecklistModel> Checklists = new List<ChecklistModel>();
         public List<Checklist> ChecklistEntities
         {
@@ -41,6 +42,14 @@ namespace CCCP.Business.Model
                 foreach (Checklist checklistEntity in value) Checklists.Add(new ChecklistModel(checklistEntity));
             }
         }
+
+        public List<string> Options_ProblemArea = new List<string>();
+        public List<string> Options_PossibleCause = new List<string>();
+        public List<string> Options_BillingErrorSeriousness = new List<string>();
+        public List<string> Options_ContactedBy = new List<string>();
+        public List<string> Options_StatusUpdate = new List<string>();
+        public List<string> Options_RequireMitigatingAction = new List<string>();
+        public List<string> Options_MitigatingAction = new List<string>();
 
         #endregion
 
@@ -116,7 +125,7 @@ namespace CCCP.Business.Model
             }
 
             // ContactedBy = Government or Consumer Council and BillingErrorSeriousness = Danger Zone -> L2
-            else if (level < IncidentLevel.Level2 && Entity.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) && 
+            else if (level < IncidentLevel.Level2 && Entity.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) &&
                 (
                     Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Consumer_Council.ToEnumString()) ||
                     Entity.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Government.ToEnumString())
@@ -124,6 +133,21 @@ namespace CCCP.Business.Model
             {
                 Entity.LevelOfSeverity = Convert.ToInt32(IncidentLevel.Level2).ToString();
             }
+        }
+
+        #endregion
+
+        #region Private Method
+
+        private void initOptions()
+        {
+            this.Options_ProblemArea = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_ProblemArea);
+            this.Options_PossibleCause = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_PossibleCause);
+            this.Options_BillingErrorSeriousness = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_BillingErrorSeriousness);
+            this.Options_ContactedBy = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_ContactedBy);
+            this.Options_StatusUpdate = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_StatusUpdate);
+            this.Options_RequireMitigatingAction = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_RequireMitigatingAction);
+            this.Options_MitigatingAction = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_MitigatingAction);
         }
 
         #endregion

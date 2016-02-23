@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CCCP.ViewModel;
 using CCCP.Business.Model;
+using CCCP.Business.Service;
 using CCCP.Common;
 
 namespace CCCP.Controllers
@@ -47,7 +48,7 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings/Create
         public ActionResult Create()
         {
-            return View();
+            return View(incident);
         }
 
         // POST: IncidentSystemBillings/Create

@@ -159,6 +159,17 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="InputOption">
+          <Key>
+            <PropertyRef Name="InputOptionId" />
+          </Key>
+          <Property Name="InputOptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InputKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="2000" />
+          <Property Name="SortingOrder" Type="smallint" />
+          <Property Name="HasLogic" Type="bit" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -196,6 +207,7 @@
           <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemCallCentre" EntityType="Self.IncidentSystemCallCentre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemInvoicing" EntityType="Self.IncidentSystemInvoicing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InputOption" EntityType="Self.InputOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -222,6 +234,7 @@
             <Parameter Name="SequenceType" Mode="In" Type="String" />
             <Parameter Name="Year" Mode="In" Type="Int16" />
           </FunctionImport>
+          <EntitySet Name="InputOption" EntityType="CCCP.ViewModel.InputOption" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -446,6 +459,17 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="InputOption">
+          <Key>
+            <PropertyRef Name="InputOptionId" />
+          </Key>
+          <Property Name="InputOptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InputKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="HasLogic" Type="Boolean" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -668,6 +692,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_GetNextSequenceNo" FunctionName="CCCP.ViewModel.Store.usp_GetNextSequenceNo" />
+          <EntitySetMapping Name="InputOption">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.InputOption">
+              <MappingFragment StoreEntitySet="InputOption">
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="HasLogic" ColumnName="HasLogic" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="InputKey" ColumnName="InputKey" />
+                <ScalarProperty Name="InputOptionId" ColumnName="InputOptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

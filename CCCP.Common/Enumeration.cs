@@ -167,5 +167,17 @@ namespace CCCP.Common
         Suspend_Bill_Generation,
         Others
     }
+
+    public enum IncidentSystemBillingInputKey
+    {
+        IncidentSystemBilling_ContactedBy,
+        IncidentSystemBilling_MitigatingAction,
+        IncidentSystemBilling_PossibleCause,
+        IncidentSystemBilling_ProblemArea,
+        IncidentSystemBilling_RequireMitigatingAction,
+        IncidentSystemBilling_StatusUpdate,
+        IncidentSystemBilling_BillingErrorSeriousness
+    }
+
     #endregion
 }

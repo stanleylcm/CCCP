@@ -3,7 +3,6 @@
 @using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
-
     CCCP.ViewModel.IncidentSystemBilling incidentSystemBilling = Model.Entity;
 }
 
@@ -321,9 +320,9 @@
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_ProblemArea" name="incidentSystemBilling.ProblemArea" class="form-control thin-control">
                                             <option value=""></option>
-                                            @foreach (IncidentSystemBillingProblemArea one in Enum.GetValues(typeof(IncidentSystemBillingProblemArea)))
+                                            @foreach (string one in Model.Options_ProblemArea)
                                             {
-                                            <option value="@one.ToEnumString()" @(one.ToEnumString() == incidentSystemBilling.ProblemArea ? "selected" : "")>@one.ToEnumString()</option>
+                                                <option value="@one" @(one == incidentSystemBilling.ProblemArea ? "selected" : "")>@one</option>
                                             }
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.ProblemArea, "", new { @class = "text-danger" })
@@ -335,10 +334,10 @@
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_PossibleCause" name="incidentSystemBilling.PossibleCause" class="form-control thin-control">
                                             <option value=""></option>
-                                            @foreach (IncidentSystemBillingPossibleCause one in Enum.GetValues(typeof(IncidentSystemBillingPossibleCause)))
-                                            {
-                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == incidentSystemBilling.PossibleCause ? "selected" : "")>@one.ToEnumString()</option>
-                                            }
+                                            @foreach (string one in Model.Options_PossibleCause)
+                                            {                                                 
+                                                <option value="@one" @(one == incidentSystemBilling.PossibleCause ? "selected" : "")>@one</option>
+                                            }  
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
                                     </div>
@@ -356,10 +355,10 @@
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ContactedBy)</label></div>
                                     <div class="col-lg-6">
                                         @{
-                                    int countContactedBy = 0;
-                                    foreach (IncidentSystemBillingContactedBy one in Enum.GetValues(typeof(IncidentSystemBillingContactedBy)))
+                                    int countContactedBy = 0;                                    
+                                    foreach (string one in Model.Options_ContactedBy)
                                     {
-                                        <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one.ToEnumString()" @(incidentSystemBilling.ContactedBy != null ? (incidentSystemBilling.ContactedBy.IsContains(one.ToEnumString()) ? "checked" : "") : "") /><label for="ContactedBy@(countContactedBy.ToString())"> @one.ToEnumString()</label><br />
+                                        <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.ContactedBy != null ? (incidentSystemBilling.ContactedBy.IsContains(one) ? "checked" : "") : "") /><label for="ContactedBy@(countContactedBy.ToString())"> @one</label><br />
                                         countContactedBy++;
                                     }
                                         }
@@ -381,9 +380,9 @@
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_StatusUpdate" name="incidentSystemBilling.StatusUpdate" class="form-control thin-control">
                                             <option value=""></option>
-                                            @foreach (IncidentSystemBillingStatusUpdate one in Enum.GetValues(typeof(IncidentSystemBillingStatusUpdate)))
+                                            @foreach (string one in Model.Options_StatusUpdate)
                                             {
-                                            <option value="@one.ToEnumString()" @(one.ToEnumString() == incidentSystemBilling.StatusUpdate ? "selected": "" )>@one.ToEnumString()</option>
+                                                <option value="@one" @(one == incidentSystemBilling.StatusUpdate ? "selected" : "")>@one</option>
                                             }
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.StatusUpdate, "", new { @class = "text-danger" })
@@ -395,9 +394,9 @@
                                     <div class="col-lg-6">
                                         <select id="incidentSystemBilling_RequireMitigatingAction" name="incidentSystemBilling.RequireMitigatingAction" class="form-control thin-control">
                                             <option value=""></option>
-                                            @foreach (IncidentSystemBillingRequireMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingRequireMitigatingAction)))
+                                            @foreach (string one in Model.Options_RequireMitigatingAction)
                                             {
-                                                <option value="@one.ToEnumString()" @(one.ToEnumString() == incidentSystemBilling.RequireMitigatingAction ? "selected" : "")>@one.ToEnumString()</option>
+                                                <option value="@one" @(one == incidentSystemBilling.RequireMitigatingAction ? "selected" : "")>@one</option>
                                             }
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.RequireMitigatingAction, "", new { @class = "text-danger" })
@@ -408,18 +407,18 @@
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.MitigatingAction)</label></div>
                                     <div class="col-lg-6">
                                         @{
-                                        int countMitigatingAction = 0;
-                                        foreach (IncidentSystemBillingMitigatingAction one in Enum.GetValues(typeof(IncidentSystemBillingMitigatingAction)))
+                                        int countMitigatingAction = 0;                                                                                                                     
+                                        foreach (string one in Model.Options_MitigatingAction)
                                         {
-                                            <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one.ToEnumString()" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one.ToEnumString()) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one.ToEnumString()</label>
-                                        if (one != IncidentSystemBillingMitigatingAction.Others)
+                                            <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
+                                        if (one != IncidentSystemBillingMitigatingAction.Others.ToEnumString())
                                         {
                                             <br />
                                         }
                                         else
                                         {
                                             string sMore = "";
-                                            if (incidentSystemBilling.MitigatingAction != null && incidentSystemBilling.MitigatingAction.IsContains(one.ToEnumString()))
+                                            if (incidentSystemBilling.MitigatingAction != null && incidentSystemBilling.MitigatingAction.IsContains(one))
                                             {
                                                 sMore = incidentSystemBilling.MitigatingAction.Substring(incidentSystemBilling.MitigatingAction.IndexOf('(') + 1, incidentSystemBilling.MitigatingAction.IndexOf(')') - incidentSystemBilling.MitigatingAction.IndexOf('(') - 1);
                                             }

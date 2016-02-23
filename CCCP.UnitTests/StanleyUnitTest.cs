@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity.Core.Objects;
 using CCCP.ViewModel;
@@ -54,7 +55,7 @@ namespace CCCP.UnitTest
         {
             AccessControlService.CurrentUser.Entity.LoginName = "stanleylam";
             AccessControlService.CurrentUser.Entity.DisplayName = "Stanley Lam";
-            
+
             IncidentSystemBillingController controller = new IncidentSystemBillingController();
             controller.Edit(1);
             controller.Test();
@@ -84,6 +85,12 @@ namespace CCCP.UnitTest
         public void TestGetNewIncidentNo()
         {
             string newIncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, 2016);
+        }
+
+        [TestMethod]
+        public void TestGetInputOptions()
+        {
+            List<string> result = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_StatusUpdate);
         }
     }
 }

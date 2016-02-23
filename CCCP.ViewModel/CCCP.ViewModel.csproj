@@ -85,6 +85,9 @@
     <Compile Include="IncidentSystemInvoicing.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InputOption.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
