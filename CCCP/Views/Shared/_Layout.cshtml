@@ -33,6 +33,21 @@
             });
 
             $(".mandatory-field").before("<i class='fa fa-star text-yellow'></i> ");
+
+            $('.sidebar-toggle').on('click', function () {
+                $.ajax({
+                    url: "/Home/ToggleSidebarCollapse",
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        return true;
+                    },
+                    error: function () {
+                        alert("An error has occured!!!");
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -66,7 +81,7 @@
     }
 }
 
-<body class="skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini @(Session["SidebarCollapse"] != null && Session["SidebarCollapse"] != "0" ? "sidebar-collapse" : "")">
     <div class="wrapper">
 
         <header class="main-header">
