@@ -1,4 +1,8 @@
-﻿label.error {
+﻿body {
+    overflow-y: scroll!important;
+}
+
+label.error {
     color: red;
 }
 
