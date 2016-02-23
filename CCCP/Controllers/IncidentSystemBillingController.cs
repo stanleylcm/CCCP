@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CCCP.ViewModel;
 using CCCP.Business.Model;
+using CCCP.Common;
 
 namespace CCCP.Controllers
 {
@@ -19,7 +20,6 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings
         public ActionResult Index()
         {
-            Test();
             return View(db.IncidentSystemBilling.ToList());
         }
 
@@ -56,12 +56,12 @@ namespace CCCP.Controllers
             {
                 incident.Entity = incidentSystemBilling;
                 incident.PrepareSave("Created");
-                incidentSystemBilling.History = incident.Entity.History;
+                incidentSystemBilling = incident.Entity;
                 incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
 
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
                 db.SaveChanges();
-                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, "KF", Common.CheckListActionStatus.Pending.ToString());
+                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
                 return RedirectToAction("Index");
             }
 
@@ -94,16 +94,24 @@ namespace CCCP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
         {
-            if (ModelState.IsValid)
-            {
-                // prepare history etc. before save
                 if (Session != null && Session["incident"] != null)
                 {
                     incident = Session["incident"] as IncidentSystemBillingModel;
                     incident.Entity = incidentSystemBilling;
                 }
-
+                
+            if (ModelState.IsValid)
+            {
+                // prepare history etc. before save
+                CCCP.Common.IncidentStatus closed = CCCP.Common.IncidentStatus.Closed;
+                if (incident.Entity.IncidentStatus == closed.ToEnumString())
+                {
+                    incident.PrepareSave("Closed");
+                }
+                else
+                {
                 incident.PrepareSave();
+                }
 
                 if (Session != null && Session["incident"] != null)
                 {
@@ -189,7 +197,7 @@ namespace CCCP.Controllers
 
             // load checklists
             int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from c in db.Checklist
+            incident.ChecklistEntities = (from c in db.Checklist                                          
                                           where c.ChecklistBatchId.Equals(checklistBatchID)
                                           orderby c.SortingOrder
                                           select c).ToList<Checklist>();
@@ -227,7 +235,7 @@ namespace CCCP.Controllers
 
         public void Test()
         {
-            incident.Checklists[1].ChecklistActions[10].ToggleActionStatus();
+            incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();
         }
     }
 }
