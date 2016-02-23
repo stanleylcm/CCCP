@@ -135,6 +135,61 @@
                 $('#EditMitigatingAction').hide();
             }
         });
+
+        $('#btnUpdate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentSystemBilling_ProblemArea').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nProblem Area is required<br />';
+            }
+
+            if ($('#incidentSystemBilling_PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+            /*
+            if ($('#incidentSystemBilling_BillingErrorSeriousness').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Billing Error Seriousness is required<br />';
+            }
+            */
+            if ($('#incidentSystemBilling_ExpectedAffectedCustomerBill').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Affected Customer Bill is required<br />';
+            }
+
+            if ($('#incidentSystemBilling_ContactedBy').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nContacted By is required<br />';
+            }
+
+            if ($('#incidentSystemBilling_Impact').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nImpact is required<br />';
+            }
+
+            if ($('#incidentSystemBilling_StatusUpdate').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nStatus Update is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Update Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
     </script>
 }
 
@@ -207,9 +262,28 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-lg-1"></div>
+                                <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.LevelOfSeverity)</label></div>
+                                <div class="col-lg-4">
+                                    <select id="incidentSystemBilling_LevelOfSeverity" name="incidentSystemBilling.LevelOfSeverity" class="form-control thin-control">
+                                        <option value=""></option>
+                                        @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                        {
+                                            if (one != IncidentLevel.None)
+                                            {
+                                                <option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemBilling.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+                                            }
+                                        }
+                                    </select>
+                                    @Html.ValidationMessageFor(model => incidentSystemBilling.LevelOfSeverity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-1"></div>
                                 <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></div>
                                 <div class="col-lg-4">
                                     <select id="incidentSystemBilling_IncidentStatus" name="incidentSystemBilling.IncidentStatus" class="form-control thin-control">
+                                        <option value=""></option>
                                         @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
                                         {
                                             <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemBilling.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
@@ -376,7 +450,6 @@
                             @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedDateTime, new { @Value = incidentSystemBilling.LastUpdatedDateTime == null ? "" : incidentSystemBilling.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemBilling.History, new { @Value = incidentSystemBilling.History })
                             @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
-                            @Html.HiddenFor(model => incidentSystemBilling.LevelOfSeverity, new { @Value = incidentSystemBilling.LevelOfSeverity })
                             @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
                         </div>
                         <!-- /.box-body -->
@@ -503,7 +576,7 @@
 
             <div>
                 <div class="btn-group">
-                    <button class="btn btn-primary" type="submit">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
                     <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemBilling", new { id = incidentSystemBilling.IncidentSystemBillingId })';">@Resources.global.Func_Cancel</button>
                 </div>
             </div>

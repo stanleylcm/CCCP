@@ -25,15 +25,6 @@
 
                     <div class="row">
                         <div class="col-lg-1"></div>
-                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.IncidentNo)</label></div>
-                        <div class="col-lg-4">
-                            @Html.EditorFor(model => model.IncidentNo, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                            @Html.ValidationMessageFor(model => model.IncidentNo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-1"></div>
                         <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.LevelOfSeverity)</label></div>
                         <div class="col-lg-4">
                             <select id="LevelOfSeverity" name="LevelOfSeverity" class="form-control thin-control">
@@ -210,6 +201,7 @@
                     @Html.HiddenFor(model => model.IssueDateTime)
                     @Html.HiddenFor(model => model.CloseById)
                     @Html.HiddenFor(model => model.CloseDateTime)
+                    @Html.HiddenFor(model => model.IncidentNo)
                     @Html.HiddenFor(model => model.IncidentStatus)
                     @Html.HiddenFor(model => model.CreatedBy)
                     @Html.HiddenFor(model => model.CreatedDateTime)
@@ -218,7 +210,7 @@
 
                     <div class="box-footer">
                         <div class="btn-group">
-                            <button class="btn btn-primary" type="submit">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
                             <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemBilling")';">@Resources.global.Func_Cancel</button>
                         </div>
                     </div>
@@ -305,6 +297,61 @@
             } else {
                 $('#CreateMitigatingAction').hide();
             }
+        });
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#ProblemArea').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nProblem Area is required<br />';
+            }
+
+            if ($('#PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+
+            if ($('#BillingErrorSeriousness').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Billing Error Seriousness is required<br />';
+            }
+
+            if ($('#ExpectedAffectedCustomerBill').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Affected Customer Bill is required<br />';
+            }
+
+            if ($('#ContactedBy').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nContacted By is required<br />';
+            }
+
+            if ($('#Impact').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nImpact is required<br />';
+            }
+
+            if ($('#StatusUpdate').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nStatus Update is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
         });
 </script>
 }
