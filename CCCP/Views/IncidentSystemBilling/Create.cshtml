@@ -29,13 +29,13 @@
                         <div class="col-lg-1"></div>
                         <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.LevelOfSeverity)</label></div>
                         <div class="col-lg-4">
-                            <select id="LevelOfSeverity" name="LevelOfSeverity" class="form-control thin-control">
+                            <select id="incidentSystemBilling_LevelOfSeverity" name="incidentSystemBilling.LevelOfSeverity" class="form-control thin-control">
                                 <option value=""></option>
                                 @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
                                 {
                                     if (one != IncidentLevel.None)
-                                    { 
-                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                    {
+                                        <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
                                     }
                                 }
                             </select>
@@ -57,7 +57,7 @@
                         <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IsDrillMode)</label></div>
                         <div class="col-lg-4">
                             <div class="checkbox">
-                                <input id="IsDrillMode" name="IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                <input id="incidentSystemBilling_IsDrillMode" name="incidentSystemBilling.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.IsDrillMode, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -69,10 +69,10 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ProblemArea)</label></div>
                             <div class="col-lg-6">
-                                <select id="ProblemArea" name="ProblemArea" class="form-control thin-control">
+                                <select id="incidentSystemBilling_ProblemArea" name="incidentSystemBilling.ProblemArea" class="form-control thin-control">
                                     <option value=""></option>
                                     @foreach (string one in Model.Options_ProblemArea)
-                                    { 
+                                    {
                                         <option value="@one">@one</option>
                                     }
                                 </select>
@@ -83,12 +83,12 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.PossibleCause)</label></div>
                             <div class="col-lg-6">
-                                <select id="PossibleCause" name="PossibleCause" class="form-control thin-control">
+                                <select id="incidentSystemBilling_PossibleCause" name="incidentSystemBilling.PossibleCause" class="form-control thin-control">
                                     <option value=""></option>
                                     @foreach (string one in Model.Options_PossibleCause)
-                                    { 
+                                    {
                                         <option value="@one">@one</option>
-                                    }                                                                                        
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
                             </div>
@@ -97,12 +97,12 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.BillingErrorSeriousness)</label></div>
                             <div class="col-lg-6">
-                                <select id="BillingErrorSeriousness" name="BillingErrorSeriousness" class="form-control thin-control">
+                                <select id="incidentSystemBilling_BillingErrorSeriousness" name="incidentSystemBilling.BillingErrorSeriousness" class="form-control thin-control">
                                     <option value=""></option>
                                     @foreach (string one in Model.Options_BillingErrorSeriousness)
-                                    { 
-                                        <option value="@one">@one</option>     
-                                    }                               
+                                    {
+                                        <option value="@one">@one</option>
+                                    }
                                 </select>
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.BillingErrorSeriousness, "", new { @class = "text-danger" })
                             </div>
@@ -127,7 +127,7 @@
                                         countContactedBy++;
                                     }
                                 }
-                                <input type="hidden" id="ContactedBy" name="ContactedBy" value="" />
+                                <input type="hidden" id="incidentSystemBilling_ContactedBy" name="incidentSystemBilling.ContactedBy" value="" />
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.ContactedBy, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -143,13 +143,14 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.StatusUpdate)</label></div>
                             <div class="col-lg-6">
-                                <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
+                                <select id="incidentSystemBilling_StatusUpdate" name="incidentSystemBilling.StatusUpdate" class="form-control thin-control">
                                     <option value=""></option>
-                                    @foreach (string one in Model.Options_StatusUpdate) 
+                                    @foreach (string one in Model.Options_StatusUpdate)
                                     {
                                         <option value="@one">@one</option>
                                     }
                                 </select>
+
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.StatusUpdate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -157,13 +158,14 @@
                         <div class="row">
                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.RequireMitigatingAction)</label></div>
                             <div class="col-lg-6">
-                                <select id="RequireMitigatingAction" name="RequireMitigatingAction" class="form-control thin-control">
+                                <select id="incidentSystemBilling_RequireMitigatingAction" name="incidentSystemBilling.RequireMitigatingAction" class="form-control thin-control">
                                     <option value=""></option>
-                                    @foreach (string one in Model.Options_RequireMitigatingAction) 
+                                    @foreach (string one in Model.Options_RequireMitigatingAction)
                                     {
-                                        <option value="@one">@one</option>    
-                                    }                                
+                                        <option value="@one">@one</option>
+                                    }
                                 </select>
+
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.RequireMitigatingAction, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -175,7 +177,7 @@
                                     int countMitigatingAction = 0;
                                     foreach (string one in Model.Options_MitigatingAction)
                                     {
-                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one)</label>
+                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
                                         if (one != IncidentSystemBillingMitigatingAction.Others.ToEnumString())
                                         { 
                                         <br />
@@ -187,7 +189,7 @@
                                         countMitigatingAction++;
                                     }
 }
-                                <input type="hidden" id="MitigatingAction" name="MitigatingAction" value="" />
+                                <input type="hidden" id="incidentSystemBilling_MitigatingAction" name="incidentSystemBilling.MitigatingAction" value="" />
                                 @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -240,7 +242,7 @@
                     i++;
                 }
             });
-            $("#ContactedBy").val(sList);
+            $("#incidentSystemBilling_ContactedBy").val(sList);
         });
 
         $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
@@ -259,7 +261,7 @@
                     i++;
                 }
             });
-            $("#MitigatingAction").val(sList);
+            $("#incidentSystemBilling_MitigatingAction").val(sList);
         });
 
         $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)ore").change(function () {
@@ -278,14 +280,14 @@
                     i++;
                 }
             });
-            $("#MitigatingAction").val(sList);
+            $("#incidentSystemBilling_MitigatingAction").val(sList);
         });
 
-        $("#IsDrillMode").on("click", function () {
+        $("#incidentSystemBilling_IsDrillMode").on("click", function () {
             $(this).val(this.checked);
         });
 
-        $('#RequireMitigatingAction').on("change", function () {
+        $('#incidentSystemBilling_RequireMitigatingAction').on("change", function () {
             if ($(this).val().toUpperCase() == "YES") {
                 $('#CreateMitigatingAction').show();
             } else {
@@ -294,7 +296,7 @@
         });
 
         $(document).ready(function () {
-            if ($('#RequireMitigatingAction').val().toUpperCase() == "YES") {
+            if ($('#incidentSystemBilling_RequireMitigatingAction').val().toUpperCase() == "YES") {
                 $('#CreateMitigatingAction').show();
             } else {
                 $('#CreateMitigatingAction').hide();
@@ -305,42 +307,42 @@
             var inputValid = true;
             var errMsg = '';
 
-            if ($('#LevelOfSeverity').val() == '') {
+            if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + 'Level Of Severity is required<br />';
             }
 
-            if ($('#ProblemArea').val() == '') {
+            if ($('#incidentSystemBilling_ProblemArea').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nProblem Area is required<br />';
             }
 
-            if ($('#PossibleCause').val() == '') {
+            if ($('#incidentSystemBilling_PossibleCause').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nPossible Cause is required<br />';
             }
 
-            if ($('#BillingErrorSeriousness').val() == '') {
+            if ($('#incidentSystemBilling_BillingErrorSeriousness').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\Billing Error Seriousness is required<br />';
             }
 
-            if ($('#ExpectedAffectedCustomerBill').val() == '') {
+            if ($('#incidentSystemBilling_ExpectedAffectedCustomerBill').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nExpected Affected Customer Bill is required<br />';
             }
 
-            if ($('#ContactedBy').val() == '') {
+            if ($('#incidentSystemBilling_ContactedBy').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nContacted By is required<br />';
             }
 
-            if ($('#Impact').val() == '') {
+            if ($('#incidentSystemBilling_Impact').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nImpact is required<br />';
             }
 
-            if ($('#StatusUpdate').val() == '') {
+            if ($('#incidentSystemBilling_StatusUpdate').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nStatus Update is required<br />';
             }
