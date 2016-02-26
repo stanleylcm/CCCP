@@ -10,30 +10,29 @@ using CCCP.ViewModel;
 using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
-using CCCP.Controllers.WebApi;
 
 namespace CCCP.Controllers
 {
-    public class IncidentSystemBillingController : Controller
+    public class IncidentSystemInvoicingController : Controller
     {
         private CCCPDbContext db = new CCCPDbContext();
-        public IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
+        public IncidentSystemInvoicingModel incident = new IncidentSystemInvoicingModel();
 
-        // GET: IncidentSystemBillings
+        // GET: IncidentSystemInvoicings
         public ActionResult Index()
         {
-            return View(db.IncidentSystemBilling.ToList());
+            return View(db.IncidentSystemInvoicing.ToList());
         }
 
-        // GET: IncidentSystemBillings/Details/5
+        // GET: IncidentSystemInvoicings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
-            if (incidentSystemBilling == null)
+            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+            if (incidentSystemInvoicing == null)
             {
                 return HttpNotFound();
             }
@@ -46,42 +45,42 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // GET: IncidentSystemBillings/Create
+        // GET: IncidentSystemInvoicings/Create
         public ActionResult Create()
         {
             return View(incident);
         }
 
-        // POST: IncidentSystemBillings/Create
+        // POST: IncidentSystemInvoicings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
+        public ActionResult Create([Bind(Include = "IncidentSystemInvoicingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,ProblemArea,PossibleCause,ExpectedAffectedNoOfBill,ExpectedAffectedBillingDay,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemInvoicing incidentSystemInvoicing)
         {
             if (ModelState.IsValid)
             {
-                incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
-                incident.Entity = incidentSystemBilling;
+                incidentSystemInvoicing.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+                incident.Entity = incidentSystemInvoicing;
                 incident.PrepareSave("Created");
-                incidentSystemBilling = incident.Entity;
+                incidentSystemInvoicing = incident.Entity;
 
-                db.IncidentSystemBilling.Add(incidentSystemBilling);
+                db.IncidentSystemInvoicing.Add(incidentSystemInvoicing);
                 db.SaveChanges();
-                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+                db.usp_Incident_PostCreate(incidentSystemInvoicing.IncidentSystemInvoicingId, 7, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
                 return RedirectToAction("Index");
             }
 
-            return View(incidentSystemBilling);
+            return View(incidentSystemInvoicing);
         }
 
-        // GET: IncidentSystemBillings/Edit/5
+        // GET: IncidentSystemInvoicings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
-            if (incidentSystemBilling == null) return HttpNotFound();
+            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+            if (incidentSystemInvoicing == null) return HttpNotFound();
             else
             {
                 LoadData(id.Value);
@@ -94,17 +93,17 @@ namespace CCCP.Controllers
             }
         }
 
-        // POST: IncidentSystemBillings/Edit/5
+        // POST: IncidentSystemInvoicings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
+        public ActionResult Edit([Bind(Include = "IncidentSystemInvoicingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,ExpectedAffectedNoOfBill,ExpectedAffectedBillingDay,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemInvoicing incidentSystemInvoicing)
         {
                 if (Session != null && Session["incident"] != null)
                 {
-                    incident = Session["incident"] as IncidentSystemBillingModel;
-                    incident.Entity = incidentSystemBilling;
+                    incident = Session["incident"] as IncidentSystemInvoicingModel;
+                    incident.Entity = incidentSystemInvoicing;
                 }
                 
             if (ModelState.IsValid)
@@ -121,7 +120,7 @@ namespace CCCP.Controllers
 
                 if (Session != null && Session["incident"] != null)
                 {
-                    db.IncidentSystemBilling.Attach(incident.Entity);
+                    db.IncidentSystemInvoicing.Attach(incident.Entity);
                     foreach (ChecklistModel cl in incident.Checklists)
                     {
                         foreach (ChecklistActionModel clAction in cl.ChecklistActions)
@@ -153,20 +152,20 @@ namespace CCCP.Controllers
                     Console.WriteLine(sb.ToString());
                 }
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemBillingId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId });
             }
             return View(incident);
         }
 
-        // GET: IncidentSystemBillings/Delete/5
+        // GET: IncidentSystemInvoicings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
-            if (incidentSystemBilling == null)
+            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+            if (incidentSystemInvoicing == null)
             {
                 return HttpNotFound();
             }
@@ -178,16 +177,16 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // POST: IncidentSystemBillings/Delete/5
+        // POST: IncidentSystemInvoicings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
-            db.IncidentSystemBilling.Remove(incidentSystemBilling);
+            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+            db.IncidentSystemInvoicing.Remove(incidentSystemInvoicing);
             if (Session != null)
             {
-                incident = Session["incident"] as IncidentSystemBillingModel;
+                incident = Session["incident"] as IncidentSystemInvoicingModel;
                 foreach (ChecklistModel cl in incident.Checklists)
                 {
                     foreach (ChecklistActionModel clAction in cl.ChecklistActions)
@@ -212,14 +211,37 @@ namespace CCCP.Controllers
 
         public void LoadData(int incidentId)
         {
-            this.incident = new IncidentSystemBillingApiController().GetIncident(incidentId);
+            incident = new IncidentSystemInvoicingModel();
+
+            // load incident details
+            incident.Entity = db.IncidentSystemInvoicing.Find(incidentId);
+
+            // load checklists
+            int checklistBatchID = incident.Entity.ChecklistBatchId;
+            incident.ChecklistEntities = (from c in db.Checklist                                          
+                                          where c.ChecklistBatchId.Equals(checklistBatchID)
+                                          orderby c.SortingOrder
+                                          select c).ToList<Checklist>();
+
+            // load checklist actions
+            foreach (ChecklistModel checklist in incident.Checklists)
+            {
+                List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
+                                                        where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                        orderby ca.SortingOrder
+                                                        select ca).ToList<ChecklistAction>();
+                checklist.ChecklistActionEntities = actionEntities;
+            }
+
+            // load chat room
+
         }
 
         public ActionResult ToggleActionStatus(int checklist, int checklistAction)
         {
             if (Session != null && Session["incident"] != null)
             {
-                incident = Session["incident"] as IncidentSystemBillingModel;
+                incident = Session["incident"] as IncidentSystemInvoicingModel;
             }
 
             incident.Checklists[checklist].ChecklistActions[checklistAction].ToggleActionStatus();
@@ -236,7 +258,7 @@ namespace CCCP.Controllers
         {
             if (Session != null && Session["incident"] != null)
             {
-                incident = Session["incident"] as IncidentSystemBillingModel;
+                incident = Session["incident"] as IncidentSystemInvoicingModel;
             }
             incident.Entity.IncidentStatus = IncidentStatus.Closed.ToEnumString();
 

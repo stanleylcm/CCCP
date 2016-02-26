@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemInvoicing>
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemInvoicing;
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#IncidentList').DataTable();
+
+            $('.dataTables_length').parent().attr("class", "col-sm-5");
+            $('.dataTables_filter').parent().addClass("pull-right");
+        });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemInvoicing
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- content -->
+
+            <div class="box box-primary">
+
+                <div class="box-body">
+
+                    <div class="pull-left"><button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemInvoicing")';">@Resources.global.Func_Create</button></div>
+                    <table id="IncidentList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.IncidentNo)</th>
+                                <th>Incident Type</th>
+                                <th>@Html.DisplayNameFor(model => model.LevelOfSeverity)</th>
+                                <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
+                                <th>@Html.DisplayNameFor(model => model.IncidentBackground)</th>
+                                <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.IssueDateTime)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            { 
+                                string sLevelOfSeverity = "";
+                                if (item.LevelOfSeverity != null)
+                                {
+                                    int level = Convert.ToInt32(item.LevelOfSeverity);
+                                    IncidentLevel iLevel = (IncidentLevel)level;
+                                    sLevelOfSeverity = iLevel.ToEnumString();
+                                }
+                            <tr>
+                                <td><a href="@Url.Action("Details", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
+                                <td>@Resources.global.Menu_IncidentSystemBilling</td>
+                                <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
+                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
+                                <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
+                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                <td>
+                                    <div class="tools">
+                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
+                                        <a href="@Url.Action("Delete", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+</section><!-- /.content -->

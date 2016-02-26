@@ -166,6 +166,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentSystemInvoicingController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemBillingApiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -800,6 +801,11 @@
     <Content Include="Views\IncidentSystemBilling\Details.cshtml" />
     <Content Include="Views\IncidentSystemBilling\Edit.cshtml" />
     <Content Include="Views\IncidentSystemBilling\Index.cshtml" />
+    <Content Include="Views\IncidentSystemInvoicing\Create.cshtml" />
+    <Content Include="Views\IncidentSystemInvoicing\Delete.cshtml" />
+    <Content Include="Views\IncidentSystemInvoicing\Details.cshtml" />
+    <Content Include="Views\IncidentSystemInvoicing\Edit.cshtml" />
+    <Content Include="Views\IncidentSystemInvoicing\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

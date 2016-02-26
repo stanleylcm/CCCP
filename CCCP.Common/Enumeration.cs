@@ -178,6 +178,25 @@ namespace CCCP.Common
         IncidentSystemBilling_StatusUpdate,
         IncidentSystemBilling_BillingErrorSeriousness
     }
-
     #endregion
+
+    #region Enum for Incident - System (Invoicing)
+    public enum IncidentSystemInvoicingMitigatingAction
+    {
+        Trigger_Emergency_Backup,
+        Others
+    }
+
+    public enum IncidentSystemInvoicingInputKey
+    {
+        IncidentSystemInvoicing_ContactedBy,
+        IncidentSystemInvoicing_MitigatingAction,
+        IncidentSystemInvoicing_PossibleCause,
+        IncidentSystemInvoicing_ProblemArea,
+        IncidentSystemInvoicing_RequireMitigatingAction,
+        IncidentSystemInvoicing_StatusUpdate,
+        IncidentSystemInvoicing_Impact
+    }
+    #endregion
+
 }
