@@ -170,6 +170,10 @@ namespace CCCP.Controllers
                 return HttpNotFound();
             }
             LoadData(id.Value);
+            if (Session != null)
+            {
+                Session["incident"] = incident;
+            }
             return View(incident);
         }
 
@@ -180,6 +184,18 @@ namespace CCCP.Controllers
         {
             IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
             db.IncidentSystemInvoicing.Remove(incidentSystemInvoicing);
+            if (Session != null)
+            {
+                incident = Session["incident"] as IncidentSystemInvoicingModel;
+                foreach (ChecklistModel cl in incident.Checklists)
+                {
+                    foreach (ChecklistActionModel clAction in cl.ChecklistActions)
+                    {
+                        db.ChecklistAction.Remove(clAction.Entity);
+                    }
+                    db.Checklist.Remove(cl.Entity);
+                }
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
