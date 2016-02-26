@@ -45,5 +45,23 @@ namespace CCCP.Controllers.WebApi
             // result
             return result;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CreateIncident([FromBody]IncidentSystemBilling incidentSystemBilling)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
+            incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+            incident.Entity = incidentSystemBilling;
+            incident.PrepareSave("Created");
+            incidentSystemBilling = incident.Entity;
+
+            db.IncidentSystemBilling.Add(incidentSystemBilling);
+            db.SaveChanges();
+            db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+
+            return incident.Entity.IncidentSystemBillingId;
+        }
     }
 }

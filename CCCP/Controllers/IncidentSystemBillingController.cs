@@ -61,6 +61,7 @@ namespace CCCP.Controllers
         {
             if (ModelState.IsValid)
             {
+                /*
                 incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
                 incident.Entity = incidentSystemBilling;
                 incident.PrepareSave("Created");
@@ -69,6 +70,9 @@ namespace CCCP.Controllers
                 db.IncidentSystemBilling.Add(incidentSystemBilling);
                 db.SaveChanges();
                 db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+                return RedirectToAction("Index");
+               */
+                new IncidentSystemBillingApiController().CreateIncident(incidentSystemBilling);
                 return RedirectToAction("Index");
             }
 
