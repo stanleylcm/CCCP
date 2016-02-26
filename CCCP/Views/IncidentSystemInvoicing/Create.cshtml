@@ -1,0 +1,374 @@
+﻿@model CCCP.Business.Model.IncidentSystemInvoicingModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemInvoicing;
+    CCCP.ViewModel.IncidentSystemInvoicing incidentSystemInvoicing = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentSystemInvoicing
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.LevelOfSeverity)</label></div>
+                        <div class="col-lg-4">
+                            <select id="incidentSystemInvoicing_LevelOfSeverity" name="incidentSystemInvoicing.LevelOfSeverity" class="form-control thin-control">
+                                <option value=""></option>
+                                @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                {
+                                    if (one != IncidentLevel.None)
+                                    {
+                                        <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                    }
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => incidentSystemInvoicing.LevelOfSeverity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.IncidentBackground)</label></div>
+                        <div class="col-lg-4">
+                            @Html.EditorFor(model => incidentSystemInvoicing.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                            @Html.ValidationMessageFor(model => incidentSystemInvoicing.IncidentBackground, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.IsDrillMode)</label></div>
+                        <div class="col-lg-4">
+                            <div class="checkbox">
+                                <input id="incidentSystemInvoicing_IsDrillMode" name="incidentSystemInvoicing.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.IsDrillMode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Details</legend>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.ProblemArea)</label></div>
+                            <div class="col-lg-6">
+                                <select id="incidentSystemInvoicing_ProblemArea" name="incidentSystemInvoicing.ProblemArea" class="form-control thin-control">
+                                    <option value=""></option>
+                                    @foreach (string one in Model.Options_ProblemArea)
+                                    {
+                                        <option value="@one">@one</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.ProblemArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.PossibleCause)</label></div>
+                            <div class="col-lg-6">
+                                <select id="incidentSystemInvoicing_PossibleCause" name="incidentSystemInvoicing.PossibleCause" class="form-control thin-control">
+                                    <option value=""></option>
+                                    @foreach (string one in Model.Options_PossibleCause)
+                                    {
+                                        <option value="@one">@one</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.PossibleCause, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.ExpectedAffectedNoOfBill)</label></div>
+                            <div class="col-lg-6">                                
+                                @Html.EditorFor(model => incidentSystemInvoicing.ExpectedAffectedNoOfBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.ExpectedAffectedNoOfBill, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.ExpectedAffectedBillingDay)</label></div>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => incidentSystemInvoicing.ExpectedAffectedBillingDay, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.ExpectedAffectedBillingDay, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.ContactedBy)</label></div>
+                            <div class="col-lg-6">
+                                @{
+                                    int countContactedBy = 0;
+                                    foreach (string one in Model.Options_ContactedBy)
+                                    {
+                                        <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one" /><label for="ContactedBy@(countContactedBy.ToString())"> @one</label><br />
+                                        countContactedBy++;
+                                    }
+                                }
+                                <input type="hidden" id="incidentSystemInvoicing_ContactedBy" name="incidentSystemInvoicing.ContactedBy" value="" />
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.ContactedBy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.Impact)</label></div>
+                            <div class="col-lg-6">
+                                @{
+                                    int countImpact = 0;
+                                    foreach (string one in Model.Options_Impact)
+                                    {
+                                        <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" /><label for="Impact@(countImpact.ToString())"> @one</label><br />
+                                        countImpact++;
+                                    }
+                                }
+                                <input type="hidden" id="incidentSystemInvoicing_Impact" name="incidentSystemInvoicing.Impact" value="" />
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.Impact, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemInvoicing.StatusUpdate)</label></div>
+                            <div class="col-lg-6">
+                                <select id="incidentSystemInvoicing_StatusUpdate" name="incidentSystemInvoicing.StatusUpdate" class="form-control thin-control">
+                                    <option value=""></option>
+                                    @foreach (string one in Model.Options_StatusUpdate)
+                                    {
+                                        <option value="@one">@one</option>
+                                    }
+                                </select>
+
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.StatusUpdate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.RequireMitigatingAction)</label></div>
+                            <div class="col-lg-6">
+                                <select id="incidentSystemInvoicing_RequireMitigatingAction" name="incidentSystemInvoicing.RequireMitigatingAction" class="form-control thin-control">
+                                    <option value=""></option>
+                                    @foreach (string one in Model.Options_RequireMitigatingAction)
+                                    {
+                                        <option value="@one">@one</option>
+                                    }
+                                </select>
+
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.RequireMitigatingAction, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row" id="CreateMitigatingAction">
+                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.MitigatingAction)</label></div>
+                            <div class="col-lg-6">
+                                @{
+                                    int countMitigatingAction = 0;
+                                    foreach (string one in Model.Options_MitigatingAction)
+                                    {
+                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
+                                        if (one != IncidentSystemInvoicingMitigatingAction.Others.ToEnumString())
+                                        { 
+                                        <br />
+                                        }
+                                        else
+                                        {
+                                        <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                        }
+                                        countMitigatingAction++;
+                                    }
+}
+                                <input type="hidden" id="incidentSystemInvoicing_MitigatingAction" name="incidentSystemInvoicing.MitigatingAction" value="" />
+                                @Html.ValidationMessageFor(model => incidentSystemInvoicing.MitigatingAction, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </fieldset>
+                            
+                    @Html.HiddenFor(model => incidentSystemInvoicing.IncidentSystemInvoicingId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemInvoicing.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemInvoicing.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemInvoicing.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemInvoicing.CrisisId)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemInvoicing.IssueById)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.IssueDateTime)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.CloseById)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.CloseDateTime)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.IncidentNo)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.IncidentStatus)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.CreatedBy)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.CreatedDateTime)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.LastUpdatedBy)
+                    @Html.HiddenFor(model => incidentSystemInvoicing.LastUpdatedDateTime)
+
+                    <div class="box-footer">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemInvoicing")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("input[type=checkbox][id^=ContactedBy]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=ContactedBy]").each(function(){
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemInvoicing_ContactedBy").val(sList);
+        });
+
+        $("input[type=checkbox][id^=Impact]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=Impact]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemInvoicing_Impact").val(sList);
+        });
+
+        $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemInvoicing_MitigatingAction").val(sList);
+        });
+
+        $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)ore").change(function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemInvoicing_MitigatingAction").val(sList);
+        });
+
+        $("#incidentSystemInvoicing_IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $('#incidentSystemInvoicing_RequireMitigatingAction').on("change", function () {
+            if ($(this).val().toUpperCase() == "YES") {
+                $('#CreateMitigatingAction').show();
+            } else {
+                $('#CreateMitigatingAction').hide();
+            }
+        });
+
+        $(document).ready(function () {
+            if ($('#incidentSystemInvoicing_RequireMitigatingAction').val().toUpperCase() == "YES") {
+                $('#CreateMitigatingAction').show();
+            } else {
+                $('#CreateMitigatingAction').hide();
+            }
+        });
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentSystemInvoicing_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_ProblemArea').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nProblem Area is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_ExpectedAffectedBillingDay').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Affected Billing Day is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_ContactedBy').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nContacted By is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_Impact').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nImpact is required<br />';
+            }
+
+            if ($('#incidentSystemInvoicing_StatusUpdate').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nStatus Update is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+</script>
+}

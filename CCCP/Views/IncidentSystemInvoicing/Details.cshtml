@@ -1,0 +1,358 @@
+﻿@model CCCP.Business.Model.IncidentSystemInvoicingModel
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemInvoicing;
+}
+
+@section Scripts {
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+            // read mode, disabled change state functionality for the tri-state checkbox
+		    $('.bootstrap-checkbox').off('click');
+
+		    $('input[type=checkbox]').click(function(event) {
+		        event.preventDefault();
+		    });
+
+		    if ("Yes" == "@(Model.Entity.RequireMitigatingAction)") {
+		        $('#DetailsMitigatingAction').show();
+		    } else {
+		        $('#DetailsMitigatingAction').hide();
+		    }
+
+	        $('#btnCloseIncident').on('click', function(event){
+	            if (confirm('@Resources.global.Label_CloseIncident')) {
+	                window.location = '@Url.Action("CloseIncident", "IncidentSystemInvoicing")';
+	                return true;
+	            } else {
+	                event.preventDefault();
+	                return false;
+	            }
+	        });
+	    });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemInvoicing")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemInvoicing</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.GeneralEnquiryId)</span>
+                    <a href="#"><span class="pull-right">@(Model.Entity.GeneralEnquiryId == 0 ? "" : Model.Entity.GeneralEnquiryId.ToString())</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
+                            </div>
+
+                            @{
+                                string sLevelOfSeverity = "";
+                                if (Model.Entity.LevelOfSeverity != null)
+                                {
+                                    int level = Convert.ToInt32(Model.Entity.LevelOfSeverity);
+                                    IncidentLevel iLevel = (IncidentLevel)level;
+                                    sLevelOfSeverity = iLevel.ToEnumString();
+                                }
+                            }
+                            <div class="row">
+                                <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
+                                <div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
+                                <div class="col-lg-5">
+                                    <button class="btn btn-primary" type="button" onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
+                            </div>
+
+                            <div class="row" style="display:none">
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentBackground)</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
+                                <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
+                            </div>
+
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Details</legend>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ProblemArea)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedNoOfBill)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedAffectedNoOfBill)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedBillingDay)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedAffectedBillingDay)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ContactedBy)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RequireMitigatingAction)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RequireMitigatingAction)</div>
+                                </div>
+
+                                <div class="row" id="DetailsMitigatingAction">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MitigatingAction)</div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+
+                                <br /><br />
+                                <div class="row">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-9">
+                                        <button class="btn btn-primary" type="button" id="btnCloseIncident" @(Model.IsReadyForClose() && Model.Entity.IncidentStatus != IncidentStatus.Closed.ToEnumString() ? "" : "disabled")>@Resources.global.Func_CloseIncident</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills">
+                                    @{
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
+                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                            <th></th>
+                                            <th>Action</th>
+                                            <th>Completed By</th>
+                                            <th>Completed Datetime</th>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                            {
+                                                <tr>
+                                                    <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
+                                                    <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                    <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
+                                                    <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                </tr>
+                                                countChecklistAction++;
+                                            }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemInvoicing", new { id = Model.Entity.IncidentSystemInvoicingId })';">@Resources.global.Func_Edit</button>
+            </div>
+            <br/>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(Model.Entity.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->
