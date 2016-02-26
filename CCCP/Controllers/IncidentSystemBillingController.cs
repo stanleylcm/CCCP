@@ -10,6 +10,7 @@ using CCCP.ViewModel;
 using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
+using CCCP.Controllers.WebApi;
 
 namespace CCCP.Controllers
 {
@@ -195,30 +196,7 @@ namespace CCCP.Controllers
 
         public void LoadData(int incidentId)
         {
-            incident = new IncidentSystemBillingModel();
-
-            // load incident details
-            incident.Entity = db.IncidentSystemBilling.Find(incidentId);
-
-            // load checklists
-            int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from c in db.Checklist                                          
-                                          where c.ChecklistBatchId.Equals(checklistBatchID)
-                                          orderby c.SortingOrder
-                                          select c).ToList<Checklist>();
-
-            // load checklist actions
-            foreach (ChecklistModel checklist in incident.Checklists)
-            {
-                List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
-                                                        where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
-                                                        orderby ca.SortingOrder
-                                                        select ca).ToList<ChecklistAction>();
-                checklist.ChecklistActionEntities = actionEntities;
-            }
-
-            // load chat room
-
+            this.incident = new IncidentSystemBillingApiController().GetIncident(incidentId);
         }
 
         public ActionResult ToggleActionStatus(int checklist, int checklistAction)
