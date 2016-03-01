@@ -12,17 +12,17 @@ using System.Data.Entity;
 
 namespace CCCP.Controllers.WebApi
 {
-    public class IncidentSystemBillingApiController : ApiController
+    public class IncidentSystemInvoicingApiController : ApiController
     {
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public IncidentSystemBillingModel GetIncident(int incidentId)
+        public IncidentSystemInvoicingModel GetIncident(int incidentId)
         {
-            IncidentSystemBillingModel result = new IncidentSystemBillingModel();
+            IncidentSystemInvoicingModel result = new IncidentSystemInvoicingModel();
             using (CCCPDbContext db = new CCCPDbContext())
             {
                 // load incident details
-                result.Entity = db.IncidentSystemBilling.Find(incidentId);
+                result.Entity = db.IncidentSystemInvoicing.Find(incidentId);
 
                 // load checklists
                 int checklistBatchID = result.Entity.ChecklistBatchId;
@@ -51,37 +51,37 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public List<IncidentSystemBilling> GetIncidentList()
+        public List<IncidentSystemInvoicing> GetIncidentList()
         {
-            List<IncidentSystemBilling> result = new List<IncidentSystemBilling>();
+            List<IncidentSystemInvoicing> result = new List<IncidentSystemInvoicing>();
             using (CCCPDbContext db = new CCCPDbContext())
             {
-                result = db.IncidentSystemBilling.ToList();
+                result = db.IncidentSystemInvoicing.ToList();
             }
             return result;
         }
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public int CreateIncident(IncidentSystemBilling incidentSystemBilling)
+        public int CreateIncident(IncidentSystemInvoicing incidentSystemInvoicing)
         {
             CCCPDbContext db = new CCCPDbContext();
-            IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
-            incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
-            incident.Entity = incidentSystemBilling;
+            IncidentSystemInvoicingModel incident = new IncidentSystemInvoicingModel();
+            incidentSystemInvoicing.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+            incident.Entity = incidentSystemInvoicing;
             incident.PrepareSave("Created");
-            incidentSystemBilling = incident.Entity;
+            incidentSystemInvoicing = incident.Entity;
 
-            db.IncidentSystemBilling.Add(incidentSystemBilling);
+            db.IncidentSystemInvoicing.Add(incidentSystemInvoicing);
             db.SaveChanges();
-            db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+            db.usp_Incident_PostCreate(incidentSystemInvoicing.IncidentSystemInvoicingId, 7, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
 
-            return incident.Entity.IncidentSystemBillingId;
+            return incident.Entity.IncidentSystemInvoicingId;
         }
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public int EditIncident(IncidentSystemBillingModel incident)
+        public int EditIncident(IncidentSystemInvoicingModel incident)
         {
             CCCPDbContext db = new CCCPDbContext();
 
@@ -95,7 +95,7 @@ namespace CCCP.Controllers.WebApi
                 incident.PrepareSave();
             }
 
-            db.IncidentSystemBilling.Attach(incident.Entity);
+            db.IncidentSystemInvoicing.Attach(incident.Entity);
             foreach (ChecklistModel cl in incident.Checklists)
             {
                 foreach (ChecklistActionModel clAction in cl.ChecklistActions)
@@ -127,7 +127,7 @@ namespace CCCP.Controllers.WebApi
                 Console.WriteLine(sb.ToString());
             }
 
-            return incident.Entity.IncidentSystemBillingId;
+            return incident.Entity.IncidentSystemInvoicingId;
         }
     }
 }

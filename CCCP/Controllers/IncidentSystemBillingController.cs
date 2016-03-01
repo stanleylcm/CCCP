@@ -22,7 +22,7 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings
         public ActionResult Index()
         {
-            return View(db.IncidentSystemBilling.ToList());
+            return View(new IncidentSystemBillingApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemBillings/Details/5
@@ -61,17 +61,6 @@ namespace CCCP.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*
-                incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
-                incident.Entity = incidentSystemBilling;
-                incident.PrepareSave("Created");
-                incidentSystemBilling = incident.Entity;
-
-                db.IncidentSystemBilling.Add(incidentSystemBilling);
-                db.SaveChanges();
-                db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
-                return RedirectToAction("Index");
-               */
                 new IncidentSystemBillingApiController().CreateIncident(incidentSystemBilling);
                 return RedirectToAction("Index");
             }
@@ -105,57 +94,15 @@ namespace CCCP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IncidentSystemBillingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,BillingErrorSeriousness,ExpectedAffectedCustomerBill,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemBilling incidentSystemBilling)
         {
-                if (Session != null && Session["incident"] != null)
-                {
-                    incident = Session["incident"] as IncidentSystemBillingModel;
-                    incident.Entity = incidentSystemBilling;
-                }
+            if (Session != null && Session["incident"] != null)
+            {
+                incident = Session["incident"] as IncidentSystemBillingModel;
+                incident.Entity = incidentSystemBilling;
+            }
                 
             if (ModelState.IsValid)
             {
-                // prepare history etc. before save
-                if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
-                {
-                    incident.PrepareSave("Closed");
-                }
-                else
-                {
-                    incident.PrepareSave();
-                }
-
-                if (Session != null && Session["incident"] != null)
-                {
-                    db.IncidentSystemBilling.Attach(incident.Entity);
-                    foreach (ChecklistModel cl in incident.Checklists)
-                    {
-                        foreach (ChecklistActionModel clAction in cl.ChecklistActions)
-                        {
-                            db.ChecklistAction.Attach(clAction.Entity);
-                            db.Entry(clAction.Entity).State = EntityState.Modified;
-                        }
-                    }
-                }
-                db.Entry(incident.Entity).State = EntityState.Modified;
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    foreach (var failure in ex.EntityValidationErrors)
-                    {
-                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
-                        foreach (var error in failure.ValidationErrors)
-                        {
-                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
-                            sb.AppendLine();
-                        }
-                    }
-
-                    // output validation errors
-                    Console.WriteLine(sb.ToString());
-                }
+                new IncidentSystemBillingApiController().EditIncident(incident);
 
                 return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemBillingId });
             }
