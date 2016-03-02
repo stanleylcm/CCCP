@@ -10,6 +10,7 @@ using CCCP.ViewModel;
 using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
+using CCCP.Controllers.WebApi;
 
 namespace CCCP.Controllers
 {
@@ -21,7 +22,7 @@ namespace CCCP.Controllers
         // GET: IncidentSystemInvoicings
         public ActionResult Index()
         {
-            return View(db.IncidentSystemInvoicing.ToList());
+            return View(new IncidentSystemInvoicingApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemInvoicings/Details/5
@@ -60,14 +61,7 @@ namespace CCCP.Controllers
         {
             if (ModelState.IsValid)
             {
-                incidentSystemInvoicing.IncidentStatus = Common.IncidentStatus.Pending.ToString();
-                incident.Entity = incidentSystemInvoicing;
-                incident.PrepareSave("Created");
-                incidentSystemInvoicing = incident.Entity;
-
-                db.IncidentSystemInvoicing.Add(incidentSystemInvoicing);
-                db.SaveChanges();
-                db.usp_Incident_PostCreate(incidentSystemInvoicing.IncidentSystemInvoicingId, 7, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+                new IncidentSystemInvoicingApiController().CreateIncident(incidentSystemInvoicing);
                 return RedirectToAction("Index");
             }
 
@@ -100,57 +94,15 @@ namespace CCCP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IncidentSystemInvoicingId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,ProblemArea,PossibleCause,ExpectedAffectedNoOfBill,ExpectedAffectedBillingDay,ContactedBy,Impact,StatusUpdate,RequireMitigatingAction,MitigatingAction,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemInvoicing incidentSystemInvoicing)
         {
-                if (Session != null && Session["incident"] != null)
-                {
-                    incident = Session["incident"] as IncidentSystemInvoicingModel;
-                    incident.Entity = incidentSystemInvoicing;
-                }
+            if (Session != null && Session["incident"] != null)
+            {
+                incident = Session["incident"] as IncidentSystemInvoicingModel;
+                incident.Entity = incidentSystemInvoicing;
+            }
                 
             if (ModelState.IsValid)
             {
-                // prepare history etc. before save
-                if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
-                {
-                    incident.PrepareSave("Closed");
-                }
-                else
-                {
-                    incident.PrepareSave();
-                }
-
-                if (Session != null && Session["incident"] != null)
-                {
-                    db.IncidentSystemInvoicing.Attach(incident.Entity);
-                    foreach (ChecklistModel cl in incident.Checklists)
-                    {
-                        foreach (ChecklistActionModel clAction in cl.ChecklistActions)
-                        {
-                            db.ChecklistAction.Attach(clAction.Entity);
-                            db.Entry(clAction.Entity).State = EntityState.Modified;
-                        }
-                    }
-                }
-                db.Entry(incident.Entity).State = EntityState.Modified;
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    foreach (var failure in ex.EntityValidationErrors)
-                    {
-                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
-                        foreach (var error in failure.ValidationErrors)
-                        {
-                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
-                            sb.AppendLine();
-                        }
-                    }
-
-                    // output validation errors
-                    Console.WriteLine(sb.ToString());
-                }
+                new IncidentSystemInvoicingApiController().EditIncident(incident);
 
                 return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId });
             }
@@ -211,30 +163,7 @@ namespace CCCP.Controllers
 
         public void LoadData(int incidentId)
         {
-            incident = new IncidentSystemInvoicingModel();
-
-            // load incident details
-            incident.Entity = db.IncidentSystemInvoicing.Find(incidentId);
-
-            // load checklists
-            int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from c in db.Checklist                                          
-                                          where c.ChecklistBatchId.Equals(checklistBatchID)
-                                          orderby c.SortingOrder
-                                          select c).ToList<Checklist>();
-
-            // load checklist actions
-            foreach (ChecklistModel checklist in incident.Checklists)
-            {
-                List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
-                                                        where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
-                                                        orderby ca.SortingOrder
-                                                        select ca).ToList<ChecklistAction>();
-                checklist.ChecklistActionEntities = actionEntities;
-            }
-
-            // load chat room
-
+            this.incident = new IncidentSystemInvoicingApiController().GetIncident(incidentId);
         }
 
         public ActionResult ToggleActionStatus(int checklist, int checklistAction)

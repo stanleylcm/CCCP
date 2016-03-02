@@ -1,11 +1,18 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CCCP.ViewModel;
+using CCCP.Business;
+using CCCP.Business.Model;
+using CCCP.Common;
 using System.Data.Entity.Core.Objects;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace CCCP.UnitTest
 {
@@ -26,10 +33,51 @@ namespace CCCP.UnitTest
 
             var client = new HttpClient();
 
-            client.BaseAddress = new Uri("http://localhost:62029/");
+            client.BaseAddress = new Uri("http://localhost/");
 
             // HTTP POST
             var response = client.PostAsJsonAsync("/api/incidentSystemBillingApi/CreateIncident", incidentSystemBilling).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+            }
+        }
+
+        [TestMethod]
+        public void TestEditIncidentWebApi()
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
+            
+            // load incident details
+            incident.Entity = db.IncidentSystemBilling.Find(1);
+
+            // load checklists
+            int checklistBatchID = incident.Entity.ChecklistBatchId;
+            incident.ChecklistEntities = (from c in db.Checklist
+                                        where c.ChecklistBatchId.Equals(checklistBatchID)
+                                        orderby c.SortingOrder
+                                        select c).ToList<Checklist>();
+
+            // load checklist actions
+            foreach (ChecklistModel checklist in incident.Checklists)
+            {
+                List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
+                                                        where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                        orderby ca.SortingOrder
+                                                        select ca).ToList<ChecklistAction>();
+                checklist.ChecklistActionEntities = actionEntities;
+                
+            }
+
+            incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();
+
+            var client = new HttpClient();
+
+            client.BaseAddress = new Uri("http://localhost/");
+
+            // HTTP POST
+            var response = client.PostAsJsonAsync("/api/incidentSystemBillingApi/EditIncident", incident).Result;
 
             if (response.IsSuccessStatusCode)
             {
