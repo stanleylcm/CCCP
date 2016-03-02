@@ -25,7 +25,7 @@
           </Key>
           <Property Name="ChecklistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
-          <Property Name="Department" Type="varchar" MaxLength="20" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="SortingOrder" Type="smallint" />
           <Property Name="History" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
@@ -58,6 +58,13 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="IncidentSystemBilling">
           <Key>
@@ -159,6 +166,15 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="IncidentType">
+          <Key>
+            <PropertyRef Name="IncidentTypeId" />
+          </Key>
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="IncidentType" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="SubType" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="InputOption">
           <Key>
             <PropertyRef Name="InputOptionId" />
@@ -204,9 +220,11 @@
           <EntitySet Name="Checklist" EntityType="Self.Checklist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistAction" EntityType="Self.ChecklistAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemBilling" EntityType="Self.IncidentSystemBilling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemCallCentre" EntityType="Self.IncidentSystemCallCentre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentSystemInvoicing" EntityType="Self.IncidentSystemInvoicing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncidentType" EntityType="Self.IncidentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputOption" EntityType="Self.InputOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -223,7 +241,6 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
             <Parameter Name="DefaultActionStatus" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Checklist" EntityType="CCCP.ViewModel.Checklist" />
           <EntitySet Name="ChecklistAction" EntityType="CCCP.ViewModel.ChecklistAction" />
           <EntitySet Name="ChecklistBatch" EntityType="CCCP.ViewModel.ChecklistBatch" />
           <EntitySet Name="AuditLog" EntityType="CCCP.ViewModel.AuditLog" />
@@ -235,6 +252,9 @@
             <Parameter Name="Year" Mode="In" Type="Int16" />
           </FunctionImport>
           <EntitySet Name="InputOption" EntityType="CCCP.ViewModel.InputOption" />
+          <EntitySet Name="Department" EntityType="CCCP.ViewModel.Department" />
+          <EntitySet Name="IncidentType" EntityType="CCCP.ViewModel.IncidentType" />
+          <EntitySet Name="Checklist" EntityType="CCCP.ViewModel.Checklist" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -299,20 +319,6 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Checklist">
-          <Key>
-            <PropertyRef Name="ChecklistId" />
-          </Key>
-          <Property Name="ChecklistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
-          <Property Name="Department" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SortingOrder" Type="Int16" />
           <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
@@ -470,6 +476,36 @@
           <Property Name="HasLogic" Type="Boolean" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Department1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="IncidentType">
+          <Key>
+            <PropertyRef Name="IncidentTypeId" />
+          </Key>
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Checklist">
+          <Key>
+            <PropertyRef Name="ChecklistId" />
+          </Key>
+          <Property Name="ChecklistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -530,21 +566,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_Incident_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_Incident_PostCreate" />
-          <EntitySetMapping Name="Checklist">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.Checklist">
-              <MappingFragment StoreEntitySet="Checklist">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="History" ColumnName="History" />
-                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
-                <ScalarProperty Name="ChecklistId" ColumnName="ChecklistId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ChecklistAction">
             <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistAction">
               <MappingFragment StoreEntitySet="ChecklistAction">
@@ -701,6 +722,39 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="InputKey" ColumnName="InputKey" />
                 <ScalarProperty Name="InputOptionId" ColumnName="InputOptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Department1" ColumnName="Department" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentType">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentType">
+              <MappingFragment StoreEntitySet="IncidentType">
+                <ScalarProperty Name="SubType" ColumnName="SubType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IncidentType1" ColumnName="IncidentType" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Checklist">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Checklist">
+              <MappingFragment StoreEntitySet="Checklist">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="ChecklistId" ColumnName="ChecklistId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

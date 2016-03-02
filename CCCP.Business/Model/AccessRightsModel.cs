@@ -66,6 +66,31 @@ namespace CCCP.Business.Model
 
             return result;
         }
+
+        public List<IncidentTypeAndLevel> GetDelta(IncidentTypeSubType incidentType)
+        {
+            List<IncidentTypeAndLevel> result = new List<IncidentTypeAndLevel>();
+
+            foreach (IncidentLevelWithCrisis level in Enum.GetValues(typeof(IncidentLevelWithCrisis)))
+            {
+                if (!(this.IncidentType == incidentType && this.IncidentLevel == level))
+                    result.Add(new IncidentTypeAndLevel() { IncidentType = incidentType, IncidentLevel = level });
+            }
+
+            return result;
+        }
+
+        public static List<IncidentTypeAndLevel> GetAllLevels(IncidentTypeSubType incidentType)
+        {
+            List<IncidentTypeAndLevel> result = new List<IncidentTypeAndLevel>();
+
+            foreach (IncidentLevelWithCrisis level in Enum.GetValues(typeof(IncidentLevelWithCrisis)))
+            {
+                result.Add(new IncidentTypeAndLevel() { IncidentType = incidentType, IncidentLevel = level });
+            }
+
+            return result;
+        }
     }
     public class IncidentTypeAndDepartment : ICloneable
     {

@@ -54,10 +54,23 @@ namespace CCCP.UnitTest
 
             // load checklists
             int checklistBatchID = incident.Entity.ChecklistBatchId;
-            incident.ChecklistEntities = (from c in db.Checklist
-                                        where c.ChecklistBatchId.Equals(checklistBatchID)
-                                        orderby c.SortingOrder
-                                        select c).ToList<Checklist>();
+            incident.ChecklistEntities = (from checklist in db.Checklist
+                                        join department in db.Department on checklist.DepartmentId equals department.DepartmentId
+                                        where checklist.ChecklistBatchId.Equals(checklistBatchID)
+                                        orderby checklist.SortingOrder
+                                        select new ChecklistExtend()
+                                        {
+                                            ChecklistId = checklist.ChecklistId,
+                                            ChecklistBatchId = checklist.ChecklistBatchId,
+                                            DepartmentId = checklist.DepartmentId,
+                                            SortingOrder = checklist.SortingOrder,
+                                            History = checklist.History,
+                                            CreatedBy = checklist.CreatedBy,
+                                            CreatedDateTime = checklist.CreatedDateTime,
+                                            LastUpdatedBy = checklist.LastUpdatedBy,
+                                            LastUpdatedDateTime = checklist.LastUpdatedDateTime,
+                                            Department = department.Department1
+                                        }).ToList<ChecklistExtend>();
 
             // load checklist actions
             foreach (ChecklistModel checklist in incident.Checklists)

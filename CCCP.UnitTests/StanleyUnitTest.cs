@@ -55,6 +55,12 @@ namespace CCCP.UnitTest
             test.NotificationRights.Add(new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.SystemBilling, IncidentLevel = IncidentLevelWithCrisis.Crisis });
             test.ChatRoomRights = test.NotificationRights.Clone<IncidentTypeAndLevel>();
             test.NotificationRights[1].IncidentLevel = IncidentLevelWithCrisis.Level_2;
+
+            IncidentTypeAndLevel il = new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.OHS, IncidentLevel = IncidentLevelWithCrisis.Level_2 };
+            List<IncidentTypeAndLevel> lid1 = il.GetDelta(IncidentTypeSubType.OHS);
+            List<IncidentTypeAndLevel> lid2 = il.GetDelta(IncidentTypeSubType.EnvironmentLeakage);
+
+            int id = IncidentService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling);
         }
 
         [TestMethod]

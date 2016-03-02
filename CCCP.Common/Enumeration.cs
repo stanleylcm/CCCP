@@ -140,6 +140,13 @@ namespace CCCP.Common
         Modifiy
     }
 
+    public enum PrepareSaveMode
+    {
+        Created,
+        Last_Updated,
+        Closed
+    }
+
     #region Enum for Incident - System (Billing)
     public enum IncidentSystemBillingProblemArea
     {

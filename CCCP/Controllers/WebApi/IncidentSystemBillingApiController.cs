@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Http;
 using CCCP.Business.Model;
+using CCCP.Business.Service;
 using CCCP.ViewModel;
 using CCCP.Common;
 using System.Data;
@@ -26,18 +27,31 @@ namespace CCCP.Controllers.WebApi
 
                 // load checklists
                 int checklistBatchID = result.Entity.ChecklistBatchId;
-                result.ChecklistEntities = (from c in db.Checklist
-                                            where c.ChecklistBatchId.Equals(checklistBatchID)
-                                            orderby c.SortingOrder
-                                            select c).ToList<Checklist>();
+                result.ChecklistEntities = (from checklist in db.Checklist
+                                            join department in db.Department on checklist.DepartmentId equals department.DepartmentId
+                                            where checklist.ChecklistBatchId.Equals(checklistBatchID)
+                                            orderby checklist.SortingOrder
+                                            select new ChecklistExtend()
+                                            {
+                                                ChecklistId = checklist.ChecklistId,
+                                                ChecklistBatchId = checklist.ChecklistBatchId,
+                                                DepartmentId = checklist.DepartmentId,
+                                                SortingOrder = checklist.SortingOrder,
+                                                History = checklist.History,
+                                                CreatedBy = checklist.CreatedBy,
+                                                CreatedDateTime = checklist.CreatedDateTime,
+                                                LastUpdatedBy = checklist.LastUpdatedBy,
+                                                LastUpdatedDateTime = checklist.LastUpdatedDateTime,
+                                                Department = department.Department1
+                                            }).ToList<ChecklistExtend>();
 
                 // load checklist actions
                 foreach (ChecklistModel checklist in result.Checklists)
                 {
-                    List<ChecklistAction> actionEntities = (from ca in db.ChecklistAction
-                                                            where ca.ChecklistId.Equals(checklist.Entity.ChecklistId)
-                                                            orderby ca.SortingOrder
-                                                            select ca).ToList<ChecklistAction>();
+                    List<ChecklistAction> actionEntities = (from checklistAction in db.ChecklistAction
+                                                            where checklistAction.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                            orderby checklistAction.SortingOrder
+                                                            select checklistAction).ToList<ChecklistAction>();
                     checklist.ChecklistActionEntities = actionEntities;
                 }
             }
@@ -69,12 +83,13 @@ namespace CCCP.Controllers.WebApi
             IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
             incidentSystemBilling.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentSystemBilling;
-            incident.PrepareSave("Created");
+            incident.PrepareSave(PrepareSaveMode.Created);
             incidentSystemBilling = incident.Entity;
 
+            int incidentTypeId = IncidentService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling);
             db.IncidentSystemBilling.Add(incidentSystemBilling);
             db.SaveChanges();
-            db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, 6, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+            db.usp_Incident_PostCreate(incidentSystemBilling.IncidentSystemBillingId, incidentTypeId, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
 
             return incident.Entity.IncidentSystemBillingId;
         }
@@ -88,7 +103,7 @@ namespace CCCP.Controllers.WebApi
             // prepare history etc. before save
             if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
             {
-                incident.PrepareSave("Closed");
+                incident.PrepareSave(PrepareSaveMode.Closed);
             }
             else
             {

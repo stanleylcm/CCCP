@@ -76,6 +76,10 @@
     <Compile Include="ChecklistBatch.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChecklistExtend.cs" />
+    <Compile Include="Department.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncidentSystemBilling.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -83,6 +87,9 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IncidentSystemInvoicing.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentType.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="InputOption.cs">

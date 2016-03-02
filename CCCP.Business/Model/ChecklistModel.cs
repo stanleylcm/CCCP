@@ -16,7 +16,7 @@ namespace CCCP.Business.Model
         public ChecklistModel()
         {
         }
-        public ChecklistModel(Checklist entity)
+        public ChecklistModel(ChecklistExtend entity)
         {
             this.Entity = entity;
         }
@@ -25,7 +25,7 @@ namespace CCCP.Business.Model
 
         #region Declaration
 
-        public Checklist Entity = new Checklist();
+        public ChecklistExtend Entity = new ChecklistExtend();
         public List<ChecklistActionModel> ChecklistActions = new List<ChecklistActionModel>();
         public List<ChecklistAction> ChecklistActionEntities
         {

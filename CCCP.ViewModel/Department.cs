@@ -12,16 +12,9 @@ namespace CCCP.ViewModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Checklist
+    public partial class Department
     {
-        public int ChecklistId { get; set; }
-        public int ChecklistBatchId { get; set; }
         public int DepartmentId { get; set; }
-        public Nullable<short> SortingOrder { get; set; }
-        public string History { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public string LastUpdatedBy { get; set; }
-        public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
+        public string Department1 { get; set; }
     }
 }

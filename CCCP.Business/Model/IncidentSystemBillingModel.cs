@@ -34,12 +34,12 @@ namespace CCCP.Business.Model
 
         public IncidentSystemBilling Entity = new IncidentSystemBilling();
         public List<ChecklistModel> Checklists = new List<ChecklistModel>();
-        public List<Checklist> ChecklistEntities
+        public List<ChecklistExtend> ChecklistEntities
         {
             set
             {
                 Checklists = new List<ChecklistModel>();
-                foreach (Checklist checklistEntity in value) Checklists.Add(new ChecklistModel(checklistEntity));
+                foreach (ChecklistExtend checklistEntity in value) Checklists.Add(new ChecklistModel(checklistEntity));
             }
         }
 
@@ -72,14 +72,14 @@ namespace CCCP.Business.Model
 
             return result;
         }
-        public void PrepareSave(string saveMode = "Last updated")
+        public void PrepareSave(PrepareSaveMode saveMode = PrepareSaveMode.Last_Updated)
         {
             DateTime now = DateTime.Now;
-            Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now, saveMode);
+            Entity.History = AuditTrailService.GetHistory(Entity.History, AccessControlService.CurrentUser.GetLastUpdatedBy(), now, saveMode.ToEnumString());
 
-            switch (saveMode.ToUpper())
+            switch (saveMode)
             {
-                case "CREATED":
+                case PrepareSaveMode.Created:
                     Entity.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.CreatedDateTime = now;
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
@@ -91,7 +91,7 @@ namespace CCCP.Business.Model
 
                     Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
                     break;
-                case "LAST UPDATED":
+                case PrepareSaveMode.Last_Updated:
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
 
@@ -99,7 +99,7 @@ namespace CCCP.Business.Model
 
                     Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
                     break;
-                case "CLOSED":
+                case PrepareSaveMode.Closed:
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     Entity.CloseById = AccessControlService.CurrentUser.Entity.UserId;

@@ -28,9 +28,15 @@ namespace CCCP.Business.Service
             foreach (IncidentTypeSubType incidentType in result.SMRoles)
             {
                 // Create Update Rights
-                if (!result.CreateUpdateRights.Contains(incidentType)) result.CreateUpdateRights.Add(incidentType);
+                if (!result.CreateUpdateRights.Contains(incidentType)) 
+                    result.CreateUpdateRights.Add(incidentType);
                 
                 // Chat Room Rights
+                IncidentTypeAndLevel found = result.ChatRoomRights.Find(x => x.IncidentType == incidentType);
+                if (found != null) result.ChatRoomRights.AddRange(found.GetDelta(incidentType)); // incident type found
+                else result.ChatRoomRights.AddRange(IncidentTypeAndLevel.GetAllLevels(incidentType)); // incident type not found
+
+                // Action Checklist Rights
 
             }
 
