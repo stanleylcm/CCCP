@@ -22,8 +22,7 @@ namespace CCCP
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // log4net
-            string path = Server.MapPath("~/log4net.config");
-            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(path));
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Server.MapPath("~/log4net.config")));
         }
 
         protected void Application_BeginRequest(Object source, EventArgs e)

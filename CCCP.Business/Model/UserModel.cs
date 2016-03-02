@@ -19,7 +19,8 @@ namespace CCCP.Business.Model
         }
 
         public User Entity = new User();
-        public bool IsAuthenticated = false;
+        public bool IsAuthenticated;
+        public AccessRightsModel AccessRights = new AccessRightsModel();
         
         public string GetLastUpdatedBy()
         {

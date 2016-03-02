@@ -82,16 +82,22 @@ namespace CCCP.Common
 
             ILog logger = LogManager.GetLogger(type + "-" + currentMethod.Name);
 
-            log4net.LogicalThreadContext.Properties["SourceData"] = sourceData;
-            log4net.LogicalThreadContext.Properties["ExceptionMessage"] = self.Message;
-            log4net.LogicalThreadContext.Properties["StackTrace"] = self.StackTrace;
-            log4net.LogicalThreadContext.Properties["CreatedBy"] = "";
+            log4net.GlobalContext.Properties["SourceData"] = sourceData;
+            log4net.GlobalContext.Properties["ExceptionMessage"] = self.Message;
+            log4net.GlobalContext.Properties["StackTrace"] = self.StackTrace;
+            log4net.GlobalContext.Properties["CreatedBy"] = "";
 
             logger.Error(type + "-" + currentMethod.Name, self);
 
             logger = null;
             frame = null;
             stackTrace = null;
+        }
+
+        // List
+        public static List<T> Clone<T>(this List<T> self) where T : ICloneable
+        {
+            return self.ConvertAll(x => (T)x.Clone());
         }
     }
 }

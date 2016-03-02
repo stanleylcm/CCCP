@@ -22,6 +22,7 @@ namespace CCCP.Controllers
         // GET: IncidentSystemBillings
         public ActionResult Index()
         {
+            Test();
             return View(db.IncidentSystemBilling.ToList());
         }
 
@@ -249,7 +250,7 @@ namespace CCCP.Controllers
 
         public void Test()
         {
-            incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();
+            incident.Checklists[1].ChecklistActions[10].ToggleActionStatus();
         }
     }
 }

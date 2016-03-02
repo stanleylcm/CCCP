@@ -19,13 +19,13 @@ namespace CCCP.Business.Service
         {
             // Level 3
             //if (incident.ContactedBy.IsEquals("Media")) return IncidentLevel.Level3;
-            if (incident.ContactedBy.IsContains("Media")) return IncidentLevel.Level3;
+            if (incident.ContactedBy.IsContains("Media")) return IncidentLevel.Level_3;
 
             // Level 2
             if (incident.BillingErrorSeriousness.IsEquals("Danger Zone") &&
                 //(incident.ContactedBy.IsEquals("Consumer Council") || incident.ContactedBy.IsEquals("Government"))
                 (incident.ContactedBy.IsContains("Consumer Council") || incident.ContactedBy.IsContains("Government"))
-                ) return IncidentLevel.Level2;
+                ) return IncidentLevel.Level_2;
 
             // else
             return IncidentLevel.None;
@@ -39,12 +39,12 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemInvoicing incident)
         {
             // Level 3
-            if (incident.ExpectedAffectedNoOfBill > 50 && incident.ExpectedAffectedBillingDay > 5) return IncidentLevel.Level3;
+            if (incident.ExpectedAffectedNoOfBill > 50 && incident.ExpectedAffectedBillingDay > 5) return IncidentLevel.Level_3;
 
             // Level 2
             if (incident.ExpectedAffectedNoOfBill > 50 &&
                 (incident.ExpectedAffectedBillingDay >= 4 && incident.ExpectedAffectedBillingDay <= 5)
-                ) return IncidentLevel.Level2;
+                ) return IncidentLevel.Level_2;
 
             // else
             return IncidentLevel.None;

@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Objects;
 using CCCP.ViewModel;
 using CCCP.Common;
 using CCCP.Business;
+using CCCP.Business.Model;
 using CCCP.Controllers;
 using CCCP.Business.Service;
 
@@ -48,6 +49,12 @@ namespace CCCP.UnitTest
             string c = "abcdefg";
             string c1 = c.Left(2);
             string c2 = c.Right(3);
+
+            AccessRightsModel test = new AccessRightsModel();
+            test.NotificationRights.Add(new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.SystemBilling, IncidentLevel = IncidentLevelWithCrisis.Level_1 });
+            test.NotificationRights.Add(new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.SystemBilling, IncidentLevel = IncidentLevelWithCrisis.Crisis });
+            test.ChatRoomRights = test.NotificationRights.Clone<IncidentTypeAndLevel>();
+            test.NotificationRights[1].IncidentLevel = IncidentLevelWithCrisis.Level_2;
         }
 
         [TestMethod]

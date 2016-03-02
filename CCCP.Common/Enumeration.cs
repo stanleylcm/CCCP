@@ -8,9 +8,17 @@ namespace CCCP.Common
     public enum IncidentLevel
     {
         None = 0,
-        Level1 = 1,
-        Level2 = 2,
-        Level3 = 3
+        Level_1 = 1,
+        Level_2 = 2,
+        Level_3 = 3
+    }
+
+    public enum IncidentLevelWithCrisis
+    {
+        Level_1 = 1,
+        Level_2 = 2,
+        Level_3 = 3,
+        Crisis = 4
     }
 
     public enum IncidentType
@@ -35,6 +43,23 @@ namespace CCCP.Common
         OT_System,
         Network_Connectivity,
         Security
+    }
+
+    public enum IncidentTypeSubType
+    {
+        SystemSecurity,
+        SystemOTSystem,
+        SystemITSystem,
+        SystemNetworkConnectivity,
+        SystemCallCentre,
+        SystemBilling,
+        SystemInvoicing,
+        QualityNetwork,
+        QualityCorporateImage,
+        QualityGenerartion,
+        EnvironmentAirEmission,
+        EnvironmentLeakage,
+        OHS
     }
 
     public enum SequenceType

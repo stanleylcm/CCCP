@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Http;
 using CCCP.Business.Model;
 using CCCP.ViewModel;
+using CCCP.Common;
 
 namespace CCCP.Controllers.WebApi
 {
