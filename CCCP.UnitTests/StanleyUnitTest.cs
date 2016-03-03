@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity.Core.Objects;
@@ -60,7 +61,9 @@ namespace CCCP.UnitTest
             List<IncidentTypeAndLevel> lid1 = il.GetDelta(IncidentTypeSubType.OHS);
             List<IncidentTypeAndLevel> lid2 = il.GetDelta(IncidentTypeSubType.EnvironmentLeakage);
 
-            int id = IncidentService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling);
+            int id = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling);
+
+            List<Department> departments = MasterTableService.GetDepartments();
         }
 
         [TestMethod]
@@ -104,6 +107,13 @@ namespace CCCP.UnitTest
         public void TestGetInputOptions()
         {
             List<string> result = InputOptionsService.GetIncidentSystemBillingInputOptions(IncidentSystemBillingInputKey.IncidentSystemBilling_StatusUpdate);
+        }
+
+        [TestMethod]
+        public void TestAccessRights()
+        { 
+            CCCPDbContext db = new CCCPDbContext();
+            List<SystemFunctionExtend> functions = db.usp_GetUserFunctions(1).ToList<SystemFunctionExtend>();
         }
     }
 }

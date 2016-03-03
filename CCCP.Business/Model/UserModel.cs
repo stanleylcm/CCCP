@@ -20,6 +20,7 @@ namespace CCCP.Business.Model
 
         public User Entity = new User();
         public bool IsAuthenticated;
+        public DateTime LoginDateTime = DateTime.MinValue;
         public AccessRightsModel AccessRights = new AccessRightsModel();
         
         public string GetLastUpdatedBy()

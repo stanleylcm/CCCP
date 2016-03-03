@@ -208,6 +208,9 @@
           <Parameter Name="SequenceType" Type="varchar" Mode="In" />
           <Parameter Name="Year" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="usp_GetUserFunctions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_Incident_PostCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IncidentId" Type="int" Mode="In" />
           <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
@@ -255,6 +258,9 @@
           <EntitySet Name="Department" EntityType="CCCP.ViewModel.Department" />
           <EntitySet Name="IncidentType" EntityType="CCCP.ViewModel.IncidentType" />
           <EntitySet Name="Checklist" EntityType="CCCP.ViewModel.Checklist" />
+          <FunctionImport Name="usp_GetUserFunctions" ReturnType="Collection(CCCP.ViewModel.SystemFunctionExtend)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -506,6 +512,44 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="usp_GetUserFunctions_Result">
+          <Property Type="Int32" Name="SystemFunctionId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="false" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetUserFunctions_Result1">
+          <Property Type="Int32" Name="SystemFunctionId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="false" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SystemFunctionExtend">
+          <Property Type="Int32" Name="SystemFunctionId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="false" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="IncidentLevel" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="usp_GetUserFunctions_Result2">
+          <Property Type="Int32" Name="SystemFunctionId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="false" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="IncidentLevel" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="usp_GetUserFunctions_Result3">
+          <Property Type="Int32" Name="SystemFunctionId" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="false" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="IncidentLevel" Nullable="true" MaxLength="20" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -758,6 +802,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetUserFunctions" FunctionName="CCCP.ViewModel.Store.usp_GetUserFunctions">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.SystemFunctionExtend">
+                <ScalarProperty Name="SystemFunctionId" ColumnName="SystemFunctionId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IncidentLevel" ColumnName="IncidentLevel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

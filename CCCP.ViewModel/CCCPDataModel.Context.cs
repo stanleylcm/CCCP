@@ -77,5 +77,14 @@ namespace CCCP.ViewModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetNextSequenceNo", sequenceTypeParameter, yearParameter);
         }
+    
+        public virtual ObjectResult<SystemFunctionExtend> usp_GetUserFunctions(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SystemFunctionExtend>("usp_GetUserFunctions", userIdParameter);
+        }
     }
 }

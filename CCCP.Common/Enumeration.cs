@@ -147,6 +147,15 @@ namespace CCCP.Common
         Closed
     }
 
+    public enum SystemFunctionCode
+    {
+        None,
+        CreateUpdate,
+        ChatRoom,
+        Notification,
+        ActionChecklist
+    }
+
     #region Enum for Incident - System (Billing)
     public enum IncidentSystemBillingProblemArea
     {

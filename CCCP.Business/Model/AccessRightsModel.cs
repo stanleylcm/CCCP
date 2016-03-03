@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CCCP.Common;
+using CCCP.Business.Service;
 
 namespace CCCP.Business.Model
 {
@@ -13,8 +14,8 @@ namespace CCCP.Business.Model
         {
         }
 
-        public List<IncidentTypeSubType> SMRoles;
-        public List<IncidentTypeSubType> ECRoles;
+        public List<IncidentTypeSubType> SMRoles = new List<IncidentTypeSubType>();
+        public List<IncidentTypeSubType> ECRoles = new List<IncidentTypeSubType>();
         public List<IncidentTypeSubType> CreateUpdateRights = new List<IncidentTypeSubType>();
         public List<IncidentTypeAndLevel> ChatRoomRights = new List<IncidentTypeAndLevel>();
         public List<IncidentTypeAndLevel> NotificationRights = new List<IncidentTypeAndLevel>();
@@ -92,6 +93,7 @@ namespace CCCP.Business.Model
             return result;
         }
     }
+
     public class IncidentTypeAndDepartment : ICloneable
     {
         public IncidentTypeSubType IncidentType;
@@ -102,6 +104,33 @@ namespace CCCP.Business.Model
             IncidentTypeAndDepartment result = new IncidentTypeAndDepartment();
             result.IncidentType = this.IncidentType;
             result.Department = this.Department;
+
+            return result;
+        }
+
+        public List<IncidentTypeAndDepartment> GetDelta(IncidentTypeSubType incidentType)
+        {
+            List<IncidentTypeAndDepartment> result = new List<IncidentTypeAndDepartment>();
+
+            List<string> departments = MasterTableService.GetDepartmentStrs();
+            foreach (string deparment in departments)
+            {
+                if (!(this.IncidentType == incidentType && this.Department == deparment))
+                    result.Add(new IncidentTypeAndDepartment() { IncidentType = incidentType, Department = deparment });
+            }
+
+            return result;
+        }
+
+        public static List<IncidentTypeAndDepartment> GetAllDepartments(IncidentTypeSubType incidentType)
+        {
+            List<IncidentTypeAndDepartment> result = new List<IncidentTypeAndDepartment>();
+
+            List<string> departments = MasterTableService.GetDepartmentStrs();
+            foreach (string deparment in departments)
+            {
+                result.Add(new IncidentTypeAndDepartment() { IncidentType = incidentType, Department = deparment });
+            }
 
             return result;
         }

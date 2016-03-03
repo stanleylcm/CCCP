@@ -61,20 +61,8 @@ namespace CCCP.Business.Service
                 int seqNo = db.usp_GetNextSequenceNo(sequenceType, (short)year).FirstOrDefault().Value;
                 Result = string.Format("{0}{1}", year.ToString().Right(2), seqNo.ToString("00000"));
             }
-            
+
             return Result;
-        }
-
-        public static int GetIncidentTypeId(IncidentTypeSubType incidentType)
-        {
-            int result = 0;
-            using (CCCPDbContext db = new CCCPDbContext())
-            {
-                string incidentTypeStr = incidentType.ToEnumString();
-                result = db.IncidentType.SingleOrDefault(x => x.IncidentType1 == incidentTypeStr).IncidentTypeId;
-            }
-
-            return result;
         }
     }
 }

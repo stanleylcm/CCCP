@@ -18,29 +18,98 @@ namespace CCCP.Business.Service
         {
             AccessRightsModel result = new AccessRightsModel();
 
-            // 
+            // retreve access rights from DB
+            result = getAccessRightsFromDB(userId);
 
             // Post processing
             // Chat Room Rights = Notification Rights
             result.ChatRoomRights = result.NotificationRights.Clone<IncidentTypeAndLevel>();
 
-            // SM roles has full rights
-            foreach (IncidentTypeSubType incidentType in result.SMRoles)
-            {
-                // Create Update Rights
-                if (!result.CreateUpdateRights.Contains(incidentType)) 
-                    result.CreateUpdateRights.Add(incidentType);
-                
-                // Chat Room Rights
-                IncidentTypeAndLevel found = result.ChatRoomRights.Find(x => x.IncidentType == incidentType);
-                if (found != null) result.ChatRoomRights.AddRange(found.GetDelta(incidentType)); // incident type found
-                else result.ChatRoomRights.AddRange(IncidentTypeAndLevel.GetAllLevels(incidentType)); // incident type not found
+            // SM role has full rights
+            processFullRights(ref result, result.SMRoles);
 
-                // Action Checklist Rights
-
-            }
+            // EC role has full rights
+            processFullRights(ref result, result.ECRoles);
 
             return result;
+        }
+
+        private static void processFullRights(ref AccessRightsModel model, List<IncidentTypeSubType> incidentTypes)
+        {
+            foreach (IncidentTypeSubType incidentType in incidentTypes)
+            {
+                // Create Update Rights
+                if (!model.CreateUpdateRights.Contains(incidentType))
+                    model.CreateUpdateRights.Add(incidentType);
+
+                // Chat Room Rights
+                IncidentTypeAndLevel found = model.ChatRoomRights.Find(x => x.IncidentType == incidentType);
+                if (found != null) model.ChatRoomRights.AddRange(found.GetDelta(incidentType)); // incident type found
+                else model.ChatRoomRights.AddRange(IncidentTypeAndLevel.GetAllLevels(incidentType)); // incident type not found
+
+                // Action Checklist Rights
+                IncidentTypeAndDepartment found1 = model.ActionChecklistRights.Find(x => x.IncidentType == incidentType);
+                if (found1 != null) model.ActionChecklistRights.AddRange(found1.GetDelta(incidentType)); // incident type found
+                else model.ActionChecklistRights.AddRange(IncidentTypeAndDepartment.GetAllDepartments(incidentType)); // incident type not found 
+            }
+        }
+
+        private static AccessRightsModel getAccessRightsFromDB(int userId)
+        {
+            AccessRightsModel result = new AccessRightsModel();
+
+            // handle rights
+            List<SystemFunctionExtend> functions = new List<SystemFunctionExtend>();
+            using (CCCPDbContext db = new CCCPDbContext())
+            {
+                functions = db.usp_GetUserFunctions(userId).ToList<SystemFunctionExtend>();
+            }
+            addFunctionToAccessRightsModel(ref result, functions);
+
+            // handle roles
+
+
+            return result;
+        }
+
+        private static void addFunctionToAccessRightsModel(ref AccessRightsModel model, List<SystemFunctionExtend> functions)
+        {
+            List<Department> departments = MasterTableService.GetDepartments();
+            List<ViewModel.IncidentType> incidentTypes = MasterTableService.GetIncidentTypes();
+
+            foreach (SystemFunctionExtend function in functions)
+            {
+                bool toEnumResult = false;
+                SystemFunctionCode systemFunction = function.Code.ToEnum<SystemFunctionCode>(out toEnumResult);
+                if (toEnumResult)
+                {
+                    IncidentTypeSubType incidentType = MasterTableService.GetIncidentTypeSubType(function.IncidentTypeId, incidentTypes);
+
+                    switch (systemFunction)
+                    {
+                        case SystemFunctionCode.CreateUpdate:
+                            {
+                                model.CreateUpdateRights.Add(incidentType);
+                                break;
+                            }
+                        case SystemFunctionCode.Notification:
+                            {
+                                IncidentLevelWithCrisis incidentLevel = function.IncidentLevel.ToEnum<IncidentLevelWithCrisis>();
+                                IncidentTypeAndLevel value = new IncidentTypeAndLevel() { IncidentType = incidentType, IncidentLevel = incidentLevel };
+                                model.NotificationRights.Add(value);
+                                break;
+                            }
+                        case SystemFunctionCode.ActionChecklist:
+                            {
+                                string department = MasterTableService.GetDepartmentStr(function.DepartmentId, departments);
+                                IncidentTypeAndDepartment value = new IncidentTypeAndDepartment() { IncidentType = incidentType, Department = department };
+                                model.ActionChecklistRights.Add(value);
+                                break;
+                            }
+                    }
+                }
+
+            }
         }
     }
 }

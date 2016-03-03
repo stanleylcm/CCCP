@@ -168,6 +168,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidentSystemInvoicingController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
+    <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemInvoicingApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemBillingApiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -812,6 +813,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AccessControlApi\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\IncidentSystemBillingApi\" />
   </ItemGroup>

@@ -86,7 +86,7 @@ namespace CCCP.Controllers.WebApi
             incident.PrepareSave(PrepareSaveMode.Created);
             incidentSystemInvoicing = incident.Entity;
 
-            int incidentTypeId = IncidentService.GetIncidentTypeId(IncidentTypeSubType.SystemInvoicing);
+            int incidentTypeId = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemInvoicing);
             db.IncidentSystemInvoicing.Add(incidentSystemInvoicing);
             db.SaveChanges();
             db.usp_Incident_PostCreate(incidentSystemInvoicing.IncidentSystemInvoicingId, incidentTypeId, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
