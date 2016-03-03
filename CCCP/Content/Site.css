@@ -103,3 +103,14 @@ input[type='checkbox'] {
 {
    white-space: pre-line;
 }
+.box-body .row 
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+section.content ul.nav li
+{    
+    list-style-position:inside;
+    border: 1px solid black;
+}

@@ -83,7 +83,7 @@
         <div class="col-lg-12">
             <!-- content -->
 
-            <ul class="nav nav-pills">
+            <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
             </ul>
@@ -93,84 +93,92 @@
                 <div class="tab-pane fade active in" id="IncidentDetails">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
-                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
-                            </div>
+							<div class="panel-group">
+								<div class="panel panel-default">
+									<div class="panel panel-body">
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
+										</div>
 
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
-                                <div class="col-lg-1">@Html.DisplayFor(model => model.Entity.LevelOfSeverity)</div>
-                            </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
+											<div class="col-lg-1">@Html.DisplayFor(model => model.Entity.LevelOfSeverity)</div>
+										</div>
 
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
-                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
-                            </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
+										</div>
 
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
-                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
-                            </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
+										</div>
 
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
-                                <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentBackground)</div>
-                            </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentBackground)</div>
+										</div>
 
-                            <div class="row">
-                                <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
-                                <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
-                            </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
+											<div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="panel panel-primary">
+									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+									<div class="panel panel-body">
 
-                            <fieldset class="scheduler-border">
-                                <legend class="scheduler-border">Details</legend>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ProblemArea)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ProblemArea)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ProblemArea)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.BillingErrorSeriousness)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.BillingErrorSeriousness)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.BillingErrorSeriousness)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.BillingErrorSeriousness)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedCustomerBill)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedAffectedCustomerBill)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedAffectedCustomerBill)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedAffectedCustomerBill)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ContactedBy)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ContactedBy)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ContactedBy)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
-                                </div>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RequireMitigatingAction)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RequireMitigatingAction)</div>
+										</div>
 
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RequireMitigatingAction)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RequireMitigatingAction)</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
-                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MitigatingAction)</div>
-                                </div>
-                            </fieldset>
+										<div class="row">
+											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
+											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MitigatingAction)</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
                         </div>
                         <!-- /.box-body -->
@@ -202,7 +210,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills">
+                                <ul class="nav nav-pills nav-justified">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
