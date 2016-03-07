@@ -216,7 +216,7 @@ namespace CCCP.ViewModel
     public partial class IncidentSystemITSystemHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentSystemITSystemId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -281,7 +281,7 @@ namespace CCCP.ViewModel
     public partial class IncidentSystemNetworkConnectivityHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentSystemNetworkConnectivityHId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -344,7 +344,7 @@ namespace CCCP.ViewModel
     public partial class IncidentSystemOTSystemHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentSystemOTSystemId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -411,7 +411,7 @@ namespace CCCP.ViewModel
     public partial class IncidentEnvironmentAirEmissionHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentEnvironmentAirEmissionId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -472,7 +472,7 @@ namespace CCCP.ViewModel
     public partial class IncidentEnvironmentLeakageHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentEnvironmentLeakageId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -535,7 +535,7 @@ namespace CCCP.ViewModel
     public partial class IncidentOHSHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentOHSId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -604,7 +604,7 @@ namespace CCCP.ViewModel
     public partial class IncidentQualityCorporateImageHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentQualityCorporateImageId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -663,7 +663,7 @@ namespace CCCP.ViewModel
     public partial class IncidentQualityGenerationHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentQualityGenerationId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]
@@ -726,7 +726,7 @@ namespace CCCP.ViewModel
     public partial class IncidentQualityNetworkHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemCallCentreId { get; set; }
+        public int IncidentQualityNetworkId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]

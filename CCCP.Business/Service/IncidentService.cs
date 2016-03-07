@@ -80,6 +80,17 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of System IT System
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentSystemITSystem incident)
+        {
+            // no Level logic for IT System
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

@@ -275,4 +275,11 @@ namespace CCCP.Common
     }
     #endregion
 
+    #region Enum for Incident - System (IT System)
+    public enum IncidentSystemITSystemInputKey
+    {
+        IncidentSystemITSystem_AffectedSystem,
+        IncidentSystemITSystem_AffectedArea
+    }
+    #endregion
 }

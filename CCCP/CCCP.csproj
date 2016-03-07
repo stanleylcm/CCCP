@@ -166,10 +166,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentSystemITSystemController.cs" />
     <Compile Include="Controllers\IncidentSystemCallCentreController.cs" />
     <Compile Include="Controllers\IncidentSystemInvoicingController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
     <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
+    <Compile Include="Controllers\WebApi\IncidentSystemITSystemApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemCallCentreApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemInvoicingApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemBillingApiController.cs" />
@@ -817,6 +819,11 @@
     <Content Include="Views\IncidentSystemCallCentre\Details.cshtml" />
     <Content Include="Views\IncidentSystemCallCentre\Edit.cshtml" />
     <Content Include="Views\IncidentSystemCallCentre\Index.cshtml" />
+    <Content Include="Views\IncidentSystemITSystem\Create.cshtml" />
+    <Content Include="Views\IncidentSystemITSystem\Delete.cshtml" />
+    <Content Include="Views\IncidentSystemITSystem\Details.cshtml" />
+    <Content Include="Views\IncidentSystemITSystem\Edit.cshtml" />
+    <Content Include="Views\IncidentSystemITSystem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
