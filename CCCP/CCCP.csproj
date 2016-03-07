@@ -173,6 +173,7 @@
     <Compile Include="Controllers\WebApi\IncidentSystemCallCentreApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemInvoicingApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemBillingApiController.cs" />
+    <Compile Include="Controllers\WebApi\MasterTableApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -823,6 +824,7 @@
     <Folder Include="Views\AccessControlApi\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\IncidentSystemBillingApi\" />
+    <Folder Include="Views\MasterTableApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

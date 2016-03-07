@@ -37,6 +37,9 @@ namespace CCCP.UnitTest
             string s = "Corporate Image";
             bool result = false;
             IncidentSubType subtype1 = s.ToEnum<IncidentSubType>(out result);
+
+            // enum
+            List<string> incidentLevels = IncidentLevelWithCrisis.Crisis.ListAll();
         }
 
         [TestMethod]
@@ -56,6 +59,9 @@ namespace CCCP.UnitTest
             test.NotificationRights.Add(new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.SystemBilling, IncidentLevel = IncidentLevelWithCrisis.Crisis });
             test.ChatRoomRights = test.NotificationRights.Clone<IncidentTypeAndLevel>();
             test.NotificationRights[1].IncidentLevel = IncidentLevelWithCrisis.Level_2;
+            test.SMRoles.Add(IncidentTypeSubType.OHS);
+            test.UpdateIncidentLevelRights = test.SMRoles.ConvertAll(x => x);
+            test.SMRoles.Add(IncidentTypeSubType.QualityCorporateImage);
 
             IncidentTypeAndLevel il = new IncidentTypeAndLevel() { IncidentType = IncidentTypeSubType.OHS, IncidentLevel = IncidentLevelWithCrisis.Level_2 };
             List<IncidentTypeAndLevel> lid1 = il.GetDelta(IncidentTypeSubType.OHS);
@@ -64,6 +70,8 @@ namespace CCCP.UnitTest
             int id = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling);
 
             List<Department> departments = MasterTableService.GetDepartments();
+
+            
         }
 
         [TestMethod]

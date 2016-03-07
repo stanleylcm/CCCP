@@ -20,6 +20,9 @@ namespace CCCP.Business.Model
         public List<IncidentTypeAndLevel> ChatRoomRights = new List<IncidentTypeAndLevel>();
         public List<IncidentTypeAndLevel> NotificationRights = new List<IncidentTypeAndLevel>();
         public List<IncidentTypeAndDepartment> ActionChecklistRights = new List<IncidentTypeAndDepartment>();
+        public List<IncidentTypeSubType> UpdateIncidentLevelRights = new List<IncidentTypeSubType>();
+        public List<IncidentTypeSubType> ApproveCrisisRights = new List<IncidentTypeSubType>();
+        public List<IncidentTypeSubType> CloseCrisisRights = new List<IncidentTypeSubType>();
 
         public bool HasUpdateIncidentLevelRights(IncidentTypeSubType incidentType)
         {
