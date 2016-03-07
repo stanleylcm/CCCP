@@ -86,6 +86,9 @@
     <Compile Include="IncidentEnvironmentLeakage.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IncidentOHS.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncidentQualityCorporateImage.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>

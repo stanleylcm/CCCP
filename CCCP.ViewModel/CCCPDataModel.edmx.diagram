@@ -25,6 +25,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" Width="2.125" PointX="0.75" PointY="5.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemOTSystem" Width="2.125" PointX="0.75" PointY="7.125" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemFunction" Width="1.5" PointX="5.625" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.125" PointX="0.75" PointY="7.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
