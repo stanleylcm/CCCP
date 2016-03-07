@@ -80,6 +80,21 @@
     <Compile Include="Department.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IncidentEnvironmentAirEmission.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentEnvironmentLeakage.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentQualityCorporateImage.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentQualityGeneration.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentQualityNetwork.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncidentSystemBilling.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +102,15 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IncidentSystemInvoicing.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemITSystem.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemNetworkConnectivity.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentSystemOTSystem.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IncidentType.cs">
