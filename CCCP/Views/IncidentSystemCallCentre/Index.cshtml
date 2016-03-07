@@ -1,8 +1,8 @@
-﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemInvoicing>
+﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemCallCentre>
 
 @using CCCP.Common
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentSystemInvoicing;
+    ViewBag.Title = Resources.global.Menu_IncidentSystemCallCentre;
 }
 
 @section Scripts {
@@ -22,7 +22,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemInvoicing
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemCallCentre
     </h1>
 </section>
 
@@ -39,7 +39,7 @@
 
                     <div class="pull-left" style="padding-right:20px">
                         <div class="form-group">
-                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemInvoicing")';">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemCallCentre")';">@Resources.global.Func_Create</button>
                             <button class="btn btn-primary" type="button" onclick="window.location = '#'">@Resources.global.Func_Export</button>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                     sLevelOfSeverity = iLevel.ToEnumString();
                                 }
                             <tr>
-                                <td><a href="@Url.Action("Details", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
+                                <td><a href="@Url.Action("Details", "IncidentSystemCallCentre", new { id = item.IncidentSystemCallCentreId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
                                 <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
                                 <td>@Html.DisplayFor(model => item.StatusUpdate)</td>
@@ -77,8 +77,8 @@
                                 <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
                                 <td>
                                     <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
-                                        <a href="@Url.Action("Delete", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemCallCentre", new { id = item.IncidentSystemCallCentreId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
+                                        <a href="@Url.Action("Delete", "IncidentSystemCallCentre", new { id = item.IncidentSystemCallCentreId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
                                     </div>
                                 </td>
                             </tr>

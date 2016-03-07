@@ -50,6 +50,36 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of System Call Centre
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentSystemCallCentre incident)
+        {
+            int impactPercent = 0;
+
+            if (incident.Impact.IsContains("% workstation failure"))
+            {
+                string impact = incident.Impact.ToLower();
+                string sImpactPercent = impact.Substring(0, impact.IndexOf("% workstation failure"));
+                impactPercent = Convert.ToInt32(sImpactPercent);
+            }
+
+            // Level 3
+            if (incident.PossibleCause.IsContains("Network Failure") ||
+                incident.Impact.IsContains("Suspension of Call Centre") ||
+                (incident.Impact.IsContains("% workstation failure") && impactPercent > 50)) return IncidentLevel.Level_3;
+
+            // Level 2
+            if (incident.Impact.IsContains("absence of e1 line") ||
+                (incident.Impact.IsContains("% workstation failure") && impactPercent >= 30 && impactPercent <= 50)
+                ) return IncidentLevel.Level_2;
+
+            // else
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

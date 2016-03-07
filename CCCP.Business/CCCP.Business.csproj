@@ -50,6 +50,7 @@
     <Compile Include="Model\AccessRightsModel.cs" />
     <Compile Include="Model\ChecklistActionModel.cs" />
     <Compile Include="Model\ChecklistModel.cs" />
+    <Compile Include="Model\IncidentSystemCallCentreModel.cs" />
     <Compile Include="Model\IncidentSystemInvoicingModel.cs" />
     <Compile Include="Model\IncidentSystemBillingModel.cs" />
     <Compile Include="Model\UserModel.cs" />

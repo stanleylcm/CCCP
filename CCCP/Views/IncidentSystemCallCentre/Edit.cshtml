@@ -1,0 +1,691 @@
+﻿@model CCCP.Business.Model.IncidentSystemCallCentreModel
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemCallCentre;
+    CCCP.ViewModel.IncidentSystemCallCentre incidentSystemCallCentre = Model.Entity;
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+		    $('.bootstrap-checkbox').on('click', function(evnet){
+
+		        $.ajax({
+		            url: "/IncidentSystemCallCentre/ToggleActionStatus",
+		            type: "POST",
+		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+		            dataType: "html",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (data) {
+		                return true;
+		            },
+		            error: function () {
+		                alert("An error has occured!!!");
+		            }
+		        });
+		    });
+	    });
+
+	    $("input[type=checkbox][id^=PossibleCause]").on("click", function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=PossibleCause]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                    sList = $(this).val();
+	                } else {
+	                    sList = sList + ", " + $(this).val();
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemCallCentre_PossibleCause").val(sList);
+	    });
+
+	    $("input[type=checkbox][id^=Impact]").on("click", function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=Impact]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                } else {
+	                    sList = sList + ", ";
+	                }
+	                if ($(this).val() == "% workstation failure") {
+	                    sList = sList + $("#Impact__workstation_failureMore").val();
+	                }
+	                sList = sList + $(this).val();
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemCallCentre_Impact").val(sList);
+	    });
+
+	    $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=Impact]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                } else {
+	                    sList = sList + ", ";
+	                }
+	                if ($(this).val() == "% workstation failure") {
+	                    sList = sList + $("#Impact__workstation_failureMore").val();
+	                }
+	                sList = sList + $(this).val();
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemCallCentre_Impact").val(sList);
+	    });
+
+	    $("#Impact__workstation_failureMore").change(function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=Impact]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                } else {
+	                    sList = sList + ", ";
+	                }
+	                if ($(this).val() == "% workstation failure") {
+	                    sList = sList + $("#Impact__workstation_failureMore").val();
+	                }
+	                sList = sList + $(this).val();
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemCallCentre_Impact").val(sList);
+	    });
+
+	    $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                    sList = $(this).val();
+	                } else {
+	                    sList = sList + ", " + $(this).val();
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemCallCentre_MitigatingAction").val(sList);
+	    });
+
+	    $("#incidentSystemCallCentre_IsDrillMode").on("click", function () {
+	        $(this).val(this.checked);
+	    });
+
+	    $("#incidentSystemCallCentre_RequireMitigatingAction").on("click", function () {
+	        $(this).val(this.checked ? "Yes" : "No");
+	    });
+
+	    $("#StatusUpdate").change(function () {
+	        if ($(this).val().toUpperCase() == "OTHERS") {
+	            $('#StatusUpdateOthers').show();
+	            $("#incidentSystemCallCentre_StatusUpdate").val($(this).val() + " (" + $("#StatusUpdateOthersMore").val() + ")");
+	        } else {
+	            $('#StatusUpdateOthers').hide();
+	            $("#incidentSystemCallCentre_StatusUpdate").val($(this).val());
+	        }
+	    });
+
+	    $("#StatusUpdateOthersMore").change(function () {
+	        $("#incidentSystemCallCentre_StatusUpdate").val($("#StatusUpdate").val() + " (" + $(this).val() + ")");
+	    });
+
+	    $("#FullRestorationDate").change(function () {
+	        $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+	    $("#FullRestorationTime").change(function () {
+	        $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+        $(document).ready(function () {
+            if ($('#StatusUpdate').val().toUpperCase() == "OTHERS") {
+                $('#StatusUpdateOthers').show();
+            } else {
+                $('#StatusUpdateOthers').hide();
+            }
+
+            $("#incidentSystemCallCentre_IsDrillMode").val($("#incidentSystemCallCentre_IsDrillMode").checked);
+
+            $("#incidentSystemCallCentre_RequireMitigatingAction").val($("#incidentSystemCallCentre_RequireMitigatingAction").checked ? "Yes" : "No");
+
+            $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("yyyy-MM-dd"))');
+            $('[data-mask]').inputmask();
+            $('.timepicker').timepicker({
+                showMeridian: false,
+                defaultTime: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("hh:mm"))',
+                hour: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("hh"))',
+                minute: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("mm"))',
+            });
+        });
+
+        $('#btnUpdate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentSystemCallCentre_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_Impact').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nImpact is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_ExpectedRestorationTime').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_RequireMitigatingAction').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nRequire Mitigating Action is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_MitigatingAction').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nMitigating Action is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_StatusUpdate').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nStatus Update is required<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_FullRestoration').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nFull Restoration is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Update Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemCallCentre")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentSystemCallCentre</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.GeneralEnquiryId)</span>
+                    <a href="#"><span class="pull-right">@(incidentSystemCallCentre.GeneralEnquiryId == 0 ? "" : incidentSystemCallCentre.GeneralEnquiryId.ToString())</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => incidentSystemCallCentre.IncidentSystemCallCentreId)
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+						
+							<div class="panel-group">
+								<div class="panel panel-default">
+									<div class="panel panel-body">
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.LevelOfSeverity)</label></div>
+											<div class="col-lg-4">
+												<select id="incidentSystemCallCentre_LevelOfSeverity" name="incidentSystemCallCentre.LevelOfSeverity" class="form-control thin-control">
+													<option value=""></option>
+													@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+													{
+														if (one != IncidentLevel.None)
+														{
+															<option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemCallCentre.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+														}
+													}
+												</select>
+												@Html.ValidationMessageFor(model => incidentSystemCallCentre.LevelOfSeverity, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentStatus)</label></div>
+											<div class="col-lg-4">
+												<select id="incidentSystemCallCentre_IncidentStatus" name="incidentSystemCallCentre.IncidentStatus" class="form-control thin-control">
+													<option value=""></option>
+													@foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+													{
+														<option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemCallCentre.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+													}
+												</select>
+												@Html.ValidationMessageFor(model => incidentSystemCallCentre.IncidentStatus, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentBackground)</label></div>
+											<div class="col-lg-4">
+												@Html.EditorFor(model => incidentSystemCallCentre.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+												@Html.ValidationMessageFor(model => incidentSystemCallCentre.IncidentBackground, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IsDrillMode)</label></div>
+											<div class="col-lg-4">
+												<div class="checkbox">
+													<input id="incidentSystemCallCentre_IsDrillMode" name="incidentSystemCallCentre.IsDrillMode" type="checkbox" value="" @(incidentSystemCallCentre.IsDrillMode != null && incidentSystemCallCentre.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+													@Html.ValidationMessageFor(model => incidentSystemCallCentre.IsDrillMode, "", new { @class = "text-danger" })
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-primary">
+									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+									<div class="panel panel-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.Impact)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countImpact = 0;
+                                                    foreach (string one in Model.Options_Impact)
+                                                    {
+                                                        <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentSystemCallCentre.Impact.IsContains(one) ? "checked" : "") />
+
+                                                        if (one != IncidentSystemCallCentreImpact.Others.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
+                                                        {
+                                                            <label for="Impact@(countImpact.ToString())"> @one</label><br />
+                                                        }
+                                                        else if (one == IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
+                                                        {
+                                                            int impactPercent = 0;
+                                                            string sImpactPercent = incidentSystemCallCentre.Impact.Substring(0, incidentSystemCallCentre.Impact.IndexOf(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")));
+                                                            impactPercent = Convert.ToInt32(sImpactPercent);
+                                                            <label for="Impact@(countImpact.ToString())"><input id="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" name="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" type="text" value="@impactPercent" class="form-control thin-control text-box pull-left" style="width:10%" /> @one</label><br />
+                                                        }
+                                                        else
+                                                        {
+                                                            string impactOthers = incidentSystemCallCentre.Impact.Substring(incidentSystemCallCentre.Impact.IndexOf("(") + 1, incidentSystemCallCentre.Impact.IndexOf(")") - incidentSystemCallCentre.Impact.IndexOf("(") - 1);
+                                                            <label for="Impact@(countImpact.ToString())"> @one</label><input id="Impact@(one)More" name="Impact@(one)More" type="text" value="@impactOthers" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                        }
+                                                        countImpact++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentSystemCallCentre_Impact" name="incidentSystemCallCentre.Impact" value="@(incidentSystemCallCentre.Impact)" />
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.Impact, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.PossibleCause)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countPossibleCause = 0;
+                                                    foreach (string one in Model.Options_PossibleCause)
+                                                    {
+                                                        <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentSystemCallCentre.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label><br />
+                                                        countPossibleCause++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentSystemCallCentre_PossibleCause" name="incidentSystemCallCentre.PossibleCause" value="@(incidentSystemCallCentre.PossibleCause)" />
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.PossibleCause, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemCallCentre.ExpectedRestorationTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.RequireMitigatingAction)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="checkbox">
+                                                    <input id="incidentSystemCallCentre_RequireMitigatingAction" name="incidentSystemCallCentre.RequireMitigatingAction" type="checkbox" value="@(incidentSystemCallCentre.RequireMitigatingAction)" @(incidentSystemCallCentre.RequireMitigatingAction == "Yes" ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    @Html.ValidationMessageFor(model => incidentSystemCallCentre.RequireMitigatingAction, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.MitigatingAction)</label></div>
+                                            <div class="col-lg-6">
+                                                                                                @{
+                                                    int countMitigatingAction = 0;
+                                                    foreach (string one in Model.Options_MitigatingAction)
+                                                    {
+                                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemCallCentre.MitigatingAction.IsContains(one) ? "checked" : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label><br />
+                                                        countMitigatingAction++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentSystemCallCentre_MitigatingAction" name="incidentSystemCallCentre.MitigatingAction" value="@(incidentSystemCallCentre.MitigatingAction)" />
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.MitigatingAction, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.StatusUpdate)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
+                                                        <option value=""></option>
+                                                        @foreach (string one in Model.Options_StatusUpdate)
+                                                        {
+                                                            <option value="@one" @(incidentSystemCallCentre.StatusUpdate.IsContains(one) ? "selected" : "")>@one</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6" id="StatusUpdateOthers">
+                                                    @{
+                                                        string StatusUpdateOthers = "";
+                                                        if (incidentSystemCallCentre.StatusUpdate.IsContains(IncidentSystemCallCentreImpact.Others.ToEnumString()))
+                                                        {
+                                                            StatusUpdateOthers = incidentSystemCallCentre.StatusUpdate.Substring(incidentSystemCallCentre.StatusUpdate.IndexOf("(") + 1, incidentSystemCallCentre.StatusUpdate.IndexOf(")") - incidentSystemCallCentre.StatusUpdate.IndexOf("(") - 1);
+                                                        }
+                                                    }
+                                                    <input id="StatusUpdateOthersMore" name="StatusUpdateOthersMore" type="text" value="@StatusUpdateOthers" class="form-control thin-control text-box pull-right" />
+                                                </div>
+                                                @Html.HiddenFor(model => incidentSystemCallCentre.StatusUpdate, new { @Value = incidentSystemCallCentre.StatusUpdate })
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.StatusUpdate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.FullRestoration)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="FullRestorationDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-clock-o"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'hh:mm'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                @Html.HiddenFor(model => incidentSystemCallCentre.FullRestoration, new { @Value = incidentSystemCallCentre.FullRestoration })
+                                                @Html.ValidationMessageFor(model => incidentSystemCallCentre.FullRestoration, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IncidentSystemCallCentreId, new { @Value = incidentSystemCallCentre.IncidentSystemCallCentreId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.ChecklistBatchId, new { @Value = incidentSystemCallCentre.ChecklistBatchId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.ChatRoomId, new { @Value = incidentSystemCallCentre.ChatRoomId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.GeneralEnquiryId, new { @Value = incidentSystemCallCentre.GeneralEnquiryId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.CrisisId, new { @Value = incidentSystemCallCentre.CrisisId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.NotificationId, new { @Value = incidentSystemCallCentre.NotificationId })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IssueById, new { @Value = incidentSystemCallCentre.IssueById })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IssueDateTime, new { @Value = incidentSystemCallCentre.IssueDateTime == null ? "" : incidentSystemCallCentre.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.CloseById, new { @Value = incidentSystemCallCentre.CloseById })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.CloseDateTime, new { @Value = incidentSystemCallCentre.CloseDateTime == null ? "" : incidentSystemCallCentre.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.CreatedBy, new { @Value = incidentSystemCallCentre.CreatedBy })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.CreatedDateTime, new { @Value = incidentSystemCallCentre.CreatedDateTime == null ? "" : incidentSystemCallCentre.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.LastUpdatedBy, new { @Value = incidentSystemCallCentre.LastUpdatedBy })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.LastUpdatedDateTime, new { @Value = incidentSystemCallCentre.LastUpdatedDateTime == null ? "" : incidentSystemCallCentre.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.History, new { @Value = incidentSystemCallCentre.History })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IncidentNo, new { @Value = incidentSystemCallCentre.IncidentNo })
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills nav-justified">
+                                    @{
+                                int countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                    countChecklist++;
+                                }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                                    int countChecklistAction = 1;
+                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                            <th></th>
+                                            <th>Action</th>
+                                            <th>Completed By</th>
+                                            <th>Completed Datetime</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                                        <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                        <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
+                                                        <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                    </tr>
+                                                    countChecklistAction++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                countChecklist++;
+                                }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemCallCentre", new { id = incidentSystemCallCentre.IncidentSystemCallCentreId })';">@Resources.global.Func_Cancel</button>
+                </div>
+            </div>
+            <br />
+}
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(incidentSystemCallCentre.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->

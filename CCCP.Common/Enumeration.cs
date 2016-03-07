@@ -240,4 +240,37 @@ namespace CCCP.Common
     }
     #endregion
 
+    #region Enum for Incident - System (Call Centre)
+    public enum IncidentSystemCallCentreStatusUpdate
+    {
+        Under_Investigation,
+        Problem_Identified,
+        Implementing_mitigating_actions,
+        Partial_service_resumed,
+        Full_service_restoration,
+        Others
+    }
+
+    public enum IncidentSystemCallCentreImpact
+    {
+        __workstation_failure,
+        Unavailability_of_self_service,
+        Absence_of_voice_record,
+        Absence_of_report,
+        No_call_routing_function,
+        Absence_of_E1_Line,
+        Suspension_of_Call_Centre,
+        Others
+    }
+
+    public enum IncidentSystemCallCentreInputKey
+    {
+        IncidentSystemCallCentre_MitigatingAction,
+        IncidentSystemCallCentre_PossibleCause,
+        IncidentSystemCallCentre_RequireMitigatingAction,
+        IncidentSystemCallCentre_StatusUpdate,
+        IncidentSystemCallCentre_Impact
+    }
+    #endregion
+
 }
