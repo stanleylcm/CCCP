@@ -402,7 +402,11 @@
                                                         }
                                                         else
                                                         {
-                                                            string impactOthers = incidentSystemCallCentre.Impact.Substring(incidentSystemCallCentre.Impact.IndexOf("(") + 1, incidentSystemCallCentre.Impact.IndexOf(")") - incidentSystemCallCentre.Impact.IndexOf("(") - 1);
+                                                            string impactOthers = "";
+                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.Others.ToEnumString()))
+                                                            {
+                                                                impactOthers = incidentSystemCallCentre.Impact.Substring(incidentSystemCallCentre.Impact.IndexOf("(") + 1, incidentSystemCallCentre.Impact.IndexOf(")") - incidentSystemCallCentre.Impact.IndexOf("(") - 1);
+                                                            }
                                                             <label for="Impact@(countImpact.ToString())"> @one</label><input id="Impact@(one)More" name="Impact@(one)More" type="text" value="@impactOthers" class="form-control thin-control text-box pull-right" style="width:70%" />
                                                         }
                                                         countImpact++;
