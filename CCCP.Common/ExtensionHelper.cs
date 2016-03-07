@@ -99,5 +99,11 @@ namespace CCCP.Common
         {
             return self.ConvertAll(x => (T)x.Clone());
         }
+        public static List<string> ListAll(this Enum self)
+        {
+            List<string> result = new List<string>();
+            foreach (Enum value in Enum.GetValues(self.GetType())) result.Add(value.ToEnumString());
+            return result;
+        }
     }
 }

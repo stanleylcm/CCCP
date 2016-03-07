@@ -25,6 +25,15 @@ namespace CCCP.Business.Service
             // Chat Room Rights = Notification Rights
             result.ChatRoomRights = result.NotificationRights.Clone<IncidentTypeAndLevel>();
 
+            // UpdateIncidentLevelRights = SMRole
+            result.UpdateIncidentLevelRights = result.SMRoles.ConvertAll(x => x);
+
+            // ApproveCrisisRights = ECRole
+            result.ApproveCrisisRights = result.ECRoles.ConvertAll(x => x);
+
+            // CloseCrisisRights = ECRole
+            result.CloseCrisisRights = result.ECRoles.ConvertAll(x => x);
+
             // SM role has full rights
             processFullRights(ref result, result.SMRoles);
 
@@ -87,6 +96,16 @@ namespace CCCP.Business.Service
 
                     switch (systemFunction)
                     {
+                        case SystemFunctionCode.SM_Role:
+                            {
+                                model.SMRoles.Add(incidentType);
+                                break;
+                            }
+                        case SystemFunctionCode.EC_Role:
+                            {
+                                model.ECRoles.Add(incidentType);
+                                break;
+                            }
                         case SystemFunctionCode.CreateUpdate:
                             {
                                 model.CreateUpdateRights.Add(incidentType);

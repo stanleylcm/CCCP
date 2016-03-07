@@ -150,6 +150,8 @@ namespace CCCP.Common
     public enum SystemFunctionCode
     {
         None,
+        SM_Role,
+        EC_Role,
         CreateUpdate,
         ChatRoom,
         Notification,
