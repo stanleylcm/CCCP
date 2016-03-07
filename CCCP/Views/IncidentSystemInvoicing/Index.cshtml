@@ -8,10 +8,13 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('#IncidentList').DataTable();
+            $('#IncidentList').DataTable({
+                "sDom": '<"top"l>rt<"bottom"ip><"clear">'
+            });
 
-            $('.dataTables_length').parent().attr("class", "col-sm-5");
-            $('.dataTables_filter').parent().addClass("pull-right");
+            $('#filterText').keyup(function() {
+                dTable.search($(this).val()).draw();
+            });
         });
     </script>
 }
@@ -34,15 +37,21 @@
 
                 <div class="box-body">
 
-                    <div class="pull-left"><button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemInvoicing")';">@Resources.global.Func_Create</button></div>
+                    <div class="pull-left" style="padding-right:20px">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentSystemInvoicing")';">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '#'">@Resources.global.Func_Export</button>
+                        </div>
+                    </div>
+                    <div class="pull-right">Search: <input id="filterText" /></div>
                     <table id="IncidentList" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.IncidentNo)</th>
-                                <th>Incident Type</th>
                                 <th>@Html.DisplayNameFor(model => model.LevelOfSeverity)</th>
-                                <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
                                 <th>@Html.DisplayNameFor(model => model.IncidentBackground)</th>
+                                <th>@Html.DisplayNameFor(model => model.StatusUpdate)</th>
+                                <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
                                 <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
                                 <th>@Html.DisplayNameFor(model => model.IssueDateTime)</th>
                                 <th></th>
@@ -60,10 +69,10 @@
                                 }
                             <tr>
                                 <td><a href="@Url.Action("Details", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
-                                <td>@Resources.global.Menu_IncidentSystemBilling</td>
                                 <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
-                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
                                 <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
+                                <td>@Html.DisplayFor(model => item.StatusUpdate)</td>
+                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
                                 <td>@Html.DisplayFor(model => item.CreatedBy)</td>
                                 <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
                                 <td>

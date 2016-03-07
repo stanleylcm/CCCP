@@ -247,7 +247,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => incidentSystemBilling.IncidentSystemBillingId)
-            <ul class="nav nav-pills">
+            <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
@@ -259,197 +259,213 @@
                 <div class="tab-pane fade active in" id="IncidentDetails">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.LevelOfSeverity)</label></div>
-                                <div class="col-lg-4">
-                                    <select id="incidentSystemBilling_LevelOfSeverity" name="incidentSystemBilling.LevelOfSeverity" class="form-control thin-control">
-                                        <option value=""></option>
-                                        @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
-                                        {
-                                            if (one != IncidentLevel.None)
-                                            {
-                                                <option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemBilling.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
-                                            }
-                                        }
-                                    </select>
-                                    @Html.ValidationMessageFor(model => incidentSystemBilling.LevelOfSeverity, "", new { @class = "text-danger" })
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.LevelOfSeverity)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentSystemBilling_LevelOfSeverity" name="incidentSystemBilling.LevelOfSeverity" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                                    {
+                                                        if (one != IncidentLevel.None)
+                                                        {
+                                                            <option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemBilling.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.LevelOfSeverity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentSystemBilling_IncidentStatus" name="incidentSystemBilling.IncidentStatus" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+                                                    {
+                                                        <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemBilling.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentStatus, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
+                                            <div class="col-lg-4">
+                                                @Html.EditorFor(model => incidentSystemBilling.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentBackground, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IsDrillMode)</label></div>
+                                            <div class="col-lg-4">
+                                                <div class="checkbox">
+                                                    <input id="incidentSystemBilling_IsDrillMode" name="incidentSystemBilling.IsDrillMode" type="checkbox" value="" @(incidentSystemBilling.IsDrillMode != null && incidentSystemBilling.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    @Html.ValidationMessageFor(model => incidentSystemBilling.IsDrillMode, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></div>
-                                <div class="col-lg-4">
-                                    <select id="incidentSystemBilling_IncidentStatus" name="incidentSystemBilling.IncidentStatus" class="form-control thin-control">
-                                        <option value=""></option>
-                                        @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
-                                        {
-                                            <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemBilling.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
-                                        }
-                                    </select>
-                                    @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentStatus, "", new { @class = "text-danger" })
-</div>
-                            </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                                    <div class="panel panel-body">
 
-                            <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
-                                <div class="col-lg-4">
-                                    @Html.EditorFor(model => incidentSystemBilling.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                    @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentBackground, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ProblemArea)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentSystemBilling_ProblemArea" name="incidentSystemBilling.ProblemArea" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_ProblemArea)
+                                                    {
+                                                        <option value="@one" @(one == incidentSystemBilling.ProblemArea ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.ProblemArea, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-                            <div class="row">
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IsDrillMode)</label></div>
-                                <div class="col-lg-4">
-                                    <div class="checkbox">
-                                        <input id="incidentSystemBilling_IsDrillMode" name="incidentSystemBilling.IsDrillMode" type="checkbox" value="" @(incidentSystemBilling.IsDrillMode != null && incidentSystemBilling.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.IsDrillMode, "", new { @class = "text-danger" })
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.PossibleCause)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentSystemBilling_PossibleCause" name="incidentSystemBilling.PossibleCause" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_PossibleCause)
+                                                    {
+                                                        <option value="@one" @(one == incidentSystemBilling.PossibleCause ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ContactedBy)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countContactedBy = 0;
+                                                    foreach (string one in Model.Options_ContactedBy)
+                                                    {
+                                                        <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.ContactedBy != null ? (incidentSystemBilling.ContactedBy.IsContains(one) ? "checked" : "") : "") /><label for="ContactedBy@(countContactedBy.ToString())"> @one</label><br />
+                                                        countContactedBy++;
+                                                    }
+                                                }
+                                                @Html.HiddenFor(model => incidentSystemBilling.ContactedBy, new { @Value = incidentSystemBilling.ContactedBy })
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.ContactedBy, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.Impact)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemBilling.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.Impact, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.StatusUpdate)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentSystemBilling_StatusUpdate" name="incidentSystemBilling.StatusUpdate" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_StatusUpdate)
+                                                    {
+                                                        <option value="@one" @(one == incidentSystemBilling.StatusUpdate ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.StatusUpdate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.RequireMitigatingAction)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentSystemBilling_RequireMitigatingAction" name="incidentSystemBilling.RequireMitigatingAction" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_RequireMitigatingAction)
+                                                    {
+                                                        <option value="@one" @(one == incidentSystemBilling.RequireMitigatingAction ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.RequireMitigatingAction, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="EditMitigatingAction">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.MitigatingAction)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countMitigatingAction = 0;
+                                                    foreach (string one in Model.Options_MitigatingAction)
+                                                    {
+                                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
+                                                        if (one != IncidentSystemBillingMitigatingAction.Others.ToEnumString())
+                                                        {
+                                                            <br />
+                                                        }
+                                                        else
+                                                        {
+                                                            string sMore = "";
+                                                            if (incidentSystemBilling.MitigatingAction != null && incidentSystemBilling.MitigatingAction.IsContains(one))
+                                                            {
+                                                                sMore = incidentSystemBilling.MitigatingAction.Substring(incidentSystemBilling.MitigatingAction.IndexOf('(') + 1, incidentSystemBilling.MitigatingAction.IndexOf(')') - incidentSystemBilling.MitigatingAction.IndexOf('(') - 1);
+                                                            }
+                                                            <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="@sMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                        }
+                                                        countMitigatingAction++;
+                                                    }
+                                                }
+                                                @Html.HiddenFor(model => incidentSystemBilling.MitigatingAction, new { @Value = incidentSystemBilling.MitigatingAction })
+                                                @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <fieldset class="scheduler-border">
-                                <legend class="scheduler-border">Details</legend>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ProblemArea)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentSystemBilling_ProblemArea" name="incidentSystemBilling.ProblemArea" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (string one in Model.Options_ProblemArea)
-                                            {
-                                                <option value="@one" @(one == incidentSystemBilling.ProblemArea ? "selected" : "")>@one</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.ProblemArea, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.PossibleCause)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentSystemBilling_PossibleCause" name="incidentSystemBilling.PossibleCause" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (string one in Model.Options_PossibleCause)
-                                            {                                                 
-                                                <option value="@one" @(one == incidentSystemBilling.PossibleCause ? "selected" : "")>@one</option>
-                                            }  
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.PossibleCause, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.ExpectedAffectedCustomerBill, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.ContactedBy)</label></div>
-                                    <div class="col-lg-6">
-                                        @{
-                                    int countContactedBy = 0;                                    
-                                    foreach (string one in Model.Options_ContactedBy)
-                                    {
-                                        <input id="ContactedBy@(countContactedBy.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.ContactedBy != null ? (incidentSystemBilling.ContactedBy.IsContains(one) ? "checked" : "") : "") /><label for="ContactedBy@(countContactedBy.ToString())"> @one</label><br />
-                                        countContactedBy++;
-                                    }
-                                        }
-                                        @Html.HiddenFor(model => incidentSystemBilling.ContactedBy, new { @Value = incidentSystemBilling.ContactedBy })
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.ContactedBy, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.Impact)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentSystemBilling.Impact, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.Impact, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.StatusUpdate)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentSystemBilling_StatusUpdate" name="incidentSystemBilling.StatusUpdate" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (string one in Model.Options_StatusUpdate)
-                                            {
-                                                <option value="@one" @(one == incidentSystemBilling.StatusUpdate ? "selected" : "")>@one</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.StatusUpdate, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.RequireMitigatingAction)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentSystemBilling_RequireMitigatingAction" name="incidentSystemBilling.RequireMitigatingAction" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (string one in Model.Options_RequireMitigatingAction)
-                                            {
-                                                <option value="@one" @(one == incidentSystemBilling.RequireMitigatingAction ? "selected" : "")>@one</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.RequireMitigatingAction, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row" id="EditMitigatingAction">
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.MitigatingAction)</label></div>
-                                    <div class="col-lg-6">
-                                        @{
-                                        int countMitigatingAction = 0;                                                                                                                     
-                                        foreach (string one in Model.Options_MitigatingAction)
-                                        {
-                                            <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
-                                        if (one != IncidentSystemBillingMitigatingAction.Others.ToEnumString())
-                                        {
-                                            <br />
-                                        }
-                                        else
-                                        {
-                                            string sMore = "";
-                                            if (incidentSystemBilling.MitigatingAction != null && incidentSystemBilling.MitigatingAction.IsContains(one))
-                                            {
-                                                sMore = incidentSystemBilling.MitigatingAction.Substring(incidentSystemBilling.MitigatingAction.IndexOf('(') + 1, incidentSystemBilling.MitigatingAction.IndexOf(')') - incidentSystemBilling.MitigatingAction.IndexOf('(') - 1);
-                                            }
-                                            <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="@sMore" class="form-control thin-control text-box pull-right" style="width:70%" />
-                                        }
-                                        countMitigatingAction++;
-                                        }
-                                        }
-                                        @Html.HiddenFor(model => incidentSystemBilling.MitigatingAction, new { @Value = incidentSystemBilling.MitigatingAction })
-                                        @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            @Html.HiddenFor(model => incidentSystemBilling.IncidentSystemBillingId, new { @Value = incidentSystemBilling.IncidentSystemBillingId })
-                            @Html.HiddenFor(model => incidentSystemBilling.ChecklistBatchId, new { @Value = incidentSystemBilling.ChecklistBatchId })
-                            @Html.HiddenFor(model => incidentSystemBilling.ChatRoomId, new { @Value = incidentSystemBilling.ChatRoomId })
-                            @Html.HiddenFor(model => incidentSystemBilling.GeneralEnquiryId, new { @Value = incidentSystemBilling.GeneralEnquiryId })
-                            @Html.HiddenFor(model => incidentSystemBilling.CrisisId, new { @Value = incidentSystemBilling.CrisisId })
-                            @Html.HiddenFor(model => incidentSystemBilling.NotificationId, new { @Value = incidentSystemBilling.NotificationId })
-                            @Html.HiddenFor(model => incidentSystemBilling.IssueById, new { @Value = incidentSystemBilling.IssueById })
-                            @Html.HiddenFor(model => incidentSystemBilling.IssueDateTime, new { @Value = incidentSystemBilling.IssueDateTime == null ? "" : incidentSystemBilling.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemBilling.CloseById, new { @Value = incidentSystemBilling.CloseById })
-                            @Html.HiddenFor(model => incidentSystemBilling.CloseDateTime, new { @Value = incidentSystemBilling.CloseDateTime == null ? "" : incidentSystemBilling.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemBilling.CreatedBy, new { @Value = incidentSystemBilling.CreatedBy })
-                            @Html.HiddenFor(model => incidentSystemBilling.CreatedDateTime, new { @Value = incidentSystemBilling.CreatedDateTime == null ? "" : incidentSystemBilling.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedBy, new { @Value = incidentSystemBilling.LastUpdatedBy })
-                            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedDateTime, new { @Value = incidentSystemBilling.LastUpdatedDateTime == null ? "" : incidentSystemBilling.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemBilling.History, new { @Value = incidentSystemBilling.History })
-                            @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
-                            @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
+            @Html.HiddenFor(model => incidentSystemBilling.IncidentSystemBillingId, new { @Value = incidentSystemBilling.IncidentSystemBillingId })
+            @Html.HiddenFor(model => incidentSystemBilling.ChecklistBatchId, new { @Value = incidentSystemBilling.ChecklistBatchId })
+            @Html.HiddenFor(model => incidentSystemBilling.ChatRoomId, new { @Value = incidentSystemBilling.ChatRoomId })
+            @Html.HiddenFor(model => incidentSystemBilling.GeneralEnquiryId, new { @Value = incidentSystemBilling.GeneralEnquiryId })
+            @Html.HiddenFor(model => incidentSystemBilling.CrisisId, new { @Value = incidentSystemBilling.CrisisId })
+            @Html.HiddenFor(model => incidentSystemBilling.NotificationId, new { @Value = incidentSystemBilling.NotificationId })
+            @Html.HiddenFor(model => incidentSystemBilling.IssueById, new { @Value = incidentSystemBilling.IssueById })
+            @Html.HiddenFor(model => incidentSystemBilling.IssueDateTime, new { @Value = incidentSystemBilling.IssueDateTime == null ? "" : incidentSystemBilling.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentSystemBilling.CloseById, new { @Value = incidentSystemBilling.CloseById })
+            @Html.HiddenFor(model => incidentSystemBilling.CloseDateTime, new { @Value = incidentSystemBilling.CloseDateTime == null ? "" : incidentSystemBilling.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentSystemBilling.CreatedBy, new { @Value = incidentSystemBilling.CreatedBy })
+            @Html.HiddenFor(model => incidentSystemBilling.CreatedDateTime, new { @Value = incidentSystemBilling.CreatedDateTime == null ? "" : incidentSystemBilling.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedBy, new { @Value = incidentSystemBilling.LastUpdatedBy })
+            @Html.HiddenFor(model => incidentSystemBilling.LastUpdatedDateTime, new { @Value = incidentSystemBilling.LastUpdatedDateTime == null ? "" : incidentSystemBilling.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentSystemBilling.History, new { @Value = incidentSystemBilling.History })
+            @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
+            @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -480,22 +496,22 @@
                                 </fieldset>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills">
+                                <ul class="nav nav-pills nav-justified">
                                     @{
-                                int countChecklist = 1;
-                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
-                                {
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
                                     <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
-                                    countChecklist++;
-                                }
+                                            countChecklist++;
+                                        }
                                     }
                                 </ul>
                                 <div id="TabList" class="tab-content">
                                     @{
-                                countChecklist = 1;
-                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
-                                {
-                                    int countChecklistAction = 1;
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
                                     <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
                                         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
@@ -519,8 +535,8 @@
                                         </table>
                                     </div>
                                                 countChecklist++;
-                                }
-                                    }
+                                            }
+                                        }
                                 </div>
                             </div>
                             <div class="col-lg-2"></div>
@@ -574,7 +590,7 @@
             </div>
 
             <div>
-                <div class="btn-group">
+                <div class="form-group">
                     <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
                     <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemBilling", new { id = incidentSystemBilling.IncidentSystemBillingId })';">@Resources.global.Func_Cancel</button>
                 </div>

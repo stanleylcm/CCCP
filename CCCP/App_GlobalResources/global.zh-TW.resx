@@ -249,4 +249,10 @@
   <data name="Label_CloseIncident" xml:space="preserve">
     <value>Are you sure to you want to close this Incident?</value>
   </data>
+  <data name="Func_Export" xml:space="preserve">
+    <value>匯出</value>
+  </data>
+  <data name="Label_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>
