@@ -186,8 +186,8 @@
             $('[data-mask]').inputmask();
             $('.timepicker').timepicker({
                 showMeridian: false,
-                defaultTime: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("hh:mm"))',
-                hour: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("hh"))',
+                defaultTime: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("HH:mm"))',
+                hour: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("HH"))',
                 minute: '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("mm"))',
             });
         });
@@ -516,7 +516,7 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-clock-o"></i>
                                                         </div>
-                                                        <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'hh:mm'" data-mask></input>
+                                                        <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
                                                     </div>
                                                 </div>
                                                 @Html.HiddenFor(model => incidentSystemCallCentre.FullRestoration, new { @Value = incidentSystemCallCentre.FullRestoration })

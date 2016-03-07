@@ -1,0 +1,294 @@
+﻿@model CCCP.Business.Model.IncidentSystemNetworkConnectivityModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemNetworkConnectivity;
+    CCCP.ViewModel.IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentSystemNetworkConnectivity
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.LevelOfSeverity)</label></div>
+									<div class="col-lg-4">
+										<select id="incidentSystemNetworkConnectivity_LevelOfSeverity" name="incidentSystemNetworkConnectivity.LevelOfSeverity" class="form-control thin-control">
+											<option value=""></option>
+											@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+											{
+												if (one != IncidentLevel.None)
+												{
+													<option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+												}
+											}
+										</select>
+										@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.LevelOfSeverity, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IncidentBackground)</label></div>
+									<div class="col-lg-4">
+										@Html.EditorFor(model => incidentSystemNetworkConnectivity.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+										@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IncidentBackground, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IsDrillMode)</label></div>
+									<div class="col-lg-4">
+										<div class="checkbox">
+											<input id="incidentSystemNetworkConnectivity_IsDrillMode" name="incidentSystemNetworkConnectivity.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+											@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IsDrillMode, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel panel-primary">
+							<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+							<div class="panel panel-body">
+
+								<div class="row">
+                                    <div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.Location)</label></div>
+									<div class="col-lg-6">                                        
+                                        @Html.EditorFor(model => incidentSystemNetworkConnectivity.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.Location, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+                                    <div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.PossibleCause)</label></div>
+									<div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentSystemNetworkConnectivity.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.PossibleCause, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+                                    <div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.Damage)</label></div>
+									<div class="col-lg-6">                                
+										@Html.EditorFor(model => incidentSystemNetworkConnectivity.Damage, new { htmlAttributes = new { @class = "form-control thin-control" } })
+										@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.Damage, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.AffectedArea)</label></div>
+                                    <div class="col-lg-6">
+                                        @{
+                                            int countAffectedArea = 0;
+                                            foreach (string one in Model.Options_AffectedArea)
+                                            {
+                                                <input id="AffectedArea@(countAffectedArea.ToString())" type="checkbox" value="@one" /><label for="AffectedArea@(countAffectedArea.ToString())"> @one</label><br />
+                                                countAffectedArea++;
+                                            }
+                                        }
+                                        <input type="hidden" id="incidentSystemNetworkConnectivity_AffectedArea" name="incidentSystemNetworkConnectivity.AffectedArea" value="" />
+                                        @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.AffectedArea, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime)</label></div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control" id="ExpectedRestorationTimeDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="input-group bootstrap-timepicker">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </div>
+                                                <input type="text" class="form-control timepicker" id="ExpectedRestorationTimeTime" data-inputmask="'alias': 'hh:mm'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime)
+                                        @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.FullRestoration)</label></div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control" id="FullRestorationDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="input-group bootstrap-timepicker">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </div>
+                                                <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'hh:mm'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(model => incidentSystemNetworkConnectivity.FullRestoration)
+                                        @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.FullRestoration, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+                            
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CrisisId)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueById)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueDateTime)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CloseById)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CloseDateTime)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentNo)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentStatus)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CreatedBy)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CreatedDateTime)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.LastUpdatedBy)
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime)
+
+                    <div class="box-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemNetworkConnectivity")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+    $("input[type=checkbox][id^=AffectedArea]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=AffectedArea]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                i++;
+            }
+        });
+        $("#incidentSystemNetworkConnectivity_AffectedArea").val(sList);
+    });
+
+    $("#incidentSystemNetworkConnectivity_IsDrillMode").on("click", function () {
+        $(this).val(this.checked);
+    });
+
+    $("#FullRestorationDate").change(function () {
+        $("#incidentSystemNetworkConnectivity_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+    });
+
+    $("#FullRestorationTime").change(function () {
+        $("#incidentSystemNetworkConnectivity_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+    });
+
+    $("#ExpectedRestorationTimeDate").change(function () {
+        $("#incidentSystemNetworkConnectivity_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+    });
+
+    $("#ExpectedRestorationTimeTime").change(function () {
+        $("#incidentSystemNetworkConnectivity_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+    });
+
+    $(document).ready(function () {
+        $("#incidentSystemNetworkConnectivity_IsDrillMode").val($("#incidentSystemNetworkConnectivity_IsDrillMode").checked);
+
+        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('[data-mask]').inputmask();
+        $('.timepicker').timepicker({
+            showMeridian: false
+        });
+    });
+
+    $('#btnCreate').on('click', function (event) {
+        var inputValid = true;
+        var errMsg = '';
+
+        if ($('#incidentSystemNetworkConnectivity_LevelOfSeverity').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + 'Level Of Severity is required<br />';
+        }
+
+        if ($('#incidentSystemNetworkConnectivity_PossibleCause').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nPossible Cause is required<br />';
+        }
+
+        if ($('#incidentSystemNetworkConnectivity_AffectedArea').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nAffected Area is required<br />';
+        }
+
+        if ($('#incidentSystemNetworkConnectivity_ExpectedRestorationTIme').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
+        }
+
+        if ($('#incidentSystemNetworkConnectivity_FullRestoration').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nFull Restoration is required<br />';
+        }
+
+        if (inputValid == false) {
+            $('#CCCPModal').find('.modal-body').html(errMsg);
+            $('#CCCPModal').find('.modal-title').html('Create Error');
+            $('#CCCPModal').modal('toggle');
+
+            event.preventDefault();
+        }
+
+        return inputValid;
+    });
+</script>
+}

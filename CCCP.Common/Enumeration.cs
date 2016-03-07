@@ -282,4 +282,11 @@ namespace CCCP.Common
         IncidentSystemITSystem_AffectedArea
     }
     #endregion
+
+    #region Enum for Incident - System (Network Connectivity)
+    public enum IncidentSystemNetworkConnectivityInputKey
+    {
+        IncidentSystemNetworkConnectivity_AffectedArea
+    }
+    #endregion
 }

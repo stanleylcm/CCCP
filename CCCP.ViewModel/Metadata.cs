@@ -281,7 +281,7 @@ namespace CCCP.ViewModel
     public partial class IncidentSystemNetworkConnectivityHelper
     {
         [Display(Name = "ID")]
-        public int IncidentSystemNetworkConnectivityHId { get; set; }
+        public int IncidentSystemNetworkConnectivityId { get; set; }
         [Display(Name = "Checklist Batch ID")]
         public int ChecklistBatchId { get; set; }
         [Display(Name = "ChatRoom ID")]

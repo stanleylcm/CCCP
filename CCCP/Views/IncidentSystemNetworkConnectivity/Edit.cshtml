@@ -1,9 +1,9 @@
-﻿@model CCCP.Business.Model.IncidentSystemITSystemModel
+﻿@model CCCP.Business.Model.IncidentSystemNetworkConnectivityModel
 
 @using CCCP.Common
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentSystemITSystem;
-    CCCP.ViewModel.IncidentSystemITSystem incidentSystemITSystem = Model.Entity;
+    ViewBag.Title = Resources.global.Menu_IncidentSystemNetworkConnectivity;
+    CCCP.ViewModel.IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = Model.Entity;
 }
 
 @section Scripts {
@@ -28,7 +28,7 @@
 		    $('.bootstrap-checkbox').on('click', function(evnet){
 
 		        $.ajax({
-		            url: "/IncidentSystemITSystem/ToggleActionStatus",
+		            url: "/IncidentSystemNetworkConnectivity/ToggleActionStatus",
 		            type: "POST",
 		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
 		            dataType: "html",
@@ -41,22 +41,6 @@
 		            }
 		        });
 		    });
-	    });
-
-	    $("input[type=checkbox][id^=AffectedSystem]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=AffectedSystem]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemITSystem_AffectedSystem").val(sList);
 	    });
 
 	    $("input[type=checkbox][id^=AffectedArea]").on("click", function () {
@@ -72,47 +56,47 @@
 	                i++;
 	            }
 	        });
-	        $("#incidentSystemITSystem_AffectedArea").val(sList);
+	        $("#incidentSystemNetworkConnectivity_AffectedArea").val(sList);
 	    });
 
-	    $("#incidentSystemITSystem_IsDrillMode").on("click", function () {
+	    $("#incidentSystemNetworkConnectivity_IsDrillMode").on("click", function () {
 	        $(this).val(this.checked);
 	    });
 
 	    $("#FullRestorationDate").change(function () {
-	        $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        $("#incidentSystemNetworkConnectivity_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
 	    });
 
 	    $("#FullRestorationTime").change(function () {
-	        $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        $("#incidentSystemNetworkConnectivity_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
 	    });
 
 	    $("#ExpectedRestorationTimeDate").change(function () {
-	        $("#incidentSystemITSystem_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+	        $("#incidentSystemNetworkConnectivity_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
 	    });
 
 	    $("#ExpectedRestorationTimeTime").change(function () {
-	        $("#incidentSystemITSystem_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+	        $("#incidentSystemNetworkConnectivity_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
 	    });
 
 	    $(document).ready(function () {
-	        $("#incidentSystemITSystem_IsDrillMode").val($("#incidentSystemITSystem_IsDrillMode").checked);
+	        $("#incidentSystemNetworkConnectivity_IsDrillMode").val($("#incidentSystemNetworkConnectivity_IsDrillMode").checked);
 
-	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemITSystem.FullRestoration == null ? "" : incidentSystemITSystem.FullRestoration.Value.ToString("yyyy-MM-dd"))');
-	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemITSystem.ExpectedRestorationTime == null ? "" : incidentSystemITSystem.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
+	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemNetworkConnectivity.FullRestoration == null ? "" : incidentSystemNetworkConnectivity.FullRestoration.Value.ToString("yyyy-MM-dd"))');
+	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemNetworkConnectivity.ExpectedRestorationTime == null ? "" : incidentSystemNetworkConnectivity.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
 	        $('[data-mask]').inputmask();
 	        $('#FullRestorationTime').timepicker({
 	            showMeridian: false,
-	            defaultTime: '@(incidentSystemITSystem.FullRestoration == null ? "" : incidentSystemITSystem.FullRestoration.Value.ToString("HH:mm"))',
-	            hour: '@(incidentSystemITSystem.FullRestoration == null ? "" : incidentSystemITSystem.FullRestoration.Value.ToString("HH"))',
-	            minute: '@(incidentSystemITSystem.FullRestoration == null ? "" : incidentSystemITSystem.FullRestoration.Value.ToString("mm"))',
+	            defaultTime: '@(incidentSystemNetworkConnectivity.FullRestoration == null ? "" : incidentSystemNetworkConnectivity.FullRestoration.Value.ToString("HH:mm"))',
+	            hour: '@(incidentSystemNetworkConnectivity.FullRestoration == null ? "" : incidentSystemNetworkConnectivity.FullRestoration.Value.ToString("HH"))',
+	            minute: '@(incidentSystemNetworkConnectivity.FullRestoration == null ? "" : incidentSystemNetworkConnectivity.FullRestoration.Value.ToString("mm"))',
 	        });
 
 	        $('#ExpectedRestorationTimeTime').timepicker({
 	            showMeridian: false,
-	            defaultTime: '@(incidentSystemITSystem.ExpectedRestorationTime == null ? "" : incidentSystemITSystem.ExpectedRestorationTime.Value.ToString("HH:mm"))',
-	            hour: '@(incidentSystemITSystem.ExpectedRestorationTime == null ? "" : incidentSystemITSystem.ExpectedRestorationTime.Value.ToString("HH"))',
-	            minute: '@(incidentSystemITSystem.ExpectedRestorationTime == null ? "" : incidentSystemITSystem.ExpectedRestorationTime.Value.ToString("mm"))',
+	            defaultTime: '@(incidentSystemNetworkConnectivity.ExpectedRestorationTime == null ? "" : incidentSystemNetworkConnectivity.ExpectedRestorationTime.Value.ToString("HH:mm"))',
+	            hour: '@(incidentSystemNetworkConnectivity.ExpectedRestorationTime == null ? "" : incidentSystemNetworkConnectivity.ExpectedRestorationTime.Value.ToString("HH"))',
+	            minute: '@(incidentSystemNetworkConnectivity.ExpectedRestorationTime == null ? "" : incidentSystemNetworkConnectivity.ExpectedRestorationTime.Value.ToString("mm"))'
 	        });
 	    });
 
@@ -120,32 +104,32 @@
             var inputValid = true;
             var errMsg = '';
 
-            if ($('#incidentSystemITSystem_LevelOfSeverity').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_LevelOfSeverity').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + 'Level Of Severity is required<br />';
             }
 
-            if ($('#incidentSystemITSystem_PossibleCause').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_PossibleCause').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nPossible Cause is required<br />';
             }
 
-            if ($('#incidentSystemITSystem_AffectedSystem').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_AffectedSystem').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nAffected System Time is required<br />';
             }
 
-            if ($('#incidentSystemITSystem_AffectedArea').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_AffectedArea').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nAffected Area is required<br />';
             }
 
-            if ($('#incidentSystemITSystem_ExpectedRestorationTIme').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_ExpectedRestorationTIme').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
             }
 
-            if ($('#incidentSystemITSystem_FullRestoration').val() == '') {
+            if ($('#incidentSystemNetworkConnectivity_FullRestoration').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nFull Restoration is required<br />';
             }
@@ -166,7 +150,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemITSystem")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentSystemITSystem</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemNetworkConnectivity")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentSystemNetworkConnectivity</a>
     </h1>
 </section>
 
@@ -177,34 +161,34 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentNo)</span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemITSystem.IncidentNo)</span>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.IncidentNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentStatus)</span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemITSystem.IncidentStatus)</span>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.IncidentStatus)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.GeneralEnquiryId)</span>
-                    <a href="#"><span class="pull-right">@(incidentSystemITSystem.GeneralEnquiryId == 0 ? "" : incidentSystemITSystem.GeneralEnquiryId.ToString())</span></a>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId)</span>
+                    <a href="#"><span class="pull-right">@(incidentSystemNetworkConnectivity.GeneralEnquiryId == 0 ? "" : incidentSystemNetworkConnectivity.GeneralEnquiryId.ToString())</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.CreatedDateTime)</span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemITSystem.CreatedDateTime)</span>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.CrisisId)</span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemITSystem.CrisisId)</span></a>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemITSystem.LastUpdatedDateTime)</span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemITSystem.LastUpdatedDateTime)</span>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime)</span>
                 </div>
             </div>
         </div>
@@ -217,7 +201,7 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => incidentSystemITSystem.IncidentSystemITSystemId)
+    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId)
             <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
@@ -236,53 +220,53 @@
 									<div class="panel panel-body">
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.LevelOfSeverity)</label></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.LevelOfSeverity)</label></div>
 											<div class="col-lg-4">
-												<select id="incidentSystemITSystem_LevelOfSeverity" name="incidentSystemITSystem.LevelOfSeverity" class="form-control thin-control">
+												<select id="incidentSystemNetworkConnectivity_LevelOfSeverity" name="incidentSystemNetworkConnectivity.LevelOfSeverity" class="form-control thin-control">
 													<option value=""></option>
 													@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
 													{
 														if (one != IncidentLevel.None)
 														{
-															<option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemITSystem.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+															<option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemNetworkConnectivity.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
 														}
 													}
 												</select>
-												@Html.ValidationMessageFor(model => incidentSystemITSystem.LevelOfSeverity, "", new { @class = "text-danger" })
+												@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.LevelOfSeverity, "", new { @class = "text-danger" })
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentStatus)</label></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IncidentStatus)</label></div>
 											<div class="col-lg-4">
-												<select id="incidentSystemITSystem_IncidentStatus" name="incidentSystemITSystem.IncidentStatus" class="form-control thin-control">
+												<select id="incidentSystemNetworkConnectivity_IncidentStatus" name="incidentSystemNetworkConnectivity.IncidentStatus" class="form-control thin-control">
 													<option value=""></option>
 													@foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
 													{
-														<option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemITSystem.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+														<option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemNetworkConnectivity.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
 													}
 												</select>
-												@Html.ValidationMessageFor(model => incidentSystemITSystem.IncidentStatus, "", new { @class = "text-danger" })
+												@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IncidentStatus, "", new { @class = "text-danger" })
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentBackground)</label></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IncidentBackground)</label></div>
 											<div class="col-lg-4">
-												@Html.EditorFor(model => incidentSystemITSystem.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
-												@Html.ValidationMessageFor(model => incidentSystemITSystem.IncidentBackground, "", new { @class = "text-danger" })
+												@Html.EditorFor(model => incidentSystemNetworkConnectivity.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+												@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IncidentBackground, "", new { @class = "text-danger" })
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.IsDrillMode)</label></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IsDrillMode)</label></div>
 											<div class="col-lg-4">
 												<div class="checkbox">
-													<input id="incidentSystemITSystem_IsDrillMode" name="incidentSystemITSystem.IsDrillMode" type="checkbox" value="" @(incidentSystemITSystem.IsDrillMode != null && incidentSystemITSystem.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
-													@Html.ValidationMessageFor(model => incidentSystemITSystem.IsDrillMode, "", new { @class = "text-danger" })
+													<input id="incidentSystemNetworkConnectivity_IsDrillMode" name="incidentSystemNetworkConnectivity.IsDrillMode" type="checkbox" value="" @(incidentSystemNetworkConnectivity.IsDrillMode != null && incidentSystemNetworkConnectivity.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+													@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IsDrillMode, "", new { @class = "text-danger" })
 												</div>
 											</div>
 										</div>
@@ -295,68 +279,51 @@
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.Location)</label></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.Location)</label></div>
                                             <div class="col-lg-6">
-                                                @Html.EditorFor(model => incidentSystemITSystem.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.Location, "", new { @class = "text-danger" })
+                                                @Html.EditorFor(model => incidentSystemNetworkConnectivity.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.Location, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.PossibleCause)</label></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.PossibleCause)</label></div>
                                             <div class="col-lg-6">
-                                                @Html.EditorFor(model => incidentSystemITSystem.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.PossibleCause, "", new { @class = "text-danger" })
+                                                @Html.EditorFor(model => incidentSystemNetworkConnectivity.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.PossibleCause, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.Damage)</label></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.Damage)</label></div>
                                             <div class="col-lg-6">
-                                                @Html.EditorFor(model => incidentSystemITSystem.Damage, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.Damage, "", new { @class = "text-danger" })
+                                                @Html.EditorFor(model => incidentSystemNetworkConnectivity.Damage, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.Damage, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.AffectedSystem)</label></div>
-                                            <div class="col-lg-6">
-                                                @{
-                                                    int countAffectedSystem = 0;
-                                                    foreach (string one in Model.Options_AffectedSystem)
-                                                    {
-                                                        <input id="AffectedSystem@(countAffectedSystem.ToString())" type="checkbox" value="@one" @(incidentSystemITSystem.AffectedSystem.IsContains(one) ? "checked" : "")/><label for="AffectedSystem@(countAffectedSystem.ToString())"> @one</label><br />
-                                                        countAffectedSystem++;
-                                                    }
-                                                }
-                                                <input type="hidden" id="incidentSystemITSystem_AffectedSystem" name="incidentSystemITSystem.AffectedSystem" value="@incidentSystemITSystem.AffectedSystem" />
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.AffectedSystem, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.AffectedArea)</label></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.AffectedArea)</label></div>
                                             <div class="col-lg-6">
                                                                                                 @{
                                                     int countAffectedArea = 0;
                                                     foreach (string one in Model.Options_AffectedArea)
                                                     {
-                                                        <input id="AffectedArea@(countAffectedArea.ToString())" type="checkbox" value="@one" @(incidentSystemITSystem.AffectedArea.IsContains(one) ? "checked" : "") /><label for="AffectedArea@(countAffectedArea.ToString())"> @one</label><br />
+                                                        <input id="AffectedArea@(countAffectedArea.ToString())" type="checkbox" value="@one" @(incidentSystemNetworkConnectivity.AffectedArea.IsContains(one) ? "checked" : "") /><label for="AffectedArea@(countAffectedArea.ToString())"> @one</label><br />
                                                         countAffectedArea++;
                                                     }
                                                 }
-                                                <input type="hidden" id="incidentSystemITSystem_AffectedArea" name="incidentSystemITSystem.AffectedArea" value="@incidentSystemITSystem.AffectedArea" />
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.AffectedArea, "", new { @class = "text-danger" })
+                                                <input type="hidden" id="incidentSystemNetworkConnectivity_AffectedArea" name="incidentSystemNetworkConnectivity.AffectedArea" value="@incidentSystemNetworkConnectivity.AffectedArea" />
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.AffectedArea, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime)</label></div>
                                             <div class="col-lg-6">
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
@@ -374,14 +341,14 @@
                                                         <input type="text" class="form-control timepicker" id="ExpectedRestorationTimeTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
                                                     </div>
                                                 </div>
-                                                @Html.HiddenFor(model => incidentSystemITSystem.ExpectedRestorationTime)
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime)
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.ExpectedRestorationTime, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.FullRestoration)</label></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.FullRestoration)</label></div>
                                             <div class="col-lg-6">
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
@@ -399,30 +366,30 @@
                                                         <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
                                                     </div>
                                                 </div>
-                                                @Html.HiddenFor(model => incidentSystemITSystem.FullRestoration)
-                                                @Html.ValidationMessageFor(model => incidentSystemITSystem.FullRestoration, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => incidentSystemNetworkConnectivity.FullRestoration)
+                                                @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.FullRestoration, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 									</div>
 								</div>
 							</div>
 
-                            @Html.HiddenFor(model => incidentSystemITSystem.IncidentSystemITSystemId, new { @Value = incidentSystemITSystem.IncidentSystemITSystemId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.ChecklistBatchId, new { @Value = incidentSystemITSystem.ChecklistBatchId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.ChatRoomId, new { @Value = incidentSystemITSystem.ChatRoomId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.GeneralEnquiryId, new { @Value = incidentSystemITSystem.GeneralEnquiryId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.CrisisId, new { @Value = incidentSystemITSystem.CrisisId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.NotificationId, new { @Value = incidentSystemITSystem.NotificationId })
-                            @Html.HiddenFor(model => incidentSystemITSystem.IssueById, new { @Value = incidentSystemITSystem.IssueById })
-                            @Html.HiddenFor(model => incidentSystemITSystem.IssueDateTime, new { @Value = incidentSystemITSystem.IssueDateTime == null ? "" : incidentSystemITSystem.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemITSystem.CloseById, new { @Value = incidentSystemITSystem.CloseById })
-                            @Html.HiddenFor(model => incidentSystemITSystem.CloseDateTime, new { @Value = incidentSystemITSystem.CloseDateTime == null ? "" : incidentSystemITSystem.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemITSystem.CreatedBy, new { @Value = incidentSystemITSystem.CreatedBy })
-                            @Html.HiddenFor(model => incidentSystemITSystem.CreatedDateTime, new { @Value = incidentSystemITSystem.CreatedDateTime == null ? "" : incidentSystemITSystem.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemITSystem.LastUpdatedBy, new { @Value = incidentSystemITSystem.LastUpdatedBy })
-                            @Html.HiddenFor(model => incidentSystemITSystem.LastUpdatedDateTime, new { @Value = incidentSystemITSystem.LastUpdatedDateTime == null ? "" : incidentSystemITSystem.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentSystemITSystem.History, new { @Value = incidentSystemITSystem.History })
-                            @Html.HiddenFor(model => incidentSystemITSystem.IncidentNo, new { @Value = incidentSystemITSystem.IncidentNo })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId, new { @Value = incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChecklistBatchId, new { @Value = incidentSystemNetworkConnectivity.ChecklistBatchId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChatRoomId, new { @Value = incidentSystemNetworkConnectivity.ChatRoomId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId, new { @Value = incidentSystemNetworkConnectivity.GeneralEnquiryId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CrisisId, new { @Value = incidentSystemNetworkConnectivity.CrisisId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.NotificationId, new { @Value = incidentSystemNetworkConnectivity.NotificationId })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueById, new { @Value = incidentSystemNetworkConnectivity.IssueById })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueDateTime, new { @Value = incidentSystemNetworkConnectivity.IssueDateTime == null ? "" : incidentSystemNetworkConnectivity.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CloseById, new { @Value = incidentSystemNetworkConnectivity.CloseById })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CloseDateTime, new { @Value = incidentSystemNetworkConnectivity.CloseDateTime == null ? "" : incidentSystemNetworkConnectivity.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CreatedBy, new { @Value = incidentSystemNetworkConnectivity.CreatedBy })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CreatedDateTime, new { @Value = incidentSystemNetworkConnectivity.CreatedDateTime == null ? "" : incidentSystemNetworkConnectivity.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.LastUpdatedBy, new { @Value = incidentSystemNetworkConnectivity.LastUpdatedBy })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime, new { @Value = incidentSystemNetworkConnectivity.LastUpdatedDateTime == null ? "" : incidentSystemNetworkConnectivity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.History, new { @Value = incidentSystemNetworkConnectivity.History })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentNo, new { @Value = incidentSystemNetworkConnectivity.IncidentNo })
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -549,7 +516,7 @@
             <div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
-                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemITSystem", new { id = incidentSystemITSystem.IncidentSystemITSystemId })';">@Resources.global.Func_Cancel</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemNetworkConnectivity", new { id = incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId })';">@Resources.global.Func_Cancel</button>
                 </div>
             </div>
             <br />
@@ -565,7 +532,7 @@
                     </a>
                     <div id="History" class="panel-collapse collapse">
                         <div class="panel-body multiline">
-                            @Html.Raw(incidentSystemITSystem.History)
+                            @Html.Raw(incidentSystemNetworkConnectivity.History)
                         </div>
                     </div>
                 </div>

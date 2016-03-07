@@ -91,6 +91,17 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of System Network Connectivity
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentSystemNetworkConnectivity incident)
+        {
+            // no Level logic for Network Connectivity
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";
