@@ -17,6 +17,13 @@ namespace CCCP.Controllers.WebApi
     {
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentEnvironmentLeakageModel GetNewIncident()
+        {
+            return new IncidentEnvironmentLeakageModel();
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public IncidentEnvironmentLeakageModel GetIncident(int incidentId)
         {
             IncidentEnvironmentLeakageModel result = new IncidentEnvironmentLeakageModel();

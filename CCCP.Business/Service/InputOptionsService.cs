@@ -11,6 +11,14 @@ namespace CCCP.Business.Service
 {
     public class InputOptionsService
     {
+        public static List<string> GetIncidentQualityCorporateImageInputOptions(IncidentQualityCorporateImageInputKey key)
+        {
+            string keyStr = key.ToString();
+            List<string> result = GetInputOptions(keyStr);
+
+            return result;
+        }
+
         public static List<string> GetIncidentEnvironmentLeakageInputOptions(IncidentEnvironmentLeakageInputKey key)
         {
             string keyStr = key.ToString();

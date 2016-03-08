@@ -17,6 +17,13 @@ namespace CCCP.Controllers.WebApi
     {
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentSystemNetworkConnectivityModel GetNewIncident()
+        {
+            return new IncidentSystemNetworkConnectivityModel();
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public IncidentSystemNetworkConnectivityModel GetIncident(int incidentId)
         {
             IncidentSystemNetworkConnectivityModel result = new IncidentSystemNetworkConnectivityModel();

@@ -330,4 +330,23 @@ namespace CCCP.Common
         IncidentEnvironmentLeakage_AffectedArea
     }
     #endregion
+
+    #region Enum for Incident - Quality (Corporate Image)
+    public enum IncidentQualityCorporateImagePossibleCause
+    {
+        Others
+    }
+
+    public enum IncidentQualityCorporateImageImpact
+    {
+        Others
+    }
+
+    public enum IncidentQualityCorporateImageInputKey
+    {
+        IncidentQualityCorporateImage_PossibleCause,
+        IncidentQualityCorporateImage_Impact,
+        IncidentQualityCorporateImage_StatusUpdate
+    }
+    #endregion
 }
