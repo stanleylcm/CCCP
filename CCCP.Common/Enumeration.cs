@@ -296,4 +296,12 @@ namespace CCCP.Common
         IncidentSystemOTSystem_AffectedSystem
     }
     #endregion
+
+    #region Enum for Incident - Environment (Air Emission)
+    public enum IncidentEnvironmentAirEmissionInputKey
+    {
+        IncidentEnvironmentAirEmission_Location,
+        IncidentEnvironmentAirEmission_SourceOfInformation
+    }
+    #endregion
 }

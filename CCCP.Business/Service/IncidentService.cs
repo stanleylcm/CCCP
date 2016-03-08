@@ -113,6 +113,21 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of Environment Air Emission
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentEnvironmentAirEmission incident)
+        {
+            // Level 2
+            if (incident.ComplaintOfBlackSmoke != null && incident.ComplaintOfBlackSmoke.Value == true)
+                return IncidentLevel.Level_2;
+
+            // else
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

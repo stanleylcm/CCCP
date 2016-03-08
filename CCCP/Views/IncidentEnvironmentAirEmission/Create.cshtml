@@ -1,0 +1,201 @@
+﻿@model CCCP.Business.Model.IncidentEnvironmentAirEmissionModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentEnvironmentAirEmission;
+    CCCP.ViewModel.IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentEnvironmentAirEmission
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.LevelOfSeverity)</label></div>
+									<div class="col-lg-4">
+										<select id="incidentEnvironmentAirEmission_LevelOfSeverity" name="incidentEnvironmentAirEmission.LevelOfSeverity" class="form-control thin-control">
+											<option value=""></option>
+											@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+											{
+												if (one != IncidentLevel.None)
+												{
+													<option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+												}
+											}
+										</select>
+										@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.LevelOfSeverity, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IncidentBackground)</label></div>
+									<div class="col-lg-4">
+										@Html.EditorFor(model => incidentEnvironmentAirEmission.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+										@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.IncidentBackground, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IsDrillMode)</label></div>
+									<div class="col-lg-4">
+										<div class="checkbox">
+											<input id="incidentEnvironmentAirEmission_IsDrillMode" name="incidentEnvironmentAirEmission.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+											@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.IsDrillMode, "", new { @class = "text-danger" })
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel panel-primary">
+							<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+							<div class="panel panel-body">
+
+								<div class="row">
+                                    <div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.Location)</label></div>
+									<div class="col-lg-6">
+										<select id="incidentEnvironmentAirEmission_Location" name="incidentEnvironmentAirEmission.Location" class="form-control thin-control">
+											<option value=""></option>
+											@foreach (string one in Model.Options_Location)
+											{
+												<option value="@one">@one</option>
+											}
+										</select>
+										@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.Location, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+                                    <div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.PossibleCause)</label></div>
+									<div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentEnvironmentAirEmission.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.PossibleCause, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.SourceOfInformation)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="incidentEnvironmentAirEmission_SourceOfInformation" name="incidentEnvironmentAirEmission.SourceOfInformation" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (string one in Model.Options_SourceOfInformation)
+                                            {
+                                                <option value="@one">@one</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.SourceOfInformation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.AbatementSystemUnavailable)</label></div>
+                                    <div class="col-lg-6">
+                                        <input id="incidentEnvironmentAirEmission_AbatementSystemUnavailable" name="incidentEnvironmentAirEmission.AbatementSystemUnavailable" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                        @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.AbatementSystemUnavailable, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.ComplaintOfBlackSmoke)</label></div>
+                                    <div class="col-lg-6">
+                                        <input id="incidentEnvironmentAirEmission_ComplaintOfBlackSmoke" name="incidentEnvironmentAirEmission.ComplaintOfBlackSmoke" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                        @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.ComplaintOfBlackSmoke, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+                            
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentEnvironmentAirEmissionId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.CrisisId)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IssueById)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IssueDateTime)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.CloseById)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.CloseDateTime)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentNo)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentStatus)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.CreatedBy)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.CreatedDateTime)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.LastUpdatedBy)
+                    @Html.HiddenFor(model => incidentEnvironmentAirEmission.LastUpdatedDateTime)
+
+                    <div class="box-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentEnvironmentAirEmission")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#incidentEnvironmentAirEmission_IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $("#incidentEnvironmentAirEmission_AbatementSystemUnavailable").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $("#incidentEnvironmentAirEmission_ComplaintOfBlackSmoke").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentSystemCallCentre_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+</script>
+}
