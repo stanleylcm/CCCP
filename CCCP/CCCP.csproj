@@ -166,6 +166,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentEnvironmentLeakageController.cs" />
     <Compile Include="Controllers\IncidentEnvironmentAirEmissionController.cs" />
     <Compile Include="Controllers\IncidentSystemOTSystemController.cs" />
     <Compile Include="Controllers\IncidentSystemNetworkConnectivityController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Controllers\IncidentSystemInvoicingController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
     <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
+    <Compile Include="Controllers\WebApi\IncidentEnvironmentLeakageApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentEnvironmentAirEmissionApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemOTSystemApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemNetworkConnectivityApiController.cs" />
@@ -845,6 +847,11 @@
     <Content Include="Views\IncidentEnvironmentAirEmission\Details.cshtml" />
     <Content Include="Views\IncidentEnvironmentAirEmission\Edit.cshtml" />
     <Content Include="Views\IncidentEnvironmentAirEmission\Index.cshtml" />
+    <Content Include="Views\IncidentEnvironmentLeakage\Create.cshtml" />
+    <Content Include="Views\IncidentEnvironmentLeakage\Delete.cshtml" />
+    <Content Include="Views\IncidentEnvironmentLeakage\Details.cshtml" />
+    <Content Include="Views\IncidentEnvironmentLeakage\Edit.cshtml" />
+    <Content Include="Views\IncidentEnvironmentLeakage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

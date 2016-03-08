@@ -128,6 +128,25 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of Environment Leakage
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentEnvironmentLeakage incident)
+        {   
+            // Level 3
+            if (incident.AffectedArea != null && incident.AffectedArea == IncidentEnvironmentLeakageAffectedArea.Outside_CEM_premise.ToEnumString())
+                return IncidentLevel.Level_3;
+
+            // Level 2
+            if (incident.AffectedArea != null && incident.AffectedArea == IncidentEnvironmentLeakageAffectedArea.Within_CEM_premise.ToEnumString())
+                return IncidentLevel.Level_2;
+
+            // else
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

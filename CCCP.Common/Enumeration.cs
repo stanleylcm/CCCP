@@ -304,4 +304,30 @@ namespace CCCP.Common
         IncidentEnvironmentAirEmission_SourceOfInformation
     }
     #endregion
+
+    #region Enum for Incident - Environment (Leakage)
+    public enum IncidentEnvironmentLeakageTypeOfLeakage
+    {
+        Fuel,
+        Lube_Oil,
+        Ammonia,
+        Chlorine,
+        Acid,
+        Alkaline,
+        Others
+    }
+
+    public enum IncidentEnvironmentLeakageAffectedArea
+    {
+        Within_CEM_premise,
+        Outside_CEM_premise
+    }
+
+    public enum IncidentEnvironmentLeakageInputKey
+    {
+        IncidentEnvironmentLeakage_SourceOfInformation,
+        IncidentEnvironmentLeakage_TypeOfLeakage,
+        IncidentEnvironmentLeakage_AffectedArea
+    }
+    #endregion
 }
