@@ -1,0 +1,306 @@
+﻿@model CCCP.Business.Model.IncidentQualityCorporateImageModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentQualityCorporateImage;
+    CCCP.ViewModel.IncidentQualityCorporateImage incidentQualityCorporateImage = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentQualityCorporateImage
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-body">
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.LevelOfSeverity)</label></div>
+                                    <div class="col-lg-4">
+                                        <select id="incidentQualityCorporateImage_LevelOfSeverity" name="incidentQualityCorporateImage.LevelOfSeverity" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                            {
+                                                if (one != IncidentLevel.None)
+                                                {
+                                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                                }
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.LevelOfSeverity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityCorporateImage.IncidentBackground)</label></div>
+                                    <div class="col-lg-4">
+                                        @Html.EditorFor(model => incidentQualityCorporateImage.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.IncidentBackground, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityCorporateImage.IsDrillMode)</label></div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <input id="incidentQualityCorporateImage_IsDrillMode" name="incidentQualityCorporateImage.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                            @Html.ValidationMessageFor(model => incidentQualityCorporateImage.IsDrillMode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                            <div class="panel panel-body">
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.PossibleCause)</label></div>
+                                    <div class="col-lg-6">
+                                                                                @{
+                                            int countPossibleCause = 0;
+                                            foreach (string one in Model.Options_PossibleCause)
+                                            {
+                                                <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label>
+                                                if (one != IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())
+                                                {
+                                                    <br />
+                                                }
+                                                else
+                                                {
+                                                    <input id="PossibleCause@(one)More" name="PossibleCause@(one)More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                }
+                                                countPossibleCause++;
+                                            }
+}
+                                        <input type="hidden" id="incidentQualityCorporateImage_PossibleCause" name="incidentQualityCorporateImage.PossibleCause" value="" />
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.PossibleCause, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.Impact)</label></div>
+                                    <div class="col-lg-6">
+                                                                                @{
+                                            int countImpact = 0;
+                                            foreach (string one in Model.Options_Impact)
+                                            {
+                                                <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" /><label for="Impact@(countImpact.ToString())"> @one</label>
+                                                if (one != IncidentQualityCorporateImageImpact.Others.ToEnumString())
+                                                {
+                                                    <br />
+                                                }
+                                                else
+                                                {
+                                                    <input id="Impact@(one)More" name="Impact@(one)More" type="text" value="" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                }
+                                                countImpact++;
+                                            }
+                                        }
+                                        <input type="hidden" id="incidentQualityCorporateImage_Impact" name="incidentQualityCorporateImage.Impact" value="" />
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.Impact, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.RemedyAction)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityCorporateImage.RemedyAction, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.RemedyAction, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.StatusUpdate)</label></div>
+                                    <div class="col-lg-6">
+                                        <select id="incidentQualityCorporateImage_StatusUpdate" name="incidentQualityCorporateImage.StatusUpdate" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (string one in Model.Options_StatusUpdate)
+                                            {
+                                                <option value="@one">@one</option>
+                                            }
+                                        </select>
+
+                                        @Html.ValidationMessageFor(model => incidentQualityCorporateImage.StatusUpdate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.IncidentQualityCorporateImageId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.CrisisId)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.IssueById)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.IssueDateTime)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.CloseById)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.CloseDateTime)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.IncidentNo)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.IncidentStatus)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.CreatedBy)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.CreatedDateTime)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.LastUpdatedBy)
+                    @Html.HiddenFor(model => incidentQualityCorporateImage.LastUpdatedDateTime)
+
+                    <div class="box-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentQualityCorporateImage")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("input[type=checkbox][id^=PossibleCause]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=PossibleCause]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentQualityCorporateImage_PossibleCause").val(sList);
+        });
+
+        $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").change(function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=PossibleCause]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
+                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentQualityCorporateImage_PossibleCause").val(sList);
+        });
+
+        $("input[type=checkbox][id^=Impact]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=Impact]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentQualityCorporateImage_Impact").val(sList);
+        });
+
+        $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").change(function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=Impact]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
+                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+                    }
+                    i++;
+                }
+            });
+            $("#incidentQualityCorporateImage_Impact").val(sList);
+        });
+
+        $("#incidentQualityCorporateImage_IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentQualityCorporateImage_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentQualityCorporateImage_PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+
+            if ($('#incidentQualityCorporateImage_Impact').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Impact is required<br />';
+            }
+
+            if ($('#incidentQualityCorporateImage_RemedyAction').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nRemedy Action is required<br />';
+            }
+
+            if ($('#incidentQualityCorporateImage_StatusUpdate').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nStatus Update is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+</script>
+}
