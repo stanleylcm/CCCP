@@ -17,6 +17,13 @@ namespace CCCP.Controllers.WebApi
     {
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentSystemInvoicingModel GetNewIncident()
+        {
+            return new IncidentSystemInvoicingModel();
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public IncidentSystemInvoicingModel GetIncident(int incidentId)
         {
             IncidentSystemInvoicingModel result = new IncidentSystemInvoicingModel();
