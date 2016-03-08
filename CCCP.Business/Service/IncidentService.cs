@@ -102,6 +102,17 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of System OT System
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentSystemOTSystem incident)
+        {
+            // no Level logic for OT System
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

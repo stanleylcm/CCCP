@@ -1,0 +1,560 @@
+﻿@model CCCP.Business.Model.IncidentSystemOTSystemModel
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemOTSystem;
+    CCCP.ViewModel.IncidentSystemOTSystem incidentSystemOTSystem = Model.Entity;
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+		    $('.bootstrap-checkbox').on('click', function(evnet){
+
+		        $.ajax({
+		            url: "/IncidentSystemOTSystem/ToggleActionStatus",
+		            type: "POST",
+		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+		            dataType: "html",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (data) {
+		                return true;
+		            },
+		            error: function () {
+		                alert("An error has occured!!!");
+		            }
+		        });
+		    });
+	    });
+
+	    $("input[type=checkbox][id^=AffectedSystem]").on("click", function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=AffectedSystem]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                    sList = $(this).val();
+	                } else {
+	                    sList = sList + ", " + $(this).val();
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentSystemOTSystem_AffectedSystem").val(sList);
+	    });
+
+	    $("#incidentSystemOTSystem_IsDrillMode").on("click", function () {
+	        $(this).val(this.checked);
+	    });
+
+	    $("#FullRestorationDate").change(function () {
+	        $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+	    $("#FullRestorationTime").change(function () {
+	        $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+	    $("#ExpectedRestorationTimeDate").change(function () {
+	        $("#incidentSystemOTSystem_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+	    });
+
+	    $("#ExpectedRestorationTimeTime").change(function () {
+	        $("#incidentSystemOTSystem_ExpectedRestorationTime").val($("#ExpectedRestorationTimeDate").val() + " " + $("#ExpectedRestorationTimeTime").val());
+	    });
+
+	    $(document).ready(function () {
+	        $("#incidentSystemOTSystem_IsDrillMode").val($("#incidentSystemOTSystem_IsDrillMode").checked);
+
+	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemOTSystem.FullRestoration == null ? "" : incidentSystemOTSystem.FullRestoration.Value.ToString("yyyy-MM-dd"))');
+	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemOTSystem.ExpectedRestorationTime == null ? "" : incidentSystemOTSystem.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
+	        $('[data-mask]').inputmask();
+	        $('#FullRestorationTime').timepicker({
+	            showMeridian: false,
+	            defaultTime: '@(incidentSystemOTSystem.FullRestoration == null ? "" : incidentSystemOTSystem.FullRestoration.Value.ToString("HH:mm"))',
+	            hour: '@(incidentSystemOTSystem.FullRestoration == null ? "" : incidentSystemOTSystem.FullRestoration.Value.ToString("HH"))',
+	            minute: '@(incidentSystemOTSystem.FullRestoration == null ? "" : incidentSystemOTSystem.FullRestoration.Value.ToString("mm"))',
+	        });
+
+	        $('#ExpectedRestorationTimeTime').timepicker({
+	            showMeridian: false,
+	            defaultTime: '@(incidentSystemOTSystem.ExpectedRestorationTime == null ? "" : incidentSystemOTSystem.ExpectedRestorationTime.Value.ToString("HH:mm"))',
+	            hour: '@(incidentSystemOTSystem.ExpectedRestorationTime == null ? "" : incidentSystemOTSystem.ExpectedRestorationTime.Value.ToString("HH"))',
+	            minute: '@(incidentSystemOTSystem.ExpectedRestorationTime == null ? "" : incidentSystemOTSystem.ExpectedRestorationTime.Value.ToString("mm"))',
+	        });
+	    });
+
+        $('#btnUpdate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentSystemOTSystem_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentSystemOTSystem_PossibleCause').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            }
+
+            if ($('#incidentSystemOTSystem_AffectedSystem').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected System Time is required<br />';
+            }
+
+            if ($('#incidentSystemOTSystem_AffectedArea').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Area is required<br />';
+            }
+
+            if ($('#incidentSystemOTSystem_ExpectedRestorationTIme').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
+            }
+
+            if ($('#incidentSystemOTSystem_FullRestoration').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nFull Restoration is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Update Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemOTSystem")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentSystemOTSystem</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.GeneralEnquiryId)</span>
+                    <a href="#"><span class="pull-right">@(incidentSystemOTSystem.GeneralEnquiryId == 0 ? "" : incidentSystemOTSystem.GeneralEnquiryId.ToString())</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => incidentSystemOTSystem.IncidentSystemOTSystemId)
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+						
+							<div class="panel-group">
+								<div class="panel panel-default">
+									<div class="panel panel-body">
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.LevelOfSeverity)</label></div>
+											<div class="col-lg-4">
+												<select id="incidentSystemOTSystem_LevelOfSeverity" name="incidentSystemOTSystem.LevelOfSeverity" class="form-control thin-control">
+													<option value=""></option>
+													@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+													{
+														if (one != IncidentLevel.None)
+														{
+															<option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentSystemOTSystem.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+														}
+													}
+												</select>
+												@Html.ValidationMessageFor(model => incidentSystemOTSystem.LevelOfSeverity, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentStatus)</label></div>
+											<div class="col-lg-4">
+												<select id="incidentSystemOTSystem_IncidentStatus" name="incidentSystemOTSystem.IncidentStatus" class="form-control thin-control">
+													<option value=""></option>
+													@foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+													{
+														<option value="@one.ToEnumString()" @( one.ToEnumString() == incidentSystemOTSystem.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+													}
+												</select>
+												@Html.ValidationMessageFor(model => incidentSystemOTSystem.IncidentStatus, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentBackground)</label></div>
+											<div class="col-lg-4">
+												@Html.EditorFor(model => incidentSystemOTSystem.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+												@Html.ValidationMessageFor(model => incidentSystemOTSystem.IncidentBackground, "", new { @class = "text-danger" })
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-1"></div>
+											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IsDrillMode)</label></div>
+											<div class="col-lg-4">
+												<div class="checkbox">
+													<input id="incidentSystemOTSystem_IsDrillMode" name="incidentSystemOTSystem.IsDrillMode" type="checkbox" value="" @(incidentSystemOTSystem.IsDrillMode != null && incidentSystemOTSystem.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+													@Html.ValidationMessageFor(model => incidentSystemOTSystem.IsDrillMode, "", new { @class = "text-danger" })
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-primary">
+									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+									<div class="panel panel-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.Location)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemOTSystem.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.Location, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.PossibleCause)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemOTSystem.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.PossibleCause, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.Damage)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemOTSystem.Damage, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.Damage, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.AffectedSystem)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countAffectedSystem = 0;
+                                                    foreach (string one in Model.Options_AffectedSystem)
+                                                    {
+                                                        <input id="AffectedSystem@(countAffectedSystem.ToString())" type="checkbox" value="@one" @(incidentSystemOTSystem.AffectedSystem.IsContains(one) ? "checked" : "")/><label for="AffectedSystem@(countAffectedSystem.ToString())"> @one</label><br />
+                                                        countAffectedSystem++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentSystemOTSystem_AffectedSystem" name="incidentSystemOTSystem.AffectedSystem" value="@incidentSystemOTSystem.AffectedSystem" />
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.AffectedSystem, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.AffectedArea)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemOTSystem.AffectedArea, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.AffectedArea, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.NoOfAffectedSubstation)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemOTSystem.NoOfAffectedSubstation, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.NoOfAffectedSubstation, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="ExpectedRestorationTimeDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-clock-o"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control timepicker" id="ExpectedRestorationTimeTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                @Html.HiddenFor(model => incidentSystemOTSystem.ExpectedRestorationTime)
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.FullRestoration)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="FullRestorationDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-clock-o"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                @Html.HiddenFor(model => incidentSystemOTSystem.FullRestoration)
+                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.FullRestoration, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+
+                            @Html.HiddenFor(model => incidentSystemOTSystem.IncidentSystemOTSystemId, new { @Value = incidentSystemOTSystem.IncidentSystemOTSystemId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.ChecklistBatchId, new { @Value = incidentSystemOTSystem.ChecklistBatchId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.ChatRoomId, new { @Value = incidentSystemOTSystem.ChatRoomId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.GeneralEnquiryId, new { @Value = incidentSystemOTSystem.GeneralEnquiryId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.CrisisId, new { @Value = incidentSystemOTSystem.CrisisId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.NotificationId, new { @Value = incidentSystemOTSystem.NotificationId })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.IssueById, new { @Value = incidentSystemOTSystem.IssueById })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.IssueDateTime, new { @Value = incidentSystemOTSystem.IssueDateTime == null ? "" : incidentSystemOTSystem.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.CloseById, new { @Value = incidentSystemOTSystem.CloseById })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.CloseDateTime, new { @Value = incidentSystemOTSystem.CloseDateTime == null ? "" : incidentSystemOTSystem.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.CreatedBy, new { @Value = incidentSystemOTSystem.CreatedBy })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.CreatedDateTime, new { @Value = incidentSystemOTSystem.CreatedDateTime == null ? "" : incidentSystemOTSystem.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.LastUpdatedBy, new { @Value = incidentSystemOTSystem.LastUpdatedBy })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.LastUpdatedDateTime, new { @Value = incidentSystemOTSystem.LastUpdatedDateTime == null ? "" : incidentSystemOTSystem.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.History, new { @Value = incidentSystemOTSystem.History })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.IncidentNo, new { @Value = incidentSystemOTSystem.IncidentNo })
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills nav-justified">
+                                    @{
+                                int countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                    countChecklist++;
+                                }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                                    int countChecklistAction = 1;
+                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                            <th></th>
+                                            <th>Action</th>
+                                            <th>Completed By</th>
+                                            <th>Completed Datetime</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                                        <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                        <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
+                                                        <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                    </tr>
+                                                    countChecklistAction++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                countChecklist++;
+                                }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentSystemOTSystem", new { id = incidentSystemOTSystem.IncidentSystemOTSystemId })';">@Resources.global.Func_Cancel</button>
+                </div>
+            </div>
+            <br />
+}
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(incidentSystemOTSystem.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->
