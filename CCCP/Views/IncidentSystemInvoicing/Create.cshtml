@@ -233,7 +233,7 @@
 
                     <div class="box-footer">
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Save</button>
                             <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemInvoicing")';">@Resources.global.Func_Cancel</button>
                         </div>
                     </div>
@@ -344,42 +344,42 @@
 
             if ($('#incidentSystemInvoicing_LevelOfSeverity').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Level Of Severity is required<br />';
+                errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_ProblemArea').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nProblem Area is required<br />';
+                errMsg = errMsg + '\r\nProblem Area cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_PossibleCause').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+                errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_ExpectedAffectedBillingDay').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nExpected Affected Billing Day is required<br />';
+                errMsg = errMsg + '\r\nExpected Affected Billing Day cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_ContactedBy').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nContacted By is required<br />';
+                errMsg = errMsg + '\r\nContacted By cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_Impact').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nImpact is required<br />';
+                errMsg = errMsg + '\r\nImpact cannot be empty<br />';
             }
 
             if ($('#incidentSystemInvoicing_StatusUpdate').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nStatus Update is required<br />';
+                errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
             }
 
             if (inputValid == false) {
                 $('#CCCPModal').find('.modal-body').html(errMsg);
-                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').find('.modal-title').html('Validation Summary');
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();

@@ -198,42 +198,42 @@
 
             if ($('#incidentSystemCallCentre_LevelOfSeverity').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Level Of Severity is required<br />';
+                errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_Impact').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nImpact is required<br />';
+                errMsg = errMsg + '\r\nImpact cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_PossibleCause').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+                errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_ExpectedRestorationTime').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
+                errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_RequireMitigatingAction').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nRequire Mitigating Action is required<br />';
+                errMsg = errMsg + '\r\nRequire Mitigating Action cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_MitigatingAction').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nMitigating Action is required<br />';
+                errMsg = errMsg + '\r\nMitigating Action cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_StatusUpdate').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nStatus Update is required<br />';
+                errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_FullRestoration').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nFull Restoration is required<br />';
+                errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
             }
 
             if (inputValid == false) {
@@ -304,7 +304,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => incidentSystemCallCentre.IncidentSystemCallCentreId)
-            <ul class="nav nav-tabs nav-justified">
+            <ul class="nav nav-pills">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>

@@ -205,7 +205,7 @@
 
                     <div class="box-footer">
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Save</button>
                             <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemITSystem")';">@Resources.global.Func_Cancel</button>
                         </div>
                     </div>
@@ -290,37 +290,37 @@
 
         if ($('#incidentSystemITSystem_LevelOfSeverity').val() == '') {
             inputValid = false;
-            errMsg = errMsg + 'Level Of Severity is required<br />';
+            errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
         }
 
         if ($('#incidentSystemITSystem_PossibleCause').val() == '') {
             inputValid = false;
-            errMsg = errMsg + '\r\nPossible Cause is required<br />';
+            errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
         }
 
         if ($('#incidentSystemITSystem_AffectedSystem').val() == '') {
             inputValid = false;
-            errMsg = errMsg + '\r\nAffected System Time is required<br />';
+            errMsg = errMsg + '\r\nAffected System Time cannot be empty<br />';
         }
 
         if ($('#incidentSystemITSystem_AffectedArea').val() == '') {
             inputValid = false;
-            errMsg = errMsg + '\r\nAffected Area is required<br />';
+            errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
         }
 
         if ($('#incidentSystemITSystem_ExpectedRestorationTIme').val() == '') {
             inputValid = false;
-            errMsg = errMsg + '\r\nExpected Restoration Time is required<br />';
+            errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
         }
 
         if ($('#incidentSystemITSystem_FullRestoration').val() == '') {
             inputValid = false;
-            errMsg = errMsg + '\r\nFull Restoration is required<br />';
+            errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
         }
 
         if (inputValid == false) {
             $('#CCCPModal').find('.modal-body').html(errMsg);
-            $('#CCCPModal').find('.modal-title').html('Create Error');
+            $('#CCCPModal').find('.modal-title').html('Validation Summary');
             $('#CCCPModal').modal('toggle');
 
             event.preventDefault();

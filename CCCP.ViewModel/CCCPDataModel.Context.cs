@@ -31,7 +31,6 @@ namespace CCCP.ViewModel
         public virtual DbSet<ChecklistAction> ChecklistAction { get; set; }
         public virtual DbSet<ChecklistBatch> ChecklistBatch { get; set; }
         public virtual DbSet<AuditLog> AuditLog { get; set; }
-        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<InputOption> InputOption { get; set; }
@@ -48,6 +47,7 @@ namespace CCCP.ViewModel
         public virtual DbSet<SystemFunction> SystemFunction { get; set; }
         public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
         public virtual DbSet<IncidentEnvironmentLeakage> IncidentEnvironmentLeakage { get; set; }
+        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

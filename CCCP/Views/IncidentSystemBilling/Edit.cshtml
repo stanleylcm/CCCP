@@ -141,42 +141,42 @@
 
             if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Level Of Severity is required<br />';
+                errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
             }
 
             if ($('#incidentSystemBilling_ProblemArea').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nProblem Area is required<br />';
+                errMsg = errMsg + '\r\nProblem Area cannot be empty<br />';
             }
 
             if ($('#incidentSystemBilling_PossibleCause').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nPossible Cause is required<br />';
+                errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
             }
             /*
             if ($('#incidentSystemBilling_BillingErrorSeriousness').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\Billing Error Seriousness is required<br />';
+                errMsg = errMsg + '\r\Billing Error Seriousness cannot be empty<br />';
             }
             */
             if ($('#incidentSystemBilling_ExpectedAffectedCustomerBill').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nExpected Affected Customer Bill is required<br />';
+                errMsg = errMsg + '\r\nExpected Affected Customer Bill cannot be empty<br />';
             }
 
             if ($('#incidentSystemBilling_ContactedBy').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nContacted By is required<br />';
+                errMsg = errMsg + '\r\nContacted By cannot be empty<br />';
             }
 
             if ($('#incidentSystemBilling_Impact').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nImpact is required<br />';
+                errMsg = errMsg + '\r\nImpact cannot be empty<br />';
             }
 
             if ($('#incidentSystemBilling_StatusUpdate').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nStatus Update is required<br />';
+                errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
             }
 
             if (inputValid == false) {
@@ -247,7 +247,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => incidentSystemBilling.IncidentSystemBillingId)
-            <ul class="nav nav-tabs nav-justified">
+            <ul class="nav nav-pills">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>

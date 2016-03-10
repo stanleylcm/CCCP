@@ -112,5 +112,5 @@ input[type='checkbox'] {
 section.content ul.nav li
 {    
     list-style-position:inside;
-    border: 1px solid black;
+    border: 0px solid black;
 }

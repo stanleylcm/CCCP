@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistAction" Width="1.5" PointX="3.5" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.ChecklistBatch" Width="1.5" PointX="3.5" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.AuditLog" Width="1.5" PointX="5.625" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.125" PointX="0.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.125" PointX="0.75" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemInvoicing" Width="2.125" PointX="0.75" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.InputOption" Width="1.5" PointX="5.625" PointY="2" IsExpanded="false" />
@@ -26,6 +25,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemFunction" Width="1.5" PointX="5.625" PointY="3.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.125" PointX="0.75" PointY="7.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" Width="2.125" PointX="0.75" PointY="3.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.125" PointX="0.75" PointY="0.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

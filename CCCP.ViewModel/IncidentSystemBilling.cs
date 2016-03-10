@@ -39,6 +39,7 @@ namespace CCCP.ViewModel
         public string StatusUpdate { get; set; }
         public string RequireMitigatingAction { get; set; }
         public string MitigatingAction { get; set; }
+        public string MitigatingActionOthers { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
