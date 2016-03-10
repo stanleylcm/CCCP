@@ -859,6 +859,7 @@
     <Content Include="Views\IncidentQualityCorporateImage\Details.cshtml" />
     <Content Include="Views\IncidentQualityCorporateImage\Edit.cshtml" />
     <Content Include="Views\IncidentQualityCorporateImage\Index.cshtml" />
+    <Content Include="Views\Shared\_AlertSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -178,6 +178,17 @@ namespace CCCP.Business.Service
             return IncidentLevel.None;
         }
 
+        /// <summary>
+        /// Get Incident Level of Quality Generation
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentQualityGeneration incident)
+        {
+            // no Level logic for Quality Generation
+            return IncidentLevel.None;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentSystemNetworkConnectivityModel incident = new IncidentSystemNetworkConnectivityModel();
 
         // GET: IncidentSystemNetworkConnectivitys
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentSystemNetworkConnectivityApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemNetworkConnectivitys/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemNetworkConnectivityApiController().CreateIncident(incidentSystemNetworkConnectivity);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemNetworkConnectivity.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentSystemNetworkConnectivity);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemNetworkConnectivityApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemNetworkConnectivityId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemNetworkConnectivityId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

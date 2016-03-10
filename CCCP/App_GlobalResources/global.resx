@@ -157,10 +157,10 @@
     <value>General Enquiry</value>
   </data>
   <data name="Menu_IncidentEnvironmentAirEmission" xml:space="preserve">
-    <value>Environment (Air Emission)</value>
+    <value>Environment - Air Emission</value>
   </data>
   <data name="Menu_IncidentEnvironmentLeakage" xml:space="preserve">
-    <value>Environment (Leakage)</value>
+    <value>Environment - Leakage</value>
   </data>
   <data name="Menu_IncidentManagement" xml:space="preserve">
     <value>Incident Management</value>
@@ -169,34 +169,34 @@
     <value>OHS</value>
   </data>
   <data name="Menu_IncidentQualityCorporateImage" xml:space="preserve">
-    <value>Quality (Corporate Image)</value>
+    <value>Quality - Corporate Image</value>
   </data>
   <data name="Menu_IncidentQualityGeneration" xml:space="preserve">
-    <value>Quality (Generation)</value>
+    <value>Quality - Generation</value>
   </data>
   <data name="Menu_IncidentQualityNetwork" xml:space="preserve">
-    <value>Quality (Network)</value>
+    <value>Quality - Network</value>
   </data>
   <data name="Menu_IncidentSystemBilling" xml:space="preserve">
-    <value>System (Billing)</value>
+    <value>System - Billing</value>
   </data>
   <data name="Menu_IncidentSystemCallCentre" xml:space="preserve">
-    <value>System (Call Centre)</value>
+    <value>System - Call Centre</value>
   </data>
   <data name="Menu_IncidentSystemInvoicing" xml:space="preserve">
-    <value>System (Invoicing)</value>
+    <value>System - Invoicing</value>
   </data>
   <data name="Menu_IncidentSystemITSystem" xml:space="preserve">
-    <value>System (IT System)</value>
+    <value>System - IT System</value>
   </data>
   <data name="Menu_IncidentSystemNetworkConnectivity" xml:space="preserve">
-    <value>System (Network Connectivity)</value>
+    <value>System - Network Connectivity</value>
   </data>
   <data name="Menu_IncidentSystemOTSystem" xml:space="preserve">
-    <value>System (OT System)</value>
+    <value>System - OT System</value>
   </data>
   <data name="Menu_IncidentSystemSecurity" xml:space="preserve">
-    <value>System (Security)</value>
+    <value>System - Security</value>
   </data>
   <data name="Menu_OMSEventManagement" xml:space="preserve">
     <value>OMS Event Management</value>

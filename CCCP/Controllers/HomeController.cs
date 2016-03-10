@@ -27,6 +27,12 @@ namespace CCCP.Controllers
             return View();
         }
 
+        public ActionResult AlertSuccess(string message)
+        {
+            ViewBag.Message = message;
+            return PartialView("_AlertSuccess");
+        }
+
         [HttpPost]
         public ActionResult SetLanguage(string name, string currentUrl)
         {

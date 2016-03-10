@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentEnvironmentAirEmissionModel incident = new IncidentEnvironmentAirEmissionModel();
 
         // GET: IncidentEnvironmentAirEmissions
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentEnvironmentAirEmissionApiController().GetIncidentList());
         }
 
         // GET: IncidentEnvironmentAirEmissions/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentEnvironmentAirEmissionApiController().CreateIncident(incidentEnvironmentAirEmission);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentAirEmission.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentEnvironmentAirEmission);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentEnvironmentAirEmissionApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentAirEmissionId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentAirEmissionId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

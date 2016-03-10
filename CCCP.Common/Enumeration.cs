@@ -349,4 +349,11 @@ namespace CCCP.Common
         IncidentQualityCorporateImage_StatusUpdate
     }
     #endregion
+
+    #region Enum for Incident - Quality (Generation)
+    public enum IncidentQualityGenerationInputKey
+    {
+        IncidentQualityGeneration_NameOfPowerGenerator
+    }
+    #endregion
 }

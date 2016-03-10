@@ -241,7 +241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Environment (Air Emission).
+        ///   Looks up a localized string similar to Environment - Air Emission.
         /// </summary>
         internal static string Menu_IncidentEnvironmentAirEmission {
             get {
@@ -250,7 +250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Environment (Leakage).
+        ///   Looks up a localized string similar to Environment - Leakage.
         /// </summary>
         internal static string Menu_IncidentEnvironmentLeakage {
             get {
@@ -277,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quality (Corporate Image).
+        ///   Looks up a localized string similar to Quality - Corporate Image.
         /// </summary>
         internal static string Menu_IncidentQualityCorporateImage {
             get {
@@ -286,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quality (Generation).
+        ///   Looks up a localized string similar to Quality - Generation.
         /// </summary>
         internal static string Menu_IncidentQualityGeneration {
             get {
@@ -295,7 +295,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quality (Network).
+        ///   Looks up a localized string similar to Quality - Network.
         /// </summary>
         internal static string Menu_IncidentQualityNetwork {
             get {
@@ -304,7 +304,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (Billing).
+        ///   Looks up a localized string similar to System - Billing.
         /// </summary>
         internal static string Menu_IncidentSystemBilling {
             get {
@@ -313,7 +313,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (Call Centre).
+        ///   Looks up a localized string similar to System - Call Centre.
         /// </summary>
         internal static string Menu_IncidentSystemCallCentre {
             get {
@@ -322,7 +322,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (Invoicing).
+        ///   Looks up a localized string similar to System - Invoicing.
         /// </summary>
         internal static string Menu_IncidentSystemInvoicing {
             get {
@@ -331,7 +331,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (IT System).
+        ///   Looks up a localized string similar to System - IT System.
         /// </summary>
         internal static string Menu_IncidentSystemITSystem {
             get {
@@ -340,7 +340,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (Network Connectivity).
+        ///   Looks up a localized string similar to System - Network Connectivity.
         /// </summary>
         internal static string Menu_IncidentSystemNetworkConnectivity {
             get {
@@ -349,7 +349,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (OT System).
+        ///   Looks up a localized string similar to System - OT System.
         /// </summary>
         internal static string Menu_IncidentSystemOTSystem {
             get {
@@ -358,7 +358,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System (Security).
+        ///   Looks up a localized string similar to System - Security.
         /// </summary>
         internal static string Menu_IncidentSystemSecurity {
             get {

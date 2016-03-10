@@ -81,7 +81,7 @@
     }
 }
 
-<body class="skin-blue sidebar-mini @(Session["SidebarCollapse"] != null && Session["SidebarCollapse"] != "0" ? "sidebar-collapse" : "")">
+<body class="skin-blue sidebar-mini @(Session["SidebarCollapse"] != null && Session["SidebarCollapse"].ToString() != "0" ? "sidebar-collapse" : "")">
     <div class="wrapper">
 
         <header class="main-header">
@@ -103,13 +103,10 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="@Url.Content("~/Images/user3-128x128.jpg")" class="user-image" alt="User Image" />
                                 <span class="hidden-xs" style="height:auto">Alex Pierce</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- User image -->
                                 <li class="user-header">
-                                    <img src="@Url.Content("~/Images/user3-128x128.jpg")" class="img-circle" alt="User Image" />
                                     <p>
                                         Alex Pierce - Web Developer
                                         <small>Member since Nov. 2015</small>

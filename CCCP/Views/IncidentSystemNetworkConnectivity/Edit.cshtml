@@ -172,8 +172,8 @@
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId)</span>
-                    <a href="#"><span class="pull-right">@(incidentSystemNetworkConnectivity.GeneralEnquiryId == 0 ? "" : incidentSystemNetworkConnectivity.GeneralEnquiryId.ToString())</span></a>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.CreatedDateTime)</span>
@@ -182,10 +182,6 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.CrisisId)</span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.CrisisId)</span></a>
-                </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime)</span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemNetworkConnectivity.LastUpdatedDateTime)</span>
@@ -207,6 +203,7 @@
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
                 <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+                <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
             </ul>
 
             <div id="myTabContent" class="tab-content">
@@ -399,7 +396,7 @@
                 <div class="tab-pane fade" id="Checklists">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <fieldset class="scheduler-border">
                                     <legend class="scheduler-border">Legend</legend>
 
@@ -463,7 +460,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="col-lg-2"></div>
+                            <div class="col-lg-1"></div>
                         </div>
                     </div>
                 </div>
@@ -499,6 +496,19 @@
                 </div>
 
                 <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedGeneralEnquiry">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2"></div>

@@ -21,6 +21,8 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
+    @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
+
     <h1>
         <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemCallCentre
     </h1>

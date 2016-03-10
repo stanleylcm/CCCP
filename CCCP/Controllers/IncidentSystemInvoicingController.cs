@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentSystemInvoicingModel incident = new IncidentSystemInvoicingModel();
 
         // GET: IncidentSystemInvoicings
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentSystemInvoicingApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemInvoicings/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemInvoicingApiController().CreateIncident(incidentSystemInvoicing);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemInvoicing.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentSystemInvoicing);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemInvoicingApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

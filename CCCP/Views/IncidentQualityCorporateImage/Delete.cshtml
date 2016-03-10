@@ -58,8 +58,8 @@
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.GeneralEnquiryId)</span>
-                    <a href="#"><span class="pull-right">@(Model.Entity.GeneralEnquiryId == 0 ? "" : Model.Entity.GeneralEnquiryId.ToString())</span></a>
+                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span>
@@ -68,10 +68,6 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
-                </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</span>
                     <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
@@ -164,7 +160,7 @@
                 <div class="tab-pane fade" id="Checklists">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <fieldset class="scheduler-border">
                                     <legend class="scheduler-border">Legend</legend>
 
@@ -228,7 +224,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="col-lg-2"></div>
+                            <div class="col-lg-1"></div>
                         </div>
                     </div>
                 </div>

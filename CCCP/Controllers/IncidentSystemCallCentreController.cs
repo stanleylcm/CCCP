@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentSystemCallCentreModel incident = new IncidentSystemCallCentreModel();
 
         // GET: IncidentSystemCallCentres
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentSystemCallCentreApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemCallCentres/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemCallCentreApiController().CreateIncident(incidentSystemCallCentre);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemCallCentre.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentSystemCallCentre);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemCallCentreApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemCallCentreId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemCallCentreId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

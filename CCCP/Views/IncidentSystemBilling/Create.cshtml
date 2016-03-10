@@ -205,6 +205,7 @@
                                             }
                                         }
                                         <input type="hidden" id="incidentSystemBilling_MitigatingAction" name="incidentSystemBilling.MitigatingAction" value="" />
+                                        <input type="hidden" id="incidentSystemBilling_MitigatingActionOthers" name="incidentSystemBilling.MitigatingActionOthers" value="" />
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -248,7 +249,7 @@
         $("input[type=checkbox][id^=ContactedBy]").on("click", function () {
             var sList = "";
             var i = 0;
-            $("input[type=checkbox][id^=ContactedBy]").each(function(){
+            $("input[type=checkbox][id^=ContactedBy]").each(function () {
                 if (this.checked) {
                     if (i == 0) {
                         sList = $(this).val();
@@ -264,6 +265,7 @@
         $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
             var sList = "";
             var i = 0;
+            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
                 if (this.checked) {
                     if (i == 0) {
@@ -272,7 +274,7 @@
                         sList = sList + ", " + $(this).val();
                     }
                     if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                        $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
                     }
                     i++;
                 }
@@ -283,6 +285,7 @@
         $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
             var sList = "";
             var i = 0;
+            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
                 if (this.checked) {
                     if (i == 0) {
@@ -291,7 +294,7 @@
                         sList = sList + ", " + $(this).val();
                     }
                     if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                        $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
                     }
                     i++;
                 }
@@ -308,6 +311,9 @@
                 $('#CreateMitigatingAction').show();
             } else {
                 $('#CreateMitigatingAction').hide();
+
+                $("#incidentSystemBilling_MitigatingAction").val(" ");
+                $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
             }
         });
 
@@ -316,6 +322,9 @@
                 $('#CreateMitigatingAction').show();
             } else {
                 $('#CreateMitigatingAction').hide();
+
+                $("#incidentSystemBilling_MitigatingAction").val(" ");
+                $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
             }
         });
 

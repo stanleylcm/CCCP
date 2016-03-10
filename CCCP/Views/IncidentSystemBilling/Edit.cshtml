@@ -10,185 +10,193 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-	    $(function() {
-		    $('#accordion').on('show.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-left");
-			    $('#HistoryIcon').addClass("fa-angle-down");
-		    });
-		    $('#accordion').on('hide.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-down");
-			    $('#HistoryIcon').addClass("fa-angle-left");
-		    });
-
-		    $('#Checklists input[type="checkbox"]').each(function () {
-			    value = $(this).val();
-			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
-		    });
-
-		    $('.bootstrap-checkbox').on('click', function(evnet){
-
-		        $.ajax({
-		            url: "/IncidentSystemBilling/ToggleActionStatus",
-		            type: "POST",
-		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
-		            dataType: "html",
-		            contentType: "application/json; charset=utf-8",
-		            success: function (data) {
-		                return true;
-		            },
-		            error: function () {
-		                alert("An error has occured!!!");
-		            }
-		        });
-		    });
-	    });
-
-	    $("input[type=checkbox][id^=ContactedBy]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=ContactedBy]").each(function(){
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemBilling_ContactedBy").val(sList);
-	    });
-
-	    $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemBilling_MitigatingAction").val(sList);
-	    });
-
-	    $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemBilling_MitigatingAction").val(sList);
-	    });
-
-        $("#incidentSystemBilling_IsDrillMode").on("click", function () {
-	        $(this).val(this.checked);
+    $(function () {
+        $('#accordion').on('show.bs.collapse', function () {
+            $('#HistoryIcon').removeClass("fa-angle-left");
+            $('#HistoryIcon').addClass("fa-angle-down");
+        });
+        $('#accordion').on('hide.bs.collapse', function () {
+            $('#HistoryIcon').removeClass("fa-angle-down");
+            $('#HistoryIcon').addClass("fa-angle-left");
         });
 
-        $('#incidentSystemBilling_RequireMitigatingAction').on("change", function () {
-            if ($(this).val().toUpperCase() == "YES") {
-                $('#EditMitigatingAction').show();
+        $('#Checklists input[type="checkbox"]').each(function () {
+            value = $(this).val();
+            $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+        });
 
-                var sList = "";
-                var i = 0;
-                $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-                    if (this.checked) {
-                        if (i == 0) {
-                            sList = $(this).val();
-                        } else {
-                            sList = sList + ", " + $(this).val();
-                        }
-                        if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                            sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
-                        }
-                        i++;
+        $('.bootstrap-checkbox').on('click', function (evnet) {
+
+            $.ajax({
+                url: "/IncidentSystemBilling/ToggleActionStatus",
+                type: "POST",
+                data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    return true;
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        });
+    });
+
+    $("input[type=checkbox][id^=ContactedBy]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=ContactedBy]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                i++;
+            }
+        });
+        $("#incidentSystemBilling_ContactedBy").val(sList);
+    });
+
+    $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                    $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
+                }
+                i++;
+            }
+        });
+        $("#incidentSystemBilling_MitigatingAction").val(sList);
+    });
+
+    $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
+        var sList = "";
+        var i = 0;
+        $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                    $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
+                }
+                i++;
+            }
+        });
+        $("#incidentSystemBilling_MitigatingAction").val(sList);
+    });
+
+    $("#incidentSystemBilling_IsDrillMode").on("click", function () {
+        $(this).val(this.checked);
+    });
+
+    $('#incidentSystemBilling_RequireMitigatingAction').on("change", function () {
+        if ($(this).val().toUpperCase() == "YES") {
+            $('#EditMitigatingAction').show();
+
+            var sList = "";
+            var i = 0;
+            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+            $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
                     }
-                });
-                $("#incidentSystemBilling_MitigatingAction").val(sList);
-            } else {
-                $('#EditMitigatingAction').hide();
-                $('#incidentSystemBilling_MitigatingAction').val('');
-            }
-        });
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
+                        $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemBilling_MitigatingAction").val(sList);
+        } else {
+            $('#EditMitigatingAction').hide();
 
-        $(document).ready(function () {
-            if ($('#incidentSystemBilling_RequireMitigatingAction').val().toUpperCase() == "YES") {
-                $('#EditMitigatingAction').show();
-            } else {
-                $('#EditMitigatingAction').hide();
-            }
-        });
+            $("#incidentSystemBilling_MitigatingAction").val(" ");
+            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+        }
+    });
 
-        $('#btnUpdate').on('click', function (event) {
-            var inputValid = true;
-            var errMsg = '';
+    $(document).ready(function () {
+        if ($('#incidentSystemBilling_RequireMitigatingAction').val().toUpperCase() == "YES") {
+            $('#EditMitigatingAction').show();
+        } else {
+            $('#EditMitigatingAction').hide();
 
-            if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
-            }
+            $("#incidentSystemBilling_MitigatingAction").val(" ");
+            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+        }
+    });
 
-            if ($('#incidentSystemBilling_ProblemArea').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nProblem Area cannot be empty<br />';
-            }
+    $('#btnUpdate').on('click', function (event) {
+        var inputValid = true;
+        var errMsg = '';
 
-            if ($('#incidentSystemBilling_PossibleCause').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
-            }
-            /*
-            if ($('#incidentSystemBilling_BillingErrorSeriousness').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\Billing Error Seriousness cannot be empty<br />';
-            }
-            */
-            if ($('#incidentSystemBilling_ExpectedAffectedCustomerBill').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nExpected Affected Customer Bill cannot be empty<br />';
-            }
+        if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+        }
 
-            if ($('#incidentSystemBilling_ContactedBy').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nContacted By cannot be empty<br />';
-            }
+        if ($('#incidentSystemBilling_ProblemArea').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nProblem Area cannot be empty<br />';
+        }
 
-            if ($('#incidentSystemBilling_Impact').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nImpact cannot be empty<br />';
-            }
+        if ($('#incidentSystemBilling_PossibleCause').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
+        }
+        /*
+        if ($('#incidentSystemBilling_BillingErrorSeriousness').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\Billing Error Seriousness cannot be empty<br />';
+        }
+        */
+        if ($('#incidentSystemBilling_ExpectedAffectedCustomerBill').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nExpected Affected Customer Bill cannot be empty<br />';
+        }
 
-            if ($('#incidentSystemBilling_StatusUpdate').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
-            }
+        if ($('#incidentSystemBilling_ContactedBy').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nContacted By cannot be empty<br />';
+        }
 
-            if (inputValid == false) {
-                $('#CCCPModal').find('.modal-body').html(errMsg);
-                $('#CCCPModal').find('.modal-title').html('Update Error');
-                $('#CCCPModal').modal('toggle');
+        if ($('#incidentSystemBilling_Impact').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nImpact cannot be empty<br />';
+        }
 
-                event.preventDefault();
-            }
+        if ($('#incidentSystemBilling_StatusUpdate').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
+        }
 
-            return inputValid;
-        });
+        if (inputValid == false) {
+            $('#CCCPModal').find('.modal-body').html(errMsg);
+            $('#CCCPModal').find('.modal-title').html('Update Error');
+            $('#CCCPModal').modal('toggle');
+
+            event.preventDefault();
+        }
+
+        return inputValid;
+    });
     </script>
 }
 
@@ -217,8 +225,8 @@
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.GeneralEnquiryId)</span>
-                    <a href="#"><span class="pull-right">@(incidentSystemBilling.GeneralEnquiryId == 0 ? "" : incidentSystemBilling.GeneralEnquiryId.ToString())</span></a>
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CreatedDateTime)</span>
@@ -227,10 +235,6 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CrisisId)</span></a>
-                </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.LastUpdatedDateTime)</span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.LastUpdatedDateTime)</span>
@@ -252,6 +256,7 @@
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
                 <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+                <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
             </ul>
 
             <div id="myTabContent" class="tab-content">
@@ -440,8 +445,9 @@
                                                         }
                                                         countMitigatingAction++;
                                                     }
-                                                }
+                                                }                                               
                                                 @Html.HiddenFor(model => incidentSystemBilling.MitigatingAction, new { @Value = incidentSystemBilling.MitigatingAction })
+                                                @Html.HiddenFor(model => incidentSystemBilling.MitigatingActionOthers, new { @Value = incidentSystemBilling.MitigatingActionOthers })
                                                 @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -475,7 +481,7 @@
                 <div class="tab-pane fade" id="Checklists">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <fieldset class="scheduler-border">
                                     <legend class="scheduler-border">Legend</legend>
 
@@ -539,7 +545,7 @@
                                         }
                                 </div>
                             </div>
-                            <div class="col-lg-2"></div>
+                            <div class="col-lg-1"></div>
                         </div>
                     </div>
                 </div>
@@ -575,6 +581,19 @@
                 </div>
 
                 <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedGeneralEnquiry">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2"></div>

@@ -157,10 +157,10 @@
     <value>General Enquiry</value>
   </data>
   <data name="Menu_IncidentEnvironmentAirEmission" xml:space="preserve">
-    <value>環境 (Air Emission)</value>
+    <value>環境 - Air Emission</value>
   </data>
   <data name="Menu_IncidentEnvironmentLeakage" xml:space="preserve">
-    <value>環境 (Leakage)</value>
+    <value>環境 - Leakage</value>
   </data>
   <data name="Menu_IncidentManagement" xml:space="preserve">
     <value>Incident Management</value>
@@ -169,34 +169,34 @@
     <value>OHS</value>
   </data>
   <data name="Menu_IncidentQualityCorporateImage" xml:space="preserve">
-    <value>品質 (Corporate Image)</value>
+    <value>品質 -Corporate Image</value>
   </data>
   <data name="Menu_IncidentQualityGeneration" xml:space="preserve">
-    <value>品質 (Generation)</value>
+    <value>品質 - Generation</value>
   </data>
   <data name="Menu_IncidentQualityNetwork" xml:space="preserve">
-    <value>品質 (Network)</value>
+    <value>品質 - Network</value>
   </data>
   <data name="Menu_IncidentSystemBilling" xml:space="preserve">
-    <value>系統 (Billing)</value>
+    <value>系統 - Billing</value>
   </data>
   <data name="Menu_IncidentSystemCallCentre" xml:space="preserve">
-    <value>系統 (Call Centre)</value>
+    <value>系統 - Call Centre</value>
   </data>
   <data name="Menu_IncidentSystemInvoicing" xml:space="preserve">
-    <value>系統 (Invoicing)</value>
+    <value>系統 - Invoicing</value>
   </data>
   <data name="Menu_IncidentSystemITSystem" xml:space="preserve">
-    <value>系統 (IT System)</value>
+    <value>系統 - IT System</value>
   </data>
   <data name="Menu_IncidentSystemNetworkConnectivity" xml:space="preserve">
-    <value>系統 (Network Connectivity)</value>
+    <value>系統 - Network Connectivity</value>
   </data>
   <data name="Menu_IncidentSystemOTSystem" xml:space="preserve">
-    <value>系統 (OT System)</value>
+    <value>系統 - OT System</value>
   </data>
   <data name="Menu_IncidentSystemSecurity" xml:space="preserve">
-    <value>系統 (Security)</value>
+    <value>系統 - Security</value>
   </data>
   <data name="Menu_OMSEventManagement" xml:space="preserve">
     <value>OMS Event Management</value>

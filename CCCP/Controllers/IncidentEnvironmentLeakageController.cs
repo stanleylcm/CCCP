@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentEnvironmentLeakageModel incident = new IncidentEnvironmentLeakageModel();
 
         // GET: IncidentEnvironmentLeakages
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentEnvironmentLeakageApiController().GetIncidentList());
         }
 
         // GET: IncidentEnvironmentLeakages/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentEnvironmentLeakageApiController().CreateIncident(incidentEnvironmentLeakage);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentLeakage.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentEnvironmentLeakage);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentEnvironmentLeakageApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentLeakageId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentLeakageId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

@@ -25,6 +25,10 @@ namespace CCCP.Business.Model
         
         public string GetLastUpdatedBy()
         {
+            // hardcord for demo...
+            Entity.LoginName = "alexpierce";
+            Entity.DisplayName = "Alex Pierce";
+
             return string.Format("{0} ({1})", Entity.LoginName, Entity.DisplayName);
         }
     }

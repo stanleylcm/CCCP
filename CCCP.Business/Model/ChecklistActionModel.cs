@@ -49,6 +49,9 @@ namespace CCCP.Business.Model
                 case CheckListActionStatus.Completed: { ActionStatus = CheckListActionStatus.Pending; break; }
             }
 
+            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            Entity.LastUpdatedDateTime = DateTime.Now;
+
             HasUpdate = true;
 
         }

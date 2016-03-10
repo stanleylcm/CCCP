@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentQualityCorporateImageModel incident = new IncidentQualityCorporateImageModel();
 
         // GET: IncidentQualityCorporateImages
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentQualityCorporateImageApiController().GetIncidentList());
         }
 
         // GET: IncidentQualityCorporateImages/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentQualityCorporateImageApiController().CreateIncident(incidentQualityCorporateImage);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentQualityCorporateImage.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentQualityCorporateImage);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentQualityCorporateImageApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityCorporateImageId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityCorporateImageId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

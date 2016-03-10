@@ -20,14 +20,16 @@ namespace CCCP.Controllers
         public IncidentSystemOTSystemModel incident = new IncidentSystemOTSystemModel();
 
         // GET: IncidentSystemOTSystems
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View(new IncidentSystemOTSystemApiController().GetIncidentList());
         }
 
         // GET: IncidentSystemOTSystems/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string message)
         {
+            ViewBag.Message = message;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,7 +64,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemOTSystemApiController().CreateIncident(incidentSystemOTSystem);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemOTSystem.IncidentNo + " have been created successfully!" });
             }
 
             return View(incidentSystemOTSystem);
@@ -104,7 +106,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemOTSystemApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemOTSystemId });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemOTSystemId, message = "Incident have been updated successfully!" });
             }
             return View(incident);
         }

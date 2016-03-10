@@ -1067,7 +1067,8 @@ a:focus {
   border-bottom-left-radius: 4px;
 }
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
-  height: 175px;
+  /*height: 175px;*/
+  height: 75px;
   padding: 10px;
   text-align: center;
 }
@@ -2311,6 +2312,7 @@ a:focus {
 }
 .alert-success {
   border-color: #008d4c;
+  background-image:none!important;
 }
 .alert-danger,
 .alert-error {
