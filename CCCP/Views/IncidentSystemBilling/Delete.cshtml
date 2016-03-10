@@ -115,7 +115,7 @@
 
 										<div class="row">
 											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentBackground)</div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
 										</div>
 
 										<div class="row">
@@ -171,7 +171,12 @@
 
 										<div class="row">
 											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MitigatingAction) @(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others.ToEnumString()) ? "(" + Model.Entity.MitigatingActionOthers + ")" : "")</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.MitigatingAction)<br />
+                                                @Html.Raw(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others.ToEnumString()) ?
+                                                    (Model.Entity.MitigatingActionOthers != null ? Model.Entity.MitigatingActionOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
 										</div>
 									</div>
 								</div>
