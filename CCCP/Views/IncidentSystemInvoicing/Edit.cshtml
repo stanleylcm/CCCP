@@ -308,7 +308,7 @@
 											<div class="col-lg-1"></div>
 											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemInvoicing.IncidentBackground)</label></div>
 											<div class="col-lg-4">
-												@Html.EditorFor(model => incidentSystemInvoicing.IncidentBackground, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.EditorFor(model => incidentSystemInvoicing.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 												@Html.ValidationMessageFor(model => incidentSystemInvoicing.IncidentBackground, "", new { @class = "text-danger" })
 											</div>
 										</div>

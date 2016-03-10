@@ -45,6 +45,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -112,6 +113,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -179,6 +181,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -242,6 +245,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -307,6 +311,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -370,6 +375,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -437,6 +443,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -498,6 +505,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -561,6 +569,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -630,6 +639,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -689,6 +699,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
@@ -752,6 +763,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
         [Display(Name = "Incident Background")]
+        [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
         [Display(Name = "Is Drill Mode?")]
         public Nullable<bool> IsDrillMode { get; set; }
