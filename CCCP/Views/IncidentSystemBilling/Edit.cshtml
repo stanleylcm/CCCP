@@ -62,36 +62,12 @@
     $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
         var sList = "";
         var i = 0;
-        $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
         $("input[type=checkbox][id^=MitigatingAction]").each(function () {
             if (this.checked) {
                 if (i == 0) {
                     sList = $(this).val();
                 } else {
                     sList = sList + ", " + $(this).val();
-                }
-                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                    $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
-                }
-                i++;
-            }
-        });
-        $("#incidentSystemBilling_MitigatingAction").val(sList);
-    });
-
-    $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
-        var sList = "";
-        var i = 0;
-        $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
-        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-            if (this.checked) {
-                if (i == 0) {
-                    sList = $(this).val();
-                } else {
-                    sList = sList + ", " + $(this).val();
-                }
-                if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                    $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
                 }
                 i++;
             }
@@ -109,16 +85,12 @@
 
             var sList = "";
             var i = 0;
-            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
                 if (this.checked) {
                     if (i == 0) {
                         sList = $(this).val();
                     } else {
                         sList = sList + ", " + $(this).val();
-                    }
-                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                        $("#incidentSystemBilling_MitigatingActionOthers").val($("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val());
                     }
                     i++;
                 }
@@ -127,8 +99,8 @@
         } else {
             $('#EditMitigatingAction').hide();
 
-            $("#incidentSystemBilling_MitigatingAction").val(" ");
-            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+            $("#incidentSystemBilling_MitigatingAction").val("");
+            $("#incidentSystemBilling_MitigatingActionOthers").val("");
         }
     });
 
@@ -138,8 +110,8 @@
         } else {
             $('#EditMitigatingAction').hide();
 
-            $("#incidentSystemBilling_MitigatingAction").val(" ");
-            $("#incidentSystemBilling_MitigatingActionOthers").val(" ");
+            $("#incidentSystemBilling_MitigatingAction").val("");
+            $("#incidentSystemBilling_MitigatingActionOthers").val("");
         }
     });
 
@@ -193,6 +165,13 @@
             $('#CCCPModal').modal('toggle');
 
             event.preventDefault();
+        }
+
+        if ($('#incidentSystemBilling_RequireMitigatingAction').val() != "Yes") {
+            $("#incidentSystemBilling_MitigatingAction").val("");
+            $("#incidentSystemBilling_MitigatingActionOthers").val("");
+        } else if ($("#incidentSystemBilling_MitigatingAction").val().indexOf("Others") < 0) {
+            $("#incidentSystemBilling_MitigatingActionOthers").val("");
         }
 
         return inputValid;
@@ -429,25 +408,15 @@
                                                     int countMitigatingAction = 0;
                                                     foreach (string one in Model.Options_MitigatingAction)
                                                     {
-                                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
-                                                        if (one != IncidentSystemBillingMitigatingAction.Others.ToEnumString())
+                                                        <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label><br />
+                                                        if (one == IncidentSystemBillingMitigatingAction.Others.ToEnumString())
                                                         {
-                                                            <br />
-                                                        }
-                                                        else
-                                                        {
-                                                            string sMore = "";
-                                                            if (incidentSystemBilling.MitigatingAction != null && incidentSystemBilling.MitigatingAction.IsContains(one))
-                                                            {
-                                                                sMore = incidentSystemBilling.MitigatingAction.Substring(incidentSystemBilling.MitigatingAction.IndexOf('(') + 1, incidentSystemBilling.MitigatingAction.IndexOf(')') - incidentSystemBilling.MitigatingAction.IndexOf('(') - 1);
-                                                            }
-                                                            <input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="@sMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                            @Html.EditorFor(model => incidentSystemBilling.MitigatingActionOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:620px" } })
                                                         }
                                                         countMitigatingAction++;
                                                     }
                                                 }                                               
                                                 @Html.HiddenFor(model => incidentSystemBilling.MitigatingAction, new { @Value = incidentSystemBilling.MitigatingAction })
-                                                @Html.HiddenFor(model => incidentSystemBilling.MitigatingActionOthers, new { @Value = incidentSystemBilling.MitigatingActionOthers })
                                                 @Html.ValidationMessageFor(model => incidentSystemBilling.MitigatingAction, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

@@ -69,6 +69,8 @@ namespace CCCP.ViewModel
         public string RequireMitigatingAction { get; set; }
         [Display(Name = "Mitigating Action")]
         public string MitigatingAction { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string MitigatingActionOthers { get; set; }
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }
         [Display(Name = "Created Date Time")]
