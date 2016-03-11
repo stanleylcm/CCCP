@@ -53,6 +53,14 @@ namespace CCCP.Business.Model
             }
             return true;
         }
+        public bool IsInProgress()
+        {
+            foreach (ChecklistActionModel checklistAction in ChecklistActions)
+            {
+                if (checklistAction.ActionStatus == CheckListActionStatus.In_Progress || checklistAction.ActionStatus == CheckListActionStatus.Completed) return true;
+            }
+            return false; 
+        }
 
         #endregion
 

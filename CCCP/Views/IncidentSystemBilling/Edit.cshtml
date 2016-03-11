@@ -409,7 +409,7 @@
                                                     foreach (string one in Model.Options_MitigatingAction)
                                                     {
                                                         <input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemBilling.MitigatingAction != null ? (incidentSystemBilling.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label><br />
-                                                        if (one == IncidentSystemBillingMitigatingAction.Others.ToEnumString())
+                                                        if (one.IsEquals(IncidentSystemBillingMitigatingAction.Others_9please_specify0.ToEnumString()))
                                                         {
                                                             @Html.EditorFor(model => incidentSystemBilling.MitigatingActionOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:620px" } })
                                                         }
@@ -471,7 +471,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills nav-justified">
+                                <ul class="nav nav-pills">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)

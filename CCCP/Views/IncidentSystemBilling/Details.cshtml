@@ -203,7 +203,7 @@
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
                                             <div class="col-lg-6">
                                                 @Html.DisplayFor(model => model.Entity.MitigatingAction)<br/>
-                                                @Html.Raw(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others.ToEnumString()) ?
+                                                @Html.Raw(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others_9please_specify0.ToEnumString()) ?
                                                     (Model.Entity.MitigatingActionOthers != null ? Model.Entity.MitigatingActionOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
                                                     "")
                                             </div>
@@ -358,7 +358,7 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Edit</button>
             </div>
             <br/>
 

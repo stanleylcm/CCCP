@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CCCP.Common;
 using CCCP.ViewModel;
+using CCCP.Business.Model;
 
 namespace CCCP.Business.Service
 {
@@ -18,17 +19,15 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemBilling incident)
         {
             // Level 3
-            //if (incident.ContactedBy.IsEquals("Media")) return IncidentLevel.Level3;
             if (incident.ContactedBy.IsContains("Media")) return IncidentLevel.Level_3;
 
             // Level 2
             if (incident.BillingErrorSeriousness.IsEquals("Danger Zone") &&
-                //(incident.ContactedBy.IsEquals("Consumer Council") || incident.ContactedBy.IsEquals("Government"))
                 (incident.ContactedBy.IsContains("Consumer Council") || incident.ContactedBy.IsContains("Government"))
                 ) return IncidentLevel.Level_2;
 
-            // else
-            return IncidentLevel.None;
+            // else default level 1
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -202,6 +201,33 @@ namespace CCCP.Business.Service
             }
 
             return Result;
+        }
+
+        public static IncidentStatus GetIncidentStatus(IIncidentModel model, IncidentStatus originalStatus)
+        {
+            // original status
+            IncidentStatus result = originalStatus;
+
+            // Crisis status would be updated by Crisis module
+
+            // In progress
+            if (isInProgress(model)) result = IncidentStatus.In_Progress;
+
+            // Ready For Close
+            if (IsReadyForClose(model)) result = IncidentStatus.Ready_For_Close;
+
+            return result;
+        }
+        public static bool IsReadyForClose(IIncidentModel model)
+        {
+            // check checklist's compulsory actions had been completed or not
+            foreach (ChecklistModel checklist in model.Checklists) if (!checklist.IsAllCompulsoryCompleted()) return false;
+            return true;
+        }
+        private static bool isInProgress(IIncidentModel model)
+        {
+            foreach (ChecklistModel checklist in model.Checklists) if (checklist.IsInProgress()) return true;
+            return false;
         }
     }
 }

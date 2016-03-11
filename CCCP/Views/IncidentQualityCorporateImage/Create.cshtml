@@ -81,7 +81,7 @@
                                             foreach (string one in Model.Options_PossibleCause)
                                             {
                                                 <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label>
-                                                if (one != IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())
+                                                if (!one.IsEquals(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString()))
                                                 {
                                                     <br />
                                                 }
@@ -106,7 +106,7 @@
                                             foreach (string one in Model.Options_Impact)
                                             {
                                                 <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" /><label for="Impact@(countImpact.ToString())"> @one</label>
-                                                if (one != IncidentQualityCorporateImageImpact.Others.ToEnumString())
+                                                if (!one.IsEquals(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString()))
                                                 {
                                                     <br />
                                                 }
@@ -193,8 +193,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+                    if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
+                        sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }
@@ -202,7 +202,7 @@
             $("#incidentQualityCorporateImage_PossibleCause").val(sList);
         });
 
-        $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").change(function () {
+        $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").change(function () {
         var sList = "";
         var i = 0;
         $("input[type=checkbox][id^=PossibleCause]").each(function () {
@@ -212,8 +212,8 @@
                 } else {
                     sList = sList + ", " + $(this).val();
                 }
-                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
-                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
+                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }
@@ -231,8 +231,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
+                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }
@@ -240,7 +240,7 @@
             $("#incidentQualityCorporateImage_Impact").val(sList);
         });
 
-        $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").change(function () {
+        $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").change(function () {
             var sList = "";
             var i = 0;
             $("input[type=checkbox][id^=Impact]").each(function () {
@@ -250,8 +250,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+                    if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
+                        sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }

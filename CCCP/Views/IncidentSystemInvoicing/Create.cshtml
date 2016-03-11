@@ -195,7 +195,7 @@
 											foreach (string one in Model.Options_MitigatingAction)
 											{
 												<input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
-												if (one != IncidentSystemInvoicingMitigatingAction.Others.ToEnumString())
+												if (one != IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())
 												{ 
 												<br />
 												}
@@ -290,8 +290,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others_9please_specify0.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }
@@ -299,7 +299,7 @@
             $("#incidentSystemInvoicing_MitigatingAction").val(sList);
         });
 
-        $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
+        $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").change(function () {
             var sList = "";
             var i = 0;
             $("input[type=checkbox][id^=MitigatingAction]").each(function () {
@@ -309,8 +309,8 @@
                     } else {
                         sList = sList + ", " + $(this).val();
                     }
-                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others.ToEnumString())") {
-                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                    if ($(this).val() == "@(IncidentSystemBillingMitigatingAction.Others_9please_specify0.ToEnumString())") {
+                        sList = sList + " (" + $("#MitigatingAction@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
                     }
                     i++;
                 }
