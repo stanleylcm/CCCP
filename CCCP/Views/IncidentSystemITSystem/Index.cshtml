@@ -71,7 +71,7 @@
                             <tr>
                                 <td><a href="@Url.Action("Details", "IncidentSystemITSystem", new { id = item.IncidentSystemITSystemId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
                                 <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
-                                <td>@Html.DisplayFor(model => item.IncidentBackground)</td>
+                                <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
                                 <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
                                 <td>@Html.DisplayFor(model => item.CreatedBy)</td>
                                 <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
