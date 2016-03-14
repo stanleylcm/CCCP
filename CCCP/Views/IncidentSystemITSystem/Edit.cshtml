@@ -471,8 +471,8 @@
                                             <thead>
                                             <th></th>
                                             <th>Action</th>
-                                            <th>Completed By</th>
-                                            <th>Completed Datetime</th>
+                                            <th>Last Updated By</th>
+                                            <th>Last Updated Datetime</th>
                                             </thead>
                                             <tbody>
                                                 @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
@@ -480,8 +480,8 @@
                                                     <tr>
                                                         <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
                                                         <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
-                                                        <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
-                                                        <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                        <td>@action.Entity.LastUpdatedBy</td>
+                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
                                                     </tr>
                                                     countChecklistAction++;
                                                 }
