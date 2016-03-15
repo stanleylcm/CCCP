@@ -136,88 +136,88 @@
     <value>更新</value>
   </data>
   <data name="Menu_AuditTrailExport" xml:space="preserve">
-    <value>Audit Trail Export</value>
+    <value>系統日誌匯出</value>
   </data>
   <data name="Menu_BusinessDataMaintenance" xml:space="preserve">
-    <value>Business Data Maintenance</value>
+    <value>系統參數管理</value>
   </data>
   <data name="Menu_ChecklistMaintenance" xml:space="preserve">
-    <value>Checklist Maintenance</value>
+    <value>清單管理</value>
   </data>
   <data name="Menu_CrisisApproval" xml:space="preserve">
-    <value>Crisis Approval</value>
+    <value>危機批予</value>
   </data>
   <data name="Menu_CrisisManagement" xml:space="preserve">
-    <value>Crisis Management</value>
+    <value>危機管理</value>
   </data>
   <data name="Menu_Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>儀表板</value>
   </data>
   <data name="Menu_GeneralEnquiry" xml:space="preserve">
-    <value>General Enquiry</value>
+    <value>一般查詢</value>
   </data>
   <data name="Menu_IncidentEnvironmentAirEmission" xml:space="preserve">
-    <value>環境 - Air Emission</value>
+    <value>環境 - 空氣排放</value>
   </data>
   <data name="Menu_IncidentEnvironmentLeakage" xml:space="preserve">
-    <value>環境 - Leakage</value>
+    <value>環境 - 洩漏</value>
   </data>
   <data name="Menu_IncidentManagement" xml:space="preserve">
-    <value>Incident Management</value>
+    <value>事件管理</value>
   </data>
   <data name="Menu_IncidentOHS" xml:space="preserve">
-    <value>OHS</value>
+    <value>職業安全與健康</value>
   </data>
   <data name="Menu_IncidentQualityCorporateImage" xml:space="preserve">
-    <value>品質 -Corporate Image</value>
+    <value>品質 -企業形象</value>
   </data>
   <data name="Menu_IncidentQualityGeneration" xml:space="preserve">
-    <value>品質 - Generation</value>
+    <value>品質 - 生產</value>
   </data>
   <data name="Menu_IncidentQualityNetwork" xml:space="preserve">
-    <value>品質 - Network</value>
+    <value>品質 - 網絡</value>
   </data>
   <data name="Menu_IncidentSystemBilling" xml:space="preserve">
-    <value>系統 - Billing</value>
+    <value>系統 - 開票</value>
   </data>
   <data name="Menu_IncidentSystemCallCentre" xml:space="preserve">
-    <value>系統 - Call Centre</value>
+    <value>系統 - 傳呼中心</value>
   </data>
   <data name="Menu_IncidentSystemInvoicing" xml:space="preserve">
-    <value>系統 - Invoicing</value>
+    <value>系統 - 帳單</value>
   </data>
   <data name="Menu_IncidentSystemITSystem" xml:space="preserve">
-    <value>系統 - IT System</value>
+    <value>系統 - 信息技術系統</value>
   </data>
   <data name="Menu_IncidentSystemNetworkConnectivity" xml:space="preserve">
-    <value>系統 - Network Connectivity</value>
+    <value>系統 - 網絡連接</value>
   </data>
   <data name="Menu_IncidentSystemOTSystem" xml:space="preserve">
-    <value>系統 - OT System</value>
+    <value>系統 - 運營團隊系統</value>
   </data>
   <data name="Menu_IncidentSystemSecurity" xml:space="preserve">
-    <value>系統 - Security</value>
+    <value>系統 - 安全</value>
   </data>
   <data name="Menu_OMSEventManagement" xml:space="preserve">
-    <value>OMS Event Management</value>
+    <value>OMS 事件管理</value>
   </data>
   <data name="Menu_Report" xml:space="preserve">
     <value>報表</value>
   </data>
   <data name="Menu_ReportIncidentDetails" xml:space="preserve">
-    <value>Incident Details</value>
+    <value>事件詳細</value>
   </data>
   <data name="Menu_ReportIncidentDetailsForCOT" xml:space="preserve">
-    <value>Incident Details for COT</value>
+    <value>COT 事件詳細</value>
   </data>
   <data name="Menu_ReportIncidentSummary" xml:space="preserve">
-    <value>Incident Summary</value>
+    <value>事件概要</value>
   </data>
   <data name="Menu_RoleMaintenance" xml:space="preserve">
-    <value>Role Maintenance</value>
+    <value>系統角色管理</value>
   </data>
   <data name="Menu_UserAccountMaintenance" xml:space="preserve">
-    <value>User Account Maintenance</value>
+    <value>系統用戶帳號管理</value>
   </data>
   <data name="Sidebar_GeneralSettings" xml:space="preserve">
     <value>基本設定</value>
@@ -226,7 +226,7 @@
     <value>語言</value>
   </data>
   <data name="SiteTitle" xml:space="preserve">
-    <value>CCCP</value>
+    <value>危機溝通協調平台</value>
   </data>
   <data name="UserMenu_Profile" xml:space="preserve">
     <value>個人資料</value>
@@ -235,24 +235,33 @@
     <value>登出</value>
   </data>
   <data name="Label_DeleteIncident" xml:space="preserve">
-    <value>你確定要刪除?</value>
+    <value>你確定要删除這個事件?</value>
   </data>
   <data name="Label_History" xml:space="preserve">
     <value>歷史</value>
   </data>
   <data name="Func_CloseIncident" xml:space="preserve">
-    <value>Close Incident</value>
+    <value>關閉事件</value>
   </data>
   <data name="Func_EscalateToCrisis" xml:space="preserve">
-    <value>Escalate to Crisis</value>
+    <value>升級到危機</value>
   </data>
   <data name="Label_CloseIncident" xml:space="preserve">
-    <value>Are you sure to you want to close this Incident?</value>
+    <value>你確定要關閉這個事件?</value>
   </data>
   <data name="Func_Export" xml:space="preserve">
     <value>匯出</value>
   </data>
   <data name="Label_Details" xml:space="preserve">
-    <value>Details</value>
+    <value>詳細</value>
+  </data>
+  <data name="Func_LinkIncident" xml:space="preserve">
+    <value>連繫事件</value>
+  </data>
+  <data name="Func_LinkGeneralEnquiry" xml:space="preserve">
+    <value>連繫一般查詢</value>
+  </data>
+  <data name="Label_Cancelncident" xml:space="preserve">
+    <value>你確定要取消這個事件?</value>
   </data>
 </root>

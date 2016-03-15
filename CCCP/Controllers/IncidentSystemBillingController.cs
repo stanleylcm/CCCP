@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentSystemBillingApiController().GetIncidentList());
+            List<IncidentSystemBilling> incidents = new IncidentSystemBillingApiController().GetIncidentList();
+            List<IncidentSystemBillingModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemBillingModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentSystemBillings/Details/5
@@ -107,7 +109,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemBillingApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemBillingId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemBillingId, message = "The Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -153,6 +155,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
+            incidentSystemBilling.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentSystemBillingId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

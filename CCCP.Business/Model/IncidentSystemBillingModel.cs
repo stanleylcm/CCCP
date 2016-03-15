@@ -34,6 +34,13 @@ namespace CCCP.Business.Model
         #region Declaration
 
         public IncidentSystemBilling Entity = new IncidentSystemBilling();
+        public IncidentStatus IncidentStatus
+        {
+            get
+            {
+                return Entity.IncidentStatus.ToEnum<IncidentStatus>();
+            }
+        }
         public List<ChecklistModel> Checklists { get; set; }
         public List<ChecklistExtend> ChecklistEntities
         {
@@ -51,6 +58,21 @@ namespace CCCP.Business.Model
         public List<string> Options_StatusUpdate = new List<string>();
         public List<string> Options_RequireMitigatingAction = new List<string>();
         public List<string> Options_MitigatingAction = new List<string>();
+
+        public bool AllowEdit
+        {
+            get
+            {
+                return (IncidentStatus != Common.IncidentStatus.Cancelled && IncidentStatus != Common.IncidentStatus.Closed );
+            }
+        }
+        public bool AllowCancel
+        {
+            get
+            {
+                return (IncidentStatus != Common.IncidentStatus.Cancelled && IncidentStatus != Common.IncidentStatus.Closed);
+            }
+        }
 
         #endregion
 

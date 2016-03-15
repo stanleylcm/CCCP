@@ -154,7 +154,7 @@
 
             if (inputValid == false) {
                 $('#CCCPModal').find('.modal-body').html(errMsg);
-                $('#CCCPModal').find('.modal-title').html('Update Error');
+                $('#CCCPModal').find('.modal-title').html('Validation Summary');
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();
@@ -237,7 +237,6 @@
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.LevelOfSeverity)</label></div>
                                             <div class="col-lg-4">
                                                 <select id="incidentQualityCorporateImage_LevelOfSeverity" name="incidentQualityCorporateImage.LevelOfSeverity" class="form-control thin-control">
-                                                    <option value=""></option>
                                                     @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
                                                     {
                                                         if (one != IncidentLevel.None)
@@ -250,7 +249,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        @*<div class="row">
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityCorporateImage.IncidentStatus)</label></div>
                                             <div class="col-lg-4">
@@ -263,7 +262,7 @@
                                                 </select>
                                                 @Html.ValidationMessageFor(model => incidentQualityCorporateImage.IncidentStatus, "", new { @class = "text-danger" })
                                             </div>
-                                        </div>
+                                        </div>*@
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>

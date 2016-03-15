@@ -235,7 +235,7 @@
     <value>Sign Out</value>
   </data>
   <data name="Label_DeleteIncident" xml:space="preserve">
-    <value>Are you sure you want to delete this incident?</value>
+    <value>Are you sure to delete this incident?</value>
   </data>
   <data name="Label_History" xml:space="preserve">
     <value>History</value>
@@ -254,5 +254,14 @@
   </data>
   <data name="Label_Details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="Func_LinkIncident" xml:space="preserve">
+    <value>Link Incident</value>
+  </data>
+  <data name="Func_LinkGeneralEnquiry" xml:space="preserve">
+    <value>Link General Enquiry</value>
+  </data>
+  <data name="Label_Cancelncident" xml:space="preserve">
+    <value>Are you sure to cancel this incident?</value>
   </data>
 </root>

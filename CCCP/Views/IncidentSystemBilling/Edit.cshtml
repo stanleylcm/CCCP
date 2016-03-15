@@ -119,9 +119,14 @@
         var inputValid = true;
         var errMsg = '';
 
-        if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
+        //if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
+        //    inputValid = false;
+        //    errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+        //}
+
+        if ($('#incidentSystemBilling_IncidentBackground').val() == '') {
             inputValid = false;
-            errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+            errMsg = errMsg + 'Incident Background cannot be empty<br />';
         }
 
         if ($('#incidentSystemBilling_ProblemArea').val() == '') {
@@ -161,7 +166,7 @@
 
         if (inputValid == false) {
             $('#CCCPModal').find('.modal-body').html(errMsg);
-            $('#CCCPModal').find('.modal-title').html('Update Error');
+            $('#CCCPModal').find('.modal-title').html('Validation Summary');
             $('#CCCPModal').modal('toggle');
 
             event.preventDefault();
@@ -189,38 +194,42 @@
 <!-- Main content -->
 <section class="content">
     <!-- Small boxes (Stat box) -->
+
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentNo)</span>
+                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentNo)</span></b>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.IncidentNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</span>
+                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</span></b>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.IncidentStatus)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</span>
+                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</span></b>
                     <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CreatedDateTime)</span>
+                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CreatedDateTime)</span></b>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.LastUpdatedDateTime)</span>
+                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.LastUpdatedDateTime)</span></b>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.LastUpdatedDateTime)</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <br />
+
     <div class="row">
         <div class="col-lg-12">
             <!-- content -->
@@ -251,7 +260,6 @@
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.LevelOfSeverity)</label></div>
                                             <div class="col-lg-4">
                                                 <select id="incidentSystemBilling_LevelOfSeverity" name="incidentSystemBilling.LevelOfSeverity" class="form-control thin-control">
-                                                    <option value=""></option>
                                                     @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
                                                     {
                                                         if (one != IncidentLevel.None)
@@ -264,7 +272,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        @*<div class="row">
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></div>
                                             <div class="col-lg-4">
@@ -277,11 +285,11 @@
                                                 </select>
                                                 @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentStatus, "", new { @class = "text-danger" })
                                             </div>
-                                        </div>
+                                        </div>*@
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
                                             <div class="col-lg-4">
                                                 @Html.EditorFor(model => incidentSystemBilling.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
                                                 @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentBackground, "", new { @class = "text-danger" })

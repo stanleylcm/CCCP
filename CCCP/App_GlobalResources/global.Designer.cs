@@ -124,6 +124,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Link General Enquiry.
+        /// </summary>
+        internal static string Func_LinkGeneralEnquiry {
+            get {
+                return ResourceManager.GetString("Func_LinkGeneralEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link Incident.
+        /// </summary>
+        internal static string Func_LinkIncident {
+            get {
+                return ResourceManager.GetString("Func_LinkIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Func_Save {
@@ -142,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to cancel this incident?.
+        /// </summary>
+        internal static string Label_Cancelncident {
+            get {
+                return ResourceManager.GetString("Label_Cancelncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to close this Incident?.
         /// </summary>
         internal static string Label_CloseIncident {
@@ -151,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete this incident?.
+        ///   Looks up a localized string similar to Are you sure to delete this incident?.
         /// </summary>
         internal static string Label_DeleteIncident {
             get {

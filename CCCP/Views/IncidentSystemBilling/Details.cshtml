@@ -35,14 +35,13 @@
 		        $('#DetailsMitigatingAction').hide();
 		    }
 
-	        $('#btnCloseIncident').on('click', function(event){
-	            if (confirm('@Resources.global.Label_CloseIncident')) {
-	                window.location = '@Url.Action("CloseIncident", "IncidentSystemBilling")';
-	                return true;
-	            } else {
-	                event.preventDefault();
-	                return false;
-	            }
+	        $('#btnCloseIncident').on('click', function (event) {
+	            bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
+	                if (result) {
+	                    window.location = '@Url.Action("CloseIncident", "IncidentSystemBilling")';
+	                    return true;
+	                }
+	            });
 	        });
 	    });
     </script>
@@ -65,29 +64,29 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-3 pull-left">
-                        <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentNo)</span>
+                        <b><span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentNo)</span></b>
                         <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo)</span>
                     </div>
                     <div class="col-lg-3 pull-right">
-                        <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</span>
+                        <b><span class="pull-left">@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</span></b>
                         <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentStatus)</span>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-3 pull-left">
-                        <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span>
+                        <b><span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CrisisId)</span></b>
                         <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
                     </div>
                     <div class="col-lg-3 pull-right">
-                        <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span>
+                        <b><span class="pull-left">@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</span></b>
                         <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-3 pull-right">
-                        <span class="pull-left">@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</span>
+                        <b><span class="pull-left">@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</span></b>
                         <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
                     </div>
                 </div>
@@ -114,10 +113,10 @@
                             <div class="panel-group">
                                 <div class="panel panel-default">
                                     <div class="panel panel-body">
-                                        <div class="row">
+                                        @*<div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
-                                        </div>
+                                        </div>*@
 
                                         @{
                                             string sLevelOfSeverity = "";
@@ -136,10 +135,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        @*<div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
-                                        </div>
+                                        </div>*@
 
                                         <div class="row" style="display:none">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
@@ -147,7 +146,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 

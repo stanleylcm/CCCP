@@ -48,7 +48,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentBackground)</label></div>
                                     <div class="col-lg-4">
                                         @Html.EditorFor(model => incidentSystemBilling.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentSystemBilling.IncidentBackground, "", new { @class = "text-danger" })
@@ -303,10 +303,10 @@
             var inputValid = true;
             var errMsg = '';
 
-            //if ($('#incidentSystemBilling_LevelOfSeverity').val() == '') {
-            //    inputValid = false;
-            //    errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
-            //}
+            if ($('#incidentSystemBilling_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
+            }
 
             if ($('#incidentSystemBilling_ProblemArea').val() == '') {
                 inputValid = false;

@@ -79,8 +79,10 @@
                                 <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
                                 <td>
                                     <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
-                                        <a href="@Url.Action("Delete", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemInvoicing", new { id = item.IncidentSystemInvoicingId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
+                                        <a id=item.IncidentSystemInvoicingId class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Delete", new { id = item.IncidentSystemInvoicingId })'; } })"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>

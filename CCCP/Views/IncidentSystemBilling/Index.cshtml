@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CCCP.ViewModel.IncidentSystemBilling>
+﻿@model IEnumerable<CCCP.Business.Model.IncidentSystemBillingModel>
 
 @using CCCP.Common
 @{
@@ -16,6 +16,8 @@
                 dTable.search($(this).val()).draw();
             });
         });
+
+
     </script>
 }
 
@@ -49,13 +51,13 @@
                     <table id="IncidentList" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.IncidentNo)</th>
-                                <th>@Html.DisplayNameFor(model => model.LevelOfSeverity)</th>
-                                <th>@Html.DisplayNameFor(model => model.IncidentBackground)</th>
-                                <th>@Html.DisplayNameFor(model => model.StatusUpdate)</th>
-                                <th>@Html.DisplayNameFor(model => model.IncidentStatus)</th>
-                                <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
-                                <th>@Html.DisplayNameFor(model => model.IssueDateTime)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -63,24 +65,26 @@
                             @foreach(var item in Model)
                             { 
                                 string sLevelOfSeverity = "";
-                                if (item.LevelOfSeverity != null)
+                                if (item.Entity.LevelOfSeverity != null)
                                 {
-                                    int level = Convert.ToInt32(item.LevelOfSeverity);
+                                    int level = Convert.ToInt32(item.Entity.LevelOfSeverity);
                                     IncidentLevel iLevel = (IncidentLevel)level;
                                     sLevelOfSeverity = iLevel.ToEnumString();
                                 }
                             <tr>
-                                <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.IncidentNo)</a></td>
+                                <td><a href="@Url.Action("Details", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })">@Html.DisplayFor(modelItem => item.Entity.IncidentNo)</a></td>
                                 <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
-                                <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
-                                <td>@Html.DisplayFor(model => item.StatusUpdate)</td>
-                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
-                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
-                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                <td>@Html.Raw(item.Entity.IncidentBackground != null ? item.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                <td>@Html.DisplayFor(model => item.Entity.StatusUpdate)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.IncidentStatus)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.CreatedBy)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.IssueDateTime)</td>
                                 <td>
                                     <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
-                                        <a href="@Url.Action("Delete", "IncidentSystemBilling", new { id = item.IncidentSystemBillingId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_Edit" @(Model.AllowEdit ? "" : "")><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
+                                        <a id=item.Entity.IncidentSystemBillingId class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentSystemBillingId })'; } })"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>

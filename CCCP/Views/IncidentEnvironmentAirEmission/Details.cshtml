@@ -29,14 +29,13 @@
 		        event.preventDefault();
 		    });
 
-	        $('#btnCloseIncident').on('click', function(event){
-	            if (confirm('@Resources.global.Label_CloseIncident')) {
-	                window.location = '@Url.Action("CloseIncident", "IncidentEnvironmentAirEmission")';
-	                return true;
-	            } else {
-	                event.preventDefault();
-	                return false;
-	            }
+		    $('#btnCloseIncident').on('click', function (event) {
+		        bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
+		            if (result) {
+		                window.location = '@Url.Action("CloseIncident", "IncidentEnvironmentAirEmission")';
+		                return true;
+		            }
+		        });
 	        });
 	    });
     </script>
@@ -139,7 +138,7 @@
 										</div>
 
 										<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
 										</div>
 

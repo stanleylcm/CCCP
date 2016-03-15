@@ -77,8 +77,10 @@
                                 <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
                                 <td>
                                     <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemOTSystem", new { id = item.IncidentSystemOTSystemId })" title="@Resources.global.Func_Edit"><i class="fa fa-sliders"></i></a>
-                                        <a href="@Url.Action("Delete", "IncidentSystemOTSystem", new { id = item.IncidentSystemOTSystemId })" class="text-red" title="@Resources.global.Func_Delete"><i class="fa fa-trash-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemOTSystem", new { id = item.IncidentSystemOTSystemId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemOTSystem", new { id = item.IncidentSystemOTSystemId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentSystemOTSystem", new { id = item.IncidentSystemOTSystemId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
+                                        <a id=item.IncidentSystemOTSystemId class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Delete", new { id = item.IncidentSystemOTSystemId })'; } })"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>

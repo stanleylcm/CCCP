@@ -344,6 +344,7 @@
     <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app.min.js" />
+    <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-checkbox.js" />
     <Content Include="Scripts\bootstrap-slider.js" />
