@@ -53,8 +53,8 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -62,7 +62,7 @@
 	        $("#incidentQualityCorporateImage_PossibleCause").val(sList);
 	    });
 
-	    $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").change(function () {
+	    $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").change(function () {
 	        var sList = "";
 	        var i = 0;
 	        $("input[type=checkbox][id^=PossibleCause]").each(function () {
@@ -72,8 +72,8 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -91,8 +91,8 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -100,7 +100,7 @@
 	        $("#incidentQualityCorporateImage_Impact").val(sList);
 	    });
 
-	    $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").change(function () {
+	    $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").change(function () {
 	        var sList = "";
 	        var i = 0;
 	        $("input[type=checkbox][id^=Impact]").each(function () {
@@ -110,8 +110,8 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -300,7 +300,7 @@
                                                     foreach (string one in Model.Options_PossibleCause)
                                                     {
                                                         <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label>
-                                                        if (one != IncidentQualityCorporateImagePossibleCause.Others.ToEnumString())
+                                                        if (one != IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())
                                                         {
                                                             <br />
                                                         }
@@ -330,7 +330,7 @@
                                                     foreach (string one in Model.Options_Impact)
                                                     {
                                                         <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.Impact.IsContains(one) ? "checked" : "") /><label for="Impact@(countImpact.ToString())"> @one</label>
-                                                        if (one != IncidentQualityCorporateImageImpact.Others.ToEnumString())
+                                                        if (one != IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())
                                                         {
                                                             <br />
                                                         }
@@ -446,8 +446,8 @@
                                             <thead>
                                             <th></th>
                                             <th>Action</th>
-                                            <th>Completed By</th>
-                                            <th>Completed Datetime</th>
+                                            <th>Last Updated By</th>
+                                            <th>Last Updated Datetime</th>
                                             </thead>
                                             <tbody>
                                                 @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
@@ -455,8 +455,8 @@
                                                     <tr>
                                                         <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
                                                         <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
-                                                        <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
-                                                        <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                        <td>@action.Entity.LastUpdatedBy</td>
+                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
                                                     </tr>
                                                     countChecklistAction++;
                                                 }

@@ -72,8 +72,8 @@
 	                    sList = sList + $("#Impact__workstation_failureMore").val();
 	                }
 	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -81,7 +81,7 @@
 	        $("#incidentSystemCallCentre_Impact").val(sList);
 	    });
 
-	    $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
+	    $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").change(function () {
 	        var sList = "";
 	        var i = 0;
 	        $("input[type=checkbox][id^=Impact]").each(function () {
@@ -94,8 +94,8 @@
 	                    sList = sList + $("#Impact__workstation_failureMore").val();
 	                }
 	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -116,8 +116,8 @@
 	                    sList = sList + $("#Impact__workstation_failureMore").val();
 	                }
 	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -386,7 +386,7 @@
                                                     {
                                                         <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentSystemCallCentre.Impact.IsContains(one) ? "checked" : "") />
 
-                                                        if (one != IncidentSystemCallCentreImpact.Others.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
+                                                        if (one != IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
                                                         {
                                                             <label for="Impact@(countImpact.ToString())"> @one</label><br />
                                                         }
@@ -400,7 +400,7 @@
                                                         else
                                                         {
                                                             string impactOthers = "";
-                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.Others.ToEnumString()))
+                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()))
                                                             {
                                                                 impactOthers = incidentSystemCallCentre.Impact.Substring(incidentSystemCallCentre.Impact.IndexOf("(") + 1, incidentSystemCallCentre.Impact.IndexOf(")") - incidentSystemCallCentre.Impact.IndexOf("(") - 1);
                                                             }
@@ -484,7 +484,7 @@
                                                 <div class="col-lg-6" id="StatusUpdateOthers">
                                                     @{
                                                         string StatusUpdateOthers = "";
-                                                        if (incidentSystemCallCentre.StatusUpdate.IsContains(IncidentSystemCallCentreImpact.Others.ToEnumString()))
+                                                        if (incidentSystemCallCentre.StatusUpdate.IsContains(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()))
                                                         {
                                                             StatusUpdateOthers = incidentSystemCallCentre.StatusUpdate.Substring(incidentSystemCallCentre.StatusUpdate.IndexOf("(") + 1, incidentSystemCallCentre.StatusUpdate.IndexOf(")") - incidentSystemCallCentre.StatusUpdate.IndexOf("(") - 1);
                                                         }
@@ -591,8 +591,8 @@
                                             <thead>
                                             <th></th>
                                             <th>Action</th>
-                                            <th>Completed By</th>
-                                            <th>Completed Datetime</th>
+                                            <th>Last Updated By</th>
+                                            <th>Last Updated Datetime</th>
                                             </thead>
                                             <tbody>
                                                 @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
@@ -600,8 +600,8 @@
                                                     <tr>
                                                         <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
                                                         <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
-                                                        <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
-                                                        <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                        <td>@action.Entity.LastUpdatedBy</td>
+                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
                                                     </tr>
                                                     countChecklistAction++;
                                                 }

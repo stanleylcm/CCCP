@@ -46,12 +46,12 @@ namespace CCCP.Common
         // Enum
         public static string ToEnumString(this Enum self)
         {
-            return self.ToString().Replace("_", " ");
+            return self.ToString().Replace("_", " ").Replace("9", "(").Replace("0", ")");
         }
         public static T ToEnum<T>(this string self, out bool result)
         {
             if (self.IsNullOrEmpty()) self = "";
-            self = self.Replace(" ", "_");
+            self = self.Replace(" ", "_").Replace("(", "9").Replace(")", "0");
             result = Enum.IsDefined(typeof(T), self);
             if (result) return (T)Enum.Parse(typeof(T), self);
             else return default(T);
@@ -59,7 +59,7 @@ namespace CCCP.Common
         public static T ToEnum<T>(this string self)
         {
             if (self.IsNullOrEmpty()) self = "";
-            self = self.Replace(" ", "_");
+            self = self.Replace(" ", "_").Replace("(", "9").Replace(")", "0");
             bool result = Enum.IsDefined(typeof(T), self);
             if (result) return (T)Enum.Parse(typeof(T), self);
             else return default(T);

@@ -82,7 +82,7 @@
                                             {
                                                 <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" />
                                             
-                                                if (one != IncidentSystemCallCentreImpact.Others.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
+                                                if (one != IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
                                                 {
                                                     <label for="Impact@(countImpact.ToString())"> @one</label><br />
                                                 }
@@ -269,8 +269,8 @@
                     sList = sList + $("#Impact__workstation_failureMore").val();
                 }
                 sList = sList + $(this).val();
-                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
                 }
                 i++;
             }
@@ -278,7 +278,7 @@
         $("#incidentSystemCallCentre_Impact").val(sList);
     });
 
-    $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").change(function () {
+    $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").change(function () {
         var sList = "";
         var i = 0;
         $("input[type=checkbox][id^=Impact]").each(function () {
@@ -291,8 +291,8 @@
                     sList = sList + $("#Impact__workstation_failureMore").val();
                 }
                 sList = sList + $(this).val();
-                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
                 }
                 i++;
             }
@@ -313,8 +313,8 @@
                     sList = sList + $("#Impact__workstation_failureMore").val();
                 }
                 sList = sList + $(this).val();
-                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others.ToEnumString())") {
-                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others)More").val() + ")";
+                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
+                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
                 }
                 i++;
             }

@@ -208,7 +208,7 @@ namespace CCCP.Common
     {
         Create_Temp_Tools_for_Manual_Control_and_Correction,
         Suspend_Bill_Generation,
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentSystemBillingInputKey
@@ -227,7 +227,7 @@ namespace CCCP.Common
     public enum IncidentSystemInvoicingMitigatingAction
     {
         Trigger_Emergency_Backup,
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentSystemInvoicingInputKey
@@ -250,7 +250,7 @@ namespace CCCP.Common
         Implementing_mitigating_actions,
         Partial_service_resumed,
         Full_service_restoration,
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentSystemCallCentreImpact
@@ -262,7 +262,7 @@ namespace CCCP.Common
         No_call_routing_function,
         Absence_of_E1_Line,
         Suspension_of_Call_Centre,
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentSystemCallCentreInputKey
@@ -314,7 +314,7 @@ namespace CCCP.Common
         Chlorine,
         Acid,
         Alkaline,
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentEnvironmentLeakageAffectedArea
@@ -334,12 +334,12 @@ namespace CCCP.Common
     #region Enum for Incident - Quality (Corporate Image)
     public enum IncidentQualityCorporateImagePossibleCause
     {
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentQualityCorporateImageImpact
     {
-        Others
+        Others_9please_specify0
     }
 
     public enum IncidentQualityCorporateImageInputKey

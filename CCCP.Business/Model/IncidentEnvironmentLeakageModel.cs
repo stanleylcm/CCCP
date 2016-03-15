@@ -9,7 +9,7 @@ using CCCP.Business.Service;
 
 namespace CCCP.Business.Model
 {
-    public class IncidentEnvironmentLeakageModel
+    public class IncidentEnvironmentLeakageModel : IIncidentModel
     {
         #region Constructor
 
@@ -26,6 +26,7 @@ namespace CCCP.Business.Model
         private void init()
         {
             initOptions();
+            Checklists = new List<ChecklistModel>();
         }
 
         #endregion
@@ -33,7 +34,7 @@ namespace CCCP.Business.Model
         #region Declaration
 
         public IncidentEnvironmentLeakage Entity = new IncidentEnvironmentLeakage();
-        public List<ChecklistModel> Checklists = new List<ChecklistModel>();
+        public List<ChecklistModel> Checklists { get; set; }
         public List<ChecklistExtend> ChecklistEntities
         {
             set
@@ -53,20 +54,12 @@ namespace CCCP.Business.Model
 
         public bool IsReadyForClose()
         {
-            // check checklist's compulsory actions had been completed or not
-            foreach (ChecklistModel checklist in Checklists) if (!checklist.IsAllCompulsoryCompleted()) return false;
-
-            return true;
+            return IncidentService.IsReadyForClose(this);
         }
         public IncidentStatus GetIncidentStatus()
         {
-            // original status
-            IncidentStatus result = Entity.IncidentStatus.ToEnum<IncidentStatus>();
-
-            // Ready For Close
-            if (IsReadyForClose()) result = IncidentStatus.Ready_For_Close;
-
-            return result;
+            IncidentStatus originalStatus = Entity.IncidentStatus.ToEnum<IncidentStatus>();
+            return IncidentService.GetIncidentStatus(this, originalStatus);
         }
         public void PrepareSave(PrepareSaveMode saveMode = PrepareSaveMode.Last_Updated)
         {

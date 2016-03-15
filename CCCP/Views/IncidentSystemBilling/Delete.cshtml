@@ -173,7 +173,7 @@
 											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MitigatingAction)</label></div>
                                             <div class="col-lg-6">
                                                 @Html.DisplayFor(model => model.Entity.MitigatingAction)<br />
-                                                @Html.Raw(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others.ToEnumString()) ?
+                                                @Html.Raw(Model.Entity.MitigatingAction != null && Model.Entity.MitigatingAction.IsContains(IncidentSystemBillingMitigatingAction.Others_9please_specify0.ToEnumString()) ?
                                                     (Model.Entity.MitigatingActionOthers != null ? Model.Entity.MitigatingActionOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
                                                     "")
                                             </div>
@@ -233,8 +233,8 @@
                                                     <thead>
                                                     <th></th>
                                                     <th>Action</th>
-                                                    <th>Completed By</th>
-                                                    <th>Completed Datetime</th>
+                                                    <th>Last Updated By</th>
+                                                    <th>Last Updated Datetime</th>
                                                     </thead>
                                                     <tbody>
                                                         @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
@@ -242,8 +242,8 @@
                                                             <tr>
                                                                 <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
                                                                 <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
-                                                                <td>@(action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedBy : "")</td>
-                                                                <td>@((action.ActionStatus == CCCP.Common.CheckListActionStatus.Completed ? action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") : ""))</td>
+                                                                <td>@action.Entity.LastUpdatedBy</td>
+                                                                <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
                                                             </tr>
                                                             countChecklistAction++;
                                                         }
