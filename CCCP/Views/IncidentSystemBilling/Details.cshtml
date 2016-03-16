@@ -131,7 +131,7 @@
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
                                             <div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
                                             <div class="col-lg-5">
-                                                <button class="btn btn-primary" type="button" onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
+                                                <button class="btn btn-primary" type="button" @(Model.IncidentStatus == IncidentStatus.Closed || Model.IncidentStatus == IncidentStatus.Cancelled ? "disabled" : "") onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
                                             </div>
                                         </div>
 
@@ -359,7 +359,7 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentSystemBilling", new { id = Model.Entity.IncidentSystemBillingId })';">@Resources.global.Func_Edit</button>
             </div>
             <br/>
 
