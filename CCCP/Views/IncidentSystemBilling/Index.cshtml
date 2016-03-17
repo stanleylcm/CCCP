@@ -80,11 +80,11 @@
                                 <td>@Html.DisplayFor(model => item.Entity.CreatedBy)</td>
                                 <td>@Html.DisplayFor(model => item.Entity.IssueDateTime)</td>
                                 <td>
-                                    <div class="tools">
-                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_Edit" @(Model.AllowEdit ? "" : "")><i class="fa fa-pencil-square-o"></i></a>
+                                    <div>
+                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a id=item.Entity.IncidentSystemBillingId class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentSystemBillingId })'; } })"><i class="fa fa-times"></i></a>
                                         <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
                                         <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
-                                        <a id=item.Entity.IncidentSystemBillingId class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentSystemBillingId })'; } })"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>
