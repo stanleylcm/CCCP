@@ -48,7 +48,7 @@
 	    });
 
 	    $("#TypeOfLeakage").change(function () {
-	        if ($(this).val().toUpperCase() == "OTHERS") {
+	        if ($(this).val() == "@IncidentEnvironmentLeakageTypeOfLeakage.Others_9please_specify0.ToEnumString()") {
 	            $('#TypeOfLeakageOthers').show();
 	            $("#incidentEnvironmentLeakage_TypeOfLeakage").val($(this).val() + " (" + $("#TypeOfLeakageOthersMore").val() + ")");
 	        } else {
@@ -62,7 +62,7 @@
 	    });
 
         $(document).ready(function () {
-            if ($('#TypeOfLeakage').val().toUpperCase() == "OTHERS") {
+            if ($('#TypeOfLeakage').val() == "@IncidentEnvironmentLeakageTypeOfLeakage.Others_9please_specify0.ToEnumString()") {
                 $('#TypeOfLeakageOthers').show();
             } else {
                 $('#TypeOfLeakageOthers').hide();
@@ -78,6 +78,11 @@
             if ($('#incidentEnvironmentLeakage_LevelOfSeverity').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+            }
+
+            if ($('#incidentEnvironmentLeakage_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
             }
 
             if (inputValid == false) {
@@ -195,7 +200,7 @@
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentLeakage.IncidentBackground)</label></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentLeakage.IncidentBackground)</label></div>
 											<div class="col-lg-4">
                                                 @Html.EditorFor(model => incidentEnvironmentLeakage.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 												@Html.ValidationMessageFor(model => incidentEnvironmentLeakage.IncidentBackground, "", new { @class = "text-danger" })
@@ -323,6 +328,7 @@
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.LastUpdatedDateTime, new { @Value = incidentEnvironmentLeakage.LastUpdatedDateTime == null ? "" : incidentEnvironmentLeakage.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.History, new { @Value = incidentEnvironmentLeakage.History })
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.IncidentNo, new { @Value = incidentEnvironmentLeakage.IncidentNo })
+                            @Html.HiddenFor(model => incidentEnvironmentLeakage.IncidentStatus, new { @Value = incidentEnvironmentLeakage.IncidentStatus })
                         </div>
                         <!-- /.box-body -->
                     </div>

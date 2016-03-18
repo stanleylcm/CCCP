@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentSystemNetworkConnectivityApiController().GetIncidentList());
+            List<IncidentSystemNetworkConnectivity> incidents = new IncidentSystemNetworkConnectivityApiController().GetIncidentList();
+            List<IncidentSystemNetworkConnectivityModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemNetworkConnectivityModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentSystemNetworkConnectivitys/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemNetworkConnectivityApiController().CreateIncident(incidentSystemNetworkConnectivity);
-                return RedirectToAction("Index", new { message = "Incident " + incidentSystemNetworkConnectivity.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemNetworkConnectivity.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentSystemNetworkConnectivity);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemNetworkConnectivityApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemNetworkConnectivityId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemNetworkConnectivityId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
+            incidentSystemNetworkConnectivity.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentSystemNetworkConnectivityId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentEnvironmentAirEmissionApiController().GetIncidentList());
+            List<IncidentEnvironmentAirEmission> incidents = new IncidentEnvironmentAirEmissionApiController().GetIncidentList();
+            List<IncidentEnvironmentAirEmissionModel> incidentModels = incidents.ConvertAll(x => new IncidentEnvironmentAirEmissionModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentEnvironmentAirEmissions/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentEnvironmentAirEmissionApiController().CreateIncident(incidentEnvironmentAirEmission);
-                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentAirEmission.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentAirEmission.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentEnvironmentAirEmission);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentEnvironmentAirEmissionApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentAirEmissionId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentAirEmissionId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = db.IncidentEnvironmentAirEmission.Find(id);
+            incidentEnvironmentAirEmission.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentEnvironmentAirEmissionId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

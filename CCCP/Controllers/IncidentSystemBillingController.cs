@@ -67,7 +67,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemBillingApiController().CreateIncident(incidentSystemBilling);
-                return RedirectToAction("Index", new { message = "Incident " + incidentSystemBilling.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemBilling.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentSystemBilling);

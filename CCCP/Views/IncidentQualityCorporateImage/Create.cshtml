@@ -28,7 +28,7 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-body">
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.LevelOfSeverity)</label></div>
                                     <div class="col-lg-4">
@@ -44,13 +44,13 @@
                                         </select>
                                         @Html.ValidationMessageFor(model => incidentQualityCorporateImage.LevelOfSeverity, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityCorporateImage.IncidentBackground)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityCorporateImage.IncidentBackground)</label></div>
                                     <div class="col-lg-4">
-                                        @Html.EditorFor(model => incidentQualityCorporateImage.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
+                                        @Html.EditorFor(model => incidentQualityCorporateImage.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityCorporateImage.IncidentBackground, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -267,9 +267,9 @@
             var inputValid = true;
             var errMsg = '';
 
-            if ($('#incidentQualityCorporateImage_LevelOfSeverity').val() == '') {
+            if ($('#incidentQualityCorporateImage_IncidentBackground').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Level Of Severity is required<br />';
+                errMsg = errMsg + 'Incident Background is required<br />';
             }
 
             if ($('#incidentQualityCorporateImage_PossibleCause').val() == '') {

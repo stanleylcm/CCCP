@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentEnvironmentLeakageApiController().GetIncidentList());
+            List<IncidentEnvironmentLeakage> incidents = new IncidentEnvironmentLeakageApiController().GetIncidentList();
+            List<IncidentEnvironmentLeakageModel> incidentModels = incidents.ConvertAll(x => new IncidentEnvironmentLeakageModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentEnvironmentLeakages/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentEnvironmentLeakageApiController().CreateIncident(incidentEnvironmentLeakage);
-                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentLeakage.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentLeakage.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentEnvironmentLeakage);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentEnvironmentLeakageApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentLeakageId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentEnvironmentLeakageId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
+            incidentEnvironmentLeakage.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentEnvironmentLeakageId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

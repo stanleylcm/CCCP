@@ -199,29 +199,29 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentNo)</span></b>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentNo)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.IncidentNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</span></b>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemBilling.IncidentStatus)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.IncidentStatus)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</span></b>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemBilling.CrisisId)</label></span>
                     <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.CreatedDateTime)</span></b>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemBilling.CreatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-right">
-                    <b><span class="pull-left">@Html.DisplayNameFor(model => incidentSystemBilling.LastUpdatedDateTime)</span></b>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemBilling.LastUpdatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemBilling.LastUpdatedDateTime)</span>
                 </div>
             </div>
@@ -449,6 +449,7 @@
             @Html.HiddenFor(model => incidentSystemBilling.History, new { @Value = incidentSystemBilling.History })
             @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
             @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
+            @Html.HiddenFor(model => incidentSystemBilling.IncidentStatus, new { @Value = incidentSystemBilling.IncidentStatus })
                         </div>
                         <!-- /.box-body -->
                     </div>

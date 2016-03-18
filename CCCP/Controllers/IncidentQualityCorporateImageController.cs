@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentQualityCorporateImageApiController().GetIncidentList());
+            List<IncidentQualityCorporateImage> incidents = new IncidentQualityCorporateImageApiController().GetIncidentList();
+            List<IncidentQualityCorporateImageModel> incidentModels = incidents.ConvertAll(x => new IncidentQualityCorporateImageModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentQualityCorporateImages/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentQualityCorporateImageApiController().CreateIncident(incidentQualityCorporateImage);
-                return RedirectToAction("Index", new { message = "Incident " + incidentQualityCorporateImage.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentQualityCorporateImage.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentQualityCorporateImage);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentQualityCorporateImageApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityCorporateImageId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityCorporateImageId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
+            incidentQualityCorporateImage.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentQualityCorporateImageId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

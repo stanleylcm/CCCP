@@ -46,7 +46,7 @@ namespace CCCP.Business.Service
                 ) return IncidentLevel.Level_2;
 
             // else
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace CCCP.Business.Service
                 ) return IncidentLevel.Level_2;
 
             // else
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemITSystem incident)
         {
             // no Level logic for IT System
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemNetworkConnectivity incident)
         {
             // no Level logic for Network Connectivity
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemOTSystem incident)
         {
             // no Level logic for OT System
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace CCCP.Business.Service
                 return IncidentLevel.Level_2;
 
             // else
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace CCCP.Business.Service
                 return IncidentLevel.Level_2;
 
             // else
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace CCCP.Business.Service
                 return IncidentLevel.Level_2;
 
             // else
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentQualityGeneration incident)
         {
             // no Level logic for Quality Generation
-            return IncidentLevel.None;
+            return IncidentLevel.Level_1;
         }
 
         public static string GetNewIncidentNo(SequenceType type, int year)
