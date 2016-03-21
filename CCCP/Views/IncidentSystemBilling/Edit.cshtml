@@ -48,12 +48,29 @@
         var i = 0;
         $("input[type=checkbox][id^=ContactedBy]").each(function () {
             if (this.checked) {
+                if ($(this).val() == "@(IncidentSystemBillingContactedBy.None.ToEnumString())") {
+                    $("input[type=checkbox][id^=ContactedBy]").each(function () {
+                        if ($(this).val() != "@(IncidentSystemBillingContactedBy.None.ToEnumString())") {
+                            $(this).attr('checked', false);
+                            $(this).attr("disabled", true);
+                        }
+                    });
+                }
+
                 if (i == 0) {
                     sList = $(this).val();
                 } else {
                     sList = sList + ", " + $(this).val();
                 }
                 i++;
+            } else {
+                if ($(this).val() == "@(IncidentSystemBillingContactedBy.None.ToEnumString())") {
+                    $("input[type=checkbox][id^=ContactedBy]").each(function () {
+                        if ($(this).val() != "@(IncidentSystemBillingContactedBy.None.ToEnumString())") {
+                            $(this).removeAttr("disabled");
+                        }
+                    });
+                }
             }
         });
         $("#incidentSystemBilling_ContactedBy").val(sList);
@@ -245,6 +262,7 @@
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
                 <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
                 <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
+                <li><a href="#Notification" data-toggle="tab">Notification</a></li>
             </ul>
 
             <div id="myTabContent" class="tab-content">
@@ -572,6 +590,19 @@
                 </div>
 
                 <div class="tab-pane fade" id="LinkedGeneralEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Notification">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2"></div>

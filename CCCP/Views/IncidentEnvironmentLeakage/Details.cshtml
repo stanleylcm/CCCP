@@ -94,6 +94,7 @@
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
                 <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
                 <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
+                <li><a href="#Notification" data-toggle="tab">Notification</a></li>
             </ul>
 
             <div id="myTabContent" class="tab-content">
@@ -223,7 +224,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills nav-justified">
+                                <ul class="nav nav-pills">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
@@ -315,6 +316,19 @@
                 </div>
 
                 <div class="tab-pane fade" id="LinkedGeneralEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Notification">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2"></div>

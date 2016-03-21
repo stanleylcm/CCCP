@@ -1,0 +1,536 @@
+﻿@model CCCP.Business.Model.IncidentQualityGenerationModel
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentQualityGeneration;
+    CCCP.ViewModel.IncidentQualityGeneration incidentQualityGeneration = Model.Entity;
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+		    $('.bootstrap-checkbox').on('click', function(evnet){
+
+		        $.ajax({
+		            url: "/IncidentQualityGeneration/ToggleActionStatus",
+		            type: "POST",
+		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+		            dataType: "html",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (data) {
+		                return true;
+		            },
+		            error: function () {
+		                alert("An error has occured!!!");
+		            }
+		        });
+		    });
+	    });
+
+	    $("input[type=checkbox][id^=NameOfPowerGenerator]").on("click", function () {
+	        var sList = "";
+	        var i = 0;
+	        $("input[type=checkbox][id^=NameOfPowerGenerator]").each(function () {
+	            if (this.checked) {
+	                if (i == 0) {
+	                    sList = $(this).val();
+	                } else {
+	                    sList = sList + ", " + $(this).val();
+	                }
+	                i++;
+	            }
+	        });
+	        $("#incidentQualityGeneration_NameOfPowerGenerator").val(sList);
+	    });
+
+	    $("#incidentQualityGeneration_IsDrillMode").on("click", function () {
+	        $(this).val(this.checked);
+	    });
+
+	    $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").on("click", function () {
+	        $(this).val(this.checked);
+	    });
+
+	    $("#FullRestorationDate").change(function () {
+	        $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+	    $("#FullRestorationTime").change(function () {
+	        $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	    });
+
+	    $(document).ready(function () {
+	        $("#incidentQualityGeneration_IsDrillMode").val($("#incidentQualityGeneration_IsDrillMode").checked);
+	        $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").val($("#incidentQualityGeneration_IsCEMNetworkBeingAffected").checked);
+
+	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityGeneration.FullRestoration == null ? "" : incidentQualityGeneration.FullRestoration.Value.ToString("yyyy-MM-dd"))');
+	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityGeneration.ExpectedRestorationTime == null ? "" : incidentQualityGeneration.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
+	        $('[data-mask]').inputmask();
+	        $('#FullRestorationTime').timepicker({
+	            showMeridian: false,
+	            defaultTime: '@(incidentQualityGeneration.FullRestoration == null ? "" : incidentQualityGeneration.FullRestoration.Value.ToString("HH:mm"))',
+	            hour: '@(incidentQualityGeneration.FullRestoration == null ? "" : incidentQualityGeneration.FullRestoration.Value.ToString("HH"))',
+	            minute: '@(incidentQualityGeneration.FullRestoration == null ? "" : incidentQualityGeneration.FullRestoration.Value.ToString("mm"))',
+	        });
+	    });
+
+        $('#btnUpdate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentQualityGeneration_LevelOfSeverity').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Level Of Severity is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_NameOfPowerGenerator').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nName Of Power Generator is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_PreliminaryCauseOfOutage').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Preliminary Cause Of Outage is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_ExpectedRestorationTime').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Full Restoration is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nLoss Of Power Time is required<br />';
+            }
+
+            return inputValid;
+        });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentQualityGeneration")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentQualityGeneration</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentQualityGeneration.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentQualityGeneration.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentQualityGeneration.IncidentStatus)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentQualityGeneration.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentQualityGeneration.CrisisId)</span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentQualityGeneration.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentQualityGeneration.CreatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentQualityGeneration.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left">@Html.DisplayNameFor(model => incidentQualityGeneration.LastUpdatedDateTime)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentQualityGeneration.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => incidentQualityGeneration.IncidentQualityGenerationId)
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+                <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
+                <li><a href="#Notification" data-toggle="tab">Notification</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.LevelOfSeverity)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentQualityGeneration_LevelOfSeverity" name="incidentQualityGeneration.LevelOfSeverity" class="form-control thin-control">
+                                                    @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                                    {
+                                                        if (one != IncidentLevel.None)
+                                                        {
+                                                            <option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentQualityGeneration.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.LevelOfSeverity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityGeneration.IncidentStatus)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentQualityGeneration_IncidentStatus" name="incidentQualityGeneration.IncidentStatus" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+                                                    {
+                                                        <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentQualityGeneration.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.IncidentStatus, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.IncidentBackground)</label></div>
+                                            <div class="col-lg-4">
+                                                @Html.EditorFor(model => incidentQualityGeneration.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.IncidentBackground, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityGeneration.IsDrillMode)</label></div>
+                                            <div class="col-lg-4">
+                                                <div class="checkbox">
+                                                    <input id="incidentQualityGeneration_IsDrillMode" name="incidentQualityGeneration.IsDrillMode" type="checkbox" value="@(incidentQualityGeneration.IsDrillMode != null && incidentQualityGeneration.IsDrillMode.Value ? "true" : "false")" @(incidentQualityGeneration.IsDrillMode != null && incidentQualityGeneration.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    @Html.ValidationMessageFor(model => incidentQualityGeneration.IsDrillMode, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                                    <div class="panel panel-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.NameOfPowerGenerator)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countNameOfPowerGenerator = 0;
+                                                    foreach (string one in Model.Options_NameOfPowerGenerator)
+                                                    {
+                                                        <input id="NameOfPowerGenerator@(countNameOfPowerGenerator.ToString())" type="checkbox" value="@one" @(incidentQualityGeneration.NameOfPowerGenerator.IsContains(one) ? "checked" : "")/><label for="NameOfPowerGenerator@(countNameOfPowerGenerator.ToString())"> @one</label><br />
+                                                        countNameOfPowerGenerator++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentQualityGeneration_NameOfPowerGenerator" name="incidentQualityGeneration.NameOfPowerGenerator" value="" />
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.NameOfPowerGenerator, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentQualityGeneration.ExpectedRestorationTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.FullRestoration)</label></div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="FullRestorationDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-clock-o"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
+                                                    </div>
+                                                </div>
+                                                @Html.HiddenFor(model => incidentQualityGeneration.FullRestoration)
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.FullRestoration, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected)</label></div>
+                                            <div class="col-lg-6">
+                                                <input id="incidentQualityGeneration_IsCEMNetworkBeingAffected" name="incidentQualityGeneration.IsCEMNetworkBeingAffected" type="checkbox" value="@(incidentQualityGeneration.IsCEMNetworkBeingAffected != null && incidentQualityGeneration.IsCEMNetworkBeingAffected.Value ? "true" : "false")" @(incidentQualityGeneration.IsCEMNetworkBeingAffected != null && incidentQualityGeneration.IsCEMNetworkBeingAffected.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.LossOfPower)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentQualityGeneration.LossOfPower, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentQualityGeneration.LossOfPower, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+            @Html.HiddenFor(model => incidentQualityGeneration.IncidentQualityGenerationId, new { @Value = incidentQualityGeneration.IncidentQualityGenerationId })
+            @Html.HiddenFor(model => incidentQualityGeneration.ChecklistBatchId, new { @Value = incidentQualityGeneration.ChecklistBatchId })
+            @Html.HiddenFor(model => incidentQualityGeneration.ChatRoomId, new { @Value = incidentQualityGeneration.ChatRoomId })
+            @Html.HiddenFor(model => incidentQualityGeneration.GeneralEnquiryId, new { @Value = incidentQualityGeneration.GeneralEnquiryId })
+            @Html.HiddenFor(model => incidentQualityGeneration.CrisisId, new { @Value = incidentQualityGeneration.CrisisId })
+            @Html.HiddenFor(model => incidentQualityGeneration.NotificationId, new { @Value = incidentQualityGeneration.NotificationId })
+            @Html.HiddenFor(model => incidentQualityGeneration.IssueById, new { @Value = incidentQualityGeneration.IssueById })
+            @Html.HiddenFor(model => incidentQualityGeneration.IssueDateTime, new { @Value = incidentQualityGeneration.IssueDateTime == null ? "" : incidentQualityGeneration.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentQualityGeneration.CloseById, new { @Value = incidentQualityGeneration.CloseById })
+            @Html.HiddenFor(model => incidentQualityGeneration.CloseDateTime, new { @Value = incidentQualityGeneration.CloseDateTime == null ? "" : incidentQualityGeneration.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentQualityGeneration.CreatedBy, new { @Value = incidentQualityGeneration.CreatedBy })
+            @Html.HiddenFor(model => incidentQualityGeneration.CreatedDateTime, new { @Value = incidentQualityGeneration.CreatedDateTime == null ? "" : incidentQualityGeneration.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentQualityGeneration.LastUpdatedBy, new { @Value = incidentQualityGeneration.LastUpdatedBy })
+            @Html.HiddenFor(model => incidentQualityGeneration.LastUpdatedDateTime, new { @Value = incidentQualityGeneration.LastUpdatedDateTime == null ? "" : incidentQualityGeneration.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentQualityGeneration.History, new { @Value = incidentQualityGeneration.History })
+            @Html.HiddenFor(model => incidentQualityGeneration.IncidentNo, new { @Value = incidentQualityGeneration.IncidentNo })
+            @Html.HiddenFor(model => incidentQualityGeneration.IncidentStatus, new { @Value = incidentQualityGeneration.IncidentStatus })
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-3">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills">
+                                    @{
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
+                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                            <th></th>
+                                            <th>Action</th>
+                                            <th>Last Updated By</th>
+                                            <th>Last Updated Datetime</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                                        <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                        <td>@action.Entity.LastUpdatedBy</td>
+                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                                    </tr>
+                                                    countChecklistAction++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                countChecklist++;
+                                            }
+                                        }
+                                </div>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedGeneralEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Notification">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentQualityGeneration", new { id = incidentQualityGeneration.IncidentQualityGenerationId })';">@Resources.global.Func_Cancel</button>
+                </div>
+            </div>
+            <br />
+}
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(incidentQualityGeneration.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->

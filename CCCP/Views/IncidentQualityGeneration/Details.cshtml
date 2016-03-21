@@ -1,8 +1,8 @@
-﻿@model CCCP.Business.Model.IncidentSystemITSystemModel
+﻿@model CCCP.Business.Model.IncidentQualityGenerationModel
 
 @using CCCP.Common
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentSystemITSystem;
+    ViewBag.Title = Resources.global.Menu_IncidentQualityGeneration;
 }
 
 @section Scripts {
@@ -32,7 +32,7 @@
 		    $('#btnCloseIncident').on('click', function (event) {
 		        bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
 		            if (result) {
-		                window.location = '@Url.Action("CloseIncident", "IncidentSystemITSystem")';
+		                window.location = '@Url.Action("CloseIncident", "IncidentQualityGeneration")';
 		                return true;
 		            }
 		        });
@@ -46,7 +46,7 @@
     @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
 
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemITSystem")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentSystemITSystem</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentQualityGeneration")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentQualityGeneration</a>
     </h1>
 </section>
 
@@ -89,7 +89,7 @@
         <div class="col-lg-12">
             <!-- content -->
 
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills ">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
@@ -103,94 +103,90 @@
                 <div class="tab-pane fade active in" id="IncidentDetails">
                     <div class="box box-primary">
                         <div class="box-body">
-							<div class="panel-group">
-								<div class="panel panel-default">
-									<div class="panel panel-body">
-										@*<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
-										</div>*@
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-body">
+                                        @*<div class="row">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
+                                        </div>*@
 
-										@{
-											string sLevelOfSeverity = "";
-											if (Model.Entity.LevelOfSeverity != null)
-											{
-												int level = Convert.ToInt32(Model.Entity.LevelOfSeverity);
-												IncidentLevel iLevel = (IncidentLevel)level;
-												sLevelOfSeverity = iLevel.ToEnumString();
-											}
-										}
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
-											<div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
-											<div class="col-lg-5">
-												<button class="btn btn-primary" type="button" onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
-											</div>
-										</div>
+                                        @{
+                                            string sLevelOfSeverity = "";
+                                            if (Model.Entity.LevelOfSeverity != null)
+                                            {
+                                                int level = Convert.ToInt32(Model.Entity.LevelOfSeverity);
+                                                IncidentLevel iLevel = (IncidentLevel)level;
+                                                sLevelOfSeverity = iLevel.ToEnumString();
+                                            }
+                                        }
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
+                                            <div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
+                                            <div class="col-lg-5">
+                                                <button class="btn btn-primary" type="button" onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
+                                            </div>
+                                        </div>
 
-										@*<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
-										</div>*@
+                                        @*<div class="row">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
+                                        </div>*@
 
-										<div class="row" style="display:none">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
-										</div>
+                                        <div class="row" style="display:none">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
-										</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
-											<div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
-										</div>
-									</div>
-								</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
+                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-								<div class="panel panel-primary">
-									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
-									<div class="panel panel-body">
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                                    <div class="panel panel-body">
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Location)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Location)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.NameOfPowerGenerator)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NameOfPowerGenerator)</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PreliminaryCauseOfOutage)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PreliminaryCauseOfOutage)</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Damage)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Damage)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedSystem)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedSystem)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedArea)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IsCEMNetworkBeingAffected)</label></div>
+                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsCEMNetworkBeingAffected == null ? false : Model.Entity.IsCEMNetworkBeingAffected)" /></div>
+                                        </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedRestorationTime)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
-										</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LossOfPower)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.LossOfPower)</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-										<div class="row">
-											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
-										</div>
-									</div>
-								</div>
-							</div>
+                            </div>
 
                         </div>
                         <!-- /.box-body -->
@@ -230,12 +226,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills">
+                                <ul class="nav nav-pills ">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
                                         {
-                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
                                             countChecklist++;
                                         }
                                     }
@@ -350,7 +346,7 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentSystemITSystem", new { id = Model.Entity.IncidentSystemITSystemId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentQualityGeneration", new { id = Model.Entity.IncidentQualityGenerationId })';">@Resources.global.Func_Edit</button>
             </div>
             <br/>
 
