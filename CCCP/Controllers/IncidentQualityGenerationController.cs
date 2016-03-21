@@ -61,7 +61,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,NameOfPowerGenerator,PreliminaryCauseOfOutage,ExpectedRestorationTime,FullRestoration,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
+        public ActionResult Create([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,NameOfPowerGenerator,PreliminaryCauseOfOutage,ExpectedRestorationTime,FullRestoration,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,PreliminaryCauseOfOutage,ExpectedRestorationTime,FullRestoration,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
+        public ActionResult Edit([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,PreliminaryCauseOfOutage,ExpectedRestorationTime,FullRestoration,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
         {
             if (Session != null && Session["incident"] != null)
             {

@@ -61,7 +61,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentEnvironmentAirEmissionId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Location,PossibleCause,SourceOfInformation,AbatementSystemUnavailability,ComplaintOfBlackSmoke,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentEnvironmentAirEmission incidentEnvironmentAirEmission)
+        public ActionResult Create([Bind(Include = "IncidentEnvironmentAirEmissionId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Location,PossibleCause,SourceOfInformation,AbatementSystemUnavailability,ComplaintOfBlackSmoke,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentEnvironmentAirEmission incidentEnvironmentAirEmission)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentEnvironmentAirEmissionId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Location,PossibleCause,SourceOfInformation,AbatementSystemUnavailability,ComplaintOfBlackSmoke,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentEnvironmentAirEmission incidentEnvironmentAirEmission)
+        public ActionResult Edit([Bind(Include = "IncidentEnvironmentAirEmissionId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Location,PossibleCause,SourceOfInformation,AbatementSystemUnavailability,ComplaintOfBlackSmoke,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentEnvironmentAirEmission incidentEnvironmentAirEmission)
         {
             if (Session != null && Session["incident"] != null)
             {

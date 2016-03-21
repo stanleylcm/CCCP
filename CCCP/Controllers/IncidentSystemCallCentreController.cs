@@ -61,7 +61,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,FullRestoration,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
+        public ActionResult Create([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,FullRestoration,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisId,NotificationId,IssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,FullRestoration,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
+        public ActionResult Edit([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,FullRestoration,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
         {
             if (Session != null && Session["incident"] != null)
             {
