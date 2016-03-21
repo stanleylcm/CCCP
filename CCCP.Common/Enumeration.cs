@@ -56,7 +56,7 @@ namespace CCCP.Common
         SystemInvoicing,
         QualityNetwork,
         QualityCorporateImage,
-        QualityGenerartion,
+        QualityGeneration,
         EnvironmentAirEmission,
         EnvironmentLeakage,
         OHS
@@ -180,6 +180,7 @@ namespace CCCP.Common
 
     public enum IncidentSystemBillingContactedBy
     {
+        None,
         Customer,
         Consumer_Council,
         Government,

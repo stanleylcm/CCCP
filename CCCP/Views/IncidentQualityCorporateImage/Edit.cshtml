@@ -132,7 +132,7 @@
                 errMsg = errMsg + 'Level Of Severity is required<br />';
             }
 
-            if ($('#incidentQualityCorporateImage_Incident Background').val() == '') {
+            if ($('#incidentQualityCorporateImage_IncidentBackground').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + 'Incident Background is required<br />';
             }
@@ -221,7 +221,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => incidentQualityCorporateImage.IncidentQualityCorporateImageId)
-            <ul class="nav nav-tabs nav-justified">
+            <ul class="nav nav-pills">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
@@ -430,7 +430,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills nav-justified">
+                                <ul class="nav nav-pills">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)

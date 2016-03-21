@@ -663,8 +663,13 @@
     });
     */
 
+    /*
+    dialog.on("shown.bs.modal", function () {
+        dialog.find(".btn-primary:first").focus();
+    });
+    */
     dialog.on("shown.bs.modal", function() {
-      dialog.find(".btn-primary:first").focus();
+      dialog.find(".btn-default:first").focus();
     });
 
     /**

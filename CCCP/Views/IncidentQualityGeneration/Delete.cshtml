@@ -1,7 +1,7 @@
-﻿@model CCCP.Business.Model.IncidentSystemNetworkConnectivityModel
+﻿@model CCCP.Business.Model.IncidentQualityGenerationModel
 
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentSystemNetworkConnectivity;
+    ViewBag.Title = Resources.global.Menu_IncidentQualityGeneration;
 }
 
 @section Scripts {
@@ -34,7 +34,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentSystemNetworkConnectivity")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Delete @Resources.global.Menu_IncidentSystemNetworkConnectivity</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentQualityGeneration")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Delete @Resources.global.Menu_IncidentQualityGeneration</a>
         <br />
         @Resources.global.Label_DeleteIncident
     </h1>
@@ -89,7 +89,6 @@
                 <div class="tab-pane fade active in" id="IncidentDetails">
                     <div class="box box-primary">
                         <div class="box-body">
-						
 							<div class="panel-group">
 								<div class="panel panel-default">
 									<div class="panel panel-body">
@@ -124,29 +123,19 @@
 										</div>
 									</div>
 								</div>
-
+								
 								<div class="panel panel-primary">
 									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
 									<div class="panel panel-body">
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Location)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Location)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.NameOfPowerGenerator)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NameOfPowerGenerator)</div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Damage)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Damage)</div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedArea)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PreliminaryCauseOfOutage)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PreliminaryCauseOfOutage)</div>
                                         </div>
 
                                         <div class="row">
@@ -157,6 +146,16 @@
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IsCEMNetworkBeingAffected)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IsCEMNetworkBeingAffected)</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LossOfPower)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.LossOfPower)</div>
                                         </div>
 									</div>
 								</div>
@@ -248,7 +247,7 @@
 
                 <div>
                     <button class="btn btn-primary" type="submit">@Resources.global.Func_Delete</button>
-                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentSystemNetworkConnectivity")';">@Resources.global.Func_Cancel</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentQualityGeneration")';">@Resources.global.Func_Cancel</button>
                 </div>
             }
             <br />

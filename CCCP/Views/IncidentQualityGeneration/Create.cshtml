@@ -1,0 +1,277 @@
+﻿@model CCCP.Business.Model.IncidentQualityGenerationModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentQualityGeneration;
+    CCCP.ViewModel.IncidentQualityGeneration incidentQualityGeneration = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentQualityGeneration
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-body">
+                                @*<div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.LevelOfSeverity)</label></div>
+                                    <div class="col-lg-4">
+                                        <select id="incidentQualityGeneration_LevelOfSeverity" name="incidentQualityGeneration.LevelOfSeverity" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                            {
+                                                if (one != IncidentLevel.None)
+                                                {
+                                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                                }
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.LevelOfSeverity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.IncidentBackground)</label></div>
+                                    <div class="col-lg-4">
+                                        @Html.EditorFor(model => incidentQualityGeneration.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.IncidentBackground, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityGeneration.IsDrillMode)</label></div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <input id="incidentQualityGeneration_IsDrillMode" name="incidentQualityGeneration.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                            @Html.ValidationMessageFor(model => incidentQualityGeneration.IsDrillMode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                            <div class="panel panel-body">
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.NameOfPowerGenerator)</label></div>
+                                    <div class="col-lg-6">
+                                        @{
+                                            int countNameOfPowerGenerator = 0;
+                                            foreach (string one in Model.Options_NameOfPowerGenerator)
+                                            {
+                                        <input id="NameOfPowerGenerator@(countNameOfPowerGenerator.ToString())" type="checkbox" value="@one" /><label for="NameOfPowerGenerator@(countNameOfPowerGenerator.ToString())"> @one</label><br />
+                                                countNameOfPowerGenerator++;
+                                            }
+                                        }
+                                        <input type="hidden" id="incidentQualityGeneration_NameOfPowerGenerator" name="incidentQualityGeneration.NameOfPowerGenerator" value="" />
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.NameOfPowerGenerator, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.PreliminaryCauseOfOutage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.ExpectedRestorationTime)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityGeneration.ExpectedRestorationTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.ExpectedRestorationTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.FullRestoration)</label></div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control" id="FullRestorationDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="input-group bootstrap-timepicker">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </div>
+                                                <input type="text" class="form-control timepicker" id="FullRestorationTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(model => incidentQualityGeneration.FullRestoration)
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.FullRestoration, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected)</label></div>
+                                    <div class="col-lg-6">
+                                        <input id="incidentQualityGeneration_IsCEMNetworkBeingAffected" name="incidentQualityGeneration.IsCEMNetworkBeingAffected" type="checkbox" value="" style="top:-10px; left: 20px" />
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.LossOfPower)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityGeneration.LossOfPower, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityGeneration.LossOfPower, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => incidentQualityGeneration.IncidentQualityGenerationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityGeneration.ChecklistBatchId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityGeneration.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityGeneration.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityGeneration.CrisisId)
+                    @Html.HiddenFor(model => incidentQualityGeneration.NotificationId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentQualityGeneration.IssueById)
+                    @Html.HiddenFor(model => incidentQualityGeneration.IssueDateTime)
+                    @Html.HiddenFor(model => incidentQualityGeneration.CloseById)
+                    @Html.HiddenFor(model => incidentQualityGeneration.CloseDateTime)
+                    @Html.HiddenFor(model => incidentQualityGeneration.IncidentNo)
+                    @Html.HiddenFor(model => incidentQualityGeneration.IncidentStatus)
+                    @Html.HiddenFor(model => incidentQualityGeneration.CreatedBy)
+                    @Html.HiddenFor(model => incidentQualityGeneration.CreatedDateTime)
+                    @Html.HiddenFor(model => incidentQualityGeneration.LastUpdatedBy)
+                    @Html.HiddenFor(model => incidentQualityGeneration.LastUpdatedDateTime)
+
+                    <div class="box-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentQualityGeneration")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("input[type=checkbox][id^=NameOfPowerGenerator]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=NameOfPowerGenerator]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    i++;
+                }
+            });
+            $("#incidentQualityGeneration_NameOfPowerGenerator").val(sList);
+        });
+
+        $("#incidentQualityGeneration_IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").on("click", function () {
+            $(this).val(this.checked);
+        });
+
+        $("#FullRestorationDate").change(function () {
+            $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+        });
+
+        $("#FullRestorationTime").change(function () {
+            $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+        });
+
+        $(document).ready(function () {
+            $("#incidentQualityGeneration_IsDrillMode").val($("#incidentQualityGeneration_IsDrillMode").checked);
+            $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").val($("#incidentQualityGeneration_IsCEMNetworkBeingAffected").checked);
+
+            $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' });
+            $('[data-mask]').inputmask();
+            $('.timepicker').timepicker({
+                showMeridian: false
+            });
+        });
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if ($('#incidentQualityGeneration_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_NameOfPowerGenerator').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nName Of Power Generator is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_PreliminaryCauseOfOutage').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Preliminary Cause Of Outage is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_ExpectedRestorationTime').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\Full Restoration is required<br />';
+            }
+
+            if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nLoss Of Power Time is required<br />';
+            }
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Create Error');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+</script>
+}

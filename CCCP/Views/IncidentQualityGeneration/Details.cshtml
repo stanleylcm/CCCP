@@ -1,8 +1,8 @@
-﻿@model CCCP.Business.Model.IncidentQualityCorporateImageModel
+﻿@model CCCP.Business.Model.IncidentQualityGenerationModel
 
 @using CCCP.Common
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentQualityCorporateImage;
+    ViewBag.Title = Resources.global.Menu_IncidentQualityGeneration;
 }
 
 @section Scripts {
@@ -32,7 +32,7 @@
 		    $('#btnCloseIncident').on('click', function (event) {
 		        bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
 		            if (result) {
-		                window.location = '@Url.Action("CloseIncident", "IncidentQualityCorporateImage")';
+		                window.location = '@Url.Action("CloseIncident", "IncidentQualityGeneration")';
 		                return true;
 		            }
 		        });
@@ -46,7 +46,7 @@
     @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
 
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentQualityCorporateImage")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentQualityCorporateImage</a>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentQualityGeneration")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentQualityGeneration</a>
     </h1>
 </section>
 
@@ -89,7 +89,7 @@
         <div class="col-lg-12">
             <!-- content -->
 
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills ">
                 <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
                 <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
                 <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
@@ -154,23 +154,33 @@
                                     <div class="panel panel-body">
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.NameOfPowerGenerator)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NameOfPowerGenerator)</div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PreliminaryCauseOfOutage)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PreliminaryCauseOfOutage)</div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.RemedyAction)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RemedyAction)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedRestorationTime)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IsCEMNetworkBeingAffected)</label></div>
+                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsCEMNetworkBeingAffected == null ? false : Model.Entity.IsCEMNetworkBeingAffected)" /></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LossOfPower)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.LossOfPower)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +225,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                                <ul class="nav nav-pills">
+                                <ul class="nav nav-pills ">
                                     @{
                                         int countChecklist = 1;
                                         foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
@@ -322,7 +332,7 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentQualityCorporateImage", new { id = Model.Entity.IncidentQualityCorporateImageId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentQualityGeneration", new { id = Model.Entity.IncidentQualityGenerationId })';">@Resources.global.Func_Edit</button>
             </div>
             <br/>
 
