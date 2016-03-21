@@ -29,7 +29,7 @@ namespace CCCP.UnitTest
             incidentSystemBilling.ChecklistBatchId = 0;
             incidentSystemBilling.ChatRoomId = 0;
             incidentSystemBilling.GeneralEnquiryId = 0;
-            incidentSystemBilling.NotificationId = 0;
+            //incidentSystemBilling.NotificationId = 0;
 
             var client = new HttpClient();
 

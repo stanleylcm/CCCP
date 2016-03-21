@@ -158,6 +158,13 @@ namespace CCCP.Common
         ActionChecklist
     }
 
+    public enum NotificationMessageType
+    {
+        GeneralEnquiry,
+        Incident,
+        Crisis
+    }
+
     #region Enum for Incident - System (Billing)
     public enum IncidentSystemBillingProblemArea
     {

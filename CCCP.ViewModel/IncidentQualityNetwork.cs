@@ -18,9 +18,8 @@ namespace CCCP.ViewModel
         public int OMSEventId { get; set; }
         public int ChecklistBatchId { get; set; }
         public int ChatRoomId { get; set; }
-        public int GeneralEnquiryId { get; set; }
+        public Nullable<int> GeneralEnquiryId { get; set; }
         public Nullable<int> CrisisId { get; set; }
-        public int NotificationId { get; set; }
         public Nullable<int> IssueById { get; set; }
         public Nullable<System.DateTime> IssueDateTime { get; set; }
         public Nullable<int> CloseById { get; set; }
