@@ -28,8 +28,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -98,8 +96,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -166,8 +162,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -230,8 +224,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -296,8 +288,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -360,8 +350,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -428,8 +416,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -490,8 +476,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -554,8 +538,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -624,8 +606,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -684,8 +664,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
@@ -748,8 +726,6 @@ namespace CCCP.ViewModel
         public int GeneralEnquiryId { get; set; }
         [Display(Name = "Crisis ID")]
         public Nullable<int> CrisisId { get; set; }
-        [Display(Name = "Notification ID")]
-        public int NotificationId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
         [Display(Name = "Issue Date Time")]
