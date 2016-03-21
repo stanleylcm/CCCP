@@ -170,6 +170,7 @@
     <Compile Include="Controllers\IncidentQualityCorporateImageController.cs" />
     <Compile Include="Controllers\IncidentEnvironmentLeakageController.cs" />
     <Compile Include="Controllers\IncidentEnvironmentAirEmissionController.cs" />
+    <Compile Include="Controllers\IncidentOHSController.cs" />
     <Compile Include="Controllers\IncidentSystemOTSystemController.cs" />
     <Compile Include="Controllers\IncidentSystemNetworkConnectivityController.cs" />
     <Compile Include="Controllers\IncidentSystemITSystemController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Controllers\WebApi\IncidentQualityCorporateImageApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentEnvironmentLeakageApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentEnvironmentAirEmissionApiController.cs" />
+    <Compile Include="Controllers\WebApi\IncidentOHSApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemOTSystemApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemNetworkConnectivityApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemITSystemApiController.cs" />
@@ -868,6 +870,11 @@
     <Content Include="Views\IncidentQualityGeneration\Details.cshtml" />
     <Content Include="Views\IncidentQualityGeneration\Edit.cshtml" />
     <Content Include="Views\IncidentQualityGeneration\Index.cshtml" />
+    <Content Include="Views\IncidentOHS\Create.cshtml" />
+    <Content Include="Views\IncidentOHS\Delete.cshtml" />
+    <Content Include="Views\IncidentOHS\Details.cshtml" />
+    <Content Include="Views\IncidentOHS\Edit.cshtml" />
+    <Content Include="Views\IncidentOHS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
