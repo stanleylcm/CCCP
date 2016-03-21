@@ -357,4 +357,29 @@ namespace CCCP.Common
         IncidentQualityGeneration_NameOfPowerGenerator
     }
     #endregion
+
+    #region Enum for Incident - OHS
+    public enum IncidentOHSInputKey
+    {
+        IncidentOHS_PossibleCause,
+        IncidentOHS_OHSType,
+        IncidentOHS_NatureOfInjury,
+        IncidentOHS_Treatment
+    }
+
+    public enum IncidentOHSPossibleCause
+    {
+        Others_9please_specify0
+    }
+
+    public enum IncidentOHSNatureOfInjury
+    {
+        Others_9please_specify0
+    }
+
+    public enum IncidentOHSTreatment
+    {
+        Others_9please_specify0
+    }
+    #endregion
 }

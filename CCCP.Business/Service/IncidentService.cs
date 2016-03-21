@@ -188,6 +188,31 @@ namespace CCCP.Business.Service
             return IncidentLevel.Level_1;
         }
 
+        /// <summary>
+        /// Get Incident Level of OHS
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentOHS incident)
+        {
+            // Level 3
+            if (
+                (incident.OHSType.IsEquals("Work Accident") && incident.NoOfDeath > 0) ||
+                (incident.OHSType.IsEquals("Epidemic Outbreak") && incident.NoOfInfectiousDisease != null && incident.NoOfInfectiousDisease > 50)
+                )
+                return IncidentLevel.Level_3;
+
+            // Level 2
+            if (
+                (incident.OHSType.IsEquals("Work Accident") && incident.Treatment.IsContains("In-Patient")) ||
+                (incident.OHSType.IsEquals("Epidemic Outbreak") && incident.NoOfInfectiousDisease != null && incident.NoOfInfectiousDisease > 1)
+                )
+                return IncidentLevel.Level_2;
+
+            // else
+            return IncidentLevel.Level_1;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";
