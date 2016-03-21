@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentSystemInvoicingApiController().GetIncidentList());
+            List<IncidentSystemInvoicing> incidents = new IncidentSystemInvoicingApiController().GetIncidentList();
+            List<IncidentSystemInvoicingModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemInvoicingModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentSystemInvoicings/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemInvoicingApiController().CreateIncident(incidentSystemInvoicing);
-                return RedirectToAction("Index", new { message = "Incident " + incidentSystemInvoicing.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemInvoicing.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentSystemInvoicing);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemInvoicingApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemInvoicingId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+            incidentSystemInvoicing.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentSystemInvoicingId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

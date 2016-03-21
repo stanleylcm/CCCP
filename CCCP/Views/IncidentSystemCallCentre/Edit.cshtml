@@ -150,7 +150,7 @@
 	    });
 
 	    $("#StatusUpdate").change(function () {
-	        if ($(this).val().toUpperCase() == "OTHERS") {
+	        if ($(this).val().toUpperCase() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
 	            $('#StatusUpdateOthers').show();
 	            $("#incidentSystemCallCentre_StatusUpdate").val($(this).val() + " (" + $("#StatusUpdateOthersMore").val() + ")");
 	        } else {
@@ -172,7 +172,7 @@
 	    });
 
         $(document).ready(function () {
-            if ($('#StatusUpdate').val().toUpperCase() == "OTHERS") {
+            if ($('#StatusUpdate').val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
                 $('#StatusUpdateOthers').show();
             } else {
                 $('#StatusUpdateOthers').hide();
@@ -199,6 +199,11 @@
             if ($('#incidentSystemCallCentre_LevelOfSeverity').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+            }
+
+            if ($('#incidentSystemCallCentre_Incident Background').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
             }
 
             if ($('#incidentSystemCallCentre_Impact').val() == '') {
@@ -263,29 +268,29 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentNo)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentNo)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.IncidentNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentStatus)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentStatus)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.IncidentStatus)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.CrisisId)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.CrisisId)</label></span>
                     <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.CreatedDateTime)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.CreatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemCallCentre.LastUpdatedDateTime)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.LastUpdatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemCallCentre.LastUpdatedDateTime)</span>
                 </div>
             </div>
@@ -351,7 +356,7 @@
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentBackground)</label></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentBackground)</label></div>
 											<div class="col-lg-4">
                                                 @Html.EditorFor(model => incidentSystemCallCentre.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 												@Html.ValidationMessageFor(model => incidentSystemCallCentre.IncidentBackground, "", new { @class = "text-danger" })
@@ -539,6 +544,7 @@
                             @Html.HiddenFor(model => incidentSystemCallCentre.LastUpdatedDateTime, new { @Value = incidentSystemCallCentre.LastUpdatedDateTime == null ? "" : incidentSystemCallCentre.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemCallCentre.History, new { @Value = incidentSystemCallCentre.History })
                             @Html.HiddenFor(model => incidentSystemCallCentre.IncidentNo, new { @Value = incidentSystemCallCentre.IncidentNo })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IncidentStatus, new { @Value = incidentSystemCallCentre.IncidentStatus })
                         </div>
                         <!-- /.box-body -->
                     </div>

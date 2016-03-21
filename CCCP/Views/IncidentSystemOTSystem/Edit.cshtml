@@ -109,6 +109,11 @@
                 errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
             }
 
+            if ($('#incidentSystemOTSystem_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
+            }
+
             if ($('#incidentSystemOTSystem_PossibleCause').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
@@ -161,29 +166,29 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentNo)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentNo)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.IncidentNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentStatus)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentStatus)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.IncidentStatus)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.CrisisId)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.CrisisId)</label></span>
                     <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.CrisisId)</span></a>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.CreatedDateTime)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.CreatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left">@Html.DisplayNameFor(model => incidentSystemOTSystem.LastUpdatedDateTime)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.LastUpdatedDateTime)</label></span>
                     <span class="pull-right">@Html.DisplayFor(model => incidentSystemOTSystem.LastUpdatedDateTime)</span>
                 </div>
             </div>
@@ -249,7 +254,7 @@
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentBackground)</label></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.IncidentBackground)</label></div>
 											<div class="col-lg-4">
                                                 @Html.EditorFor(model => incidentSystemOTSystem.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 												@Html.ValidationMessageFor(model => incidentSystemOTSystem.IncidentBackground, "", new { @class = "text-danger" })
@@ -404,6 +409,7 @@
                             @Html.HiddenFor(model => incidentSystemOTSystem.LastUpdatedDateTime, new { @Value = incidentSystemOTSystem.LastUpdatedDateTime == null ? "" : incidentSystemOTSystem.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemOTSystem.History, new { @Value = incidentSystemOTSystem.History })
                             @Html.HiddenFor(model => incidentSystemOTSystem.IncidentNo, new { @Value = incidentSystemOTSystem.IncidentNo })
+                            @Html.HiddenFor(model => incidentSystemOTSystem.IncidentStatus, new { @Value = incidentSystemOTSystem.IncidentStatus })
                         </div>
                         <!-- /.box-body -->
                     </div>

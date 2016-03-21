@@ -28,29 +28,29 @@
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel panel-body">
-								<div class="row">
-									<div class="col-lg-1"></div>
-									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentLeakage.LevelOfSeverity)</label></div>
-									<div class="col-lg-4">
-										<select id="incidentEnvironmentLeakage_LevelOfSeverity" name="incidentEnvironmentLeakage.LevelOfSeverity" class="form-control thin-control">
-											<option value=""></option>
-											@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
-											{
-												if (one != IncidentLevel.None)
-												{
-													<option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
-												}
-											}
-										</select>
-										@Html.ValidationMessageFor(model => incidentEnvironmentLeakage.LevelOfSeverity, "", new { @class = "text-danger" })
-									</div>
-								</div>
+								@*<div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentLeakage.LevelOfSeverity)</label></div>
+                                    <div class="col-lg-4">
+                                        <select id="incidentEnvironmentLeakage_LevelOfSeverity" name="incidentEnvironmentLeakage.LevelOfSeverity" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                            {
+                                                if (one != IncidentLevel.None)
+                                                {
+                                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                                }
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => incidentEnvironmentLeakage.LevelOfSeverity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
 
 								<div class="row">
 									<div class="col-lg-1"></div>
-									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentLeakage.IncidentBackground)</label></div>
+									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentLeakage.IncidentBackground)</label></div>
 									<div class="col-lg-4">
-                                        @Html.EditorFor(model => incidentEnvironmentLeakage.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
+                                        @Html.EditorFor(model => incidentEnvironmentLeakage.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
 										@Html.ValidationMessageFor(model => incidentEnvironmentLeakage.IncidentBackground, "", new { @class = "text-danger" })
 									</div>
 								</div>
@@ -193,7 +193,7 @@
     });
 
     $("#TypeOfLeakage").change(function () {
-        if ($(this).val().toUpperCase() == "OTHERS") {
+        if ($(this).val() == "@IncidentEnvironmentLeakageTypeOfLeakage.Others_9please_specify0.ToEnumString()") {
             $('#TypeOfLeakageOthers').show();
             $("#incidentEnvironmentLeakage_TypeOfLeakage").val($(this).val() + " (" + $("#TypeOfLeakageOthersMore").val() + ")");
         } else {
@@ -207,7 +207,7 @@
     });
 
     $(document).ready(function () {
-        if ($('#TypeOfLeakage').val().toUpperCase() == "OTHERS") {
+        if ($('#TypeOfLeakage').val() == "@IncidentEnvironmentLeakageTypeOfLeakage.Others_9please_specify0.ToEnumString()") {
             $('#TypeOfLeakageOthers').show();
         } else {
             $('#TypeOfLeakageOthers').hide();
@@ -220,9 +220,9 @@
         var inputValid = true;
         var errMsg = '';
 
-        if ($('#incidentEnvironmentLeakage_LevelOfSeverity').val() == '') {
+        if ($('#incidentEnvironmentLeakage_IncidentBackground').val() == '') {
             inputValid = false;
-            errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+            errMsg = errMsg + 'Incident Background cannot be empty<br />';
         }
 
         if (inputValid == false) {

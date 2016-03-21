@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentSystemOTSystemApiController().GetIncidentList());
+            List<IncidentSystemOTSystem> incidents = new IncidentSystemOTSystemApiController().GetIncidentList();
+            List<IncidentSystemOTSystemModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemOTSystemModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentSystemOTSystems/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemOTSystemApiController().CreateIncident(incidentSystemOTSystem);
-                return RedirectToAction("Index", new { message = "Incident " + incidentSystemOTSystem.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemOTSystem.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentSystemOTSystem);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemOTSystemApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemOTSystemId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemOTSystemId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
+            incidentSystemOTSystem.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentSystemOTSystemId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)

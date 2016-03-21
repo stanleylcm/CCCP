@@ -125,6 +125,11 @@
                 errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
             }
 
+            if ($('#incidentSystemITSystem_IncidentBackground').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
+            }
+
             if ($('#incidentSystemITSystem_PossibleCause').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
@@ -265,7 +270,7 @@
 
 										<div class="row">
 											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentBackground)</label></div>
+											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.IncidentBackground)</label></div>
 											<div class="col-lg-4">
                                                 @Html.EditorFor(model => incidentSystemITSystem.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 												@Html.ValidationMessageFor(model => incidentSystemITSystem.IncidentBackground, "", new { @class = "text-danger" })
@@ -419,6 +424,7 @@
                             @Html.HiddenFor(model => incidentSystemITSystem.LastUpdatedDateTime, new { @Value = incidentSystemITSystem.LastUpdatedDateTime == null ? "" : incidentSystemITSystem.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
                             @Html.HiddenFor(model => incidentSystemITSystem.History, new { @Value = incidentSystemITSystem.History })
                             @Html.HiddenFor(model => incidentSystemITSystem.IncidentNo, new { @Value = incidentSystemITSystem.IncidentNo })
+                            @Html.HiddenFor(model => incidentSystemITSystem.IncidentStatus, new { @Value = incidentSystemITSystem.IncidentStatus })
                         </div>
                         <!-- /.box-body -->
                     </div>

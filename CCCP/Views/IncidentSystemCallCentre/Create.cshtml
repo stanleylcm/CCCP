@@ -28,27 +28,27 @@
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel panel-body">
-								<div class="row">
-									<div class="col-lg-1"></div>
-									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.LevelOfSeverity)</label></div>
-									<div class="col-lg-4">
-										<select id="incidentSystemCallCentre_LevelOfSeverity" name="incidentSystemCallCentre.LevelOfSeverity" class="form-control thin-control">
-											<option value=""></option>
-											@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
-											{
-												if (one != IncidentLevel.None)
-												{
-													<option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
-												}
-											}
-										</select>
-										@Html.ValidationMessageFor(model => incidentSystemCallCentre.LevelOfSeverity, "", new { @class = "text-danger" })
-									</div>
-								</div>
+								@*<div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.LevelOfSeverity)</label></div>
+                                    <div class="col-lg-4">
+                                        <select id="incidentSystemCallCentre_LevelOfSeverity" name="incidentSystemCallCentre.LevelOfSeverity" class="form-control thin-control">
+                                            <option value=""></option>
+                                            @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                            {
+                                                if (one != IncidentLevel.None)
+                                                {
+                                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
+                                                }
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(model => incidentSystemCallCentre.LevelOfSeverity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
 
 								<div class="row">
 									<div class="col-lg-1"></div>
-									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentBackground)</label></div>
+									<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.IncidentBackground)</label></div>
 									<div class="col-lg-4">
                                         @Html.EditorFor(model => incidentSystemCallCentre.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
 										@Html.ValidationMessageFor(model => incidentSystemCallCentre.IncidentBackground, "", new { @class = "text-danger" })
@@ -347,7 +347,7 @@
     });
 
     $("#StatusUpdate").change(function () {
-        if ($(this).val().toUpperCase() == "OTHERS") {
+        if ($(this).val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
             $('#StatusUpdateOthers').show();
             $("#incidentSystemCallCentre_StatusUpdate").val($(this).val() + " (" + $("#StatusUpdateOthersMore").val() + ")");
         } else {
@@ -369,7 +369,7 @@
     });
 
     $(document).ready(function () {
-        if ($('#StatusUpdate').val().toUpperCase() == "OTHERS") {
+        if ($('#StatusUpdate').val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
             $('#StatusUpdateOthers').show();
         } else {
             $('#StatusUpdateOthers').hide();
@@ -390,9 +390,9 @@
         var inputValid = true;
         var errMsg = '';
 
-        if ($('#incidentSystemCallCentre_LevelOfSeverity').val() == '') {
+        if ($('#incidentSystemCallCentre_IncidentBackground').val() == '') {
             inputValid = false;
-            errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+            errMsg = errMsg + 'Incident Background cannot be empty<br />';
         }
 
         if ($('#incidentSystemCallCentre_Impact').val() == '') {

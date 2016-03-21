@@ -23,7 +23,9 @@ namespace CCCP.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View(new IncidentSystemCallCentreApiController().GetIncidentList());
+            List<IncidentSystemCallCentre> incidents = new IncidentSystemCallCentreApiController().GetIncidentList();
+            List<IncidentSystemCallCentreModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemCallCentreModel(x));
+            return View(incidentModels);
         }
 
         // GET: IncidentSystemCallCentres/Details/5
@@ -64,7 +66,7 @@ namespace CCCP.Controllers
             if (ModelState.IsValid)
             {
                 new IncidentSystemCallCentreApiController().CreateIncident(incidentSystemCallCentre);
-                return RedirectToAction("Index", new { message = "Incident " + incidentSystemCallCentre.IncidentNo + " have been created successfully!" });
+                return RedirectToAction("Index", new { message = "Incident " + incidentSystemCallCentre.IncidentNo + " had been created successfully!" });
             }
 
             return View(incidentSystemCallCentre);
@@ -106,7 +108,7 @@ namespace CCCP.Controllers
             {
                 new IncidentSystemCallCentreApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemCallCentreId, message = "Incident have been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentSystemCallCentreId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
@@ -152,6 +154,15 @@ namespace CCCP.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
+            incidentSystemCallCentre.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentSystemCallCentreId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)
