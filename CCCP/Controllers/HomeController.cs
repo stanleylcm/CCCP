@@ -35,7 +35,7 @@ namespace CCCP.Controllers
                 }
                 else
                 {
-                    ViewBag.IncidentProgressPercentage = (((record.TotalIncidentCount - record.OutstandingIncidentCount) * 1.0) / record.TotalIncidentCount) * 100;
+                    ViewBag.IncidentProgressPercentage = Math.Round(((((record.TotalIncidentCount.Value - record.OutstandingIncidentCount.Value) * 1.0) / record.TotalIncidentCount.Value) * 100), 2);
                 }
             }
             #endregion
@@ -54,7 +54,7 @@ namespace CCCP.Controllers
                 }
                 else
                 {
-                    ViewBag.GeneralEnquiryProgressPercentage = (((record.TotalGeneralEnquiryCount - record.OutstandingGeneralEnquiryCount) * 1.0) / record.TotalGeneralEnquiryCount) * 100;
+                    ViewBag.GeneralEnquiryProgressPercentage = Math.Round(((((record.TotalGeneralEnquiryCount.Value - record.OutstandingGeneralEnquiryCount.Value) * 1.0) / record.TotalGeneralEnquiryCount.Value) * 100.0), 2);
                 }
             }
             #endregion
