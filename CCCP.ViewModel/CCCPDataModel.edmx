@@ -500,6 +500,10 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <Function Name="usp_Dashboard_GetGeneralEnquiryProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_Dashboard_GetIncidentProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_Dashboard_GetIncidentSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_Dashboard_GetOpenCloseIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetNextSequenceNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SequenceType" Type="varchar" Mode="In" />
           <Parameter Name="Year" Type="smallint" Mode="In" />
@@ -577,6 +581,11 @@
           <EntitySet Name="IncidentSystemITSystem" EntityType="CCCP.ViewModel.IncidentSystemITSystem" />
           <EntitySet Name="IncidentSystemNetworkConnectivity" EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" />
           <EntitySet Name="IncidentSystemOTSystem" EntityType="CCCP.ViewModel.IncidentSystemOTSystem" />
+          <FunctionImport Name="usp_Dashboard_GetIncidentProgress" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetIncidentProgress_Result)" />
+          <FunctionImport Name="usp_Dashboard_GetGeneralEnquiryProgress" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetGeneralEnquiryProgress_Result)" />
+          <FunctionImport Name="usp_Dashboard_GetIncidentSummary" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetIncidentSummary_Result)" />
+          <FunctionImport Name="usp_Dashboard_GetIncidentSummary1" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetIncidentSummary1_Result)" />
+          <FunctionImport Name="usp_Dashboard_GetOpenCloseIncident" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetOpenCloseIncident_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1162,6 +1171,88 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="usp_Dashboard_GetIncidentProgress_Result">
+          <Property Type="Int32" Name="TotalIncidentCount" Nullable="true" />
+          <Property Type="Int32" Name="OutstandingIncidentCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_Dashboard_GetGeneralEnquiryProgress_Result">
+          <Property Type="Int32" Name="TotalGeneralEnquiryCount" Nullable="true" />
+          <Property Type="Int32" Name="OutstandingGeneralEnquiryCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_Dashboard_GetIncidentSummary_Result">
+          <Property Type="Int32" Name="GeneralEnquiry_EnvironmentLeakage" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_EnvironmentAirEmission" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_QualityGeneration" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_OHS" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_QualityCorporateImage" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_QualityNetwork" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemInvoicing" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemBilling" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemCallCentre" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemNetworkConnectivity" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemITSystem" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiry_SystemOTSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_EnvironmentLeakage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_EnvironmentAirEmission" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_QualityGeneration" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_OHS" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_QualityCorporateImage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_QualityNetwork" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemInvoicing" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemBilling" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemCallCentre" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemNetworkConnectivity" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemITSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel1_SystemOTSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_EnvironmentLeakage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_EnvironmentAirEmission" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_QualityGeneration" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_OHS" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_QualityCorporateImage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_QualityNetwork" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemInvoicing" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemBilling" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemCallCentre" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemNetworkConnectivity" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemITSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel2_SystemOTSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_EnvironmentLeakage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_EnvironmentAirEmission" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_QualityGeneration" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_OHS" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_QualityCorporateImage" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_QualityNetwork" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemInvoicing" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemBilling" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemCallCentre" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemNetworkConnectivity" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemITSystem" Nullable="true" />
+          <Property Type="Int32" Name="IncidentLevel3_SystemOTSystem" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_EnvironmentLeakage" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_EnvironmentAirEmission" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_QualityGeneration" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_OHS" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_QualityCorporateImage" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_QualityNetwork" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemInvoicing" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemBilling" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemCallCentre" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemNetworkConnectivity" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemITSystem" Nullable="true" />
+          <Property Type="Int32" Name="Crisis_SystemOTSystem" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_Dashboard_GetIncidentSummary1_Result">
+          <Property Type="String" Name="NAME" Nullable="true" MaxLength="65" />
+          <Property Type="Int32" Name="Cnt" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_Dashboard_GetOpenCloseIncident_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="incidentNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="level" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="type" Nullable="false" MaxLength="29" />
+          <Property Type="String" Name="status" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="description" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1732,6 +1823,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetIncidentProgress" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetIncidentProgress">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetIncidentProgress_Result">
+                <ScalarProperty Name="TotalIncidentCount" ColumnName="TotalIncidentCount" />
+                <ScalarProperty Name="OutstandingIncidentCount" ColumnName="OutstandingIncidentCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetGeneralEnquiryProgress" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetGeneralEnquiryProgress">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetGeneralEnquiryProgress_Result">
+                <ScalarProperty Name="TotalGeneralEnquiryCount" ColumnName="TotalGeneralEnquiryCount" />
+                <ScalarProperty Name="OutstandingGeneralEnquiryCount" ColumnName="OutstandingGeneralEnquiryCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetIncidentSummary1" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetIncidentSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetIncidentSummary1_Result">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="Cnt" ColumnName="Cnt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetOpenCloseIncident" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetOpenCloseIncident">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetOpenCloseIncident_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="incidentNo" ColumnName="incidentNo" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -96,5 +96,30 @@ namespace CCCP.ViewModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SystemFunctionExtend>("usp_GetUserFunctions", userIdParameter);
         }
+    
+        public virtual ObjectResult<usp_Dashboard_GetIncidentProgress_Result> usp_Dashboard_GetIncidentProgress()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetIncidentProgress_Result>("usp_Dashboard_GetIncidentProgress");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetGeneralEnquiryProgress_Result> usp_Dashboard_GetGeneralEnquiryProgress()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetGeneralEnquiryProgress_Result>("usp_Dashboard_GetGeneralEnquiryProgress");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetIncidentSummary_Result> usp_Dashboard_GetIncidentSummary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetIncidentSummary_Result>("usp_Dashboard_GetIncidentSummary");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetIncidentSummary1_Result> usp_Dashboard_GetIncidentSummary1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetIncidentSummary1_Result>("usp_Dashboard_GetIncidentSummary1");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOpenCloseIncident_Result> usp_Dashboard_GetOpenCloseIncident()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOpenCloseIncident_Result>("usp_Dashboard_GetOpenCloseIncident");
+        }
     }
 }

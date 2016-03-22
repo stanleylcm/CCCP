@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentQualityCorporateImageModel incident = new IncidentQualityCorporateImageModel();
 
         // GET: IncidentQualityCorporateImages
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentQualityCorporateImage> incidents = new IncidentQualityCorporateImageApiController().GetIncidentList();
             List<IncidentQualityCorporateImageModel> incidentModels = incidents.ConvertAll(x => new IncidentQualityCorporateImageModel(x));
             return View(incidentModels);

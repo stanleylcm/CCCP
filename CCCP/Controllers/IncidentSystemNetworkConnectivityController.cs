@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentSystemNetworkConnectivityModel incident = new IncidentSystemNetworkConnectivityModel();
 
         // GET: IncidentSystemNetworkConnectivitys
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentSystemNetworkConnectivity> incidents = new IncidentSystemNetworkConnectivityApiController().GetIncidentList();
             List<IncidentSystemNetworkConnectivityModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemNetworkConnectivityModel(x));
             return View(incidentModels);

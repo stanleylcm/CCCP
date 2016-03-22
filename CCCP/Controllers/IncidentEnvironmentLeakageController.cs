@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentEnvironmentLeakageModel incident = new IncidentEnvironmentLeakageModel();
 
         // GET: IncidentEnvironmentLeakages
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentEnvironmentLeakage> incidents = new IncidentEnvironmentLeakageApiController().GetIncidentList();
             List<IncidentEnvironmentLeakageModel> incidentModels = incidents.ConvertAll(x => new IncidentEnvironmentLeakageModel(x));
             return View(incidentModels);

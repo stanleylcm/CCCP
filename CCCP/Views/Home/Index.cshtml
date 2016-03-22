@@ -18,12 +18,12 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">General Enquiries</span>
-                    <span class="info-box-number">14/20</span>
+                    <span class="info-box-number">@ViewBag.GeneralEnquiryProgress</span>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
+                        <div class="progress-bar" style="width: @ViewBag.GeneralEnquiryProgressPercentage%"></div>
                     </div>
                     <span class="progress-description">
-                        70% Finished
+                        @ViewBag.GeneralEnquiryProgressPercentage% Finished
                     </span>
                 </div>
             </div>
@@ -36,12 +36,12 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Incidents</span>
-                    <span class="info-box-number">28/40</span>
+                    <span class="info-box-number">@ViewBag.IncidentProgress</span>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
+                        <div class="progress-bar" style="width: @ViewBag.IncidentProgressPercentage%"></div>
                     </div>
                     <span class="progress-description">
-                        70% Finished
+                        @ViewBag.IncidentProgressPercentage% Finished
                     </span>
                 </div>
             </div>
@@ -250,6 +250,10 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
+                    @{
+                        
+                    }
+
                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <th></th>
@@ -269,78 +273,64 @@
                         <tbody>
                             <tr>
                                 <td>General Enquiry</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    {
+                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = "" })">
+                                    @(ViewBag.IncidentSummary.ContainsKey("GeneralEnquiry_" + item.ToString()) && ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] : "")
+                                </a></td>        
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 1</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    {
+                                <td><a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 1" })">
+                                    @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel1_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] : "")
+                                </a></td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 2</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 2" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel2_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel2_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel2_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 3</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 3" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel3_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel3_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel3_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Crisis</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = "" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("Crisis_" + item.ToString()) && ViewBag.IncidentSummary["Crisis_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["Crisis_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                         </tbody>
                     </table>

@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentSystemBillingModel incident = new IncidentSystemBillingModel();
 
         // GET: IncidentSystemBillings
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentSystemBilling> incidents = new IncidentSystemBillingApiController().GetIncidentList();
             List<IncidentSystemBillingModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemBillingModel(x));
             return View(incidentModels);

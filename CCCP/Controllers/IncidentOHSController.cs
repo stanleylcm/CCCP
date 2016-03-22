@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentOHSModel incident = new IncidentOHSModel();
 
         // GET: IncidentOHSs
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentOHS> incidents = new IncidentOHSApiController().GetIncidentList();
             List<IncidentOHSModel> incidentModels = incidents.ConvertAll(x => new IncidentOHSModel(x));
             return View(incidentModels);

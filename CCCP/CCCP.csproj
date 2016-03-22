@@ -189,6 +189,7 @@
     <Compile Include="Controllers\WebApi\IncidentSystemCallCentreApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemInvoicingApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentSystemBillingApiController.cs" />
+    <Compile Include="Controllers\WebApi\DashboardApiController.cs" />
     <Compile Include="Controllers\WebApi\MasterTableApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

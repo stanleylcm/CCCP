@@ -42,24 +42,24 @@ namespace CCCP.Common
         IT_System,
         OT_System,
         Network_Connectivity,
-        Security
+        //Security
     }
 
     public enum IncidentTypeSubType
     {
-        SystemSecurity,
-        SystemOTSystem,
-        SystemITSystem,
-        SystemNetworkConnectivity,
-        SystemCallCentre,
-        SystemBilling,
-        SystemInvoicing,
-        QualityNetwork,
-        QualityCorporateImage,
-        QualityGeneration,
-        EnvironmentAirEmission,
         EnvironmentLeakage,
-        OHS
+        EnvironmentAirEmission,
+        QualityGeneration,
+        OHS,
+        QualityCorporateImage,
+        QualityNetwork,
+        SystemInvoicing,
+        SystemBilling,
+        SystemCallCentre,
+        SystemNetworkConnectivity,
+        SystemITSystem,
+        SystemOTSystem
+        //SystemSecurity
     }
 
     public enum SequenceType
@@ -387,6 +387,14 @@ namespace CCCP.Common
     public enum IncidentOHSTreatment
     {
         Others_9please_specify0
+    }
+    #endregion
+
+    #region Enum for Incident - Quality Network
+    public enum IncidentQualityNetworkInputKey
+    {
+        IncidentQualityNetwork_LossInterconnection,
+        IncidentQualityNetwork_LossTransmission
     }
     #endregion
 }

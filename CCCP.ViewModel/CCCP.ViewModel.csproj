@@ -139,6 +139,21 @@
     <Compile Include="usp_Checklist_LoadData_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_Dashboard_GetGeneralEnquiryProgress_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetIncidentProgress_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetIncidentSummary1_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetIncidentSummary_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetOpenCloseIncident_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetUserFunctions_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
