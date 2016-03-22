@@ -154,6 +154,18 @@
     <Compile Include="usp_Dashboard_GetOpenCloseIncident_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_Dashboard_GetOutstandingCrisis_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetOutstandingGeneralEnquiry_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetOutstandingIncident1_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Dashboard_GetOutstandingIncident_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetUserFunctions_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>

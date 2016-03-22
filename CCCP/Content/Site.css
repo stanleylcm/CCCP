@@ -114,3 +114,12 @@ section.content ul.nav li
     list-style-position:inside;
     border: 0px solid black;
 }
+
+.hide_overflow
+{
+    display:inline-block;
+    width:250px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}

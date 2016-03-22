@@ -121,5 +121,25 @@ namespace CCCP.ViewModel
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOpenCloseIncident_Result>("usp_Dashboard_GetOpenCloseIncident");
         }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOutstandingCrisis_Result> usp_Dashboard_GetOutstandingCrisis()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingCrisis_Result>("usp_Dashboard_GetOutstandingCrisis");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOutstandingGeneralEnquiry_Result> usp_Dashboard_GetOutstandingGeneralEnquiry()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingGeneralEnquiry_Result>("usp_Dashboard_GetOutstandingGeneralEnquiry");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOutstandingIncident_Result> usp_Dashboard_GetOutstandingIncident()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingIncident_Result>("usp_Dashboard_GetOutstandingIncident");
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOutstandingIncident1_Result> usp_Dashboard_GetOutstandingIncident1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingIncident1_Result>("usp_Dashboard_GetOutstandingIncident1");
+        }
     }
 }

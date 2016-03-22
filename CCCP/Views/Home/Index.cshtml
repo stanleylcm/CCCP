@@ -1,4 +1,8 @@
-﻿@{
+﻿
+@using CCCP.Common
+@using CCCP.ViewModel
+@using CCCP.Business
+@{
     ViewBag.Title = @Resources.global.Menu_Dashboard;
 }
 
@@ -63,7 +67,6 @@
                             <th>Enquiry No.</th>
                             <th>Enquiry Type</th>
                             <th>Date</th>
-                            <th>Incident Background</th>
                             <th></th>
                         </thead>
                         <tbody>
@@ -71,21 +74,30 @@
                                 <td>1234567</td>
                                 <td>System (Billing)</td>
                                 <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
                                 <td><i class="fa fa-sliders"></i></td>
                             </tr>
                             <tr>
                                 <td>1234567</td>
                                 <td>System (Billing)</td>
                                 <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
                                 <td><i class="fa fa-sliders"></i></td>
                             </tr>
                             <tr>
                                 <td>1234567</td>
                                 <td>System (Billing)</td>
                                 <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
+                                <td><i class="fa fa-sliders"></i></td>
+                            </tr>
+                            <tr>
+                                <td>1234567</td>
+                                <td>System (Billing)</td>
+                                <td>2015-12-28 11:11:11</td>
+                                <td><i class="fa fa-sliders"></i></td>
+                            </tr>
+                            <tr>
+                                <td>1234567</td>
+                                <td>System (Billing)</td>
+                                <td>2015-12-28 11:11:11</td>
                                 <td><i class="fa fa-sliders"></i></td>
                             </tr>
                         </tbody>
@@ -123,31 +135,22 @@
                                             <th>Incident No.</th>
                                             <th>Incident Type</th>
                                             <th>Date</th>
-                                            <th>Incident Background</th>
+                                            <th width="250px">Incident Background</th>
                                             <th></th>
                                         </thead>
                                         <tbody>
+                                            @{
+                                                foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel1List)
+                                                { 
                                             <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
+                                                <td>@item.IncidentNo</td>
+                                                <td>@item.IncidentType</td>
+                                                <td>@item.IssueDateTime</td>
+                                                <td class="hide_overflow">@item.IncidentBackground</td>
+                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
                                             </tr>
-                                            <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
-                                            </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -254,7 +257,7 @@
                         
                     }
 
-                    <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <th></th>
                             <th>Leakage</th>
@@ -274,7 +277,7 @@
                             <tr>
                                 <td>General Enquiry</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = "" })">
                                     @(ViewBag.IncidentSummary.ContainsKey("GeneralEnquiry_" + item.ToString()) && ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] : "")
@@ -285,7 +288,7 @@
                             <tr>
                                 <td>Level 1</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td><a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 1" })">
                                     @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel1_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] : "")
@@ -296,7 +299,7 @@
                             <tr>
                                 <td>Level 2</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td>
                                     <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 2" })">
@@ -309,7 +312,7 @@
                             <tr>
                                 <td>Level 3</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td>
                                     <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 3" })">
@@ -322,7 +325,7 @@
                             <tr>
                                 <td>Crisis</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(CCCP.Common.IncidentTypeSubType)))
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td>
                                     <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = "" })">
@@ -351,7 +354,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <th>Incident No.</th>
                         <th>Incident Type</th>

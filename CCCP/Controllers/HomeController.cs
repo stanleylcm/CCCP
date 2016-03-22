@@ -59,8 +59,18 @@ namespace CCCP.Controllers
             }
             #endregion
 
-            #region Outstanding Incident List
+            #region Outstanding General Enquiry List
+            ViewBag.OutstandingGeneralEnquiryList = db.usp_Dashboard_GetOutstandingGeneralEnquiry();
+            #endregion
 
+            #region Outstanding Incident List
+            List<usp_Dashboard_GetOutstandingIncident1_Result> outIncidentList = db.usp_Dashboard_GetOutstandingIncident1().ToList<usp_Dashboard_GetOutstandingIncident1_Result>();
+
+            ViewBag.OutstandingIncidentLevel1List = outIncidentList.Where(m => m.LevelOfSeverity == "1").ToList<usp_Dashboard_GetOutstandingIncident1_Result>();
+            ViewBag.OutstandingIncidentLevel2List = outIncidentList.Where(m => m.LevelOfSeverity == "2").ToList<usp_Dashboard_GetOutstandingIncident1_Result>();
+            ViewBag.OutstandingIncidentLevel3List = outIncidentList.Where(m => m.LevelOfSeverity == "3").ToList<usp_Dashboard_GetOutstandingIncident1_Result>();
+
+            ViewBag.OutstandingCrisisList = db.usp_Dashboard_GetOutstandingCrisis();
             #endregion
 
             #region Incident Summary
