@@ -27,6 +27,7 @@ namespace CCCP.Controllers
             foreach(usp_Dashboard_GetIncidentProgress_Result record in incidentProgress)
             {
                 ViewBag.TotalIncidentCount = record.TotalIncidentCount;
+                ViewBag.OutstandingIncidentCount = record.OutstandingIncidentCount;
 
                 ViewBag.IncidentProgress = (record.TotalIncidentCount - record.OutstandingIncidentCount).ToString() + "/" + record.TotalIncidentCount.ToString();
                 if (record.TotalIncidentCount == 0)
@@ -46,6 +47,7 @@ namespace CCCP.Controllers
             foreach (usp_Dashboard_GetGeneralEnquiryProgress_Result record in generalEnquiryProgress)
             {
                 ViewBag.TotalGeneralEnquiryCount = record.TotalGeneralEnquiryCount;
+                ViewBag.OutstandingGeneralEnquiryCount = record.OutstandingGeneralEnquiryCount;
 
                 ViewBag.GeneralEnquiryProgress = (record.TotalGeneralEnquiryCount - record.OutstandingGeneralEnquiryCount).ToString() + "/" + record.TotalGeneralEnquiryCount.ToString();
                 if (record.TotalGeneralEnquiryCount == 0)

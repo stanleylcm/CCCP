@@ -118,7 +118,7 @@ section.content ul.nav li
 .hide_overflow
 {
     display:inline-block;
-    width:250px;
+    width:225px;
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
