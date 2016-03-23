@@ -43,38 +43,6 @@
 		    });
 	    });
 
-	    $("input[type=checkbox][id^=AffectedSystem]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=AffectedSystem]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemITSystem_AffectedSystem").val(sList);
-	    });
-
-	    $("input[type=checkbox][id^=AffectedArea]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=AffectedArea]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemITSystem_AffectedArea").val(sList);
-	    });
-
 	    $("#incidentSystemITSystem_IsDrillMode").on("click", function () {
 	        $(this).val(this.checked);
 	    });
@@ -145,12 +113,12 @@
                 errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
             }
 
-            if ($('#incidentSystemITSystem_ExpectedRestorationTIme').val() == '') {
+            if ($("#ExpectedRestorationTimeDate").val() == '' || $("#ExpectedRestorationTimeTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($('#incidentSystemITSystem_FullRestoration').val() == '') {
+            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
             }
@@ -326,15 +294,15 @@
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.AffectedSystem)</label></div>
                                             <div class="col-lg-6">
-                                                @{
-                                                    int countAffectedSystem = 0;
-                                                    foreach (string one in Model.Options_AffectedSystem)
-                                                    {
-                                                        <input id="AffectedSystem@(countAffectedSystem.ToString())" type="checkbox" value="@one" @(incidentSystemITSystem.AffectedSystem.IsContains(one) ? "checked" : "")/><label for="AffectedSystem@(countAffectedSystem.ToString())"> @one</label><br />
-                                                        countAffectedSystem++;
+                                                <select id="incidentSystemITSystem_AffectedSystem" name="incidentSystemITSystem.AffectedSystem" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @{
+                                                        foreach (string one in Model.Options_AffectedSystem)
+                                                        {
+                                                    <option value=" @one" @(incidentSystemITSystem.AffectedSystem.IsContains(one) ? "selected" : "")>@one</option>
+                                                        }
                                                     }
-                                                }
-                                                <input type="hidden" id="incidentSystemITSystem_AffectedSystem" name="incidentSystemITSystem.AffectedSystem" value="@incidentSystemITSystem.AffectedSystem" />
+                                                </select>
                                                 @Html.ValidationMessageFor(model => incidentSystemITSystem.AffectedSystem, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -343,18 +311,20 @@
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemITSystem.AffectedArea)</label></div>
                                             <div class="col-lg-6">
-                                                                                                @{
-                                                    int countAffectedArea = 0;
-                                                    foreach (string one in Model.Options_AffectedArea)
-                                                    {
-                                                        <input id="AffectedArea@(countAffectedArea.ToString())" type="checkbox" value="@one" @(incidentSystemITSystem.AffectedArea.IsContains(one) ? "checked" : "") /><label for="AffectedArea@(countAffectedArea.ToString())"> @one</label><br />
-                                                        countAffectedArea++;
+                                                <select id="incidentSystemITSystem_AffectedArea" name="incidentSystemITSystem.AffectedArea" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @{
+                                                        foreach (string one in Model.Options_AffectedArea)
+                                                        {
+                                                    <option value="@one" @(incidentSystemITSystem.AffectedArea.IsContains(one) ? "selected" : "")>@one</option>
+                                                        }
                                                     }
-                                                }
-                                                <input type="hidden" id="incidentSystemITSystem_AffectedArea" name="incidentSystemITSystem.AffectedArea" value="@incidentSystemITSystem.AffectedArea" />
+                                                </select>
                                                 @Html.ValidationMessageFor(model => incidentSystemITSystem.AffectedArea, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+
+
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>

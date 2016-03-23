@@ -129,12 +129,12 @@
                 errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
             }
 
-            if ($('#incidentSystemNetworkConnectivity_ExpectedRestorationTIme').val() == '') {
+            if ($("#ExpectedRestorationTimeDate").val() == '' || $("#ExpectedRestorationTimeTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($('#incidentSystemNetworkConnectivity_FullRestoration').val() == '') {
+            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
             }

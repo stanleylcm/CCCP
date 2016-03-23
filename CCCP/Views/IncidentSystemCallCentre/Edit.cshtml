@@ -236,7 +236,7 @@
                 errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
             }
 
-            if ($('#incidentSystemCallCentre_FullRestoration').val() == '') {
+            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
             }
