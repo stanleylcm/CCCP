@@ -21,6 +21,11 @@
             $('#filterText').keyup(function() {
                 dTable.search($(this).val()).draw();
             });
+
+            $("a[name^='LinkIncident']").on('click', function (event) {
+                alert($(this).data('incidentid'));
+                //alert('111');
+            });
         });
     </script>
 }
@@ -85,7 +90,7 @@
                                     <div class="tools">
                                         <a href="@Url.Action("Edit", "IncidentEnvironmentAirEmission", new { id = item.Entity.IncidentEnvironmentAirEmissionId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
                                         <a id="@item.Entity.IncidentEnvironmentAirEmissionId" class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentEnvironmentAirEmissionId })'; } })"><i class="fa fa-times"></i></a>
-                                        <a href="@Url.Action("Edit", "IncidentEnvironmentAirEmission", new { id = item.Entity.IncidentEnvironmentAirEmissionId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a name="LinkIncident@(item.Entity.IncidentEnvironmentAirEmissionId)" data-incidentid="@item.Entity.IncidentEnvironmentAirEmissionId" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
                                         <a href="@Url.Action("Edit", "IncidentEnvironmentAirEmission", new { id = item.Entity.IncidentEnvironmentAirEmissionId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
                                     </div>
                                 </td>

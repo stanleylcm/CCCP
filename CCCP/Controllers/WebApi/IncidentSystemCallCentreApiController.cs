@@ -159,5 +159,31 @@ namespace CCCP.Controllers.WebApi
 
             return incident.Entity.IncidentSystemCallCentreId;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CancelIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
+            incidentSystemCallCentre.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return incidentSystemCallCentre.IncidentSystemCallCentreId;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CloseIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
+            incidentSystemCallCentre.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+            db.SaveChanges();
+
+            return incidentSystemCallCentre.IncidentSystemCallCentreId;
+        }
     }
 }

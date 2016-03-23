@@ -159,5 +159,31 @@ namespace CCCP.Controllers.WebApi
 
             return incident.Entity.IncidentOHSId;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CancelIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
+            incidentOHS.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return incidentOHS.IncidentOHSId;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CloseIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
+            incidentOHS.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+            db.SaveChanges();
+
+            return incidentOHS.IncidentOHSId;
+        }
     }
 }

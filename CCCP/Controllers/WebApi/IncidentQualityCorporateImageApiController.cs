@@ -159,5 +159,31 @@ namespace CCCP.Controllers.WebApi
 
             return incident.Entity.IncidentQualityCorporateImageId;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CancelIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
+            incidentQualityCorporateImage.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return incidentQualityCorporateImage.IncidentQualityCorporateImageId;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CloseIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
+            incidentQualityCorporateImage.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+            db.SaveChanges();
+
+            return incidentQualityCorporateImage.IncidentQualityCorporateImageId;
+        }
     }
 }

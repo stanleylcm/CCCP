@@ -159,5 +159,31 @@ namespace CCCP.Controllers.WebApi
 
             return incident.Entity.IncidentQualityGenerationId;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CancelIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
+            incidentQualityGeneration.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return incidentQualityGeneration.IncidentQualityGenerationId;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int CloseIncident(int id)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
+            incidentQualityGeneration.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+            db.SaveChanges();
+
+            return incidentQualityGeneration.IncidentQualityGenerationId;
+        }
     }
 }
