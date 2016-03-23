@@ -220,7 +220,7 @@
                                                     <option value=""></option>
                                                     @foreach (string one in Model.Options_Location)
                                                     {
-                                                        <option value="@one" @(incidentEnvironmentAirEmission.Location == one ? "checked" : "")>@one</option>
+                                                        <option value="@one" @(incidentEnvironmentAirEmission.Location == one ? "selected" : "")>@one</option>
                                                     }
                                                 </select>
                                                 @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.Location, "", new { @class = "text-danger" })
@@ -244,7 +244,7 @@
                                                     <option value=""></option>
                                                     @foreach (string one in Model.Options_SourceOfInformation)
                                                     {
-                                                        <option value="@one" @(incidentEnvironmentAirEmission.SourceOfInformation == one ? "checked" : "")>@one</option>
+                                                        <option value="@one" @(incidentEnvironmentAirEmission.SourceOfInformation == one ? "selected" : "")>@one</option>
                                                     }
                                                 </select>
                                                 @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.SourceOfInformation, "", new { @class = "text-danger" })
