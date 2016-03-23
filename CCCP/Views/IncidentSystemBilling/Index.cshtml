@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<CCCP.Business.Model.IncidentSystemBillingModel>
 
 @using CCCP.Common
+@using CCCP.Business.Service
 @{
     ViewBag.Title = Resources.global.Menu_IncidentSystemBilling;
 }
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            dTable = $('#IncidentList').DataTable({
-                "sDom": '<"top"l>rt<"bottom"ip><"clear">'
-            });
+    $(document).ready(function () {
+        dTable = $('#IncidentList').DataTable({
+            "sDom": '<"top"l>rt<"bottom"ip><"clear">'
+        });
 
-            $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
+        $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
             if ($('#filterText').val() != "") {
                 $('#filterText').val('"' + $('#filterText').val() + '"');
             }
@@ -20,6 +21,73 @@
 
             $('#filterText').keyup(function() {
                 dTable.search($(this).val()).draw();
+            });
+
+            $("a[name^='LinkIncident']").on('click', function (event) {
+                var incidentId = $(this).data('incidentid');
+                var incidentNo = $(this).data('incidentno');
+                var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling)';
+
+                $.ajax({
+                    url: "/IncidentSystemBilling/GetIncidentListForLink",
+                    type: "POST",
+                    data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId }),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $('#CCCPModal').find('.modal-dialog').css({ width: '90%' });
+                        $('#CCCPModal').find('.modal-body').html(data);
+                        $('#CCCPModal').find('.modal-title').html('Link Incident - ' + incidentNo);
+                        $('#CCCPModal').modal('toggle');
+
+                        dLinkTable = $('#LinkIncidentList').DataTable({
+                            "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+                            "order": [[1, "desc"]]
+                        });
+
+                        $('#LinkIncidentFilterText').keyup(function () {
+                            dLinkTable.search($(this).val()).draw();
+                        });
+
+                        $('input[type=checkbox][id^=chkLinkIncident]').on('click', function (event) {
+                            var sList = "";
+                            var i = 0;
+                            $("input[type=checkbox][id^=chkLinkIncident]").each(function () {
+                                if (this.checked) {
+                                    if (i == 0) {
+                                        sList = $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
+                                    } else {
+                                        sList = sList + ";" + $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
+                                    }
+                                    i++;
+                                }
+                            });
+                            $("#LinkIncidentLinkList").val(sList);
+                        });
+
+                        $('button[name=LinkIncident]').on('click', function (event) {
+                            var incidentId = $(this).data('incidentid');
+                            var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemBilling)';
+
+                            $.ajax({
+                                url: "/IncidentSystemBilling/LinkIncident",
+                                type: "POST",
+                                data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'linkList': $("#LinkIncidentLinkList").val() }),
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location = '\IncidentSystemBilling\?message=Selected incidents had been linked to ' + data.SelectedIncidentNo + ' successfully!';
+                                },
+                                error: function () {
+                                    alert("An error has occured!!!");
+                                }
+                            });
+                        });
+                    },
+                    error: function () {
+                        alert("An error has occured!!!");
+                    }
+                });
             });
         });
 
@@ -89,7 +157,7 @@
                                     <div>
                                         <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
                                         <a id="@item.Entity.IncidentSystemBillingId" class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentSystemBillingId })'; } })"><i class="fa fa-times"></i></a>
-                                        <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a name="LinkIncident@(item.Entity.IncidentSystemBillingId)" data-incidentid="@item.Entity.IncidentSystemBillingId" data-incidentno="@item.Entity.IncidentNo" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
                                         <a href="@Url.Action("Edit", "IncidentSystemBilling", new { id = item.Entity.IncidentSystemBillingId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
                                     </div>
                                 </td>

@@ -141,5 +141,39 @@ namespace CCCP.ViewModel
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingIncident1_Result>("usp_Dashboard_GetOutstandingIncident1");
         }
+    
+        public virtual ObjectResult<usp_Incident_GetIncidentForLink_Result> usp_Incident_GetIncidentForLink(string incidentId, string incidentTypeId)
+        {
+            var incidentIdParameter = incidentId != null ?
+                new ObjectParameter("IncidentId", incidentId) :
+                new ObjectParameter("IncidentId", typeof(string));
+    
+            var incidentTypeIdParameter = incidentTypeId != null ?
+                new ObjectParameter("IncidentTypeId", incidentTypeId) :
+                new ObjectParameter("IncidentTypeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Incident_GetIncidentForLink_Result>("usp_Incident_GetIncidentForLink", incidentIdParameter, incidentTypeIdParameter);
+        }
+    
+        public virtual int usp_Incident_LinkIncident(Nullable<int> incidentId, Nullable<int> incidentTypeId, Nullable<int> linkIncidentId, Nullable<int> linkIncidentTypeId)
+        {
+            var incidentIdParameter = incidentId.HasValue ?
+                new ObjectParameter("IncidentId", incidentId) :
+                new ObjectParameter("IncidentId", typeof(int));
+    
+            var incidentTypeIdParameter = incidentTypeId.HasValue ?
+                new ObjectParameter("IncidentTypeId", incidentTypeId) :
+                new ObjectParameter("IncidentTypeId", typeof(int));
+    
+            var linkIncidentIdParameter = linkIncidentId.HasValue ?
+                new ObjectParameter("LinkIncidentId", linkIncidentId) :
+                new ObjectParameter("LinkIncidentId", typeof(int));
+    
+            var linkIncidentTypeIdParameter = linkIncidentTypeId.HasValue ?
+                new ObjectParameter("LinkIncidentTypeId", linkIncidentTypeId) :
+                new ObjectParameter("LinkIncidentTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Incident_LinkIncident", incidentIdParameter, incidentTypeIdParameter, linkIncidentIdParameter, linkIncidentTypeIdParameter);
+        }
     }
 }
