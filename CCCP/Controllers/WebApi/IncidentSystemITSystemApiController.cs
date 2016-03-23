@@ -72,6 +72,14 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentSystemITSystemModel GetIncident()
+        {
+            IncidentSystemITSystemModel result = new IncidentSystemITSystemModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public List<IncidentSystemITSystem> GetIncidentList()
         {
             List<IncidentSystemITSystem> result = new List<IncidentSystemITSystem>();

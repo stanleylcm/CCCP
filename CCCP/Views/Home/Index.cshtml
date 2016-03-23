@@ -1,4 +1,8 @@
-﻿@{
+﻿
+@using CCCP.Common
+@using CCCP.ViewModel
+@using CCCP.Business
+@{
     ViewBag.Title = @Resources.global.Menu_Dashboard;
 }
 
@@ -18,12 +22,12 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">General Enquiries</span>
-                    <span class="info-box-number">14/20</span>
+                    <span class="info-box-number">@ViewBag.GeneralEnquiryProgress</span>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
+                        <div class="progress-bar" style="width: @ViewBag.GeneralEnquiryProgressPercentage%"></div>
                     </div>
                     <span class="progress-description">
-                        70% Finished
+                        @ViewBag.GeneralEnquiryProgressPercentage% Finished
                     </span>
                 </div>
             </div>
@@ -36,12 +40,12 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Incidents</span>
-                    <span class="info-box-number">28/40</span>
+                    <span class="info-box-number">@ViewBag.IncidentProgress</span>
                     <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
+                        <div class="progress-bar" style="width: @ViewBag.IncidentProgressPercentage%"></div>
                     </div>
                     <span class="progress-description">
-                        70% Finished
+                        @ViewBag.IncidentProgressPercentage% Finished
                     </span>
                 </div>
             </div>
@@ -50,58 +54,46 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="box box-success box-solid" style="height:310px">
+            <div class="box box-success box-solid" style="height:400px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding General Enquiries</h3>
                     <!-- /.box-tools -->
+                    <span class="pull-right">Total: @ViewBag.OutstandingGeneralEnquiryCount</span>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table class="OutstandingGeneralEnquiry table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <th>Enquiry No.</th>
                             <th>Enquiry Type</th>
                             <th>Date</th>
-                            <th>Incident Background</th>
                             <th></th>
                         </thead>
                         <tbody>
+                            @{
+                                foreach (usp_Dashboard_GetOutstandingGeneralEnquiry_Result item in ViewBag.OutStandingGeneralEnquiryList)
+                                {
                             <tr>
-                                <td>1234567</td>
-                                <td>System (Billing)</td>
-                                <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
-                                <td><i class="fa fa-sliders"></i></td>
+                                <td>@item.IncidentNo</td>
+                                <td>@item.IncidentType</td>
+                                <td>@item.IssueDateTime</td>
+                                <td><a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })"><i class="fa fa-sliders"></i></a></td>
                             </tr>
-                            <tr>
-                                <td>1234567</td>
-                                <td>System (Billing)</td>
-                                <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
-                                <td><i class="fa fa-sliders"></i></td>
-                            </tr>
-                            <tr>
-                                <td>1234567</td>
-                                <td>System (Billing)</td>
-                                <td>2015-12-28 11:11:11</td>
-                                <td>Oh No...</td>
-                                <td><i class="fa fa-sliders"></i></td>
-                            </tr>
+                                }
+                            }
                         </tbody>
                     </table>
-                    <a href="#" class="small-box-footer pull-right">
-                        More <i class="fa fa-arrow-circle-right"></i>
-                    </a>
                 </div>
                 <!-- /.box-body -->
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="box box-warning box-solid" style="height:310px">
+            <div class="box box-warning box-solid" style="height:400px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding Incidents</h3>
                     <!-- /.box-tools -->
+                    <span class="pull-right">Total: @ViewBag.OutstandingIncidentCount</span>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -120,34 +112,25 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th>Incident No.</th>
-                                            <th>Incident Type</th>
-                                            <th>Date</th>
-                                            <th>Incident Background</th>
+                                            <th width="80px">Incident No.</th>
+                                            <th width="200px">Incident Type</th>
+                                            <th width="100px">Date</th>
+                                            <th width="200px">Incident Background</th>
                                             <th></th>
                                         </thead>
                                         <tbody>
+                                            @{
+                                                foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel1List)
+                                                { 
                                             <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
+                                                <td>@item.IncidentNo</td>
+                                                <td>@item.IncidentType</td>
+                                                <td>@item.IssueDateTime</td>
+                                                <td class="hide_overflow">@item.IncidentBackground</td>
+                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
                                             </tr>
-                                            <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
-                                            </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -159,20 +142,25 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th>Incident No.</th>
-                                            <th>Incident Type</th>
-                                            <th>Date</th>
-                                            <th>Incident Background</th>
+                                            <th width="80px">Incident No.</th>
+                                            <th width="200px">Incident Type</th>
+                                            <th width="100px">Date</th>
+                                            <th width="200px">Incident Background</th>
                                             <th></th>
                                         </thead>
                                         <tbody>
+                                            @{
+                                                foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel2List)
+                                                {
                                             <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
+                                                <td>@item.IncidentNo</td>
+                                                <td>@item.IncidentType</td>
+                                                <td>@item.IssueDateTime</td>
+                                                <td class="hide_overflow">@item.IncidentBackground</td>
+                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
                                             </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -184,20 +172,25 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th>Incident No.</th>
-                                            <th>Incident Type</th>
-                                            <th>Date</th>
-                                            <th>Incident Background</th>
+                                            <th width="80px">Incident No.</th>
+                                            <th width="200px">Incident Type</th>
+                                            <th width="100px">Date</th>
+                                            <th width="200px">Incident Background</th>
                                             <th></th>
                                         </thead>
                                         <tbody>
+                                            @{
+                                                foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel3List)
+                                                {
                                             <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
+                                                <td>@item.IncidentNo</td>
+                                                <td>@item.IncidentType</td>
+                                                <td>@item.IssueDateTime</td>
+                                                <td class="hide_overflow">@item.IncidentBackground</td>
+                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
                                             </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -209,20 +202,23 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                        <th>Incident No.</th>
-                                        <th>Incident Type</th>
-                                        <th>Date</th>
-                                        <th>Incident Background</th>
-                                        <th></th>
+                                            <th width="80px">Crisis No.</th>
+                                            <th width="200px">Incident Type</th>
+                                            <th width="100px">Date</th>
+                                            <th></th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1234567</td>
-                                                <td>System (Billing)</td>
-                                                <td>2015-12-28 11:11:11</td>
-                                                <td>Oh No...</td>
-                                                <td><i class="fa fa-sliders"></i></td>
-                                            </tr>
+                                            @{
+                                                foreach (usp_Dashboard_GetOutstandingCrisis_Result item in ViewBag.OutstandingCrisisList)
+                                                {
+                                                    <tr>
+                                                        <td>@item.CrisisNo</td>
+                                                        <td>@item.IncidentType</td>
+                                                        <td>@item.IssueDateTime</td>
+                                                        <td><a href="@Url.Action("Details", "CrisisManagement", new { id = item.CrisisId })"><i class="fa fa-sliders"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -230,9 +226,6 @@
                         </div>
 
                     </div>
-                    <a href="#" class="small-box-footer pull-right">
-                        More <i class="fa fa-arrow-circle-right"></i>
-                    </a>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -250,7 +243,11 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
+                    @{
+                        
+                    }
+
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <th></th>
                             <th>Leakage</th>
@@ -269,78 +266,64 @@
                         <tbody>
                             <tr>
                                 <td>General Enquiry</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    {
+                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = "" })">
+                                    @(ViewBag.IncidentSummary.ContainsKey("GeneralEnquiry_" + item.ToString()) && ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] : "")
+                                </a></td>        
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 1</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    {
+                                <td><a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 1" })">
+                                    @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel1_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel1_" + item.ToString()] : "")
+                                </a></td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 2</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 2" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel2_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel2_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel2_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Level 3</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "Incident" + item.ToString(), new { searchCriteria = "Level 3" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("IncidentLevel3_" + item.ToString()) && ViewBag.IncidentSummary["IncidentLevel3_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["IncidentLevel3_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                             <tr>
                                 <td>Crisis</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>5</td>
-                                <td>23</td>
-                                <td></td>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
+                                @{
+                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    {
+                                <td>
+                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = "" })">
+                                        @(ViewBag.IncidentSummary.ContainsKey("Crisis_" + item.ToString()) && ViewBag.IncidentSummary["Crisis_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["Crisis_" + item.ToString()] : "")
+                                    </a>
+                                </td>
+                                    }
+                                }
                             </tr>
                         </tbody>
                     </table>
@@ -361,7 +344,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <th>Incident No.</th>
                         <th>Incident Type</th>
@@ -405,5 +388,18 @@
 
 @section Scripts {
     <script>
+        $(document).ready(function () {
+            $('.OutstandingCase').DataTable({
+                "sDom": '<"top">rt<"bottom"ip><"clear">',
+                "iDisplayLength": 4,
+                "order": [[2, "desc"]]
+            });
+
+            $('.OutstandingGeneralEnquiry').DataTable({
+                "sDom": '<"top">rt<"bottom"ip><"clear">',
+                "iDisplayLength": 6,
+                "order": [[2, "desc"]]
+            });
+        });
     </script>
 }

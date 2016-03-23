@@ -213,6 +213,23 @@ namespace CCCP.Business.Service
             return IncidentLevel.Level_1;
         }
 
+        /// <summary>
+        /// Get Incident Level of Quality - Network
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <returns></returns>
+        public static IncidentLevel GetIncidentLevel(IncidentQualityNetwork incident)
+        {
+            // Level 3
+
+            // Level 2
+
+            // Level 1
+
+            // else
+            return IncidentLevel.Level_1;
+        }
+
         public static string GetNewIncidentNo(SequenceType type, int year)
         {
             string Result = "";

@@ -72,6 +72,14 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentQualityCorporateImageModel GetIncident()
+        {
+            IncidentQualityCorporateImageModel result = new IncidentQualityCorporateImageModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public List<IncidentQualityCorporateImage> GetIncidentList()
         {
             List<IncidentQualityCorporateImage> result = new List<IncidentQualityCorporateImage>();

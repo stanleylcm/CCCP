@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentEnvironmentAirEmissionModel incident = new IncidentEnvironmentAirEmissionModel();
 
         // GET: IncidentEnvironmentAirEmissions
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentEnvironmentAirEmission> incidents = new IncidentEnvironmentAirEmissionApiController().GetIncidentList();
             List<IncidentEnvironmentAirEmissionModel> incidentModels = incidents.ConvertAll(x => new IncidentEnvironmentAirEmissionModel(x));
             return View(incidentModels);

@@ -72,6 +72,14 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentEnvironmentAirEmissionModel GetIncident()
+        {
+            IncidentEnvironmentAirEmissionModel result = new IncidentEnvironmentAirEmissionModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public List<IncidentEnvironmentAirEmission> GetIncidentList()
         {
             List<IncidentEnvironmentAirEmission> result = new List<IncidentEnvironmentAirEmission>();

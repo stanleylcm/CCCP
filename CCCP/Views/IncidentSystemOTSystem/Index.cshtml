@@ -12,6 +12,12 @@
                 "sDom": '<"top"l>rt<"bottom"ip><"clear">'
             });
 
+            $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
+            if ($('#filterText').val() != "") {
+                $('#filterText').val('"' + $('#filterText').val() + '"');
+            }
+            dTable.search($('#filterText').val()).draw();
+
             $('#filterText').keyup(function() {
                 dTable.search($(this).val()).draw();
             });

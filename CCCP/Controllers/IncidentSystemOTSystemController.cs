@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentSystemOTSystemModel incident = new IncidentSystemOTSystemModel();
 
         // GET: IncidentSystemOTSystems
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentSystemOTSystem> incidents = new IncidentSystemOTSystemApiController().GetIncidentList();
             List<IncidentSystemOTSystemModel> incidentModels = incidents.ConvertAll(x => new IncidentSystemOTSystemModel(x));
             return View(incidentModels);

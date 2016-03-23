@@ -20,9 +20,10 @@ namespace CCCP.Controllers
         public IncidentQualityGenerationModel incident = new IncidentQualityGenerationModel();
 
         // GET: IncidentQualityGenerations
-        public ActionResult Index(string message)
+        public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
+            ViewBag.SearchCriteria = searchCriteria;
             List<IncidentQualityGeneration> incidents = new IncidentQualityGenerationApiController().GetIncidentList();
             List<IncidentQualityGenerationModel> incidentModels = incidents.ConvertAll(x => new IncidentQualityGenerationModel(x));
             return View(incidentModels);

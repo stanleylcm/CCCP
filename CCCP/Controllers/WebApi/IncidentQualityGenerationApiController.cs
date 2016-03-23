@@ -72,6 +72,14 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public IncidentQualityGenerationModel GetIncident()
+        {
+            IncidentQualityGenerationModel result = new IncidentQualityGenerationModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public List<IncidentQualityGeneration> GetIncidentList()
         {
             List<IncidentQualityGeneration> result = new List<IncidentQualityGeneration>();
