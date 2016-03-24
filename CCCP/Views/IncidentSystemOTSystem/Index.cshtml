@@ -49,10 +49,13 @@
                             dLinkTable.search($(this).val()).draw();
                         });
 
-                        $('input[type=checkbox][id^=chkLinkIncident]').on('click', function (event) {
+                        $('button[name=LinkIncident]').on('click', function (event) {
+                            var incidentId = $(this).data('incidentid');
+                            var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemOTSystem)';
+
                             var sList = "";
                             var i = 0;
-                            $("input[type=checkbox][id^=chkLinkIncident]").each(function () {
+                            dLinkTable.$("input[type=checkbox][id^=chkLinkIncident]").each(function () {
                                 if (this.checked) {
                                     if (i == 0) {
                                         sList = $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
@@ -63,11 +66,6 @@
                                 }
                             });
                             $("#LinkIncidentLinkList").val(sList);
-                        });
-
-                        $('button[name=LinkIncident]').on('click', function (event) {
-                            var incidentId = $(this).data('incidentid');
-                            var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemOTSystem)';
 
                             $.ajax({
                                 url: "/IncidentSystemOTSystem/LinkIncident",
