@@ -175,5 +175,18 @@ namespace CCCP.ViewModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Incident_LinkIncident", incidentIdParameter, incidentTypeIdParameter, linkIncidentIdParameter, linkIncidentTypeIdParameter);
         }
+    
+        public virtual ObjectResult<usp_Incident_GetLinkedIncident_Result> usp_Incident_GetLinkedIncident(Nullable<int> incidentId, Nullable<int> incidentTypeId)
+        {
+            var incidentIdParameter = incidentId.HasValue ?
+                new ObjectParameter("IncidentId", incidentId) :
+                new ObjectParameter("IncidentId", typeof(int));
+    
+            var incidentTypeIdParameter = incidentTypeId.HasValue ?
+                new ObjectParameter("IncidentTypeId", incidentTypeId) :
+                new ObjectParameter("IncidentTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Incident_GetLinkedIncident_Result>("usp_Incident_GetLinkedIncident", incidentIdParameter, incidentTypeIdParameter);
+        }
     }
 }

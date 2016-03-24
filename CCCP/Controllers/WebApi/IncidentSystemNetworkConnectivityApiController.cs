@@ -61,10 +61,16 @@ namespace CCCP.Controllers.WebApi
                                                             select checklistAction).ToList<ChecklistAction>();
                     checklist.ChecklistActionEntities = actionEntities;
                 }
-            }
 
-            // load chat room
-            //
+                // load chat room
+                //
+
+                // load linked incident
+                result.LinkedIncidentEntities = db.usp_Incident_GetLinkedIncident(incidentId, MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemNetworkConnectivity)).ToList<usp_Incident_GetLinkedIncident_Result>();
+
+                // load linked general enquiry
+                //
+            }
 
             // result
             return result;
