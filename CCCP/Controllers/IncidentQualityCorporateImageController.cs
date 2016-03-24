@@ -217,7 +217,7 @@ namespace CCCP.Controllers
                 string[] tmp = link.Split(new string[] { ":" }, StringSplitOptions.None);
                 int linkIncidentId = Convert.ToInt32(tmp[0]);
                 int linkIncidentTypeId = Convert.ToInt32(tmp[1]);
-                new MasterTableApiController().LinkIncident(Convert.ToInt32(incidentId), Convert.ToInt32(incidentTypeId), linkIncidentId, linkIncidentTypeId);
+                new IncidentApiController().LinkIncident(Convert.ToInt32(incidentId), Convert.ToInt32(incidentTypeId), linkIncidentId, linkIncidentTypeId);
             }
 
             IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(Convert.ToInt32(incidentId));

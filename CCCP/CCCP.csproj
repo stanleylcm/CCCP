@@ -178,6 +178,7 @@
     <Compile Include="Controllers\IncidentSystemInvoicingController.cs" />
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
     <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
+    <Compile Include="Controllers\WebApi\IncidentApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityGenerationApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityCorporateImageApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentEnvironmentLeakageApiController.cs" />
