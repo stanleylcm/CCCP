@@ -54,7 +54,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="box box-success box-solid" id="DivOutstandingGeneralEnquiry">
+            <div class="box box-success box-solid" id="DivOutstandingGeneralEnquiry" style="height:500px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding General Enquiries</h3>
                     <!-- /.box-tools -->
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="box box-warning box-solid" id="DivOutstandingIncident">
+            <div class="box box-warning box-solid" id="DivOutstandingIncident" style="height:500px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding Incidents</h3>
                     <!-- /.box-tools -->
@@ -399,12 +399,6 @@
                 "sDom": '<"top">rt<"bottom"ip><"clear">',
                 "iDisplayLength": 6,
                 "order": [[2, "desc"]]
-            });
-
-            $('#DivOutstandingGeneralEnquiry').height($('#DivOutstandingIncident').height());
-
-            $(window).bind('resize', function () {
-                $('#DivOutstandingGeneralEnquiry').height($('#DivOutstandingIncident').height());
             });
         });
     </script>
