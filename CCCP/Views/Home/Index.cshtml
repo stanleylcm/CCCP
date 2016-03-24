@@ -54,7 +54,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="box box-success box-solid" style="height:400px">
+            <div class="box box-success box-solid" id="DivOutstandingGeneralEnquiry">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding General Enquiries</h3>
                     <!-- /.box-tools -->
@@ -65,21 +65,21 @@
 
                     <table class="OutstandingGeneralEnquiry table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                            <th>Enquiry No.</th>
-                            <th>Enquiry Type</th>
-                            <th>Date</th>
-                            <th></th>
+                        <th>Enquiry No.</th>
+                        <th>Enquiry Type</th>
+                        <th>Date</th>
+                        <th></th>
                         </thead>
                         <tbody>
                             @{
                                 foreach (usp_Dashboard_GetOutstandingGeneralEnquiry_Result item in ViewBag.OutStandingGeneralEnquiryList)
                                 {
-                            <tr>
-                                <td>@item.IncidentNo</td>
-                                <td>@item.IncidentType</td>
-                                <td>@item.IssueDateTime</td>
-                                <td><a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })"><i class="fa fa-sliders"></i></a></td>
-                            </tr>
+                                    <tr>
+                                        <td>@item.IncidentNo</td>
+                                        <td>@item.IncidentType</td>
+                                        <td>@item.IssueDateTime</td>
+                                        <td><a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })"><i class="fa fa-sliders"></i></a></td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="box box-warning box-solid" style="height:400px">
+            <div class="box box-warning box-solid" id="DivOutstandingIncident">
                 <div class="box-header with-border">
                     <h3 class="box-title">Outstanding Incidents</h3>
                     <!-- /.box-tools -->
@@ -112,23 +112,23 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th width="80px">Incident No.</th>
-                                            <th width="200px">Incident Type</th>
-                                            <th width="100px">Date</th>
-                                            <th width="200px">Incident Background</th>
-                                            <th></th>
+                                        <th width="80px">Incident No.</th>
+                                        <th width="200px">Incident Type</th>
+                                        <th width="100px">Date</th>
+                                        <th width="200px">Incident Background</th>
+                                        <th></th>
                                         </thead>
                                         <tbody>
                                             @{
                                                 foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel1List)
-                                                { 
-                                            <tr>
-                                                <td>@item.IncidentNo</td>
-                                                <td>@item.IncidentType</td>
-                                                <td>@item.IssueDateTime</td>
-                                                <td class="hide_overflow">@item.IncidentBackground</td>
-                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
-                                            </tr>
+                                                {
+                                                    <tr>
+                                                        <td>@item.IncidentNo</td>
+                                                        <td>@item.IncidentType</td>
+                                                        <td>@item.IssueDateTime</td>
+                                                        <td class="hide_overflow">@item.IncidentBackground</td>
+                                                        <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
+                                                    </tr>
                                                 }
                                             }
                                         </tbody>
@@ -142,23 +142,23 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th width="80px">Incident No.</th>
-                                            <th width="200px">Incident Type</th>
-                                            <th width="100px">Date</th>
-                                            <th width="200px">Incident Background</th>
-                                            <th></th>
+                                        <th width="80px">Incident No.</th>
+                                        <th width="200px">Incident Type</th>
+                                        <th width="100px">Date</th>
+                                        <th width="200px">Incident Background</th>
+                                        <th></th>
                                         </thead>
                                         <tbody>
                                             @{
                                                 foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel2List)
                                                 {
-                                            <tr>
-                                                <td>@item.IncidentNo</td>
-                                                <td>@item.IncidentType</td>
-                                                <td>@item.IssueDateTime</td>
-                                                <td class="hide_overflow">@item.IncidentBackground</td>
-                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
-                                            </tr>
+                                                    <tr>
+                                                        <td>@item.IncidentNo</td>
+                                                        <td>@item.IncidentType</td>
+                                                        <td>@item.IssueDateTime</td>
+                                                        <td class="hide_overflow">@item.IncidentBackground</td>
+                                                        <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
+                                                    </tr>
                                                 }
                                             }
                                         </tbody>
@@ -172,23 +172,23 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th width="80px">Incident No.</th>
-                                            <th width="200px">Incident Type</th>
-                                            <th width="100px">Date</th>
-                                            <th width="200px">Incident Background</th>
-                                            <th></th>
+                                        <th width="80px">Incident No.</th>
+                                        <th width="200px">Incident Type</th>
+                                        <th width="100px">Date</th>
+                                        <th width="200px">Incident Background</th>
+                                        <th></th>
                                         </thead>
                                         <tbody>
                                             @{
                                                 foreach (usp_Dashboard_GetOutstandingIncident1_Result item in ViewBag.OutstandingIncidentLevel3List)
                                                 {
-                                            <tr>
-                                                <td>@item.IncidentNo</td>
-                                                <td>@item.IncidentType</td>
-                                                <td>@item.IssueDateTime</td>
-                                                <td class="hide_overflow">@item.IncidentBackground</td>
-                                                <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
-                                            </tr>
+                                                    <tr>
+                                                        <td>@item.IncidentNo</td>
+                                                        <td>@item.IncidentType</td>
+                                                        <td>@item.IssueDateTime</td>
+                                                        <td class="hide_overflow">@item.IncidentBackground</td>
+                                                        <td><a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })"><i class="fa fa-sliders"></i></a></td>
+                                                    </tr>
                                                 }
                                             }
                                         </tbody>
@@ -202,10 +202,10 @@
                                 <div class="box-body">
                                     <table class="OutstandingCase table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <th width="80px">Crisis No.</th>
-                                            <th width="200px">Incident Type</th>
-                                            <th width="100px">Date</th>
-                                            <th></th>
+                                        <th width="80px">Crisis No.</th>
+                                        <th width="200px">Incident Type</th>
+                                        <th width="100px">Date</th>
+                                        <th></th>
                                         </thead>
                                         <tbody>
                                             @{
@@ -399,6 +399,12 @@
                 "sDom": '<"top">rt<"bottom"ip><"clear">',
                 "iDisplayLength": 6,
                 "order": [[2, "desc"]]
+            });
+
+            $('#DivOutstandingGeneralEnquiry').height($('#DivOutstandingIncident').height());
+
+            $(window).bind('resize', function () {
+                $('#DivOutstandingGeneralEnquiry').height($('#DivOutstandingIncident').height());
             });
         });
     </script>
