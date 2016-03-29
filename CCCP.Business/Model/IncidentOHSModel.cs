@@ -27,6 +27,7 @@ namespace CCCP.Business.Model
         {
             initOptions();
             Checklists = new List<ChecklistModel>();
+            LinkedIncidentEntities = new List<usp_Incident_GetLinkedIncident_Result>();
         }
 
         #endregion
@@ -50,6 +51,7 @@ namespace CCCP.Business.Model
                 foreach (ChecklistExtend checklistEntity in value) Checklists.Add(new ChecklistModel(checklistEntity));
             }
         }
+        public List<usp_Incident_GetLinkedIncident_Result> LinkedIncidentEntities { get; set; }
 
         public List<string> Options_PossibleCause = new List<string>();
         public List<string> Options_OHSType = new List<string>();

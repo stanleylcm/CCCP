@@ -20,6 +20,8 @@
 			    $('#HistoryIcon').addClass("fa-angle-left");
 		    });
 
+		    $('#LinkedIncidentTable').DataTable();
+
 		    $('#Checklists input[type="checkbox"]').each(function () {
 			    value = $(this).val();
 			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
@@ -468,12 +470,50 @@
                 <div class="tab-pane fade" id="LinkedIncident">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-8">
-                                <div style="height: 400px">
-                                </div>
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <table id="LinkedIncidentTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                            <th>Incident Type</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.LinkedIncidentEntities)
+                                        {
+                                            string sLevelOfSeverity1 = "";
+                                            if (item.LevelOfSeverity != null)
+                                            {
+                                                int level = Convert.ToInt32(item.LevelOfSeverity);
+                                                IncidentLevel iLevel = (IncidentLevel)level;
+                                                sLevelOfSeverity1 = iLevel.ToEnumString();
+                                            }
+                                            <tr>
+                                                <td>@Html.DisplayFor(model => item.IncidentNo)</td>
+                                                <td>@Html.DisplayFor(model => item.IncidentType)</td>
+                                                <td>@Html.DisplayFor(model => sLevelOfSeverity1)</td>
+                                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
+                                                <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                                <td>
+                                                    <div class="tools">
+                                                        <a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-sliders"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-lg-2"></div>
+                            <div class="col-lg-1"></div>
                         </div>
                     </div>
                 </div>

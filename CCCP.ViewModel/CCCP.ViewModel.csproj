@@ -181,6 +181,12 @@
     <Compile Include="usp_IncidentSystemBilling_Test_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_Incident_GetIncidentForLink_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Incident_GetLinkedIncident_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

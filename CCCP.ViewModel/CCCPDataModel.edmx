@@ -514,6 +514,20 @@
         <Function Name="usp_GetUserFunctions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_Incident_GetIncidentForLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncidentId" Type="nvarchar" Mode="In" />
+          <Parameter Name="IncidentTypeId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Incident_GetLinkedIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncidentId" Type="int" Mode="In" />
+          <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Incident_LinkIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncidentId" Type="int" Mode="In" />
+          <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
+          <Parameter Name="LinkIncidentId" Type="int" Mode="In" />
+          <Parameter Name="LinkIncidentTypeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_Incident_PostCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IncidentId" Type="int" Mode="In" />
           <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
@@ -593,6 +607,20 @@
           <FunctionImport Name="usp_Dashboard_GetOutstandingGeneralEnquiry" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetOutstandingGeneralEnquiry_Result)" />
           <FunctionImport Name="usp_Dashboard_GetOutstandingIncident" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetOutstandingIncident_Result)" />
           <FunctionImport Name="usp_Dashboard_GetOutstandingIncident1" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetOutstandingIncident1_Result)" />
+          <FunctionImport Name="usp_Incident_GetIncidentForLink" ReturnType="Collection(CCCP.ViewModel.usp_Incident_GetIncidentForLink_Result)">
+            <Parameter Name="IncidentId" Mode="In" Type="String" />
+            <Parameter Name="IncidentTypeId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Incident_LinkIncident">
+            <Parameter Name="IncidentId" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="LinkIncidentId" Mode="In" Type="Int32" />
+            <Parameter Name="LinkIncidentTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Incident_GetLinkedIncident" ReturnType="Collection(CCCP.ViewModel.usp_Incident_GetLinkedIncident_Result)">
+            <Parameter Name="IncidentId" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1290,6 +1318,29 @@
           <Property Type="String" Name="LevelOfSeverity" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="Controller" Nullable="true" MaxLength="58" />
         </ComplexType>
+        <ComplexType Name="usp_Incident_GetIncidentForLink_Result">
+          <Property Type="Int32" Name="IncidentId" Nullable="true" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="true" />
+          <Property Type="String" Name="IncidentNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LevelOfSeverity" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IncidentStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IncidentBackground" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_Incident_GetLinkedIncident_Result">
+          <Property Type="Int32" Name="IncidentId" Nullable="true" />
+          <Property Type="Int32" Name="IncidentTypeId" Nullable="true" />
+          <Property Type="String" Name="IncidentNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentType" Nullable="true" MaxLength="103" />
+          <Property Type="String" Name="LevelOfSeverity" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IncidentStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IncidentBackground" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Controller" Nullable="true" MaxLength="58" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1925,6 +1976,38 @@
                 <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
                 <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
                 <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Incident_GetIncidentForLink" FunctionName="CCCP.ViewModel.Store.usp_Incident_GetIncidentForLink">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Incident_GetIncidentForLink_Result">
+                <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="IncidentType" ColumnName="IncidentType" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Incident_LinkIncident" FunctionName="CCCP.ViewModel.Store.usp_Incident_LinkIncident" />
+          <FunctionImportMapping FunctionImportName="usp_Incident_GetLinkedIncident" FunctionName="CCCP.ViewModel.Store.usp_Incident_GetLinkedIncident">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Incident_GetLinkedIncident_Result">
+                <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="IncidentType" ColumnName="IncidentType" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
                 <ScalarProperty Name="Controller" ColumnName="Controller" />
               </ComplexTypeMapping>
             </ResultMapping>
