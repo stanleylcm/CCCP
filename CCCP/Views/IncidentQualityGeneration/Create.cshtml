@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.FullRestoration)</label></div>
                                     <div class="col-lg-6">
@@ -130,7 +130,7 @@
                                         @Html.HiddenFor(model => incidentQualityGeneration.FullRestoration)
                                         @Html.ValidationMessageFor(model => incidentQualityGeneration.FullRestoration, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
@@ -252,10 +252,10 @@
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\Full Restoration is required<br />';
-            }
+            //if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
+            //    inputValid = false;
+            //    errMsg = errMsg + '\r\Full Restoration is required<br />';
+            //}
 
             if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
                 inputValid = false;

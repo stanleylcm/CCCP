@@ -58,7 +58,7 @@ namespace CCCP.Business.Model
 
         public bool IsReadyForClose()
         {
-            return IncidentService.IsReadyForClose(this);
+            return IncidentService.IsReadyForClose(this) && (Entity.FullRestoration != null);
         }
         public IncidentStatus GetIncidentStatus()
         {

@@ -70,11 +70,15 @@
 	    });
 
 	    $("#FullRestorationDate").change(function () {
-	        $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $("#FullRestorationTime").change(function () {
-	        $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $(document).ready(function () {
@@ -121,10 +125,10 @@
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\Full Restoration is required<br />';
-            }
+            //if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
+            //    inputValid = false;
+            //    errMsg = errMsg + '\r\Full Restoration is required<br />';
+            //}
 
             if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
                 inputValid = false;

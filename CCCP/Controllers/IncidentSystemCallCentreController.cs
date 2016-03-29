@@ -62,7 +62,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,FullRestoration,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
+        public ActionResult Create([Bind(Include = "IncidentSystemCallCentreId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Impact,PossibleCause,ExpectedRestorationTime,RequireMitigatingAction,MitigatingAction,StatusUpdate,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentSystemCallCentre incidentSystemCallCentre)
         {
             if (ModelState.IsValid)
             {

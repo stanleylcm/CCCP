@@ -50,11 +50,15 @@
 	    });
 
 	    $("#FullRestorationDate").change(function () {
-	        $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $("#FullRestorationTime").change(function () {
-	        $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentSystemITSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $("#ExpectedRestorationTimeDate").change(function () {
@@ -120,10 +124,10 @@
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
-            }
+            //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
+            //    inputValid = false;
+            //    errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
+            //}
 
             if (inputValid == false) {
                 $('#CCCPModal').find('.modal-body').html(errMsg);

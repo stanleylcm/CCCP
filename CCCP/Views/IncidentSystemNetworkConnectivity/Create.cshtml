@@ -141,9 +141,9 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                @*<div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.FullRestoration)</label></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.FullRestoration)</label></div>
                                     <div class="col-lg-6">
                                         <div class="col-lg-6">
                                             <div class="input-group">
@@ -164,7 +164,7 @@
                                         @Html.HiddenFor(model => incidentSystemNetworkConnectivity.FullRestoration)
                                         @Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.FullRestoration, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
+                                </div>*@
 							</div>
 						</div>
 					</div>
@@ -274,10 +274,10 @@
             errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
         }
 
-        if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
-        }
+        //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
+        //    inputValid = false;
+        //    errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
+        //}
 
         if (inputValid == false) {
             $('#CCCPModal').find('.modal-body').html(errMsg);

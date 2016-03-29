@@ -161,16 +161,20 @@
 	        }
 	    });
 
-	    $("#StatusUpdateOthersMore").change(function () {
-	        $("#incidentSystemCallCentre_StatusUpdate").val($("#StatusUpdate").val() + " (" + $(this).val() + ")");
+        $("#StatusUpdateOthersMore").change(function () {
+            $("#incidentSystemCallCentre_StatusUpdate").val($("#StatusUpdate").val() + " (" + $(this).val() + ")");
 	    });
 
-	    $("#FullRestorationDate").change(function () {
-	        $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+        $("#FullRestorationDate").change(function () {
+            if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+                $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+            }
 	    });
 
-	    $("#FullRestorationTime").change(function () {
-	        $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+        $("#FullRestorationTime").change(function () {
+            if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+                $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+            }
 	    });
 
         $(document).ready(function () {
@@ -238,10 +242,10 @@
                 errMsg = errMsg + '\r\nStatus Update cannot be empty<br />';
             }
 
-            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
-            }
+            //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
+            //    inputValid = false;
+            //    errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
+            //}
 
             if (inputValid == false) {
                 $('#CCCPModal').find('.modal-body').html(errMsg);

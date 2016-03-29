@@ -66,11 +66,15 @@
 	    });
 
 	    $("#FullRestorationDate").change(function () {
-	        $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $("#FullRestorationTime").change(function () {
-	        $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
+	            $("#incidentSystemOTSystem_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
+	        }
 	    });
 
 	    $("#ExpectedRestorationTimeDate").change(function () {
