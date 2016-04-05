@@ -1,0 +1,167 @@
+﻿@model IEnumerable<CCCP.Business.Model.IncidentQualityNetworkModel>
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentQualityNetwork;
+}
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        dTable = $('#IncidentList').DataTable({
+            "sDom": '<"top"l>rt<"bottom"ip><"clear">'
+        });
+
+        $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
+            if ($('#filterText').val() != "") {
+                $('#filterText').val('"' + $('#filterText').val() + '"');
+            }
+            dTable.search($('#filterText').val()).draw();
+
+            $('#filterText').keyup(function() {
+                dTable.search($(this).val()).draw();
+            });
+
+            $("a[name^='LinkIncident']").on('click', function (event) {
+                var incidentId = $(this).data('incidentid');
+                var incidentNo = $(this).data('incidentno');
+                var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.QualityNetwork)';
+
+                $.ajax({
+                    url: "/IncidentQualityNetwork/GetIncidentListForLink",
+                    type: "POST",
+                    data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId }),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $('#CCCPModal').find('.modal-dialog').css({ width: '90%' });
+                        $('#CCCPModal').find('.modal-body').html(data);
+                        $('#CCCPModal').find('.modal-title').html('Link Incident - ' + incidentNo);
+                        $('#CCCPModal').modal('toggle');
+
+                        dLinkTable = $('#LinkIncidentList').DataTable({
+                            "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+                            "order": [[1, "desc"]]
+                        });
+
+                        $('#LinkIncidentFilterText').keyup(function () {
+                            dLinkTable.search($(this).val()).draw();
+                        });
+
+                        $('button[name=LinkIncident]').on('click', function (event) {
+                            var incidentId = $(this).data('incidentid');
+                            var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.QualityNetwork)';
+
+                            var sList = "";
+                            var i = 0;
+                            dLinkTable.$("input[type=checkbox][id^=chkLinkIncident]").each(function () {
+                                if (this.checked) {
+                                    if (i == 0) {
+                                        sList = $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
+                                    } else {
+                                        sList = sList + ";" + $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
+                                    }
+                                    i++;
+                                }
+                            });
+                            $("#LinkIncidentLinkList").val(sList);
+
+                            $.ajax({
+                                url: "/IncidentQualityNetwork/LinkIncident",
+                                type: "POST",
+                                data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'linkList': $("#LinkIncidentLinkList").val() }),
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location = '\IncidentQualityNetwork\?message=Selected incidents had been linked to ' + data.SelectedIncidentNo + ' successfully!';
+                                },
+                                error: function () {
+                                    alert("An error has occured!!!");
+                                }
+                            });
+                        });
+                    },
+                    error: function () {
+                        alert("An error has occured!!!");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
+
+    <h1>
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Menu_IncidentQualityNetwork
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- content -->
+
+            <div class="box box-primary">
+
+                <div class="box-body">
+
+                    <div class="pull-left" style="padding-right:20px">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Create", "IncidentQualityNetwork")';">@Resources.global.Func_Create</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '#'">@Resources.global.Func_Export</button>
+                        </div>
+                    </div>
+                    <div class="pull-right">Search: <input id="filterText" /></div>
+                    <table id="IncidentList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            { 
+                                string sLevelOfSeverity = "";
+                                if (item.Entity.LevelOfSeverity != null)
+                                {
+                                    int level = Convert.ToInt32(item.Entity.LevelOfSeverity);
+                                    IncidentLevel iLevel = (IncidentLevel)level;
+                                    sLevelOfSeverity = iLevel.ToEnumString();
+                                }
+                            <tr>
+                                <td><a href="@Url.Action("Details", "IncidentQualityNetwork", new { id = item.Entity.IncidentQualityNetworkId })">@Html.DisplayFor(modelItem => item.Entity.IncidentNo)</a></td>
+                                <td>@Html.DisplayFor(model => sLevelOfSeverity)</td>
+                                <td>@Html.Raw(item.Entity.IncidentBackground != null ? item.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                <td>@Html.DisplayFor(model => item.Entity.IncidentStatus)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.CreatedBy)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.IssueDateTime)</td>
+                                <td>
+                                    <div class="tools">
+                                        <a href="@Url.Action("Edit", "IncidentQualityNetwork", new { id = item.Entity.IncidentQualityNetworkId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a id="@item.Entity.IncidentQualityNetworkId" class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentQualityNetworkId })'; } })"><i class="fa fa-times"></i></a>
+                                        <a name="LinkIncident@(item.Entity.IncidentQualityNetworkId)" data-incidentid="@item.Entity.IncidentQualityNetworkId" data-incidentno="@item.Entity.IncidentNo" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a href="@Url.Action("Edit", "IncidentQualityNetwork", new { id = item.Entity.IncidentQualityNetworkId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+</section><!-- /.content -->

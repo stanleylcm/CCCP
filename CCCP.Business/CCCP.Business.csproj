@@ -54,6 +54,7 @@
     <Compile Include="Model\IncidentQualityCorporateImageModel.cs" />
     <Compile Include="Model\IncidentEnvironmentLeakageModel.cs" />
     <Compile Include="Model\IncidentEnvironmentAirEmissionModel.cs" />
+    <Compile Include="Model\IncidentQualityNetworkModel.cs" />
     <Compile Include="Model\IncidentQualityGenerationModel.cs" />
     <Compile Include="Model\IncidentOHSModel.cs" />
     <Compile Include="Model\IncidentSystemOTSystemModel.cs" />

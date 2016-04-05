@@ -776,17 +776,17 @@ namespace CCCP.ViewModel
         public string StatusUpdate { get; set; }
         [Display(Name = "Root Cause")]
         public string RootCause { get; set; }
-        [Display(Name = "Loss Generation")]
+        [Display(Name = "Loss Generation (MW)")]
         public Nullable<int> LossGeneration { get; set; }
         [Display(Name = "Loss Interconnection")]
-        public Nullable<int> LossInterconnection { get; set; }
+        public string LossInterconnection { get; set; }
         [Display(Name = "Loss Transmission")]
         public string LossTransmission { get; set; }
-        [Display(Name = "MV Outage")]
+        [Display(Name = "MV Outage (min)")]
         public Nullable<int> MVOutage { get; set; }
         [Display(Name = "Is Double Fault?")]
         public Nullable<bool> IsDoubleFault { get; set; }
-        [Display(Name = "LV Outage")]
+        [Display(Name = "LV Outage (min)")]
         public Nullable<int> LVOutage { get; set; }
         [Display(Name = "Is PQ Event Affect Large Customer?")]
         public Nullable<bool> IsPQEventAffectLargeCustomer { get; set; }

@@ -166,6 +166,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentQualityNetworkController.cs" />
     <Compile Include="Controllers\IncidentQualityGenerationController.cs" />
     <Compile Include="Controllers\IncidentQualityCorporateImageController.cs" />
     <Compile Include="Controllers\IncidentEnvironmentLeakageController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
     <Compile Include="Controllers\WebApi\CommonApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentApiController.cs" />
+    <Compile Include="Controllers\WebApi\IncidentQualityNetworkApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityGenerationApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityCorporateImageApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentEnvironmentLeakageApiController.cs" />
@@ -879,6 +881,11 @@
     <Content Include="Views\IncidentOHS\Details.cshtml" />
     <Content Include="Views\IncidentOHS\Edit.cshtml" />
     <Content Include="Views\IncidentOHS\Index.cshtml" />
+    <Content Include="Views\IncidentQualityNetwork\Create.cshtml" />
+    <Content Include="Views\IncidentQualityNetwork\Delete.cshtml" />
+    <Content Include="Views\IncidentQualityNetwork\Details.cshtml" />
+    <Content Include="Views\IncidentQualityNetwork\Edit.cshtml" />
+    <Content Include="Views\IncidentQualityNetwork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

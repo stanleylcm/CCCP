@@ -221,8 +221,43 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentQualityNetwork incident)
         {
             // Level 3
+            if (
+                incident.LossGeneration > 200 ||
+                (incident.LossInterconnection != null && incident.LossInterconnection.IsEquals("220kV SS")) ||
+                (incident.LossTransmission != null && incident.LossTransmission.IsEquals("Loss one primary substation"))
+                )
+                return IncidentLevel.Level_3;
 
             // Level 2
+            if (
+                (incident.LossGeneration >= 80 && incident.LossGeneration <= 200) ||
+                (incident.LossInterconnection != null && incident.LossInterconnection.IsEquals(">1220kV Cable")) ||
+                (incident.LossInterconnection != null && incident.LossInterconnection.IsEquals(">1220kV TR")) ||
+                (incident.LossInterconnection != null && incident.LossInterconnection.IsEquals(">1220kV Busbar")) ||
+                (incident.LossTransmission != null && incident.LossTransmission.IsEquals("Transmission network violate N-1 condition due to network fault")) ||
+                (incident.LossTransmission != null && incident.LossTransmission.IsEquals("Cable overload")) ||
+                (incident.LossTransmission != null && incident.LossTransmission.IsEquals("TR overload")) ||
+                (incident.LossTransmission != null && incident.LossTransmission.IsEquals("66/11kV loss two TR")) ||
+                (incident.MVOutage > 240 && incident.MVOutage <= 360) ||
+                (incident.IsDoubleFault != null && incident.IsDoubleFault.Value == true) ||
+                // More than 1 condition (at least 2...) of the below had been met
+                // No. of Diamond customer > 0
+                // No. of Platinum customer > 0
+                // No. of Customer Affected >= 100
+                // LV Outage >= 240min.
+                // Critical PT is TRUE
+                (incident.NoOfDiamondCustomer > 0 && incident.NoOfPlatinumCustomer > 0) ||
+                (incident.NoOfDiamondCustomer > 0 && incident.NoOfCustomerAffected > 0) ||
+                (incident.NoOfDiamondCustomer > 0 && incident.LVOutage >= 240) ||
+                (incident.NoOfDiamondCustomer > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
+                (incident.NoOfPlatinumCustomer > 0 && incident.NoOfCustomerAffected > 0) ||
+                (incident.NoOfPlatinumCustomer > 0 && incident.LVOutage >= 240) ||
+                (incident.NoOfPlatinumCustomer > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
+                (incident.NoOfCustomerAffected > 0 && incident.LVOutage >= 240) ||
+                (incident.NoOfCustomerAffected > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
+                (incident.LVOutage >= 240 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true)
+                )
+                return IncidentLevel.Level_2;
 
             // Level 1
 

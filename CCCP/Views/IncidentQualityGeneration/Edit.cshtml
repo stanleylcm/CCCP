@@ -135,6 +135,14 @@
                 errMsg = errMsg + '\r\nLoss Of Power Time is required<br />';
             }
 
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('Validation Summary');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
             return inputValid;
         });
     </script>

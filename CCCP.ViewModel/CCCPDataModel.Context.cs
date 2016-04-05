@@ -41,13 +41,13 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
         public virtual DbSet<IncidentQualityCorporateImage> IncidentQualityCorporateImage { get; set; }
         public virtual DbSet<IncidentQualityGeneration> IncidentQualityGeneration { get; set; }
-        public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<IncidentSystemITSystem> IncidentSystemITSystem { get; set; }
         public virtual DbSet<IncidentSystemNetworkConnectivity> IncidentSystemNetworkConnectivity { get; set; }
         public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
+        public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

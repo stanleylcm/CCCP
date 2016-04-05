@@ -45,7 +45,7 @@ namespace CCCP.ViewModel
         public string StatusUpdate { get; set; }
         public string RootCause { get; set; }
         public Nullable<int> LossGeneration { get; set; }
-        public Nullable<int> LossInterconnection { get; set; }
+        public string LossInterconnection { get; set; }
         public string LossTransmission { get; set; }
         public Nullable<int> MVOutage { get; set; }
         public Nullable<bool> IsDoubleFault { get; set; }

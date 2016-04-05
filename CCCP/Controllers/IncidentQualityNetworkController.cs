@@ -14,22 +14,22 @@ using CCCP.Controllers.WebApi;
 
 namespace CCCP.Controllers
 {
-    public class IncidentQualityGenerationController : Controller
+    public class IncidentQualityNetworkController : Controller
     {
         private CCCPDbContext db = new CCCPDbContext();
-        public IncidentQualityGenerationModel incident = new IncidentQualityGenerationModel();
+        public IncidentQualityNetworkModel incident = new IncidentQualityNetworkModel();
 
-        // GET: IncidentQualityGenerations
+        // GET: IncidentQualityNetworks
         public ActionResult Index(string message, string searchCriteria)
         {
             ViewBag.Message = message;
             ViewBag.SearchCriteria = searchCriteria;
-            List<IncidentQualityGeneration> incidents = new IncidentQualityGenerationApiController().GetIncidentList();
-            List<IncidentQualityGenerationModel> incidentModels = incidents.ConvertAll(x => new IncidentQualityGenerationModel(x));
+            List<IncidentQualityNetwork> incidents = new IncidentQualityNetworkApiController().GetIncidentList();
+            List<IncidentQualityNetworkModel> incidentModels = incidents.ConvertAll(x => new IncidentQualityNetworkModel(x));
             return View(incidentModels);
         }
 
-        // GET: IncidentQualityGenerations/Details/5
+        // GET: IncidentQualityNetworks/Details/5
         public ActionResult Details(int? id, string message)
         {
             ViewBag.Message = message;
@@ -37,8 +37,8 @@ namespace CCCP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            if (incidentQualityGeneration == null)
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+            if (incidentQualityNetwork == null)
             {
                 return HttpNotFound();
             }
@@ -51,35 +51,35 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // GET: IncidentQualityGenerations/Create
+        // GET: IncidentQualityNetworks/Create
         public ActionResult Create()
         {
             return View(incident);
         }
 
-        // POST: IncidentQualityGenerations/Create
+        // POST: IncidentQualityNetworks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,NameOfPowerGenerator,PreliminaryCauseOfOutage,ExpectedRestorationTime,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
+        public ActionResult Create([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
         {
             if (ModelState.IsValid)
             {
-                new IncidentQualityGenerationApiController().CreateIncident(incidentQualityGeneration);
-                return RedirectToAction("Index", new { message = "Incident " + incidentQualityGeneration.IncidentNo + " had been created successfully!" });
+                new IncidentQualityNetworkApiController().CreateIncident(incidentQualityNetwork);
+                return RedirectToAction("Index", new { message = "Incident " + incidentQualityNetwork.IncidentNo + " had been created successfully!" });
             }
 
-            return View(incidentQualityGeneration);
+            return View(incidentQualityNetwork);
         }
 
-        // GET: IncidentQualityGenerations/Edit/5
+        // GET: IncidentQualityNetworks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            if (incidentQualityGeneration == null) return HttpNotFound();
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+            if (incidentQualityNetwork == null) return HttpNotFound();
             else
             {
                 LoadData(id.Value);
@@ -92,37 +92,37 @@ namespace CCCP.Controllers
             }
         }
 
-        // POST: IncidentQualityGenerations/Edit/5
+        // POST: IncidentQualityNetworks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,NameOfPowerGenerator,PreliminaryCauseOfOutage,ExpectedRestorationTime,FullRestoration,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentQualityGeneration)
+        public ActionResult Edit([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
         {
             if (Session != null && Session["incident"] != null)
             {
-                incident = Session["incident"] as IncidentQualityGenerationModel;
-                incident.Entity = incidentQualityGeneration;
+                incident = Session["incident"] as IncidentQualityNetworkModel;
+                incident.Entity = incidentQualityNetwork;
             }
                 
             if (ModelState.IsValid)
             {
-                new IncidentQualityGenerationApiController().EditIncident(incident);
+                new IncidentQualityNetworkApiController().EditIncident(incident);
 
-                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityGenerationId, message = "Incident had been updated successfully!" });
+                return RedirectToAction("Details", new { id = incident.Entity.IncidentQualityNetworkId, message = "Incident had been updated successfully!" });
             }
             return View(incident);
         }
 
-        // GET: IncidentQualityGenerations/Delete/5
+        // GET: IncidentQualityNetworks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            if (incidentQualityGeneration == null)
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+            if (incidentQualityNetwork == null)
             {
                 return HttpNotFound();
             }
@@ -134,16 +134,16 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // POST: IncidentQualityGenerations/Delete/5
+        // POST: IncidentQualityNetworks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            db.IncidentQualityGeneration.Remove(incidentQualityGeneration);
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+            db.IncidentQualityNetwork.Remove(incidentQualityNetwork);
             if (Session != null)
             {
-                incident = Session["incident"] as IncidentQualityGenerationModel;
+                incident = Session["incident"] as IncidentQualityNetworkModel;
                 foreach (ChecklistModel cl in incident.Checklists)
                 {
                     foreach (ChecklistActionModel clAction in cl.ChecklistActions)
@@ -159,11 +159,11 @@ namespace CCCP.Controllers
 
         public ActionResult Cancel(int id)
         {
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            incidentQualityGeneration.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+            incidentQualityNetwork.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
             db.SaveChanges();
 
-            return RedirectToAction("Index", new { id = incident.Entity.IncidentQualityGenerationId, message = "The Incident had been cancelled successfully" });
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentQualityNetworkId, message = "The Incident had been cancelled successfully" });
         }
 
         protected override void Dispose(bool disposing)
@@ -177,14 +177,14 @@ namespace CCCP.Controllers
 
         public void LoadData(int incidentId)
         {
-            this.incident = new IncidentQualityGenerationApiController().GetIncident(incidentId);
+            this.incident = new IncidentQualityNetworkApiController().GetIncident(incidentId);
         }
 
         public ActionResult ToggleActionStatus(int checklist, int checklistAction)
         {
             if (Session != null && Session["incident"] != null)
             {
-                incident = Session["incident"] as IncidentQualityGenerationModel;
+                incident = Session["incident"] as IncidentQualityNetworkModel;
             }
 
             incident.Checklists[checklist].ChecklistActions[checklistAction].ToggleActionStatus();
@@ -201,7 +201,7 @@ namespace CCCP.Controllers
         {
             if (Session != null && Session["incident"] != null)
             {
-                incident = Session["incident"] as IncidentQualityGenerationModel;
+                incident = Session["incident"] as IncidentQualityNetworkModel;
             }
             incident.Entity.IncidentStatus = IncidentStatus.Closed.ToEnumString();
 
@@ -220,9 +220,9 @@ namespace CCCP.Controllers
                 new IncidentApiController().LinkIncident(Convert.ToInt32(incidentId), Convert.ToInt32(incidentTypeId), linkIncidentId, linkIncidentTypeId);
             }
 
-            IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(Convert.ToInt32(incidentId));
+            IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(Convert.ToInt32(incidentId));
 
-            return Json(new { SelectedIncidentNo = incidentQualityGeneration.IncidentNo });
+            return Json(new { SelectedIncidentNo = incidentQualityNetwork.IncidentNo });
         }
 
         public ActionResult GetIncidentListForLink(string incidentId, string incidentTypeId)
