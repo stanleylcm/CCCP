@@ -189,5 +189,18 @@ namespace CCCP.ViewModel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Incident_GetLinkedIncident_Result>("usp_Incident_GetLinkedIncident", incidentIdParameter, incidentTypeIdParameter);
         }
+    
+        public virtual int usp_GeneralEnquiry_PostCreate(Nullable<int> generalEnquiryId, string createdBy)
+        {
+            var generalEnquiryIdParameter = generalEnquiryId.HasValue ?
+                new ObjectParameter("GeneralEnquiryId", generalEnquiryId) :
+                new ObjectParameter("GeneralEnquiryId", typeof(int));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GeneralEnquiry_PostCreate", generalEnquiryIdParameter, createdByParameter);
+        }
     }
 }

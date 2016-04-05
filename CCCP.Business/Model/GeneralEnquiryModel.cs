@@ -40,6 +40,25 @@ namespace CCCP.Business.Model
                 return Entity.Status.ToEnum<EnquiryStatus>();
             }
         }
+        public String IssueBy
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                User user = db.User.Find(Entity.IssueById);
+                if (user == null) return "";
+
+                UserModel userModel =  new UserModel(user);
+                return userModel.GetLastUpdatedBy();
+            }
+        }
+        public String EnquiryType
+        {
+            get
+            {
+                return MasterTableService.GetIncidentTypeSubType(Entity.IncidentTypeId).ToEnumString();
+            }
+        }
 
         #endregion
 

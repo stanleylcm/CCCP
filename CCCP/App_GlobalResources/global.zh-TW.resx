@@ -264,4 +264,7 @@
   <data name="Label_Cancelncident" xml:space="preserve">
     <value>你確定要取消這個事件?</value>
   </data>
+  <data name="Func_Details" xml:space="preserve">
+    <value>細明</value>
+  </data>
 </root>

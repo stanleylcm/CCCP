@@ -526,6 +526,10 @@
         <Function Name="usp_Dashboard_GetOutstandingCrisis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Dashboard_GetOutstandingGeneralEnquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Dashboard_GetOutstandingIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GeneralEnquiry_PostCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GeneralEnquiryId" Type="int" Mode="In" />
+          <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="usp_GetNextSequenceNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SequenceType" Type="varchar" Mode="In" />
           <Parameter Name="Year" Type="smallint" Mode="In" />
@@ -642,6 +646,10 @@
           </FunctionImport>
           <EntitySet Name="IncidentQualityNetwork" EntityType="CCCP.ViewModel.IncidentQualityNetwork" />
           <EntitySet Name="GeneralEnquiry" EntityType="CCCP.ViewModel.GeneralEnquiry" />
+          <FunctionImport Name="usp_GeneralEnquiry_PostCreate">
+            <Parameter Name="GeneralEnquiryId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -2072,6 +2080,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GeneralEnquiry_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_GeneralEnquiry_PostCreate" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -264,4 +264,7 @@
   <data name="Label_Cancelncident" xml:space="preserve">
     <value>Are you sure to cancel this incident?</value>
   </data>
+  <data name="Func_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>

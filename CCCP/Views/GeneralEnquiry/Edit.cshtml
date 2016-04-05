@@ -1,0 +1,637 @@
+﻿@model CCCP.Business.Model.IncidentOHSModel
+
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentOHS;
+    CCCP.ViewModel.IncidentOHS incidentOHS = Model.Entity;
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+    $(function () {
+        $('#accordion').on('show.bs.collapse', function () {
+            $('#HistoryIcon').removeClass("fa-angle-left");
+            $('#HistoryIcon').addClass("fa-angle-down");
+        });
+        $('#accordion').on('hide.bs.collapse', function () {
+            $('#HistoryIcon').removeClass("fa-angle-down");
+            $('#HistoryIcon').addClass("fa-angle-left");
+        });
+
+        $('#LinkedIncidentTable').DataTable();
+
+        $('#Checklists input[type="checkbox"]').each(function () {
+            value = $(this).val();
+            $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+        });
+
+        $('.bootstrap-checkbox').on('click', function (evnet) {
+
+            $.ajax({
+                url: "/IncidentOHS/ToggleActionStatus",
+                type: "POST",
+                data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    return true;
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        });
+    });
+
+    $("input[type=checkbox][id^=PossibleCause]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=PossibleCause]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                i++;
+            }
+        });
+        $("#incidentOHS_PossibleCause").val(sList);
+    });
+
+    $("input[type=checkbox][id^=NatureOfInjury]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=NatureOfInjury]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                i++;
+            }
+        });
+        $("#incidentOHS_NatureOfInjury").val(sList);
+    });
+
+    $("input[type=checkbox][id^=Treatment]").on("click", function () {
+        var sList = "";
+        var i = 0;
+        $("input[type=checkbox][id^=Treatment]").each(function () {
+            if (this.checked) {
+                if (i == 0) {
+                    sList = $(this).val();
+                } else {
+                    sList = sList + ", " + $(this).val();
+                }
+                i++;
+            }
+        });
+        $("#incidentOHS_Treatment").val(sList);
+    });
+
+    $("#incidentOHS_IsDrillMode").on("click", function () {
+        $(this).val(this.checked);
+    });
+
+    $('#btnUpdate').on('click', function (event) {
+        var inputValid = true;
+        var errMsg = '';
+
+        //if ($('#incidentOHS_LevelOfSeverity').val() == '') {
+        //    inputValid = false;
+        //    errMsg = errMsg + 'Level Of Severity cannot be empty<br />';
+        //}
+
+        if ($('#incidentOHS_IncidentBackground').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + 'Incident Background cannot be empty<br />';
+        }
+
+        if ($('#incidentOHS_Location').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nLocation cannot be empty<br />';
+        }
+
+        if ($('#incidentOHS_OHSType').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nOHS Type cannot be empty<br />';
+        }
+
+        if ($('#incidentOHS_NoOfInjury').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\No Of Injury cannot be empty<br />';
+        }
+
+        if ($('#incidentOHS_NoOfDeath').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nNo Of Death cannot be empty<br />';
+        }
+
+        if ($('#incidentOHS_Treatment').val() == '') {
+            inputValid = false;
+            errMsg = errMsg + '\r\nTreatment cannot be empty<br />';
+        }
+
+        if (inputValid == false) {
+            $('#CCCPModal').find('.modal-body').html(errMsg);
+            $('#CCCPModal').find('.modal-title').html('Validation Summary');
+            $('#CCCPModal').modal('toggle');
+
+            event.preventDefault();
+        }
+
+        return inputValid;
+    });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentOHS")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentOHS</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentOHS.IncidentNo)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentOHS.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentOHS.IncidentStatus)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentOHS.IncidentStatus)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentOHS.CrisisId)</label></span>
+                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentOHS.CrisisId)</span></a>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentOHS.CreatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentOHS.CreatedDateTime)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentOHS.LastUpdatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => incidentOHS.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => incidentOHS.IncidentOHSId)
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+                <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
+                <li><a href="#Notification" data-toggle="tab">Notification</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="IncidentDetails">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.LevelOfSeverity)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentOHS_LevelOfSeverity" name="incidentOHS.LevelOfSeverity" class="form-control thin-control">
+                                                    @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
+                                                    {
+                                                        if (one != IncidentLevel.None)
+                                                        {
+                                                            <option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentOHS.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentOHS.LevelOfSeverity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        @*<div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.IncidentStatus)</label></div>
+                                            <div class="col-lg-4">
+                                                <select id="incidentOHS_IncidentStatus" name="incidentOHS.IncidentStatus" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
+                                                    {
+                                                        <option value="@one.ToEnumString()" @( one.ToEnumString() == incidentOHS.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentOHS.IncidentStatus, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.IncidentBackground)</label></div>
+                                            <div class="col-lg-4">
+                                                @Html.EditorFor(model => incidentOHS.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.IncidentBackground, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.IsDrillMode)</label></div>
+                                            <div class="col-lg-4">
+                                                <div class="checkbox">
+                                                    <input id="incidentOHS_IsDrillMode" name="incidentOHS.IsDrillMode" type="checkbox" value="" @(incidentOHS.IsDrillMode != null && incidentOHS.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    @Html.ValidationMessageFor(model => incidentOHS.IsDrillMode, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                                    <div class="panel panel-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.Location)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentOHS.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.Location, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.PossibleCause)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countPossibleCause = 0;
+                                                    foreach (string one in Model.Options_PossibleCause)
+                                                    {
+                                                        <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentOHS.PossibleCause != null && incidentOHS.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label><br />
+                                                        if (one == IncidentOHSPossibleCause.Others_9please_specify0.ToEnumString())
+                                                        {
+                                                            @*Html.EditorFor(model => incidentOHS.PossibleCauseOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                        }
+                                                        countPossibleCause++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentOHS_PossibleCause" name="incidentOHS.PossibleCause" value="@incidentOHS.PossibleCause" />
+                                                @Html.ValidationMessageFor(model => incidentOHS.PossibleCause, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.OHSType)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentOHS_OHSType" name="incidentOHS.OHSType" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_OHSType)
+                                                    {
+                                                        <option value="@one" @(incidentOHS.OHSType.IsEquals(one) ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentOHS.OHSType, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NatureOfInjury)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countNatureOfInjury = 0;
+                                                    foreach (string one in Model.Options_NatureOfInjury)
+                                                    {
+                                                        <input id="NatureOfInjury@(countNatureOfInjury.ToString())" type="checkbox" value="@one" @(incidentOHS.NatureOfInjury != null && incidentOHS.NatureOfInjury.IsContains(one) ? "checked" : "") /><label for="NatureOfInjury@(countNatureOfInjury.ToString())"> @one</label><br />
+                                                        if (one == IncidentOHSNatureOfInjury.Others_9please_specify0.ToEnumString())
+                                                        {
+                                                            @*Html.EditorFor(model => incidentOHS.NatureOfInjuryOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                        }
+                                                        countNatureOfInjury++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentOHS_NatureOfInjury" name="incidentOHS.NatureOfInjury" value="@incidentOHS.NatureOfInjury" />
+                                                @Html.ValidationMessageFor(model => incidentOHS.NatureOfInjury, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.NoOfInjury)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentOHS.NoOfInjury, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.NoOfInjury, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NoOfInfectiousDisease)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentOHS.NoOfInfectiousDisease, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.NoOfInfectiousDisease, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.NoOfDeath)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentOHS.NoOfDeath, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.NoOfDeath, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NoOfInfected)</label></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentOHS.NoOfInfected, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                                @Html.ValidationMessageFor(model => incidentOHS.NoOfInfected, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.Treatment)</label></div>
+                                            <div class="col-lg-6">
+                                                @{
+                                                    int countTreatment = 0;
+                                                    foreach (string one in Model.Options_Treatment)
+                                                    {
+                                                        <input id="Treatment@(countTreatment.ToString())" type="checkbox" value="@one" @(incidentOHS.Treatment.IsContains(one) ? "checked" : "") /><label for="Treatment@(countTreatment.ToString())"> @one</label><br />
+                                                        if (one == IncidentOHSTreatment.Others_9please_specify0.ToEnumString())
+                                                        {
+                                                            @*Html.EditorFor(model => incidentOHS.TreatmentOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                        }
+                                                        countTreatment++;
+                                                    }
+                                                }
+                                                <input type="hidden" id="incidentOHS_Treatment" name="incidentOHS.Treatment" value="@incidentOHS.Treatment" />
+                                                @Html.ValidationMessageFor(model => incidentOHS.Treatment, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+            @Html.HiddenFor(model => incidentOHS.IncidentOHSId, new { @Value = incidentOHS.IncidentOHSId })
+            @Html.HiddenFor(model => incidentOHS.ChecklistBatchId, new { @Value = incidentOHS.ChecklistBatchId })
+            @Html.HiddenFor(model => incidentOHS.ChatRoomId, new { @Value = incidentOHS.ChatRoomId })
+            @Html.HiddenFor(model => incidentOHS.GeneralEnquiryId, new { @Value = incidentOHS.GeneralEnquiryId })
+            @Html.HiddenFor(model => incidentOHS.CrisisId, new { @Value = incidentOHS.CrisisId })
+            @Html.HiddenFor(model => incidentOHS.IssueById, new { @Value = incidentOHS.IssueById })
+            @Html.HiddenFor(model => incidentOHS.IssueDateTime, new { @Value = incidentOHS.IssueDateTime == null ? "" : incidentOHS.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentOHS.CloseById, new { @Value = incidentOHS.CloseById })
+            @Html.HiddenFor(model => incidentOHS.CloseDateTime, new { @Value = incidentOHS.CloseDateTime == null ? "" : incidentOHS.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentOHS.CreatedBy, new { @Value = incidentOHS.CreatedBy })
+            @Html.HiddenFor(model => incidentOHS.CreatedDateTime, new { @Value = incidentOHS.CreatedDateTime == null ? "" : incidentOHS.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentOHS.LastUpdatedBy, new { @Value = incidentOHS.LastUpdatedBy })
+            @Html.HiddenFor(model => incidentOHS.LastUpdatedDateTime, new { @Value = incidentOHS.LastUpdatedDateTime == null ? "" : incidentOHS.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+            @Html.HiddenFor(model => incidentOHS.History, new { @Value = incidentOHS.History })
+            @Html.HiddenFor(model => incidentOHS.IncidentNo, new { @Value = incidentOHS.IncidentNo })
+            @Html.HiddenFor(model => incidentOHS.IncidentStatus, new { @Value = incidentOHS.IncidentStatus })
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-3">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills">
+                                    @{
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
+                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                            <th></th>
+                                            <th>Action</th>
+                                            <th>Last Updated By</th>
+                                            <th>Last Updated Datetime</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                                        <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                        <td>@action.Entity.LastUpdatedBy</td>
+                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                                    </tr>
+                                                    countChecklistAction++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                countChecklist++;
+                                            }
+                                        }
+                                </div>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="IncidentEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div id="chat" style="height: 400px;overflow-y: scroll;">
+                                    <div class="bubble you">
+                                        <label>Peter</label><br>
+                                        What happened?<br>
+                                        <h6 align="right">11:46</h6>
+                                    </div>
+                                    <div class="bubble me">
+                                        Someone got cut.<br>
+                                        <h6 align="right">11:52</h6>
+                                    </div>
+                                    <div class="bubble you">
+                                        <label>John</label><br>
+                                        Is it serious?<br>
+                                        <h6 align="right">11:55</h6>
+                                    </div>
+                                </div>
+                                <div id="SendMessage">
+                                    <textarea rows="4" cols="150"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedIncident">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <table id="LinkedIncidentTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                            <th>Incident Type</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.LinkedIncidentEntities)
+                                        {
+                                            string sLevelOfSeverity1 = "";
+                                            if (item.LevelOfSeverity != null)
+                                            {
+                                                int level = Convert.ToInt32(item.LevelOfSeverity);
+                                                IncidentLevel iLevel = (IncidentLevel)level;
+                                                sLevelOfSeverity1 = iLevel.ToEnumString();
+                                            }
+                                            <tr>
+                                                <td>@Html.DisplayFor(model => item.IncidentNo)</td>
+                                                <td>@Html.DisplayFor(model => item.IncidentType)</td>
+                                                <td>@Html.DisplayFor(model => sLevelOfSeverity1)</td>
+                                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
+                                                <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                                <td>
+                                                    <div class="tools">
+                                                        <a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-sliders"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="LinkedGeneralEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Notification">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div style="height: 400px">
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentOHS", new { id = incidentOHS.IncidentOHSId })';">@Resources.global.Func_Cancel</button>
+                </div>
+            </div>
+            <br />
+}
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(incidentOHS.History)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->
