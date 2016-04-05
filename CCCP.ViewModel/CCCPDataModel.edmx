@@ -66,6 +66,25 @@
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="Department" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="GeneralEnquiry">
+          <Key>
+            <PropertyRef Name="GeneralEnquiryId" />
+          </Key>
+          <Property Name="GeneralEnquiryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="IncidentNo" Type="varchar" MaxLength="50" />
+          <Property Name="Background" Type="nvarchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="IssueById" Type="int" />
+          <Property Name="IssueDateTime" Type="datetime" />
+          <Property Name="CloseById" Type="int" />
+          <Property Name="CloseDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="IncidentEnvironmentAirEmission">
           <Key>
             <PropertyRef Name="IncidentEnvironmentAirEmissionId" />
@@ -541,6 +560,7 @@
           <EntitySet Name="ChecklistAction" EntityType="Self.ChecklistAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralEnquiry" EntityType="Self.GeneralEnquiry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentEnvironmentAirEmission" EntityType="Self.IncidentEnvironmentAirEmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentEnvironmentLeakage" EntityType="Self.IncidentEnvironmentLeakage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentOHS" EntityType="Self.IncidentOHS" Schema="dbo" store:Type="Tables" />
@@ -621,6 +641,7 @@
             <Parameter Name="IncidentTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="IncidentQualityNetwork" EntityType="CCCP.ViewModel.IncidentQualityNetwork" />
+          <EntitySet Name="GeneralEnquiry" EntityType="CCCP.ViewModel.GeneralEnquiry" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1341,6 +1362,25 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="GeneralEnquiry">
+          <Key>
+            <PropertyRef Name="GeneralEnquiryId" />
+          </Key>
+          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Background" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2009,6 +2049,26 @@
                 <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
                 <ScalarProperty Name="OMSEventId" ColumnName="OMSEventId" />
                 <ScalarProperty Name="IncidentQualityNetworkId" ColumnName="IncidentQualityNetworkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralEnquiry">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.GeneralEnquiry">
+              <MappingFragment StoreEntitySet="GeneralEnquiry">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Background" ColumnName="Background" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

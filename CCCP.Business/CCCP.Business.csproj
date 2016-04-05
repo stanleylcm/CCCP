@@ -51,6 +51,7 @@
     <Compile Include="Model\ChecklistActionModel.cs" />
     <Compile Include="Model\ChecklistModel.cs" />
     <Compile Include="Model\IIncidentModel.cs" />
+    <Compile Include="Model\GeneralEnquiryModel.cs" />
     <Compile Include="Model\IncidentQualityCorporateImageModel.cs" />
     <Compile Include="Model\IncidentEnvironmentLeakageModel.cs" />
     <Compile Include="Model\IncidentEnvironmentAirEmissionModel.cs" />

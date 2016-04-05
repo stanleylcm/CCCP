@@ -404,9 +404,12 @@
                                                         else if (one == IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
                                                         {
                                                             int impactPercent = 0;
-                                                            string sImpactPercent = incidentSystemCallCentre.Impact.Substring(0, incidentSystemCallCentre.Impact.IndexOf(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")));
-                                                            impactPercent = Convert.ToInt32(sImpactPercent);
-                                                            <label for="Impact@(countImpact.ToString())"><input id="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" name="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" type="text" value="@impactPercent" class="form-control thin-control text-box pull-left" style="width:10%" /> @one</label><br />
+                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")))
+                                                            {
+                                                                string sImpactPercent = incidentSystemCallCentre.Impact.Substring(0, incidentSystemCallCentre.Impact.IndexOf(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")));
+                                                                impactPercent = Convert.ToInt32(sImpactPercent);
+                                                            }
+                                                            <label for="Impact@(countImpact.ToString())"><input id="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" name="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" type="text" value="@(impactPercent == 0 ? "" : impactPercent.ToString())" class="form-control thin-control text-box pull-left" style="width:10%" /> @one</label><br />
                                                         }
                                                         else
                                                         {

@@ -803,4 +803,41 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
     }
     #endregion
+
+    #region General Enquiry Metadata
+    [MetadataType(typeof(GeneralEnquiryHelper))]
+    public partial class GeneralEnquiry { }
+
+    public partial class GeneralEnquiryHelper
+    {
+        [Display(Name = "ID")]
+        public int GeneralEnquiryId { get; set; }
+        [Display(Name = "Chatroom ID")]
+        public int ChatRoomId { get; set; }
+        [Display(Name = "Enquiry Type")]
+        public int IncidentTypeId { get; set; }
+        [Display(Name = "Incident No")]
+        public string IncidentNo { get; set; }
+        [Display(Name = "Enquiry Background")]
+        public string Background { get; set; }
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+        [Display(Name = "Issue By")]
+        public Nullable<int> IssueById { get; set; }
+        [Display(Name = "Issue Date Time")]
+        public Nullable<System.DateTime> IssueDateTime { get; set; }
+        [Display(Name = "Close By")]
+        public Nullable<int> CloseById { get; set; }
+        [Display(Name = "Close Date Time")]
+        public Nullable<System.DateTime> CloseDateTime { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Created Date Time")]
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        [Display(Name = "Last Updated By")]
+        public string LastUpdatedBy { get; set; }
+        [Display(Name = "Last Updated Date Time")]
+        public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
+    }
+    #endregion
 }

@@ -80,6 +80,9 @@
     <Compile Include="Department.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralEnquiry.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncidentEnvironmentAirEmission.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
