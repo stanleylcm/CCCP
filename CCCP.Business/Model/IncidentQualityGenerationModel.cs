@@ -45,6 +45,30 @@ namespace CCCP.Business.Model
             }
         }
         public List<usp_Incident_GetLinkedIncident_Result> LinkedIncidentEntities { get; set; }
+        public String IssueBy
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                User user = db.User.Find(Entity.IssueById);
+                if (user == null) return "";
+
+                UserModel userModel = new UserModel(user);
+                return userModel.GetLastUpdatedBy();
+            }
+        }
+        public String CloseBy
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                User user = db.User.Find(Entity.CloseById);
+                if (user == null) return "";
+
+                UserModel userModel = new UserModel(user);
+                return userModel.GetLastUpdatedBy();
+            }
+        }
 
         public List<string> Options_NameOfPowerGenerator = new List<string>();
 

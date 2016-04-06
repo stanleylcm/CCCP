@@ -10,7 +10,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_GeneralEnquiry
+        <i class="fa fa-clipboard"></i> @Resources.global.Func_Create @Resources.global.Menu_GeneralEnquiry
     </h1>
 </section>
 
@@ -41,8 +41,26 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => generalEnquiry.IssueDateTime)</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => generalEnquiry.IssueDateTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => generalEnquiry.IssueDateTime, "", new { @class = "text-danger" })
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="IssueDateTimeDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask></input>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group bootstrap-timepicker">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control timepicker" id="IssueDateTimeTime" data-inputmask="'alias': 'HH:mm'" data-mask></input>
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(model => generalEnquiry.IssueDateTime)
+                                            @Html.ValidationMessageFor(model => generalEnquiry.IssueDateTime, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                 </div>
 
@@ -50,12 +68,15 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">Enquiry Type</label></div>
                                     <div class="col-lg-6">
-                                        @{                                            
-                                            foreach (IncidentTypeSubType type in Enum.GetValues(typeof(IncidentTypeSubType)))
-                                            {
-                                                @type.ToEnumString().ToTypeSubTypeString();<br/>
+                                        <select id="generalEnquiry_IncidentTypeId" name="generalEnquiry.IncidentTypeId" class="form-control thin-control">
+                                            @{
+                                                foreach (var type in MasterTableService.GetIncidentTypes())
+                                                {
+                                                    <option value="@type.IncidentTypeId">@(type.Type + (type.SubType != null ? " - " + type.SubType : ""))</option>
+                                                }
                                             }
-                                        }
+                                        </select>
+
                                         @Html.HiddenFor(model => generalEnquiry.IncidentTypeId)
                                         @Html.ValidationMessageFor(model => generalEnquiry.IncidentTypeId, "", new { @class = "text-danger" })
                                     </div>
@@ -100,7 +121,26 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        
+ 
+        $("#IssueDateTimeDate").change(function () {
+            $("#generalEnquiry_IssueDateTime").val($("#IssueDateTimeDate").val() + " " + $("#IssueDateTimeTime").val());
+        });
+
+        $("#IssueDateTimeTime").change(function () {
+            $("#generalEnquiry_IssueDateTime").val($("#IssueDateTimeDate").val() + " " + $("#IssueDateTimeTime").val());
+        });
+
+        $(document).ready(function () {
+            $("#generalEnquiry_IsDrillMode").val($("#generalEnquiry_IsDrillMode").checked);
+            $("#generalEnquiry_IsCEMNetworkBeingAffected").val($("#generalEnquiry_IsCEMNetworkBeingAffected").checked);
+
+            $('#IssueDateTimeDate').datepicker({ dateFormat: 'yy-mm-dd' });
+            $('[data-mask]').inputmask();
+            $('.timepicker').timepicker({
+                showMeridian: false
+            });
+        });
+               
         $('#btnCreate').on('click', function (event) {
             var inputValid = true;
             var errMsg = '';

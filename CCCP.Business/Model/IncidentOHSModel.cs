@@ -57,6 +57,30 @@ namespace CCCP.Business.Model
         public List<string> Options_OHSType = new List<string>();
         public List<string> Options_NatureOfInjury = new List<string>();
         public List<string> Options_Treatment = new List<string>();
+        public String IssueBy
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                User user = db.User.Find(Entity.IssueById);
+                if (user == null) return "";
+
+                UserModel userModel = new UserModel(user);
+                return userModel.GetLastUpdatedBy();
+            }
+        }
+        public String CloseBy
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                User user = db.User.Find(Entity.CloseById);
+                if (user == null) return "";
+
+                UserModel userModel = new UserModel(user);
+                return userModel.GetLastUpdatedBy();
+            }
+        }
 
         public bool AllowEdit
         {

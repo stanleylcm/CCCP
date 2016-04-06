@@ -29,7 +29,7 @@ namespace CCCP.Business.Service
             List<ViewModel.IncidentType> result = new List<ViewModel.IncidentType>();
             using (CCCPDbContext db = new CCCPDbContext())
             {
-                result = db.IncidentType.ToList<ViewModel.IncidentType>();
+                result = db.IncidentType.Where(x => x.IncidentType1.IndexOf("___") < 0).ToList<ViewModel.IncidentType>();
             }
 
             return result;

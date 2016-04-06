@@ -81,7 +81,6 @@ namespace CCCP.Business.Model
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
-                    Entity.IssueDateTime = now;
                     break;
                 case PrepareSaveMode.Last_Updated:
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
