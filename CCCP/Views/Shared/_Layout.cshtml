@@ -110,7 +110,7 @@
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <p>
-                                        @AccessControlService.CurrentUser.Entity.DisplayName - @MasterTableService.GetDepartmentStr(AccessControlService.CurrentUser.Entity.DepartmentId)
+                                        @AccessControlService.CurrentUser.Entity.DisplayName - @(AccessControlService.CurrentUser.Entity.DepartmentId > 0 ? MasterTableService.GetDepartmentStr(AccessControlService.CurrentUser.Entity.DepartmentId) : "")
                                         <small>@AccessControlService.CurrentUser.Entity.Title</small>
                                     </p>
                                 </li>

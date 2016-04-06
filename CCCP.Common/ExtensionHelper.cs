@@ -43,6 +43,14 @@ namespace CCCP.Common
             else return "";
         }
 
+        public static string Encode(this string self)
+        {
+            var hash = System.Security.Cryptography.SHA1.Create();
+            var encoder = new System.Text.ASCIIEncoding();
+            var combined = encoder.GetBytes(self ?? "");
+            return BitConverter.ToString(hash.ComputeHash(combined)).ToLower().Replace("-", "");
+        }
+
         // Enum
         public static string ToEnumString(this Enum self)
         {

@@ -22,6 +22,8 @@ namespace CCCP.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.ErrorMsg = "";
+
             if (Request.Form["loginId"] != null)
             {
                 string loginId = Request.Form["loginId"];
@@ -29,14 +31,14 @@ namespace CCCP.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (AccessControlService.IsValid(loginId, password))
+                    if (AccessControlService.IsValid(loginId, password.Encode()))
                     {
                         FormsAuthentication.SetAuthCookie(loginId, false);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Login data is incorrect!");
+                        ViewBag.ErrorMsg = "Fail to Login!";
                     }
                 }
             }
