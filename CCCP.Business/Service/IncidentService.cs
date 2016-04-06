@@ -220,6 +220,13 @@ namespace CCCP.Business.Service
         /// <returns></returns>
         public static IncidentLevel GetIncidentLevel(IncidentQualityNetwork incident)
         {
+            // for later use...
+            int outageMinute = 0;
+            if (incident.IssueDateTime != null && incident.OutageStartTime != null)
+            {
+                outageMinute = Convert.ToInt32((incident.IssueDateTime.Value - incident.OutageStartTime.Value).TotalMinutes);
+            }
+
             // Level 3
             if (
                 incident.LossGeneration > 200 ||
