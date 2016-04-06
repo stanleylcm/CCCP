@@ -67,6 +67,15 @@ namespace CCCP.Common
         Incident
     }
 
+
+    public enum OMSStatus 
+    {
+        Pending,
+        In_Progress,
+        Closed,
+        Cancelled
+    }
+
     public enum IncidentStatus
     {
         Pending,
