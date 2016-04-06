@@ -135,5 +135,107 @@ namespace CCCP.UnitTest
             {
             }
         }
+
+        [TestMethod]
+        public void TestEditOMSEventWebApi()
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            var client = new HttpClient();
+
+            OMSEventApiModel test = new OMSEventApiModel();
+
+            test.OMSNo = "1";
+            test.AffectedArea = "test affected area";
+            test.AffectedArea_Chi = "要刪了123";
+            test.AffectedBuilding = "test affected building";
+            test.AffectedBuilding_Chi = "要刪了";
+            test.AffectedStreet = "test affected street";
+            test.AffectedStreet_Chi = "要刪了333";
+            test.OutageStartTime = DateTime.Now;
+            test.NoOfBuilding = 2;
+            test.NoOfPlatinumCustomer = 1;
+            test.NoOfDiamondCustomer = 1;
+            test.NoOfGoldCustomer = 1;
+            test.NoOfSilverCustomer = 1;
+            test.ExpectedRestorationDateTime = DateTime.Now.AddHours(10);
+            test.StatusUpdateCode = "1";
+            test.MVOutage = true;
+            test.LVOutage = true;
+            test.Points = "11,22,33,44,55,66,77";
+
+
+            client.BaseAddress = new Uri("http://localhost/");
+
+            // HTTP POST
+            var response = client.PostAsJsonAsync("/api/OMSEventApi/Update", test).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+            }
+        }
+
+        [TestMethod]
+        public void TestCancelOMSEventWebApi()
+        {
+            /*
+            CCCPDbContext db = new CCCPDbContext();
+
+            var client = new HttpClient();
+
+            string OMSNo = "2";
+
+            client.BaseAddress = new Uri("http://localhost/");
+
+            // HTTP POST
+            var response = client.PostAsJsonAsync("/api/OMSEventApi/Cancel", OMSNo).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+            }
+            */
+
+            // http://localhost/api/OMSEventApi/Cancel?OMSNo=2
+        }
+
+
+
+        [TestMethod]
+        public void TestCloseOMSEventWebApi()
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            var client = new HttpClient();
+
+            OMSEventApiModel test = new OMSEventApiModel();
+
+            test.OMSNo = "1";
+            test.AffectedArea = "test affected area";
+            test.AffectedArea_Chi = "要刪了123";
+            test.AffectedBuilding = "test affected building";
+            test.AffectedBuilding_Chi = "要刪了";
+            test.AffectedStreet = "test affected street";
+            test.AffectedStreet_Chi = "要刪了333";
+            test.OutageStartTime = DateTime.Now;
+            test.NoOfBuilding = 2;
+            test.NoOfPlatinumCustomer = 1;
+            test.NoOfDiamondCustomer = 1;
+            test.NoOfGoldCustomer = 1;
+            test.NoOfSilverCustomer = 1;
+            test.ExpectedRestorationDateTime = DateTime.Now.AddHours(10);
+            test.StatusUpdateCode = "1";
+            test.MVOutage = true;
+            test.LVOutage = true;
+            test.Points = "11,22,33,44,55,66,77";
+
+            client.BaseAddress = new Uri("http://localhost/");
+
+            // HTTP POST
+            var response = client.PostAsJsonAsync("/api/OMSEventApi/Close", test).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+            }
+        }
     }
 }

@@ -54,6 +54,36 @@ namespace CCCP.Business.Model
 
             this.Entity = oms;
         }
+        public OMSEventModel(OMSEvent oms, OMSEventApiModel viewModel)
+        {
+            oms.OMSNo = viewModel.OMSNo;
+            oms.AffectedArea = viewModel.AffectedArea;
+            oms.AffectedArea_Chi = viewModel.AffectedArea_Chi;
+            oms.AffectedBuilding = viewModel.AffectedBuilding;
+            oms.AffectedBuilding_Chi = viewModel.AffectedBuilding_Chi;
+            oms.AffectedStreet = viewModel.AffectedStreet;
+            oms.AffectedStreet_Chi = viewModel.AffectedStreet_Chi;
+            oms.OutageStartTime = viewModel.OutageStartTime;
+            oms.NoOfBuilding = viewModel.NoOfBuilding;
+            oms.NoOfCustomerAffected = viewModel.NoOfCustomerAffected;
+            oms.NoOfPlatinumCustomer = viewModel.NoOfPlatinumCustomer;
+            oms.NoOfDiamondCustomer = viewModel.NoOfDiamondCustomer;
+            oms.NoOfGoldCustomer = viewModel.NoOfGoldCustomer;
+            oms.NoOfSilverCustomer = viewModel.NoOfSilverCustomer;
+            oms.PossibleCause = viewModel.PossibleCause;
+            oms.PossibleCause_Chi = viewModel.PossibleCause_Chi;
+            oms.ExpectedRestorationDateTime = viewModel.ExpectedRestorationDateTime;
+            oms.RestorationMethod = viewModel.RestorationMethod;
+            oms.RestorationMethod_Chi = viewModel.RestorationMethod_Chi;
+            oms.StatusUpdateCode = viewModel.StatusUpdateCode;
+            oms.RootCause = viewModel.RootCause;
+            oms.RootCause_Chi = viewModel.RootCause_Chi;
+            oms.MVOutage = viewModel.MVOutage;
+            oms.LVOutage = viewModel.LVOutage;
+            oms.Points = viewModel.Points;
+
+            this.Entity = oms;
+        }
 
         private void init()
         {
@@ -84,7 +114,7 @@ namespace CCCP.Business.Model
                     Entity.LastUpdatedDateTime = now;
                     break;
                 case PrepareSaveMode.Last_Updated:
-                    Entity.OMSStatus = OMSStatus.In_Progress.ToEnumString();
+                    //Entity.OMSStatus = OMSStatus.In_Progress.ToEnumString();
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     break;
