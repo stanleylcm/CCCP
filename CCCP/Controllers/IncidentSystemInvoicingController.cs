@@ -114,49 +114,6 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // GET: IncidentSystemInvoicings/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
-            if (incidentSystemInvoicing == null)
-            {
-                return HttpNotFound();
-            }
-            LoadData(id.Value);
-            if (Session != null)
-            {
-                Session["incident"] = incident;
-            }
-            return View(incident);
-        }
-
-        // POST: IncidentSystemInvoicings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
-            db.IncidentSystemInvoicing.Remove(incidentSystemInvoicing);
-            if (Session != null)
-            {
-                incident = Session["incident"] as IncidentSystemInvoicingModel;
-                foreach (ChecklistModel cl in incident.Checklists)
-                {
-                    foreach (ChecklistActionModel clAction in cl.ChecklistActions)
-                    {
-                        db.ChecklistAction.Remove(clAction.Entity);
-                    }
-                    db.Checklist.Remove(cl.Entity);
-                }
-            }
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         public ActionResult Cancel(int id)
         {
             IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);

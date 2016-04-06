@@ -1,5 +1,6 @@
 ﻿@model CCCP.Business.Model.GeneralEnquiryModel
 
+@using CCCP.Business.Service
 @using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_GeneralEnquiry;
@@ -65,6 +66,19 @@
                         <button class="btn btn-primary" type="button" id="btnCloseEnquiry">Close Enquiry</button>
                         <button class="btn btn-primary" type="button" id="btnCancelEnquiry">Cancel Enquiry</button>
                     </div>
+                </div>
+
+                <div class="callout callout-success">
+                    <center>
+                        <label>
+                            @{
+                                CCCP.ViewModel.IncidentType type = MasterTableService.GetIncidentTypes().Where(x => x.IncidentTypeId == Model.Entity.IncidentTypeId).FirstOrDefault();
+                                @(type.Type + (type.SubType != null ? " - " + type.SubType : ""))
+                            }
+                        </label>
+                        <br/>
+                        @Model.Entity.Background
+                    </center>
                 </div>
 
                 <div class="box-body">

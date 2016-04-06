@@ -114,49 +114,6 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // GET: IncidentQualityCorporateImages/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
-            if (incidentQualityCorporateImage == null)
-            {
-                return HttpNotFound();
-            }
-            LoadData(id.Value);
-            if (Session != null)
-            {
-                Session["incident"] = incident;
-            }
-            return View(incident);
-        }
-
-        // POST: IncidentQualityCorporateImages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
-            db.IncidentQualityCorporateImage.Remove(incidentQualityCorporateImage);
-            if (Session != null)
-            {
-                incident = Session["incident"] as IncidentQualityCorporateImageModel;
-                foreach (ChecklistModel cl in incident.Checklists)
-                {
-                    foreach (ChecklistActionModel clAction in cl.ChecklistActions)
-                    {
-                        db.ChecklistAction.Remove(clAction.Entity);
-                    }
-                    db.Checklist.Remove(cl.Entity);
-                }
-            }
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         public ActionResult Cancel(int id)
         {
             IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);

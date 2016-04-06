@@ -115,58 +115,6 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        // GET: IncidentOHSs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
-            if (incidentOHS == null)
-            {
-                return HttpNotFound();
-            }
-            LoadData(id.Value);
-            if (Session != null)
-            {
-                Session["incident"] = incident;
-            }
-            return View(incident);
-        }
-
-        // POST: IncidentOHSs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
-            db.IncidentOHS.Remove(incidentOHS);
-            if (Session != null)
-            {
-                incident = Session["incident"] as IncidentOHSModel;
-                foreach (ChecklistModel cl in incident.Checklists)
-                {
-                    foreach (ChecklistActionModel clAction in cl.ChecklistActions)
-                    {
-                        db.ChecklistAction.Remove(clAction.Entity);
-                    }
-                    db.Checklist.Remove(cl.Entity);
-                }
-            }
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Cancel(int id)
-        {
-            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
-            incidentOHS.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
-            db.SaveChanges();
-
-            return RedirectToAction("Index", new { id = incident.Entity.IncidentOHSId, message = "The Incident had been cancelled successfully" });
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

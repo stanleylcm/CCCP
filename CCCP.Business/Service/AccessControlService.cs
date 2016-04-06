@@ -14,6 +14,25 @@ namespace CCCP.Business.Service
     {
         public static UserModel CurrentUser = new UserModel();
 
+        public static Boolean IsValid(String username, String password)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            List<User> users = db.User.Where(x => x.LoginName == username && x.Password == password).ToList();
+
+            if (users.Count() == 1)
+            {
+                CurrentUser = new UserModel(users.FirstOrDefault());
+                return true;
+            }
+
+            return false;
+        }
+
+        public static AccessRightsModel GetAccessRights()
+        {
+            return GetAccessRights(CurrentUser.Entity.UserId);
+        }
+
         public static AccessRightsModel GetAccessRights(int userId)
         {
             AccessRightsModel result = new AccessRightsModel();
@@ -61,6 +80,11 @@ namespace CCCP.Business.Service
                 if (found1 != null) model.ActionChecklistRights.AddRange(found1.GetDelta(incidentType)); // incident type found
                 else model.ActionChecklistRights.AddRange(IncidentTypeAndDepartment.GetAllDepartments(incidentType)); // incident type not found 
             }
+        }
+
+        public static AccessRightsModel getAccessRightsFromDB()
+        {
+            return getAccessRightsFromDB(CurrentUser.Entity.UserId);
         }
 
         private static AccessRightsModel getAccessRightsFromDB(int userId)

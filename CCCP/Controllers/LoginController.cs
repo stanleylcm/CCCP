@@ -22,28 +22,31 @@ namespace CCCP.Controllers
 
         public ActionResult Index()
         {
+            if (Request.Form["loginId"] != null)
+            {
+                string loginId = Request.Form["loginId"];
+                string password = Request.Form["password"];
+
+                if (ModelState.IsValid)
+                {
+                    if (AccessControlService.IsValid(loginId, password))
+                    {
+                        FormsAuthentication.SetAuthCookie(loginId, false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Login data is incorrect!");
+                    }
+                }
+            }
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Logout()
         {
-            string loginId = Request.Form["loginId"];
-            string password = Request.Form["password"];
-
-            CCCPDbContext db = new CCCPDbContext();
-
-            var userObject = (from data in db.User
-                              where data.LoginName == loginId
-                              && data.Password == password
-                              select data);
-
-            if (userObject.Count() > 0)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return RedirectToAction("Index");
-            //FormsAuthentication.RedirectFromLoginPage(loginId, false);
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

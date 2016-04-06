@@ -53,6 +53,7 @@
     </script>
 </head>
 @using CCCP.Common;
+@using CCCP.Business.Service;
 @{
     string curAction = ViewContext.RouteData.Values["action"].ToString();
     string curController = ViewContext.RouteData.Values["controller"].ToString();
@@ -109,8 +110,8 @@
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <p>
-                                        Alex Pierce - CSD/CBM
-                                        <small>Officer II</small>
+                                        @AccessControlService.CurrentUser.Entity.DisplayName - @MasterTableService.GetDepartmentStr(AccessControlService.CurrentUser.Entity.DepartmentId)
+                                        <small>@AccessControlService.CurrentUser.Entity.Title</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -118,7 +119,7 @@
                                 <li class="user-footer">
 
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">@Resources.global.UserMenu_Signout</a>
+                                        <a href="@Url.Action("Logout", "Login")" class="btn btn-default btn-flat">@Resources.global.UserMenu_Signout</a>
                                     </div>
                                 </li>
                             </ul>
