@@ -77,14 +77,14 @@ namespace CCCP.Business.Model
             switch (saveMode)
             {
                 case PrepareSaveMode.Created:
-                    Entity.OMSStatus = IncidentStatus.Pending.ToEnumString();
+                    Entity.OMSStatus = OMSStatus.Pending.ToEnumString();
                     Entity.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.CreatedDateTime = now;
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     break;
                 case PrepareSaveMode.Last_Updated:
-                    Entity.OMSStatus = IncidentStatus.In_Progress.ToEnumString();
+                    Entity.OMSStatus = OMSStatus.In_Progress.ToEnumString();
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
                     break;
