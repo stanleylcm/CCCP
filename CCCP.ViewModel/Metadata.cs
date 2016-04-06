@@ -819,6 +819,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
         [Display(Name = "Enquiry Background")]
+        [DataType(DataType.MultilineText)]
         public string Background { get; set; }
         [Display(Name = "Status")]
         public string Status { get; set; }

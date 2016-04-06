@@ -43,6 +43,34 @@ namespace CCCP.Common
             else return "";
         }
 
+        public static string ToTypeSubTypeString(this string self)
+        {
+            int spaceCnt = 0;
+            if (self.Length >= 0)
+            {
+                if (string.IsNullOrWhiteSpace(self))
+                    return "";
+                StringBuilder newText = new StringBuilder(self.Length * 2);
+                newText.Append(self[0]);
+                for (int i = 1; i < self.Length; i++)
+                {
+                    if (char.IsUpper(self[i]) && self[i - 1] != ' ')
+                    {
+                        newText.Append(' ');
+                        spaceCnt++;
+                    }
+                    if (spaceCnt == 2)
+                    {
+                        newText.Append('-');
+                        newText.Append(' ');
+                    }
+                    newText.Append(self[i]);
+                }
+                return newText.ToString();
+            }
+            else return "";
+        }
+
         // Enum
         public static string ToEnumString(this Enum self)
         {

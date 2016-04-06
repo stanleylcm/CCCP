@@ -493,6 +493,47 @@
           <Property Name="HasLogic" Type="bit" />
           <Property Name="CreatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="OMSEvent">
+          <Key>
+            <PropertyRef Name="OMSEventId" />
+          </Key>
+          <Property Name="OMSEventId" Type="int" Nullable="false" />
+          <Property Name="OMSNo" Type="varchar" MaxLength="50" />
+          <Property Name="AffectedArea" Type="nvarchar(max)" />
+          <Property Name="AffectedArea_Chi" Type="nvarchar(max)" />
+          <Property Name="AffectedBuilding" Type="nvarchar(max)" />
+          <Property Name="AffectedBuilding_Chi" Type="nvarchar(max)" />
+          <Property Name="AffectedStreet" Type="nvarchar(max)" />
+          <Property Name="AffectedStreet_Chi" Type="nvarchar(max)" />
+          <Property Name="OutageStartTime" Type="datetime" />
+          <Property Name="FullRestoration" Type="datetime" />
+          <Property Name="NoOfBuilding" Type="smallint" />
+          <Property Name="NoOfCustomerAffected" Type="int" />
+          <Property Name="NoOfPlatinumCustomer" Type="int" />
+          <Property Name="NoOfDiamondCustomer" Type="int" />
+          <Property Name="NoOfGoldCustomer" Type="int" />
+          <Property Name="NoOfSilverCustomer" Type="int" />
+          <Property Name="PossibleCause" Type="nvarchar(max)" />
+          <Property Name="PossibleCause_Chi" Type="nvarchar(max)" />
+          <Property Name="ExpectedRestorationDateTime" Type="datetime" />
+          <Property Name="ExpectedRestorationTime" Type="smallint" />
+          <Property Name="RestorationMethod" Type="nvarchar(max)" />
+          <Property Name="RestorationMethod_Chi" Type="nvarchar(max)" />
+          <Property Name="StatusUpdateCode" Type="nvarchar(max)" />
+          <Property Name="StatusUpdate" Type="nvarchar(max)" />
+          <Property Name="RootCause" Type="nvarchar(max)" />
+          <Property Name="RootCause_Chi" Type="nvarchar(max)" />
+          <Property Name="MVOutage" Type="bit" />
+          <Property Name="LVOutage" Type="bit" />
+          <Property Name="Points" Type="varchar(max)" />
+          <Property Name="CriticalPoint" Type="bit" />
+          <Property Name="Reviewed" Type="bit" />
+          <Property Name="OMSStatus" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="SystemFunction">
           <Key>
             <PropertyRef Name="SystemFunctionId" />
@@ -579,6 +620,7 @@
           <EntitySet Name="IncidentSystemOTSystem" EntityType="Self.IncidentSystemOTSystem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentType" EntityType="Self.IncidentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputOption" EntityType="Self.InputOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OMSEvent" EntityType="Self.OMSEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemFunction" EntityType="Self.SystemFunction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -650,6 +692,7 @@
             <Parameter Name="GeneralEnquiryId" Mode="In" Type="Int32" />
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="OMSEvent" EntityType="CCCP.ViewModel.OMSEvent" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1389,6 +1432,47 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="OMSEvent">
+          <Key>
+            <PropertyRef Name="OMSEventId" />
+          </Key>
+          <Property Name="OMSEventId" Type="Int32" Nullable="false" />
+          <Property Name="OMSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AffectedArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedArea_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedBuilding" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedBuilding_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedStreet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedStreet_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OutageStartTime" Type="DateTime" Precision="3" />
+          <Property Name="FullRestoration" Type="DateTime" Precision="3" />
+          <Property Name="NoOfBuilding" Type="Int16" />
+          <Property Name="NoOfCustomerAffected" Type="Int32" />
+          <Property Name="NoOfPlatinumCustomer" Type="Int32" />
+          <Property Name="NoOfDiamondCustomer" Type="Int32" />
+          <Property Name="NoOfGoldCustomer" Type="Int32" />
+          <Property Name="NoOfSilverCustomer" Type="Int32" />
+          <Property Name="PossibleCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedRestorationDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ExpectedRestorationTime" Type="Int16" />
+          <Property Name="RestorationMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RestorationMethod_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdateCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RootCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RootCause_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MVOutage" Type="Boolean" />
+          <Property Name="LVOutage" Type="Boolean" />
+          <Property Name="Points" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CriticalPoint" Type="Boolean" />
+          <Property Name="Reviewed" Type="Boolean" />
+          <Property Name="OMSStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2081,6 +2165,48 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_GeneralEnquiry_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_GeneralEnquiry_PostCreate" />
+          <EntitySetMapping Name="OMSEvent">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.OMSEvent">
+              <MappingFragment StoreEntitySet="OMSEvent">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OMSStatus" ColumnName="OMSStatus" />
+                <ScalarProperty Name="Reviewed" ColumnName="Reviewed" />
+                <ScalarProperty Name="CriticalPoint" ColumnName="CriticalPoint" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="LVOutage" ColumnName="LVOutage" />
+                <ScalarProperty Name="MVOutage" ColumnName="MVOutage" />
+                <ScalarProperty Name="RootCause_Chi" ColumnName="RootCause_Chi" />
+                <ScalarProperty Name="RootCause" ColumnName="RootCause" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="StatusUpdateCode" ColumnName="StatusUpdateCode" />
+                <ScalarProperty Name="RestorationMethod_Chi" ColumnName="RestorationMethod_Chi" />
+                <ScalarProperty Name="RestorationMethod" ColumnName="RestorationMethod" />
+                <ScalarProperty Name="ExpectedRestorationTime" ColumnName="ExpectedRestorationTime" />
+                <ScalarProperty Name="ExpectedRestorationDateTime" ColumnName="ExpectedRestorationDateTime" />
+                <ScalarProperty Name="PossibleCause_Chi" ColumnName="PossibleCause_Chi" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="NoOfSilverCustomer" ColumnName="NoOfSilverCustomer" />
+                <ScalarProperty Name="NoOfGoldCustomer" ColumnName="NoOfGoldCustomer" />
+                <ScalarProperty Name="NoOfDiamondCustomer" ColumnName="NoOfDiamondCustomer" />
+                <ScalarProperty Name="NoOfPlatinumCustomer" ColumnName="NoOfPlatinumCustomer" />
+                <ScalarProperty Name="NoOfCustomerAffected" ColumnName="NoOfCustomerAffected" />
+                <ScalarProperty Name="NoOfBuilding" ColumnName="NoOfBuilding" />
+                <ScalarProperty Name="FullRestoration" ColumnName="FullRestoration" />
+                <ScalarProperty Name="OutageStartTime" ColumnName="OutageStartTime" />
+                <ScalarProperty Name="AffectedStreet_Chi" ColumnName="AffectedStreet_Chi" />
+                <ScalarProperty Name="AffectedStreet" ColumnName="AffectedStreet" />
+                <ScalarProperty Name="AffectedBuilding_Chi" ColumnName="AffectedBuilding_Chi" />
+                <ScalarProperty Name="AffectedBuilding" ColumnName="AffectedBuilding" />
+                <ScalarProperty Name="AffectedArea_Chi" ColumnName="AffectedArea_Chi" />
+                <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
+                <ScalarProperty Name="OMSNo" ColumnName="OMSNo" />
+                <ScalarProperty Name="OMSEventId" ColumnName="OMSEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

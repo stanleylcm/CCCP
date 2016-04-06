@@ -49,6 +49,7 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
         public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<GeneralEnquiry> GeneralEnquiry { get; set; }
+        public virtual DbSet<OMSEvent> OMSEvent { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

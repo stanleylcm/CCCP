@@ -184,6 +184,7 @@
     <Compile Include="Controllers\WebApi\CommonApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentApiController.cs" />
     <Compile Include="Controllers\WebApi\GeneralEnquiryApiController.cs" />
+    <Compile Include="Controllers\WebApi\OMSEventApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityNetworkApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityGenerationApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentQualityCorporateImageApiController.cs" />

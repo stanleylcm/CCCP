@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\OMSEventModel .cs" />
+    <Compile Include="Model\OMSEventApiModel.cs" />
     <Compile Include="Model\AccessRightsModel.cs" />
     <Compile Include="Model\ChecklistActionModel.cs" />
     <Compile Include="Model\ChecklistModel.cs" />

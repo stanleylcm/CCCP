@@ -126,6 +126,9 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Metadata.cs" />
+    <Compile Include="OMSEvent.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemFunction.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>

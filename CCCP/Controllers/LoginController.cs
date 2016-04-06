@@ -25,12 +25,25 @@ namespace CCCP.Controllers
             return View();
         }
 
-        public void Login()
+        public ActionResult Login()
         {
             string loginId = Request.Form["loginId"];
             string password = Request.Form["password"];
 
-            FormsAuthentication.RedirectFromLoginPage(loginId, false);
+            CCCPDbContext db = new CCCPDbContext();
+
+            var userObject = (from data in db.User
+                              where data.LoginName == loginId
+                              && data.Password == password
+                              select data);
+
+            if (userObject.Count() > 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index");
+            //FormsAuthentication.RedirectFromLoginPage(loginId, false);
         }
     }
 }

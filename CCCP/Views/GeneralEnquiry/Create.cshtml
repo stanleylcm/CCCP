@@ -1,16 +1,16 @@
-﻿@model CCCP.Business.Model.IncidentOHSModel
+﻿@model CCCP.Business.Model.GeneralEnquiryModel
 
 @using CCCP.Common
 @using CCCP.Business.Service
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentOHS;
-    CCCP.ViewModel.IncidentOHS incidentOHS = Model.Entity; // variable for binding
+    ViewBag.Title = Resources.global.Menu_GeneralEnquiry;
+    CCCP.ViewModel.GeneralEnquiry generalEnquiry = Model.Entity; // variable for binding
 }
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_IncidentOHS
+        <i class="fa fa-clipboard"></i> @Resources.global.Menu_IncidentManagement - @Resources.global.Func_Create @Resources.global.Menu_GeneralEnquiry
     </h1>
 </section>
 
@@ -28,195 +28,65 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-body">
-                                @*<div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.LevelOfSeverity)</label></div>
-                                    <div class="col-lg-4">
-                                        <select id="incidentOHS_LevelOfSeverity" name="incidentOHS.LevelOfSeverity" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
-                                            {
-                                                if (one != IncidentLevel.None)
-                                                {
-                                                    <option value="@(Convert.ToInt32(one))">@one.ToEnumString()</option>
-                                                }
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentOHS.LevelOfSeverity, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>*@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.IncidentBackground)</label></div>
-                                    <div class="col-lg-4">
-                                        @Html.EditorFor(model => incidentOHS.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.IncidentBackground, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.IsDrillMode)</label></div>
-                                    <div class="col-lg-4">
-                                        <div class="checkbox">
-                                            <input id="incidentOHS_IsDrillMode" name="incidentOHS.IsDrillMode" type="checkbox" value="" style="top:-10px; left: 20px" />
-                                            @Html.ValidationMessageFor(model => incidentOHS.IsDrillMode, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
-                            <div class="panel panel-body">
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.Location)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">Issue By</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentOHS.Location, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.Location, "", new { @class = "text-danger" })
+                                        @AccessControlService.CurrentUser.GetLastUpdatedBy()
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.PossibleCause)</label></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => generalEnquiry.IssueDateTime)</label></div>
                                     <div class="col-lg-6">
-                                        @{
-                                            int countPossibleCause = 0;
-                                            foreach (string one in Model.Options_PossibleCause)
+                                        @Html.EditorFor(model => generalEnquiry.IssueDateTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => generalEnquiry.IssueDateTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">Enquiry Type</label></div>
+                                    <div class="col-lg-6">
+                                        @{                                            
+                                            foreach (IncidentTypeSubType type in Enum.GetValues(typeof(IncidentTypeSubType)))
                                             {
-                                        <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label><br />
-                                                if (one == IncidentOHSPossibleCause.Others_9please_specify0.ToEnumString())
-                                                {
-                                                    @*Html.EditorFor(model => incidentOHS.PossibleCauseOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
-                                                }
-                                                countPossibleCause++;
+                                                @type.ToEnumString().ToTypeSubTypeString();<br/>
                                             }
                                         }
-                                        <input type="hidden" id="incidentOHS_PossibleCause" name="incidentOHS.PossibleCause" value="" />
-                                        @Html.ValidationMessageFor(model => incidentOHS.PossibleCause, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => generalEnquiry.IncidentTypeId)
+                                        @Html.ValidationMessageFor(model => generalEnquiry.IncidentTypeId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.OHSType)</label></div>
-                                    <div class="col-lg-6">
-                                        <select id="incidentOHS_OHSType" name="incidentOHS.OHSType" class="form-control thin-control">
-                                            <option value=""></option>
-                                            @foreach (string one in Model.Options_OHSType)
-                                            {
-                                                <option value="@one">@one</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => incidentOHS.OHSType, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NatureOfInjury)</label></div>
-                                    <div class="col-lg-6">
-                                        @{
-                                            int countNatureOfInjury = 0;
-                                            foreach (string one in Model.Options_NatureOfInjury)
-                                            {
-                                                <input id="NatureOfInjury@(countNatureOfInjury.ToString())" type="checkbox" value="@one" /><label for="NatureOfInjury@(countNatureOfInjury.ToString())"> @one</label><br />
-                                                if (one == IncidentOHSNatureOfInjury.Others_9please_specify0.ToEnumString())
-                                                {
-                                                    @*Html.EditorFor(model => incidentOHS.NatureOfInjuryOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
-                                                }
-                                                countNatureOfInjury++;
-                                            }
-                                        }
-                                        <input type="hidden" id="incidentOHS_NatureOfInjury" name="incidentOHS.NatureOfInjury" value="" />
-                                        @Html.ValidationMessageFor(model => incidentOHS.NatureOfInjury, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.NoOfInjury)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentOHS.NoOfInjury, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.NoOfInjury, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NoOfInfectiousDisease)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentOHS.NoOfInfectiousDisease, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.NoOfInfectiousDisease, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.NoOfDeath)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentOHS.NoOfDeath, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.NoOfDeath, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.NoOfInfected)</label></div>
-                                    <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentOHS.NoOfInfected, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                        @Html.ValidationMessageFor(model => incidentOHS.NoOfInfected, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentOHS.Treatment)</label></div>
-                                    <div class="col-lg-6">
-                                        @{
-                                            int countTreatment = 0;
-                                            foreach (string one in Model.Options_Treatment)
-                                            {
-                                                <input id="Treatment@(countTreatment.ToString())" type="checkbox" value="@one" /><label for="Treatment@(countTreatment.ToString())"> @one</label><br />
-                                                if (one == IncidentOHSTreatment.Others_9please_specify0.ToEnumString())
-                                                {
-                                                    @*Html.EditorFor(model => incidentOHS.TreatmentOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
-                                                }
-                                                countTreatment++;
-                                            }
-                                        }
-                                        <input type="hidden" id="incidentOHS_Treatment" name="incidentOHS.Treatment" value="" />
-                                        @Html.ValidationMessageFor(model => incidentOHS.Treatment, "", new { @class = "text-danger" })
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => generalEnquiry.Background)</label></div>
+                                    <div class="col-lg-4">
+                                        @Html.EditorFor(model => generalEnquiry.Background, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => generalEnquiry.Background, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @Html.HiddenFor(model => incidentOHS.IncidentOHSId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentOHS.ChecklistBatchId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentOHS.ChatRoomId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentOHS.GeneralEnquiryId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentOHS.CrisisId)
-                    @Html.HiddenFor(model => incidentOHS.IssueById)
-                    @Html.HiddenFor(model => incidentOHS.IssueDateTime)
-                    @Html.HiddenFor(model => incidentOHS.CloseById)
-                    @Html.HiddenFor(model => incidentOHS.CloseDateTime)
-                    @Html.HiddenFor(model => incidentOHS.IncidentNo)
-                    @Html.HiddenFor(model => incidentOHS.IncidentStatus)
-                    @Html.HiddenFor(model => incidentOHS.CreatedBy)
-                    @Html.HiddenFor(model => incidentOHS.CreatedDateTime)
-                    @Html.HiddenFor(model => incidentOHS.LastUpdatedBy)
-                    @Html.HiddenFor(model => incidentOHS.LastUpdatedDateTime)
+                    @Html.HiddenFor(model => generalEnquiry.ChatRoomId, new { @Value = 0 })
+                    @Html.HiddenFor(model => generalEnquiry.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => generalEnquiry.CloseById)
+                    @Html.HiddenFor(model => generalEnquiry.CloseDateTime)
+                    @Html.HiddenFor(model => generalEnquiry.IncidentNo)
+                    @Html.HiddenFor(model => generalEnquiry.Status)
+                    @Html.HiddenFor(model => generalEnquiry.CreatedBy)
+                    @Html.HiddenFor(model => generalEnquiry.CreatedDateTime)
+                    @Html.HiddenFor(model => generalEnquiry.LastUpdatedBy)
+                    @Html.HiddenFor(model => generalEnquiry.LastUpdatedDateTime)
 
                     <div class="box-footer">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Save</button>
-                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "IncidentOHS")';">@Resources.global.Func_Cancel</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "GeneralEnquiry")';">@Resources.global.Func_Cancel</button>
                         </div>
                     </div>
                     }
@@ -230,90 +100,14 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $("input[type=checkbox][id^=PossibleCause]").on("click", function () {
-            var sList = "";
-            var i = 0;
-            $("input[type=checkbox][id^=PossibleCause]").each(function () {
-                if (this.checked) {
-                    if (i == 0) {
-                        sList = $(this).val();
-                    } else {
-                        sList = sList + ", " + $(this).val();
-                    }
-                    i++;
-                }
-            });
-            $("#incidentOHS_PossibleCause").val(sList);
-        });
-
-        $("input[type=checkbox][id^=NatureOfInjury]").on("click", function () {
-            var sList = "";
-            var i = 0;
-            $("input[type=checkbox][id^=NatureOfInjury]").each(function () {
-                if (this.checked) {
-                    if (i == 0) {
-                        sList = $(this).val();
-                    } else {
-                        sList = sList + ", " + $(this).val();
-                    }
-                    i++;
-                }
-            });
-            $("#incidentOHS_NatureOfInjury").val(sList);
-        });
-
-        $("input[type=checkbox][id^=Treatment]").on("click", function () {
-            var sList = "";
-            var i = 0;
-            $("input[type=checkbox][id^=Treatment]").each(function () {
-                if (this.checked) {
-                    if (i == 0) {
-                        sList = $(this).val();
-                    } else {
-                        sList = sList + ", " + $(this).val();
-                    }
-                    i++;
-                }
-            });
-            $("#incidentOHS_Treatment").val(sList);
-        });
-
-        $("#incidentOHS_IsDrillMode").on("click", function () {
-            $(this).val(this.checked);
-        });
-
+        
         $('#btnCreate').on('click', function (event) {
             var inputValid = true;
             var errMsg = '';
 
-            if ($('#incidentOHS_IncidentBackground').val() == '') {
+            if ($('#generalEnquiry_Background').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Incident Background cannot be empty<br />';
-            }
-
-            if ($('#incidentOHS_Location').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nLocation cannot be empty<br />';
-            }
-
-            if ($('#incidentOHS_OHSType').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nOHS Type cannot be empty<br />';
-            }
-
-            if ($('#incidentOHS_NoOfInjury').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\No Of Injury cannot be empty<br />';
-            }
-
-            if ($('#incidentOHS_NoOfDeath').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nNo Of Death cannot be empty<br />';
-            }
-
-            if ($('#incidentOHS_Treatment').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nTreatment cannot be empty<br />';
+                errMsg = errMsg + 'Enquiry Background cannot be empty<br />';
             }
 
             if (inputValid == false) {
@@ -322,14 +116,6 @@
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();
-            }
-
-            if ($('#incidentOHS_RequireMitigatingAction').val() != "Yes")
-            {
-                $("#incidentOHS_MitigatingAction").val("");
-                $("#incidentOHS_MitigatingActionOthers").val("");
-            } else if ($("#incidentOHS_MitigatingAction").val().indexOf("Others") < 0) {
-                $("#incidentOHS_MitigatingActionOthers").val("");
             }
 
             return inputValid;
