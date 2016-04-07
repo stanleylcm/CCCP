@@ -62,7 +62,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentQualityCorporateImageId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,PossibleCause,Impact,RemedyAction,StatusUpdate,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityCorporateImage incidentQualityCorporateImage)
+        public ActionResult Create([Bind(Include = "IncidentQualityCorporateImageId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,PossibleCause,PossibleCauseOthers,Impact,ImpactOthers,RemedyAction,StatusUpdate,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityCorporateImage incidentQualityCorporateImage)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentQualityCorporateImageId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,PossibleCause,Impact,RemedyAction,StatusUpdate,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityCorporateImage incidentQualityCorporateImage)
+        public ActionResult Edit([Bind(Include = "IncidentQualityCorporateImageId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,PossibleCause,PossibleCauseOthers,Impact,ImpactOthers,RemedyAction,StatusUpdate,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityCorporateImage incidentQualityCorporateImage)
         {
             if (Session != null && Session["incident"] != null)
             {

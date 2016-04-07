@@ -177,7 +177,12 @@
 
 										<div class="row">
 											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.TypeOfLeakage)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.TypeOfLeakage)</div>
+											<div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.TypeOfLeakage)<br />
+                                                @Html.Raw(Model.Entity.TypeOfLeakage != null && Model.Entity.TypeOfLeakage.IsEquals(IncidentEnvironmentLeakageTypeOfLeakage.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.TypeOfLeakageOthers != null ? Model.Entity.TypeOfLeakageOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
 										</div>
 
 										<div class="row">

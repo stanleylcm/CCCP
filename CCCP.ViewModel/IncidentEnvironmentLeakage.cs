@@ -34,6 +34,7 @@ namespace CCCP.ViewModel
         public string Damage { get; set; }
         public string SourceOfInformation { get; set; }
         public string TypeOfLeakage { get; set; }
+        public string TypeOfLeakageOthers { get; set; }
         public string AffectedArea { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

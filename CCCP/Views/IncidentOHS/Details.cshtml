@@ -164,7 +164,12 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.PossibleCause)<br />
+                                                @Html.Raw(Model.Entity.PossibleCause != null && Model.Entity.PossibleCause.IsContains(IncidentOHSPossibleCause.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.PossibleCauseOthers != null ? Model.Entity.PossibleCauseOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -174,7 +179,12 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NatureOfInjury)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NatureOfInjury)</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.NatureOfInjury)<br />
+                                                @Html.Raw(Model.Entity.NatureOfInjury != null && Model.Entity.NatureOfInjury.IsContains(IncidentOHSNatureOfInjury.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.NatureOfInjuryOthers != null ? Model.Entity.NatureOfInjuryOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -199,7 +209,12 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Treatment)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Treatment)</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.Treatment)<br />
+                                                @Html.Raw(Model.Entity.Treatment != null && Model.Entity.Treatment.IsContains(IncidentOHSTreatment.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.TreatmentOthers != null ? Model.Entity.TreatmentOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

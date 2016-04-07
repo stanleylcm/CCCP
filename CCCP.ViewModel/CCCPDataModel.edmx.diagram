@@ -15,19 +15,19 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.Checklist" Width="1.5" PointX="3.5" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemFunction" Width="1.5" PointX="5.625" PointY="3.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentAirEmission" Width="2.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" Width="2.5" PointX="0.75" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.5" PointX="0.75" PointY="1.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" Width="2.5" PointX="0.75" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityGeneration" Width="2.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.5" PointX="0.75" PointY="3.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.5" PointX="0.75" PointY="6.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemInvoicing" Width="2.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemITSystem" Width="2.5" PointX="0.75" PointY="3.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" Width="2.5" PointX="0.75" PointY="5.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemOTSystem" Width="2.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityNetwork" Width="2.5" PointX="0.75" PointY="4.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.GeneralEnquiry" Width="2.5" PointX="0.75" PointY="6.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.OMSEvent" Width="1.5" PointX="4.375" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.OMSEvent" Width="2.5" PointX="0.75" PointY="7.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" Width="2.5" PointX="0.75" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.5" PointX="0.75" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" Width="2.5" PointX="0.75" PointY="2.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.5" PointX="0.75" PointY="6.25" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

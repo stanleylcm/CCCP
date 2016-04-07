@@ -158,7 +158,12 @@
 
 										<div class="row">
 											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
+											<div class="col-lg-6">
+                                                @(Model.Entity.Impact != null && Model.Entity.Impact.IsContains(IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString()) ? Model.Entity.ImpactWorkstationFailure.ToString() : "")@Html.DisplayFor(model => model.Entity.Impact)<br />
+                                                @Html.Raw(Model.Entity.Impact != null && Model.Entity.Impact.IsContains(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.ImpactOthers != null ? Model.Entity.ImpactOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
 										</div>
 
 										<div class="row">
@@ -183,7 +188,12 @@
 
 										<div class="row">
 											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
-											<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
+											<div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.StatusUpdate)<br />
+                                                @Html.Raw(Model.Entity.StatusUpdate != null && Model.Entity.StatusUpdate.IsContains(IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.StatusUpdateOthers != null ? Model.Entity.StatusUpdateOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
 										</div>
 
 										<div class="row">

@@ -144,6 +144,18 @@
             event.preventDefault();
         }
 
+        if ($("#incidentOHS_PossibleCause").val().indexOf("@IncidentOHSPossibleCause.Others_9please_specify0.ToEnumString()") < 0) {
+            $("#incidentOHS_PossibleCauseOthers").val("");
+        }
+
+        if ($("#incidentOHS_NatureOfInjury").val().indexOf("@IncidentOHSNatureOfInjury.Others_9please_specify0.ToEnumString()") < 0) {
+            $("#incidentOHS_NatureOfInjuryOthers").val("");
+        }
+
+        if ($("#incidentOHS_Treatment").val().indexOf("@IncidentOHSTreatment.Others_9please_specify0.ToEnumString()") < 0) {
+            $("#incidentOHS_TreatmentOthers").val("");
+        }
+
         return inputValid;
     });
     </script>
@@ -299,7 +311,7 @@
                                                         <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentOHS.PossibleCause != null && incidentOHS.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label><br />
                                                         if (one == IncidentOHSPossibleCause.Others_9please_specify0.ToEnumString())
                                                         {
-                                                            @*Html.EditorFor(model => incidentOHS.PossibleCauseOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                            @Html.EditorFor(model => incidentOHS.PossibleCauseOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                         }
                                                         countPossibleCause++;
                                                     }
@@ -335,7 +347,7 @@
                                                         <input id="NatureOfInjury@(countNatureOfInjury.ToString())" type="checkbox" value="@one" @(incidentOHS.NatureOfInjury != null && incidentOHS.NatureOfInjury.IsContains(one) ? "checked" : "") /><label for="NatureOfInjury@(countNatureOfInjury.ToString())"> @one</label><br />
                                                         if (one == IncidentOHSNatureOfInjury.Others_9please_specify0.ToEnumString())
                                                         {
-                                                            @*Html.EditorFor(model => incidentOHS.NatureOfInjuryOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                            @Html.EditorFor(model => incidentOHS.NatureOfInjuryOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                         }
                                                         countNatureOfInjury++;
                                                     }
@@ -392,7 +404,7 @@
                                                         <input id="Treatment@(countTreatment.ToString())" type="checkbox" value="@one" @(incidentOHS.Treatment.IsContains(one) ? "checked" : "") /><label for="Treatment@(countTreatment.ToString())"> @one</label><br />
                                                         if (one == IncidentOHSTreatment.Others_9please_specify0.ToEnumString())
                                                         {
-                                                            @*Html.EditorFor(model => incidentOHS.TreatmentOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })*@
+                                                            @Html.EditorFor(model => incidentOHS.TreatmentOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                         }
                                                         countTreatment++;
                                                     }

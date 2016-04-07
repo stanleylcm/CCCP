@@ -185,6 +185,8 @@ namespace CCCP.ViewModel
         public string History { get; set; }
         [Display(Name = "Impact")]
         public string Impact { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string ImpactOthers { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
         [Display(Name = "Expected Restoration Time")]
@@ -195,6 +197,8 @@ namespace CCCP.ViewModel
         public string MitigatingAction { get; set; }
         [Display(Name = "Status Update")]
         public string StatusUpdate { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string StatusUpdateOthers { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
         [Display(Name = "Created By")]
@@ -508,6 +512,8 @@ namespace CCCP.ViewModel
         public string SourceOfInformation { get; set; }
         [Display(Name = "Type Of Leakage")]
         public Nullable<bool> TypeOfLeakage { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string TypeOfLeakageOthers { get; set; }
         [Display(Name = "Affected Area")]
         public Nullable<bool> AffectedArea { get; set; }
 
@@ -564,10 +570,14 @@ namespace CCCP.ViewModel
         public string Location { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string PossibleCauseOthers { get; set; }
         [Display(Name = "OHS Type")]
         public string OHSType { get; set; }
         [Display(Name = "Nature Of Injury")]
         public string NatureOfInjury { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string NatureOfInjuryOthers { get; set; }
         [Display(Name = "No Of Injury")]
         public Nullable<int> NoOfInjury { get; set; }
         [Display(Name = "No Of Infectious Disease")]
@@ -578,6 +588,8 @@ namespace CCCP.ViewModel
         public Nullable<int> NoOfInfected { get; set; }
         [Display(Name = "Treatment")]
         public string Treatment { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string TreatmentOthers { get; set; }
 
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }
@@ -630,8 +642,12 @@ namespace CCCP.ViewModel
 
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string PossibleCauseOthers { get; set; }
         [Display(Name = "Impact")]
         public string Impact { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string ImpactOthers { get; set; }
         [Display(Name = "Remedy Action")]
         public string RemedyAction { get; set; }
         [Display(Name = "Status Update")]

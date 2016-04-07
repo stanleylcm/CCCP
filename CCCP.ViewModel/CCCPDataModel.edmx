@@ -138,6 +138,7 @@
           <Property Name="Damage" Type="nvarchar" MaxLength="255" />
           <Property Name="SourceOfInformation" Type="nvarchar" MaxLength="255" />
           <Property Name="TypeOfLeakage" Type="nvarchar" MaxLength="255" />
+          <Property Name="TypeOfLeakageOthers" Type="nvarchar(max)" />
           <Property Name="AffectedArea" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
@@ -165,13 +166,16 @@
           <Property Name="History" Type="nvarchar(max)" />
           <Property Name="Location" Type="nvarchar" MaxLength="255" />
           <Property Name="PossibleCause" Type="nvarchar" MaxLength="255" />
+          <Property Name="PossibleCauseOthers" Type="nvarchar(max)" />
           <Property Name="OHSType" Type="nvarchar" MaxLength="255" />
           <Property Name="NatureOfInjury" Type="nvarchar" MaxLength="255" />
+          <Property Name="NatureOfInjuryOthers" Type="nvarchar(max)" />
           <Property Name="NoOfInjury" Type="int" />
           <Property Name="NoOfInfectiousDisease" Type="int" />
           <Property Name="NoOfDeath" Type="int" />
           <Property Name="NoOfInfected" Type="int" />
           <Property Name="Treatment" Type="nvarchar" MaxLength="255" />
+          <Property Name="TreatmentOthers" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
@@ -197,7 +201,9 @@
           <Property Name="IsDrillMode" Type="bit" />
           <Property Name="History" Type="nvarchar(max)" />
           <Property Name="PossibleCause" Type="nvarchar" MaxLength="255" />
+          <Property Name="PossibleCauseOthers" Type="nvarchar(max)" />
           <Property Name="Impact" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImpactOthers" Type="nvarchar(max)" />
           <Property Name="RemedyAction" Type="nvarchar" MaxLength="255" />
           <Property Name="StatusUpdate" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
@@ -336,11 +342,14 @@
           <Property Name="IsDrillMode" Type="bit" />
           <Property Name="History" Type="nvarchar(max)" />
           <Property Name="Impact" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImpactWorkstationFailure" Type="int" />
+          <Property Name="ImpactOthers" Type="nvarchar(max)" />
           <Property Name="PossibleCause" Type="nvarchar" MaxLength="255" />
           <Property Name="ExpectedRestorationTime" Type="smallint" />
           <Property Name="RequireMitigatingAction" Type="nvarchar" MaxLength="255" />
           <Property Name="MitigatingAction" Type="nvarchar" MaxLength="255" />
           <Property Name="StatusUpdate" Type="nvarchar" MaxLength="255" />
+          <Property Name="StatusUpdateOthers" Type="nvarchar(max)" />
           <Property Name="FullRestoration" Type="datetime" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
@@ -497,7 +506,7 @@
           <Key>
             <PropertyRef Name="OMSEventId" />
           </Key>
-          <Property Name="OMSEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OMSEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OMSNo" Type="varchar" MaxLength="50" />
           <Property Name="AffectedArea" Type="nvarchar(max)" />
           <Property Name="AffectedArea_Chi" Type="nvarchar(max)" />
@@ -653,12 +662,8 @@
           </FunctionImport>
           <EntitySet Name="SystemFunction" EntityType="CCCP.ViewModel.SystemFunction" />
           <EntitySet Name="IncidentEnvironmentAirEmission" EntityType="CCCP.ViewModel.IncidentEnvironmentAirEmission" />
-          <EntitySet Name="IncidentEnvironmentLeakage" EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" />
-          <EntitySet Name="IncidentOHS" EntityType="CCCP.ViewModel.IncidentOHS" />
-          <EntitySet Name="IncidentQualityCorporateImage" EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" />
           <EntitySet Name="IncidentQualityGeneration" EntityType="CCCP.ViewModel.IncidentQualityGeneration" />
           <EntitySet Name="IncidentSystemBilling" EntityType="CCCP.ViewModel.IncidentSystemBilling" />
-          <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCP.ViewModel.IncidentSystemCallCentre" />
           <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCP.ViewModel.IncidentSystemInvoicing" />
           <EntitySet Name="IncidentSystemITSystem" EntityType="CCCP.ViewModel.IncidentSystemITSystem" />
           <EntitySet Name="IncidentSystemNetworkConnectivity" EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" />
@@ -693,6 +698,10 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="OMSEvent" EntityType="CCCP.ViewModel.OMSEvent" />
+          <EntitySet Name="IncidentEnvironmentLeakage" EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" />
+          <EntitySet Name="IncidentOHS" EntityType="CCCP.ViewModel.IncidentOHS" />
+          <EntitySet Name="IncidentQualityCorporateImage" EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" />
+          <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCP.ViewModel.IncidentSystemCallCentre" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -919,97 +928,6 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="IncidentEnvironmentLeakage">
-          <Key>
-            <PropertyRef Name="IncidentEnvironmentLeakageId" />
-          </Key>
-          <Property Name="IncidentEnvironmentLeakageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
-          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
-          <Property Name="GeneralEnquiryId" Type="Int32" />
-          <Property Name="CrisisId" Type="Int32" />
-          <Property Name="IssueById" Type="Int32" />
-          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CloseById" Type="Int32" />
-          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDrillMode" Type="Boolean" />
-          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Damage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SourceOfInformation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TypeOfLeakage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="AffectedArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="IncidentOHS">
-          <Key>
-            <PropertyRef Name="IncidentOHSId" />
-          </Key>
-          <Property Name="IncidentOHSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
-          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
-          <Property Name="GeneralEnquiryId" Type="Int32" />
-          <Property Name="CrisisId" Type="Int32" />
-          <Property Name="IssueById" Type="Int32" />
-          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CloseById" Type="Int32" />
-          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDrillMode" Type="Boolean" />
-          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="OHSType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="NatureOfInjury" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="NoOfInjury" Type="Int32" />
-          <Property Name="NoOfInfectiousDisease" Type="Int32" />
-          <Property Name="NoOfDeath" Type="Int32" />
-          <Property Name="NoOfInfected" Type="Int32" />
-          <Property Name="Treatment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="IncidentQualityCorporateImage">
-          <Key>
-            <PropertyRef Name="IncidentQualityCorporateImageId" />
-          </Key>
-          <Property Name="IncidentQualityCorporateImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
-          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
-          <Property Name="GeneralEnquiryId" Type="Int32" />
-          <Property Name="CrisisId" Type="Int32" />
-          <Property Name="IssueById" Type="Int32" />
-          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CloseById" Type="Int32" />
-          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDrillMode" Type="Boolean" />
-          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RemedyAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="IncidentQualityGeneration">
           <Key>
             <PropertyRef Name="IncidentQualityGenerationId" />
@@ -1069,37 +987,6 @@
           <Property Name="RequireMitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MitigatingActionOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="IncidentSystemCallCentre">
-          <Key>
-            <PropertyRef Name="IncidentSystemCallCentreId" />
-          </Key>
-          <Property Name="IncidentSystemCallCentreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
-          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
-          <Property Name="GeneralEnquiryId" Type="Int32" />
-          <Property Name="CrisisId" Type="Int32" />
-          <Property Name="IssueById" Type="Int32" />
-          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CloseById" Type="Int32" />
-          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDrillMode" Type="Boolean" />
-          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ExpectedRestorationTime" Type="Int16" />
-          <Property Name="RequireMitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FullRestoration" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1473,6 +1360,137 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="IncidentEnvironmentLeakage">
+          <Key>
+            <PropertyRef Name="IncidentEnvironmentLeakageId" />
+          </Key>
+          <Property Name="IncidentEnvironmentLeakageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Damage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SourceOfInformation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfLeakage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfLeakageOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectedArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="IncidentOHS">
+          <Key>
+            <PropertyRef Name="IncidentOHSId" />
+          </Key>
+          <Property Name="IncidentOHSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCauseOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OHSType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NatureOfInjury" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NatureOfInjuryOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfInjury" Type="Int32" />
+          <Property Name="NoOfInfectiousDisease" Type="Int32" />
+          <Property Name="NoOfDeath" Type="Int32" />
+          <Property Name="NoOfInfected" Type="Int32" />
+          <Property Name="Treatment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TreatmentOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="IncidentQualityCorporateImage">
+          <Key>
+            <PropertyRef Name="IncidentQualityCorporateImageId" />
+          </Key>
+          <Property Name="IncidentQualityCorporateImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCauseOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImpactOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RemedyAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="IncidentSystemCallCentre">
+          <Key>
+            <PropertyRef Name="IncidentSystemCallCentreId" />
+          </Key>
+          <Property Name="IncidentSystemCallCentreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LevelOfSeverity" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentBackground" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDrillMode" Type="Boolean" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Impact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImpactWorkstationFailure" Type="Int32" />
+          <Property Name="ImpactOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PossibleCause" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedRestorationTime" Type="Int16" />
+          <Property Name="RequireMitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MitigatingAction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusUpdateOthers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullRestoration" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1673,100 +1691,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IncidentEnvironmentLeakage">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentEnvironmentLeakage">
-              <MappingFragment StoreEntitySet="IncidentEnvironmentLeakage">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
-                <ScalarProperty Name="TypeOfLeakage" ColumnName="TypeOfLeakage" />
-                <ScalarProperty Name="SourceOfInformation" ColumnName="SourceOfInformation" />
-                <ScalarProperty Name="Damage" ColumnName="Damage" />
-                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="History" ColumnName="History" />
-                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
-                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
-                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
-                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
-                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
-                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
-                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
-                <ScalarProperty Name="IncidentEnvironmentLeakageId" ColumnName="IncidentEnvironmentLeakageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="IncidentOHS">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentOHS">
-              <MappingFragment StoreEntitySet="IncidentOHS">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Treatment" ColumnName="Treatment" />
-                <ScalarProperty Name="NoOfInfected" ColumnName="NoOfInfected" />
-                <ScalarProperty Name="NoOfDeath" ColumnName="NoOfDeath" />
-                <ScalarProperty Name="NoOfInfectiousDisease" ColumnName="NoOfInfectiousDisease" />
-                <ScalarProperty Name="NoOfInjury" ColumnName="NoOfInjury" />
-                <ScalarProperty Name="NatureOfInjury" ColumnName="NatureOfInjury" />
-                <ScalarProperty Name="OHSType" ColumnName="OHSType" />
-                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="History" ColumnName="History" />
-                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
-                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
-                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
-                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
-                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
-                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
-                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
-                <ScalarProperty Name="IncidentOHSId" ColumnName="IncidentOHSId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="IncidentQualityCorporateImage">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentQualityCorporateImage">
-              <MappingFragment StoreEntitySet="IncidentQualityCorporateImage">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
-                <ScalarProperty Name="RemedyAction" ColumnName="RemedyAction" />
-                <ScalarProperty Name="Impact" ColumnName="Impact" />
-                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
-                <ScalarProperty Name="History" ColumnName="History" />
-                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
-                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
-                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
-                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
-                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
-                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
-                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
-                <ScalarProperty Name="IncidentQualityCorporateImageId" ColumnName="IncidentQualityCorporateImageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IncidentQualityGeneration">
             <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentQualityGeneration">
               <MappingFragment StoreEntitySet="IncidentQualityGeneration">
@@ -1830,38 +1754,6 @@
                 <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
                 <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
                 <ScalarProperty Name="IncidentSystemBillingId" ColumnName="IncidentSystemBillingId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="IncidentSystemCallCentre">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentSystemCallCentre">
-              <MappingFragment StoreEntitySet="IncidentSystemCallCentre">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="FullRestoration" ColumnName="FullRestoration" />
-                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
-                <ScalarProperty Name="MitigatingAction" ColumnName="MitigatingAction" />
-                <ScalarProperty Name="RequireMitigatingAction" ColumnName="RequireMitigatingAction" />
-                <ScalarProperty Name="ExpectedRestorationTime" ColumnName="ExpectedRestorationTime" />
-                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
-                <ScalarProperty Name="Impact" ColumnName="Impact" />
-                <ScalarProperty Name="History" ColumnName="History" />
-                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
-                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
-                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
-                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
-                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
-                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
-                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
-                <ScalarProperty Name="IncidentSystemCallCentreId" ColumnName="IncidentSystemCallCentreId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2204,6 +2096,141 @@
                 <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
                 <ScalarProperty Name="OMSNo" ColumnName="OMSNo" />
                 <ScalarProperty Name="OMSEventId" ColumnName="OMSEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentEnvironmentLeakage">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentEnvironmentLeakage">
+              <MappingFragment StoreEntitySet="IncidentEnvironmentLeakage">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
+                <ScalarProperty Name="TypeOfLeakageOthers" ColumnName="TypeOfLeakageOthers" />
+                <ScalarProperty Name="TypeOfLeakage" ColumnName="TypeOfLeakage" />
+                <ScalarProperty Name="SourceOfInformation" ColumnName="SourceOfInformation" />
+                <ScalarProperty Name="Damage" ColumnName="Damage" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="IncidentEnvironmentLeakageId" ColumnName="IncidentEnvironmentLeakageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentOHS">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentOHS">
+              <MappingFragment StoreEntitySet="IncidentOHS">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TreatmentOthers" ColumnName="TreatmentOthers" />
+                <ScalarProperty Name="Treatment" ColumnName="Treatment" />
+                <ScalarProperty Name="NoOfInfected" ColumnName="NoOfInfected" />
+                <ScalarProperty Name="NoOfDeath" ColumnName="NoOfDeath" />
+                <ScalarProperty Name="NoOfInfectiousDisease" ColumnName="NoOfInfectiousDisease" />
+                <ScalarProperty Name="NoOfInjury" ColumnName="NoOfInjury" />
+                <ScalarProperty Name="NatureOfInjuryOthers" ColumnName="NatureOfInjuryOthers" />
+                <ScalarProperty Name="NatureOfInjury" ColumnName="NatureOfInjury" />
+                <ScalarProperty Name="OHSType" ColumnName="OHSType" />
+                <ScalarProperty Name="PossibleCauseOthers" ColumnName="PossibleCauseOthers" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="IncidentOHSId" ColumnName="IncidentOHSId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentQualityCorporateImage">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentQualityCorporateImage">
+              <MappingFragment StoreEntitySet="IncidentQualityCorporateImage">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="RemedyAction" ColumnName="RemedyAction" />
+                <ScalarProperty Name="ImpactOthers" ColumnName="ImpactOthers" />
+                <ScalarProperty Name="Impact" ColumnName="Impact" />
+                <ScalarProperty Name="PossibleCauseOthers" ColumnName="PossibleCauseOthers" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="IncidentQualityCorporateImageId" ColumnName="IncidentQualityCorporateImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentSystemCallCentre">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.IncidentSystemCallCentre">
+              <MappingFragment StoreEntitySet="IncidentSystemCallCentre">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FullRestoration" ColumnName="FullRestoration" />
+                <ScalarProperty Name="StatusUpdateOthers" ColumnName="StatusUpdateOthers" />
+                <ScalarProperty Name="StatusUpdate" ColumnName="StatusUpdate" />
+                <ScalarProperty Name="MitigatingAction" ColumnName="MitigatingAction" />
+                <ScalarProperty Name="RequireMitigatingAction" ColumnName="RequireMitigatingAction" />
+                <ScalarProperty Name="ExpectedRestorationTime" ColumnName="ExpectedRestorationTime" />
+                <ScalarProperty Name="PossibleCause" ColumnName="PossibleCause" />
+                <ScalarProperty Name="ImpactOthers" ColumnName="ImpactOthers" />
+                <ScalarProperty Name="ImpactWorkstationFailure" ColumnName="ImpactWorkstationFailure" />
+                <ScalarProperty Name="Impact" ColumnName="Impact" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IsDrillMode" ColumnName="IsDrillMode" />
+                <ScalarProperty Name="IncidentBackground" ColumnName="IncidentBackground" />
+                <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+                <ScalarProperty Name="LevelOfSeverity" ColumnName="LevelOfSeverity" />
+                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="IncidentSystemCallCentreId" ColumnName="IncidentSystemCallCentreId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

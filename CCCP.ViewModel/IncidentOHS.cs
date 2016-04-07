@@ -31,13 +31,16 @@ namespace CCCP.ViewModel
         public string History { get; set; }
         public string Location { get; set; }
         public string PossibleCause { get; set; }
+        public string PossibleCauseOthers { get; set; }
         public string OHSType { get; set; }
         public string NatureOfInjury { get; set; }
+        public string NatureOfInjuryOthers { get; set; }
         public Nullable<int> NoOfInjury { get; set; }
         public Nullable<int> NoOfInfectiousDisease { get; set; }
         public Nullable<int> NoOfDeath { get; set; }
         public Nullable<int> NoOfInfected { get; set; }
         public string Treatment { get; set; }
+        public string TreatmentOthers { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

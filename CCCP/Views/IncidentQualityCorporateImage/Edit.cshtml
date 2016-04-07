@@ -55,28 +55,6 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentQualityCorporateImage_PossibleCause").val(sList);
-	    });
-
-	    $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=PossibleCause]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#PossibleCause@(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0)More").val() + ")";
-	                }
 	                i++;
 	            }
 	        });
@@ -92,28 +70,6 @@
 	                    sList = $(this).val();
 	                } else {
 	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentQualityCorporateImage_Impact").val(sList);
-	    });
-
-	    $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=Impact]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentQualityCorporateImageImpact.Others_9please_specify0)More").val() + ")";
 	                }
 	                i++;
 	            }
@@ -165,6 +121,14 @@
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();
+            }
+
+            if ($("#incidentQualityCorporateImage_PossibleCause").val().indexOf("@IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString()") < 0) {
+                $("#incidentQualityCorporateImage_PossibleCauseOthers").val("");
+            }
+
+            if ($("#incidentQualityCorporateImage_Impact").val().indexOf("@IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString()") < 0) {
+                $("#incidentQualityCorporateImage_ImpactOthers").val("");
             }
 
             return inputValid;
@@ -306,24 +270,15 @@
                                                     int countPossibleCause = 0;
                                                     foreach (string one in Model.Options_PossibleCause)
                                                     {
-                                                        <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label>
-                                                        if (one != IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())
+                                                        <input id="PossibleCause@(countPossibleCause.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.PossibleCause != null && incidentQualityCorporateImage.PossibleCause.IsContains(one) ? "checked" : "") /><label for="PossibleCause@(countPossibleCause.ToString())"> @one</label><br />
+                                                        if (one == IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString())
                                                         {
-                                                            <br />
-                                                        }
-                                                        else
-                                                        {
-                                                            string sPossibleCauseMore = "";
-                                                            if (incidentQualityCorporateImage.PossibleCause != null && incidentQualityCorporateImage.PossibleCause.IsContains(one))
-                                                            {
-                                                                sPossibleCauseMore = incidentQualityCorporateImage.PossibleCause.Substring(incidentQualityCorporateImage.PossibleCause.IndexOf('(') + 1, incidentQualityCorporateImage.PossibleCause.IndexOf(')') - incidentQualityCorporateImage.PossibleCause.IndexOf('(') - 1);
-                                                            }
-                                                            <input id="PossibleCause@(one)More" name="PossibleCause@(one)More" type="text" value="@sPossibleCauseMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                            @Html.EditorFor(model => incidentQualityCorporateImage.PossibleCauseOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                         }
                                                         countPossibleCause++;
                                                     }
                                                 }
-                                                <input type="hidden" id="incidentQualityCorporateImage_PossibleCause" name="incidentQualityCorporateImage.PossibleCause" value="@incidentQualityCorporateImage.PossibleCause" />
+                                                <input type="hidden" id="incidentQualityCorporateImage_PossibleCause" name="incidentQualityCorporateImage.PossibleCause" value="@Model.Entity.PossibleCause" />
                                                 @Html.ValidationMessageFor(model => incidentQualityCorporateImage.PossibleCause, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -336,24 +291,15 @@
                                                     int countImpact = 0;
                                                     foreach (string one in Model.Options_Impact)
                                                     {
-                                                        <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.Impact.IsContains(one) ? "checked" : "") /><label for="Impact@(countImpact.ToString())"> @one</label>
-                                                        if (one != IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())
+                                                        <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentQualityCorporateImage.Impact != null && incidentQualityCorporateImage.Impact.IsContains(one) ? "checked" : "") /><label for="Impact@(countImpact.ToString())"> @one</label><br />
+                                                        if (one == IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString())
                                                         {
-                                                            <br />
-                                                        }
-                                                        else
-                                                        {
-                                                            string sImpactMore = "";
-                                                            if (incidentQualityCorporateImage.Impact != null && incidentQualityCorporateImage.Impact.IsContains(one))
-                                                            {
-                                                                sImpactMore = incidentQualityCorporateImage.Impact.Substring(incidentQualityCorporateImage.Impact.IndexOf('(') + 1, incidentQualityCorporateImage.Impact.IndexOf(')') - incidentQualityCorporateImage.Impact.IndexOf('(') - 1);
-                                                            }
-                                                            <input id="Impact@(one)More" name="Impact@(one)More" type="text" value="@sImpactMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                            @Html.EditorFor(model => incidentQualityCorporateImage.ImpactOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                         }
                                                         countImpact++;
                                                     }
                                                 }
-                                                <input type="hidden" id="incidentQualityCorporateImage_Impact" name="incidentQualityCorporateImage.Impact" value="@incidentQualityCorporateImage.Impact" />
+                                                <input type="hidden" id="incidentQualityCorporateImage_Impact" name="incidentQualityCorporateImage.Impact" value="@Model.Entity.Impact" />
                                                 @Html.ValidationMessageFor(model => incidentQualityCorporateImage.Impact, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

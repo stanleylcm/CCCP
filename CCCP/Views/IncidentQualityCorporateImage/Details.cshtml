@@ -158,12 +158,22 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.PossibleCause)<br />
+                                                @Html.Raw(Model.Entity.PossibleCause != null && Model.Entity.PossibleCause.IsContains(IncidentQualityCorporateImagePossibleCause.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.PossibleCauseOthers != null ? Model.Entity.PossibleCauseOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.Impact)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Impact)</div>
+                                            <div class="col-lg-6">
+                                                @Html.DisplayFor(model => model.Entity.Impact)<br />
+                                                @Html.Raw(Model.Entity.Impact != null && Model.Entity.Impact.IsContains(IncidentQualityCorporateImageImpact.Others_9please_specify0.ToEnumString()) ?
+                                                    (Model.Entity.ImpactOthers != null ? Model.Entity.ImpactOthers.Replace(System.Environment.NewLine, "<br/>") : "") :
+                                                    "")
+                                            </div>
                                         </div>
 
                                         <div class="row">

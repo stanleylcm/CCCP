@@ -30,11 +30,14 @@ namespace CCCP.ViewModel
         public Nullable<bool> IsDrillMode { get; set; }
         public string History { get; set; }
         public string Impact { get; set; }
+        public Nullable<int> ImpactWorkstationFailure { get; set; }
+        public string ImpactOthers { get; set; }
         public string PossibleCause { get; set; }
         public Nullable<short> ExpectedRestorationTime { get; set; }
         public string RequireMitigatingAction { get; set; }
         public string MitigatingAction { get; set; }
         public string StatusUpdate { get; set; }
+        public string StatusUpdateOthers { get; set; }
         public Nullable<System.DateTime> FullRestoration { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

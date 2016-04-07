@@ -63,7 +63,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentOHSId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Location,PossibleCause,OHSType,NatureOfInjury,NoOfInjury,NoOfInfectiousDisease,NoOfDeath,NoOfInfected,Treatment,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentOHS incidentOHS)
+        public ActionResult Create([Bind(Include = "IncidentOHSId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Location,PossibleCause,PossibleCauseOthers,OHSType,NatureOfInjury,NatureOfInjuryOthers,NoOfInjury,NoOfInfectiousDisease,NoOfDeath,NoOfInfected,Treatment,TreatmentOthers,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentOHS incidentOHS)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentOHSId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Location,PossibleCause,OHSType,NatureOfInjury,NoOfInjury,NoOfInfectiousDisease,NoOfDeath,NoOfInfected,Treatment,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentOHS incidentOHS)
+        public ActionResult Edit([Bind(Include = "IncidentOHSId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,Location,PossibleCause,PossibleCauseOthers,OHSType,NatureOfInjury,NatureOfInjuryOthers,NoOfInjury,NoOfInfectiousDisease,NoOfDeath,NoOfInfected,Treatment,TreatmentOthers,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentOHS incidentOHS)
         {
             if (Session != null && Session["incident"] != null)
             {

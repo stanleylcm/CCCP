@@ -67,72 +67,6 @@
 	        $("input[type=checkbox][id^=Impact]").each(function () {
 	            if (this.checked) {
 	                if (i == 0) {
-	                } else {
-	                    sList = sList + ", ";
-	                }
-	                if ($(this).val() == "% workstation failure") {
-	                    sList = sList + $("#Impact__workstation_failureMore").val();
-	                }
-	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemCallCentre_Impact").val(sList);
-	    });
-
-	    $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=Impact]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                } else {
-	                    sList = sList + ", ";
-	                }
-	                if ($(this).val() == "% workstation failure") {
-	                    sList = sList + $("#Impact__workstation_failureMore").val();
-	                }
-	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemCallCentre_Impact").val(sList);
-	    });
-
-	    $("#Impact__workstation_failureMore").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=Impact]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                } else {
-	                    sList = sList + ", ";
-	                }
-	                if ($(this).val() == "% workstation failure") {
-	                    sList = sList + $("#Impact__workstation_failureMore").val();
-	                }
-	                sList = sList + $(this).val();
-	                if ($(this).val() == "@(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#Impact@(IncidentSystemBillingMitigatingAction.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemCallCentre_Impact").val(sList);
-	    });
-
-	    $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
 	                    sList = $(this).val();
 	                } else {
 	                    sList = sList + ", " + $(this).val();
@@ -140,45 +74,55 @@
 	                i++;
 	            }
 	        });
-	        $("#incidentSystemCallCentre_MitigatingAction").val(sList);
+	        $("#incidentSystemCallCentre_Impact").val(sList);
 	    });
 
-	    $("#incidentSystemCallCentre_IsDrillMode").on("click", function () {
-	        $(this).val(this.checked);
-	    });
+        $("input[type=checkbox][id^=MitigatingAction]").on("click", function () {
+            var sList = "";
+            var i = 0;
+            $("input[type=checkbox][id^=MitigatingAction]").each(function () {
+                if (this.checked) {
+                    if (i == 0) {
+                        sList = $(this).val();
+                    } else {
+                        sList = sList + ", " + $(this).val();
+                    }
+                    i++;
+                }
+            });
+            $("#incidentSystemCallCentre_MitigatingAction").val(sList);
+        });
 
-	    $("#incidentSystemCallCentre_RequireMitigatingAction").on("click", function () {
-	        $(this).val(this.checked ? "Yes" : "No");
-	    });
+        $("#incidentSystemCallCentre_IsDrillMode").on("click", function () {
+            $(this).val(this.checked);
+        });
 
-	    $("#StatusUpdate").change(function () {
-	        if ($(this).val().toUpperCase() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
-	            $('#StatusUpdateOthers').show();
-	            $("#incidentSystemCallCentre_StatusUpdate").val($(this).val() + " (" + $("#StatusUpdateOthersMore").val() + ")");
-	        } else {
-	            $('#StatusUpdateOthers').hide();
-	            $("#incidentSystemCallCentre_StatusUpdate").val($(this).val());
-	        }
-	    });
+        $("#incidentSystemCallCentre_RequireMitigatingAction").on("click", function () {
+            $(this).val(this.checked ? "Yes" : "No");
+        });
 
-        $("#StatusUpdateOthersMore").change(function () {
-            $("#incidentSystemCallCentre_StatusUpdate").val($("#StatusUpdate").val() + " (" + $(this).val() + ")");
-	    });
+        $("#incidentSystemCallCentre_StatusUpdate").change(function () {
+            if ($(this).val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
+                $('#StatusUpdateOthers').show();
+            } else {
+                $('#StatusUpdateOthers').hide();
+            }
+        });
 
         $("#FullRestorationDate").change(function () {
             if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
                 $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
             }
-	    });
+        });
 
         $("#FullRestorationTime").change(function () {
             if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
                 $("#incidentSystemCallCentre_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
             }
-	    });
+        });
 
         $(document).ready(function () {
-            if ($('#StatusUpdate').val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
+            if ($('#incidentSystemCallCentre_StatusUpdate').val() == "@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") {
                 $('#StatusUpdateOthers').show();
             } else {
                 $('#StatusUpdateOthers').hide();
@@ -217,6 +161,12 @@
                 errMsg = errMsg + '\r\nImpact cannot be empty<br />';
             }
 
+            if ($("#incidentSystemCallCentre_Impact").val().indexOf("@IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString()") >= 0 &&
+                $("#incidentSystemCallCentre_ImpactWorkstationFailure").val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nFor Impact, % workstation failure cannot be empty<br />';
+            }
+
             if ($('#incidentSystemCallCentre_PossibleCause').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
@@ -253,6 +203,18 @@
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();
+            }
+
+            if ($("#incidentSystemCallCentre_Impact").val().indexOf("@IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()") < 0) {
+                $("#incidentSystemCallCentre_ImpactOthers").val("");
+            }
+
+            if ($("#incidentSystemCallCentre_Impact").val().indexOf("@IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString()") < 0) {
+                $("#incidentSystemCallCentre_ImpactWorkstationFailure").val("");
+            }
+
+            if ($("#incidentSystemCallCentre_StatusUpdate").val().indexOf("@IncidentSystemCallCentreStatusUpdate.Others_9please_specify0.ToEnumString()") < 0) {
+                $("#incidentSystemCallCentre_StatusUpdateOthers").val("");
             }
 
             return inputValid;
@@ -397,33 +359,22 @@
                                                     {
                                                         <input id="Impact@(countImpact.ToString())" type="checkbox" value="@one" @(incidentSystemCallCentre.Impact.IsContains(one) ? "checked" : "") />
 
-                                                        if (one != IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString() && one != IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
+                                                        if (one != IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString())
                                                         {
                                                             <label for="Impact@(countImpact.ToString())"> @one</label><br />
-                                                        }
-                                                        else if (one == IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% "))
-                                                        {
-                                                            int impactPercent = 0;
-                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")))
+                                                            if (one == IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString())
                                                             {
-                                                                string sImpactPercent = incidentSystemCallCentre.Impact.Substring(0, incidentSystemCallCentre.Impact.IndexOf(IncidentSystemCallCentreImpact.__workstation_failure.ToEnumString().Replace("  ", "% ")));
-                                                                impactPercent = Convert.ToInt32(sImpactPercent);
+                                                                @Html.EditorFor(model => incidentSystemCallCentre.ImpactOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                                             }
-                                                            <label for="Impact@(countImpact.ToString())"><input id="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" name="Impact@(IncidentSystemCallCentreImpact.__workstation_failure)More" type="text" value="@(impactPercent == 0 ? "" : impactPercent.ToString())" class="form-control thin-control text-box pull-left" style="width:10%" /> @one</label><br />
                                                         }
                                                         else
                                                         {
-                                                            string impactOthers = "";
-                                                            if (incidentSystemCallCentre.Impact.IsContains(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()))
-                                                            {
-                                                                impactOthers = incidentSystemCallCentre.Impact.Substring(incidentSystemCallCentre.Impact.IndexOf("(") + 1, incidentSystemCallCentre.Impact.IndexOf(")") - incidentSystemCallCentre.Impact.IndexOf("(") - 1);
-                                                            }
-                                                            <label for="Impact@(countImpact.ToString())"> @one</label><input id="Impact@(one)More" name="Impact@(one)More" type="text" value="@impactOthers" class="form-control thin-control text-box pull-right" style="width:70%" />
+                                                            <label for="Impact@(countImpact.ToString())">@Html.EditorFor(model => incidentSystemCallCentre.ImpactWorkstationFailure, new { htmlAttributes = new { @class = "form-control thin-control text-box pull-left", @style = "width:20%" } }) @one</label><br />
                                                         }
                                                         countImpact++;
                                                     }
                                                 }
-                                                <input type="hidden" id="incidentSystemCallCentre_Impact" name="incidentSystemCallCentre.Impact" value="@(incidentSystemCallCentre.Impact)" />
+                                                <input type="hidden" id="incidentSystemCallCentre_Impact" name="incidentSystemCallCentre.Impact" value="@incidentSystemCallCentre.Impact" />
                                                 @Html.ValidationMessageFor(model => incidentSystemCallCentre.Impact, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -486,27 +437,22 @@
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemCallCentre.StatusUpdate)</label></div>
                                             <div class="col-lg-6">
-                                                <div class="col-lg-6">
-                                                    <select id="StatusUpdate" name="StatusUpdate" class="form-control thin-control">
-                                                        <option value=""></option>
-                                                        @foreach (string one in Model.Options_StatusUpdate)
-                                                        {
-                                                            <option value="@one" @(incidentSystemCallCentre.StatusUpdate.IsContains(one) ? "selected" : "")>@one</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-6" id="StatusUpdateOthers">
-                                                    @{
-                                                        string StatusUpdateOthers = "";
-                                                        if (incidentSystemCallCentre.StatusUpdate.IsContains(IncidentSystemCallCentreImpact.Others_9please_specify0.ToEnumString()))
-                                                        {
-                                                            StatusUpdateOthers = incidentSystemCallCentre.StatusUpdate.Substring(incidentSystemCallCentre.StatusUpdate.IndexOf("(") + 1, incidentSystemCallCentre.StatusUpdate.IndexOf(")") - incidentSystemCallCentre.StatusUpdate.IndexOf("(") - 1);
-                                                        }
+                                                <select id="incidentSystemCallCentre_StatusUpdate" name="incidentSystemCallCentre.StatusUpdate" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_StatusUpdate)
+                                                    {
+                                                        <option value="@one" @(Model.Entity.StatusUpdate.IsEquals(one) ? "selected" : "")>@one</option>
                                                     }
-                                                    <input id="StatusUpdateOthersMore" name="StatusUpdateOthersMore" type="text" value="@StatusUpdateOthers" class="form-control thin-control text-box pull-right" />
-                                                </div>
-                                                @Html.HiddenFor(model => incidentSystemCallCentre.StatusUpdate, new { @Value = incidentSystemCallCentre.StatusUpdate })
+                                                </select>
                                                 @Html.ValidationMessageFor(model => incidentSystemCallCentre.StatusUpdate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="StatusUpdateOthers">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-3 text-right"></div>
+                                            <div class="col-lg-6">
+                                                @Html.EditorFor(model => incidentSystemCallCentre.StatusUpdateOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                             </div>
                                         </div>
 

@@ -19,11 +19,12 @@ namespace CCCP.Business.Service
         public static IncidentLevel GetIncidentLevel(IncidentSystemBilling incident)
         {
             // Level 3
-            if (incident.ContactedBy.IsContains("Media")) return IncidentLevel.Level_3;
+            if (incident.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Media.ToEnumString())) return IncidentLevel.Level_3;
 
             // Level 2
-            if (incident.BillingErrorSeriousness.IsEquals("Danger Zone") &&
-                (incident.ContactedBy.IsContains("Consumer Council") || incident.ContactedBy.IsContains("Government"))
+            if (incident.BillingErrorSeriousness.IsEquals(IncidentSystemBillingBillingErrorSeriousness.Danger_Zone.ToEnumString()) &&
+                (incident.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Consumer_Council.ToEnumString()) || 
+                    incident.ContactedBy.IsContains(IncidentSystemBillingContactedBy.Government.ToEnumString()))
                 ) return IncidentLevel.Level_2;
 
             // else default level 1
@@ -56,23 +57,14 @@ namespace CCCP.Business.Service
         /// <returns></returns>
         public static IncidentLevel GetIncidentLevel(IncidentSystemCallCentre incident)
         {
-            int impactPercent = 0;
-
-            if (incident.Impact.IsContains("% workstation failure"))
-            {
-                string impact = incident.Impact.ToLower();
-                string sImpactPercent = impact.Substring(0, impact.IndexOf("% workstation failure"));
-                impactPercent = Convert.ToInt32(sImpactPercent);
-            }
-
             // Level 3
-            if (incident.PossibleCause.IsContains("Network Failure") ||
-                incident.Impact.IsContains("Suspension of Call Centre") ||
-                (incident.Impact.IsContains("% workstation failure") && impactPercent > 50)) return IncidentLevel.Level_3;
+            if (incident.PossibleCause.IsContains(IncidentSystemCallCentrePossibleCause.Network_Failure.ToEnumString()) ||
+                incident.Impact.IsContains(IncidentSystemCallCentreImpact.Suspension_of_Call_Centre.ToEnumString()) ||
+                (incident.Impact.IsContains(IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString()) && incident.ImpactWorkstationFailure.Value > 50)) return IncidentLevel.Level_3;
 
             // Level 2
-            if (incident.Impact.IsContains("absence of e1 line") ||
-                (incident.Impact.IsContains("% workstation failure") && impactPercent >= 30 && impactPercent <= 50)
+            if (incident.Impact.IsContains(IncidentSystemCallCentreImpact.Absence_of_E1_Line.ToEnumString()) ||
+                (incident.Impact.IsContains(IncidentSystemCallCentreImpact._5_workstation_failure.ToEnumString()) && incident.ImpactWorkstationFailure.Value >= 30 && incident.ImpactWorkstationFailure.Value <= 50)
                 ) return IncidentLevel.Level_2;
 
             // else

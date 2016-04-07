@@ -30,7 +30,9 @@ namespace CCCP.ViewModel
         public Nullable<bool> IsDrillMode { get; set; }
         public string History { get; set; }
         public string PossibleCause { get; set; }
+        public string PossibleCauseOthers { get; set; }
         public string Impact { get; set; }
+        public string ImpactOthers { get; set; }
         public string RemedyAction { get; set; }
         public string StatusUpdate { get; set; }
         public string CreatedBy { get; set; }

@@ -272,7 +272,7 @@ namespace CCCP.Common
 
     public enum IncidentSystemCallCentreImpact
     {
-        __workstation_failure,
+        _5_workstation_failure,
         Unavailability_of_self_service,
         Absence_of_voice_record,
         Absence_of_report,
@@ -280,6 +280,11 @@ namespace CCCP.Common
         Absence_of_E1_Line,
         Suspension_of_Call_Centre,
         Others_9please_specify0
+    }
+
+    public enum IncidentSystemCallCentrePossibleCause
+    {
+        Network_Failure
     }
 
     public enum IncidentSystemCallCentreInputKey
