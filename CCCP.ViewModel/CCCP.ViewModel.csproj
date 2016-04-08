@@ -67,6 +67,15 @@
       <DependentUpon>CCCPDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="CCCPDBContext_Audit.cs" />
+    <Compile Include="ChatRoom.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChatRoomAttachment.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChatRoomMessage.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Checklist.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -126,6 +135,9 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Metadata.cs" />
+    <Compile Include="Notification.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OMSEvent.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>

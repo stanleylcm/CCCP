@@ -19,6 +19,45 @@
           <Property Name="OriginalValue" Type="varchar(max)" />
           <Property Name="NewValue" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="ChatRoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChatRoomAttachment">
+          <Key>
+            <PropertyRef Name="ChatRoomAttachmentId" />
+          </Key>
+          <Property Name="ChatRoomAttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatRoomMessageId" Type="int" Nullable="false" />
+          <Property Name="Attachment" Type="binary" MaxLength="8000" />
+          <Property Name="AttachmentType" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChatRoomMessage">
+          <Key>
+            <PropertyRef Name="ChatRoomMessageId" />
+          </Key>
+          <Property Name="ChatRoomMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="SenderUserId" Type="int" Nullable="false" />
+          <Property Name="SenderDisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SendDateTime" Type="datetime" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Checklist">
           <Key>
             <PropertyRef Name="ChecklistId" />
@@ -502,6 +541,23 @@
           <Property Name="HasLogic" Type="bit" />
           <Property Name="CreatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="int" />
+          <Property Name="IncidentTypeId" Type="int" />
+          <Property Name="IncidentId" Type="int" />
+          <Property Name="CrisisId" Type="int" />
+          <Property Name="MessageType" Type="varchar" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="OMSEvent">
           <Key>
             <PropertyRef Name="OMSEventId" />
@@ -610,6 +666,9 @@
         <Function Name="usp_IncidentSystemBilling_Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CCCPViewModelStoreContainer">
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoom" EntityType="Self.ChatRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoomAttachment" EntityType="Self.ChatRoomAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoomMessage" EntityType="Self.ChatRoomMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Checklist" EntityType="Self.Checklist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistAction" EntityType="Self.ChecklistAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
@@ -629,6 +688,7 @@
           <EntitySet Name="IncidentSystemOTSystem" EntityType="Self.IncidentSystemOTSystem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentType" EntityType="Self.IncidentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputOption" EntityType="Self.InputOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OMSEvent" EntityType="Self.OMSEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemFunction" EntityType="Self.SystemFunction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -702,6 +762,10 @@
           <EntitySet Name="IncidentOHS" EntityType="CCCP.ViewModel.IncidentOHS" />
           <EntitySet Name="IncidentQualityCorporateImage" EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" />
           <EntitySet Name="IncidentSystemCallCentre" EntityType="CCCP.ViewModel.IncidentSystemCallCentre" />
+          <EntitySet Name="ChatRoom" EntityType="CCCP.ViewModel.ChatRoom" />
+          <EntitySet Name="ChatRoomAttachment" EntityType="CCCP.ViewModel.ChatRoomAttachment" />
+          <EntitySet Name="ChatRoomMessage" EntityType="CCCP.ViewModel.ChatRoomMessage" />
+          <EntitySet Name="Notification" EntityType="CCCP.ViewModel.Notification" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1491,6 +1555,62 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChatRoomAttachment">
+          <Key>
+            <PropertyRef Name="ChatRoomAttachmentId" />
+          </Key>
+          <Property Name="ChatRoomAttachmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatRoomMessageId" Type="Int32" Nullable="false" />
+          <Property Name="Attachment" Type="Binary" MaxLength="8000" FixedLength="true" />
+          <Property Name="AttachmentType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChatRoomMessage">
+          <Key>
+            <PropertyRef Name="ChatRoomMessageId" />
+          </Key>
+          <Property Name="ChatRoomMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="SenderUserId" Type="Int32" Nullable="false" />
+          <Property Name="SenderDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SendDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="Int32" />
+          <Property Name="IncidentTypeId" Type="Int32" />
+          <Property Name="IncidentId" Type="Int32" />
+          <Property Name="CrisisId" Type="Int32" />
+          <Property Name="MessageType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2231,6 +2351,66 @@
                 <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
                 <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
                 <ScalarProperty Name="IncidentSystemCallCentreId" ColumnName="IncidentSystemCallCentreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRoom">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChatRoom">
+              <MappingFragment StoreEntitySet="ChatRoom">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRoomAttachment">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChatRoomAttachment">
+              <MappingFragment StoreEntitySet="ChatRoomAttachment">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="AttachmentType" ColumnName="AttachmentType" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="ChatRoomMessageId" ColumnName="ChatRoomMessageId" />
+                <ScalarProperty Name="ChatRoomAttachmentId" ColumnName="ChatRoomAttachmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRoomMessage">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChatRoomMessage">
+              <MappingFragment StoreEntitySet="ChatRoomMessage">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="SendDateTime" ColumnName="SendDateTime" />
+                <ScalarProperty Name="SenderDisplayName" ColumnName="SenderDisplayName" />
+                <ScalarProperty Name="SenderUserId" ColumnName="SenderUserId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChatRoomMessageId" ColumnName="ChatRoomMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+                <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

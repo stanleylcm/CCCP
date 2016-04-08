@@ -28,6 +28,10 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.5" PointX="0.75" PointY="1.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" Width="2.5" PointX="0.75" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemCallCentre" Width="2.5" PointX="0.75" PointY="6.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.ChatRoom" Width="1.5" PointX="3.5" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.ChatRoomAttachment" Width="1.5" PointX="3.5" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.ChatRoomMessage" Width="1.5" PointX="3.5" PointY="3.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.Notification" Width="1.5" PointX="3.5" PointY="4.5" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,7 +25,7 @@ namespace CCCP.Business.Model
 
         private void init()
         {
-
+            Chatroom = new ChatRoomModel();
         }
 
         #endregion
@@ -33,6 +33,7 @@ namespace CCCP.Business.Model
         #region Declaration
 
         public GeneralEnquiry Entity = new GeneralEnquiry();
+        public ChatRoomModel Chatroom { get; set; }
         public EnquiryStatus EnquiryStatus
         {
             get

@@ -50,6 +50,10 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
         public virtual DbSet<IncidentQualityCorporateImage> IncidentQualityCorporateImage { get; set; }
         public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
+        public virtual DbSet<ChatRoom> ChatRoom { get; set; }
+        public virtual DbSet<ChatRoomAttachment> ChatRoomAttachment { get; set; }
+        public virtual DbSet<ChatRoomMessage> ChatRoomMessage { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

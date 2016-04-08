@@ -21,12 +21,14 @@ namespace CCCP.Business.Model
         {
             init();
             this.Entity = viewModel;
+            this.OriginalLevelOfSeverity = viewModel.LevelOfSeverity;
         }
 
         private void init()
         {
             initOptions();
             Checklists = new List<ChecklistModel>();
+            Chatroom = new ChatRoomModel();
             LinkedIncidentEntities = new List<usp_Incident_GetLinkedIncident_Result>();
         }
 
@@ -35,6 +37,8 @@ namespace CCCP.Business.Model
         #region Declaration
 
         public IncidentQualityGeneration Entity = new IncidentQualityGeneration();
+        public String OriginalLevelOfSeverity { get; set; }
+        public ChatRoomModel Chatroom { get; set; }
         public List<ChecklistModel> Checklists { get; set; }
         public List<ChecklistExtend> ChecklistEntities
         {
@@ -75,6 +79,13 @@ namespace CCCP.Business.Model
         #endregion
 
         #region Public Method
+
+        public bool IsLevelChanged()
+        {
+            if (OriginalLevelOfSeverity == null) return false;
+            if (OriginalLevelOfSeverity == "") return false;
+            return !OriginalLevelOfSeverity.IsEquals(Entity.LevelOfSeverity);
+        }
 
         public bool IsReadyForClose()
         {

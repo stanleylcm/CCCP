@@ -31,6 +31,7 @@ namespace CCCP.Controllers.WebApi
             {
                 // load incident details
                 result.Entity = db.IncidentSystemITSystem.Find(incidentId);
+                result.OriginalLevelOfSeverity = result.Entity.LevelOfSeverity;
 
                 // load checklists
                 int checklistBatchID = result.Entity.ChecklistBatchId;
@@ -63,6 +64,22 @@ namespace CCCP.Controllers.WebApi
                 }
 
                 // load chat room
+                result.Chatroom = new ChatRoomModel(result.Entity.ChatRoomId);
+
+                result.Chatroom.ChatRoomMessagesEntites = (from crMessage in db.ChatRoomMessage
+                                                           where crMessage.ChatRoomId.Equals(result.Chatroom.Entity.ChatRoomId)
+                                                           orderby crMessage.SendDateTime
+                                                           select new ChatRoomMessageModel()
+                                                           {
+                                                               Entity = crMessage
+                                                           }).ToList<ChatRoomMessageModel>();
+
+                foreach (ChatRoomMessageModel crMessage in result.Chatroom.ChatRoomMessagesEntites)
+                {
+                    crMessage.ChatRoomAttachmentsEntities = (from crAttachment in db.ChatRoomAttachment
+                                                             where crAttachment.ChatRoomMessageId.Equals(crMessage.Entity.ChatRoomMessageId)
+                                                             select crAttachment).ToList<ChatRoomAttachment>();
+                }
                 //
 
                 // load linked incident
@@ -111,6 +128,10 @@ namespace CCCP.Controllers.WebApi
             db.IncidentSystemITSystem.Add(incidentSystemITSystem);
             db.SaveChanges();
             db.usp_Incident_PostCreate(incidentSystemITSystem.IncidentSystemITSystemId, incidentTypeId, incident.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToString());
+
+            NotificationService.SendCreateIncidentNotification(incidentSystemITSystem.IncidentSystemITSystemId,
+                                                               incidentSystemITSystem.IncidentNo,
+                                                               IncidentTypeSubType.SystemITSystem);
 
             return incident.Entity.IncidentSystemITSystemId;
         }
@@ -161,6 +182,15 @@ namespace CCCP.Controllers.WebApi
 
                 // output validation errors
                 Console.WriteLine(sb.ToString());
+            }
+
+            if (incident.IsLevelChanged())
+            {
+                NotificationService.SendUpdateIncidentLevelNotification(incident.Entity.IncidentSystemITSystemId,
+                                                                        incident.Entity.IncidentNo,
+                                                                        incident.OriginalLevelOfSeverity,
+                                                                        incident.Entity.LevelOfSeverity,
+                                                                        IncidentTypeSubType.SystemITSystem);
             }
 
             return incident.Entity.IncidentSystemITSystemId;

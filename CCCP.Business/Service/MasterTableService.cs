@@ -24,6 +24,23 @@ namespace CCCP.Business.Service
             return result;
         }
 
+        public static string GetIncidentTypeName(IncidentTypeSubType incidentType)
+        {
+            string ret = "";
+            using (CCCPDbContext db = new CCCPDbContext())
+            {
+                string incidentTypeStr = incidentType.ToEnumString();
+                CCCP.ViewModel.IncidentType result = db.IncidentType.SingleOrDefault(x => x.IncidentType1 == incidentTypeStr);
+                ret = result.Type;
+                if (result.SubType != null)
+                {
+                    ret = string.Format("{0} - {1}", ret, result.SubType);
+                }
+            }
+
+            return ret;
+        }
+
         public static List<ViewModel.IncidentType> GetIncidentTypes()
         {
             List<ViewModel.IncidentType> result = new List<ViewModel.IncidentType>();

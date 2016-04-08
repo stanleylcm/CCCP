@@ -9,5 +9,6 @@ namespace CCCP.Business.Model
     public interface IIncidentModel
     {
         List<ChecklistModel> Checklists { get; set; }
+        ChatRoomModel Chatroom { get; set; }
     }
 }

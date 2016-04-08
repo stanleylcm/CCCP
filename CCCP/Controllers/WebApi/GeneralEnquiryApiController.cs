@@ -31,6 +31,24 @@ namespace CCCP.Controllers.WebApi
             {
                 // load enquiry details
                 result.Entity = db.GeneralEnquiry.Find(Id);
+
+                // load chatroom
+                result.Chatroom = new ChatRoomModel(result.Entity.ChatRoomId);
+
+                result.Chatroom.ChatRoomMessagesEntites = (from crMessage in db.ChatRoomMessage
+                                                           where crMessage.ChatRoomId.Equals(result.Chatroom.Entity.ChatRoomId)
+                                                           orderby crMessage.SendDateTime
+                                                           select new ChatRoomMessageModel()
+                                                           {
+                                                               Entity = crMessage
+                                                           }).ToList<ChatRoomMessageModel>();
+
+                foreach (ChatRoomMessageModel crMessage in result.Chatroom.ChatRoomMessagesEntites)
+                {
+                    crMessage.ChatRoomAttachmentsEntities = (from crAttachment in db.ChatRoomAttachment
+                                                             where crAttachment.ChatRoomMessageId.Equals(crMessage.Entity.ChatRoomMessageId)
+                                                             select crAttachment).ToList<ChatRoomAttachment>();
+                }
             }
 
             // result

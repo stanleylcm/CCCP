@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ChatRoomMessageModel.cs" />
+    <Compile Include="Model\ChatRoomModel.cs" />
     <Compile Include="Model\OMSEventModel .cs" />
     <Compile Include="Model\OMSEventApiModel.cs" />
     <Compile Include="Model\AccessRightsModel.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Service\AuditTrailService.cs" />
     <Compile Include="Service\IncidentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\InputOptionsService.cs" />
     <Compile Include="Service\MasterTableService.cs" />
   </ItemGroup>
