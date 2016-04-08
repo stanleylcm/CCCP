@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace CCCP.Hubs
 {
-    public class GeneralEnquiryHub : Hub
+    public class ChatRoomHub : Hub
     {
         public void Hello()
         {
@@ -15,6 +15,7 @@ namespace CCCP.Hubs
 
         public void Send(string name, string message, string time)
         {
+            // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage(name, message, time);
         }
 

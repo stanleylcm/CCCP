@@ -276,24 +276,7 @@
                         <div class="box-body">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-8">
-                                <div id="chat" style="height: 400px;overflow-y: scroll;">
-                                    @{
-                                        foreach (var crMsg in Model.Chatroom.ChatRoomMessagesEntites)
-                                        {
-                                    <div class="bubble @(crMsg.Entity.SenderUserId == AccessControlService.CurrentUser.Entity.UserId ? "me" : "you")">
-                                            @if (crMsg.Entity.SenderUserId != AccessControlService.CurrentUser.Entity.UserId)
-                                            {
-                                        <label>@crMsg.Entity.SenderDisplayName</label><br>
-                                            }
-                                        @crMsg.Entity.Message<br>
-                                        <h6 align="right">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</h6>
-                                    </div>
-                                        }
-                                    }
-                                </div>
-                                <div id="SendMessage">
-                                    <textarea rows="4" cols="150"></textarea>
-                                </div>
+                                @Html.Partial("_ChatRoom", Model.Chatroom)
                             </div>
                             <div class="col-lg-2"></div>
                         </div>

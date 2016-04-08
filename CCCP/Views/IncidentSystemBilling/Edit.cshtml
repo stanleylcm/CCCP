@@ -552,25 +552,7 @@
                         <div class="box-body">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-8">
-                                <div id="chat" style="height: 400px;overflow-y: scroll;">
-                                    <div class="bubble you">
-                                        <label>Peter</label><br>
-                                        What happened?<br>
-                                        <h6 align="right">11:46</h6>
-                                    </div>
-                                    <div class="bubble me">
-                                        Someone got cut.<br>
-                                        <h6 align="right">11:52</h6>
-                                    </div>
-                                    <div class="bubble you">
-                                        <label>John</label><br>
-                                        Is it serious?<br>
-                                        <h6 align="right">11:55</h6>
-                                    </div>
-                                </div>
-                                <div id="SendMessage">
-                                    <textarea rows="4" cols="150"></textarea>
-                                </div>
+                                @Html.Partial("_ChatRoom", Model.Chatroom)
                             </div>
                             <div class="col-lg-2"></div>
                         </div>
