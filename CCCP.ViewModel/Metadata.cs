@@ -857,4 +857,17 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
     }
     #endregion
+
+    #region Notification Metadata
+    [MetadataType(typeof(NotificationHelper))]
+    public partial class Notification { }
+
+    public partial class NotificationHelper
+    {
+        [Display(Name = "Created Date Time")]
+        public DateTime? CreatedDateTime { get; set; }
+        [Display(Name = "Notification Message")]
+        public String Message { get; set; }
+    }
+    #endregion
 }

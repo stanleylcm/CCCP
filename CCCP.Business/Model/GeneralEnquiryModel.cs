@@ -34,6 +34,7 @@ namespace CCCP.Business.Model
 
         public GeneralEnquiry Entity = new GeneralEnquiry();
         public ChatRoomModel Chatroom { get; set; }
+
         public EnquiryStatus EnquiryStatus
         {
             get

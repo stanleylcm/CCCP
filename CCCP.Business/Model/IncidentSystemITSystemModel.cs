@@ -30,6 +30,7 @@ namespace CCCP.Business.Model
             Checklists = new List<ChecklistModel>();
             Chatroom = new ChatRoomModel();
             LinkedIncidentEntities = new List<usp_Incident_GetLinkedIncident_Result>();
+            NotificationEntities = new List<Notification>();
         }
 
         #endregion
@@ -49,6 +50,7 @@ namespace CCCP.Business.Model
             }
         }
         public List<usp_Incident_GetLinkedIncident_Result> LinkedIncidentEntities { get; set; }
+        public List<Notification> NotificationEntities { get; set; }
 
         public List<string> Options_AffectedSystem = new List<string>();
         public List<string> Options_AffectedArea = new List<string>();

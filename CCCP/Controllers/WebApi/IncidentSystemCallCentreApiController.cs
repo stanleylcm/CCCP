@@ -87,6 +87,15 @@ namespace CCCP.Controllers.WebApi
 
                 // load linked general enquiry
                 //
+
+                // load notification
+                int incidentTypeId = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemCallCentre);
+                result.NotificationEntities = (from notice in db.Notification
+                                               where notice.IncidentId == result.Entity.IncidentSystemCallCentreId &&
+                                                     notice.IncidentTypeId == incidentTypeId
+                                               orderby notice.CreatedDateTime descending
+                                               select notice).ToList<Notification>();
+                //
             }
 
             // result

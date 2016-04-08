@@ -87,6 +87,15 @@ namespace CCCP.Controllers.WebApi
 
                 // load linked general enquiry
                 //
+
+                // load notification
+                int incidentTypeId = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.EnvironmentLeakage);
+                result.NotificationEntities = (from notice in db.Notification
+                                               where notice.IncidentId == result.Entity.IncidentEnvironmentLeakageId &&
+                                                     notice.IncidentTypeId == incidentTypeId
+                                               orderby notice.CreatedDateTime descending
+                                               select notice).ToList<Notification>();
+                //
             }
 
             // result
