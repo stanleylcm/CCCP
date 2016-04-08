@@ -106,7 +106,7 @@ namespace CCCP.UnitTest
 
             OMSEventApiModel test = new OMSEventApiModel();
 
-            test.OMSNo = "1";
+            test.OMSNo = "3";
             test.AffectedArea = "test affected area";
             test.AffectedArea_Chi = "測試影響範圍";
             test.AffectedBuilding = "test affected building";
@@ -129,7 +129,7 @@ namespace CCCP.UnitTest
             client.BaseAddress = new Uri("http://localhost/");
 
             // HTTP POST
-            var response = client.PostAsJsonAsync("/api/OMSEventApi/Create", test).Result;
+            var response = client.PostAsJsonAsync("/api/OMSEventApi/SubmitOMSEvent", test).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -145,7 +145,7 @@ namespace CCCP.UnitTest
 
             OMSEventApiModel test = new OMSEventApiModel();
 
-            test.OMSNo = "1";
+            test.OMSNo = "3";
             test.AffectedArea = "test affected area";
             test.AffectedArea_Chi = "要刪了123";
             test.AffectedBuilding = "test affected building";
@@ -168,7 +168,7 @@ namespace CCCP.UnitTest
             client.BaseAddress = new Uri("http://localhost/");
 
             // HTTP POST
-            var response = client.PostAsJsonAsync("/api/OMSEventApi/Update", test).Result;
+            var response = client.PostAsJsonAsync("/api/OMSEventApi/SubmitOMSEvent", test).Result;
 
             if (response.IsSuccessStatusCode)
             {

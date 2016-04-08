@@ -25,9 +25,11 @@ namespace CCCP.Business.Model
         
         public string GetLastUpdatedBy()
         {
-            // hardcord for demo...
-            //Entity.LoginName = "alexpierce";
-            //Entity.DisplayName = "Alex Pierce";
+            if (Entity.UserId <= 0)
+            {
+                // from web api, no login info, use 1 as System acc?
+                Entity = new CCCPDbContext().User.Find(1);
+            }
 
             return string.Format("{0} ({1})", Entity.LoginName, Entity.DisplayName);
         }
