@@ -64,12 +64,15 @@ div.leftTool {
 }
 
 .me {
+	background-color: #46A3FF;
+    color: #FFFFFF;
 	float: right;    
 	margin: 5px 20px 5px 45px;
 	width: 700px;			
 }
 
 .me::before {
+	background-color: #46A3FF;
 	box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
 	right: -9px;    
 }
