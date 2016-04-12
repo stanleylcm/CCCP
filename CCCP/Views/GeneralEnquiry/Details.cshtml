@@ -9,36 +9,18 @@
 @section Scripts {
     <script>
 	    $(function() {
-		    $('#accordion').on('show.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-left");
-			    $('#HistoryIcon').addClass("fa-angle-down");
-		    });
-		    $('#accordion').on('hide.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-down");
-			    $('#HistoryIcon').addClass("fa-angle-left");
-		    });
 
-		    $('#LinkedIncidentTable').DataTable();
-
-		    $('#Checklists input[type="checkbox"]').each(function () {
-			    value = $(this).val();
-			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
-		    });
-
-            // read mode, disabled change state functionality for the tri-state checkbox
-		    $('.bootstrap-checkbox').off('click');
-
-		    $('input[type=checkbox]').click(function(event) {
-		        event.preventDefault();
-		    });
-
-	        $('#btnCloseIncident').on('click', function (event) {
+		    $('#btnCloseEnquiry').on('click', function (event) {
 	            bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
 	                if (result) {
-	                    window.location = '@Url.Action("CloseIncident", "GeneralEnquiry")';
+	                    window.location = '@Url.Action("CloseEnquiry", "GeneralEnquiry")';
 	                    return true;
 	                }
 	            });
+		    });
+
+	        $('#btnCreateIncident').on('click', function (event) {
+                // route to different incident create function by incident type id
 	        });
 	    });
     </script>
@@ -64,7 +46,7 @@
                     <div class="form-group pull-right">
                         <button class="btn btn-primary" type="button" id="btnCreateIncident">Create Incident</button>
                         <button class="btn btn-primary" type="button" id="btnCloseEnquiry">Close Enquiry</button>
-                        <button class="btn btn-primary" type="button" id="btnCancelEnquiry">Cancel Enquiry</button>
+                        <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "GeneralEnquiry")';">Back</button>
                     </div>
                 </div>
 
