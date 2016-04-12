@@ -189,14 +189,14 @@ namespace CCCP.Business.Service
         {
             // Level 3
             if (
-                (incident.OHSType.IsEquals("Work Accident") && incident.NoOfDeath > 0) ||
+                (incident.OHSType.IsEquals("Work Accidents") && incident.NoOfDeath > 0) ||
                 (incident.OHSType.IsEquals("Epidemic Outbreak") && incident.NoOfInfectiousDisease != null && incident.NoOfInfectiousDisease > 50)
                 )
                 return IncidentLevel.Level_3;
 
             // Level 2
             if (
-                (incident.OHSType.IsEquals("Work Accident") && incident.Treatment.IsContains("In-Patient")) ||
+                (incident.OHSType.IsEquals("Work Accidents") && incident.Treatment.IsContains("In-Patient")) ||
                 (incident.OHSType.IsEquals("Epidemic Outbreak") && incident.NoOfInfectiousDisease != null && incident.NoOfInfectiousDisease > 1)
                 )
                 return IncidentLevel.Level_2;
