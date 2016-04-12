@@ -279,7 +279,7 @@
                                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentOHS.IsDrillMode)</label></div>
                                             <div class="col-lg-4">
                                                 <div class="checkbox">
-                                                    <input id="incidentOHS_IsDrillMode" name="incidentOHS.IsDrillMode" type="checkbox" value="" @(incidentOHS.IsDrillMode != null && incidentOHS.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    <input id="incidentOHS_IsDrillMode" name="incidentOHS.IsDrillMode" type="checkbox" value="@(incidentOHS.IsDrillMode != null && incidentOHS.IsDrillMode.Value ? "true" : "false")" @(incidentOHS.IsDrillMode != null && incidentOHS.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
                                                     @Html.ValidationMessageFor(model => incidentOHS.IsDrillMode, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>

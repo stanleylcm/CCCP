@@ -273,7 +273,7 @@
 											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentSystemNetworkConnectivity.IsDrillMode)</label></div>
 											<div class="col-lg-4">
 												<div class="checkbox">
-													<input id="incidentSystemNetworkConnectivity_IsDrillMode" name="incidentSystemNetworkConnectivity.IsDrillMode" type="checkbox" value="" @(incidentSystemNetworkConnectivity.IsDrillMode != null && incidentSystemNetworkConnectivity.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                    <input id="incidentSystemNetworkConnectivity_IsDrillMode" name="incidentSystemNetworkConnectivity.IsDrillMode" type="checkbox" value="@(incidentSystemNetworkConnectivity.IsDrillMode != null && incidentSystemNetworkConnectivity.IsDrillMode.Value ? "true" : "false")" @(incidentSystemNetworkConnectivity.IsDrillMode != null && incidentSystemNetworkConnectivity.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
 													@Html.ValidationMessageFor(model => incidentSystemNetworkConnectivity.IsDrillMode, "", new { @class = "text-danger" })
 												</div>
 											</div>
