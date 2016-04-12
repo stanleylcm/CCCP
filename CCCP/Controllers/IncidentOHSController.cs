@@ -115,6 +115,15 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
+        public ActionResult Cancel(int id)
+        {
+            IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
+            incidentOHS.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = incident.Entity.IncidentOHSId, message = "The Incident had been cancelled successfully" });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
