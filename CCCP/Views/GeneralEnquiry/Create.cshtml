@@ -2,9 +2,13 @@
 
 @using CCCP.Common
 @using CCCP.Business.Service
+@using CCCP.Business.Model
 @{
     ViewBag.Title = Resources.global.Menu_GeneralEnquiry;
     CCCP.ViewModel.GeneralEnquiry generalEnquiry = Model.Entity; // variable for binding
+
+    CCCP.Helpers.SessionHelper sessionHelper = new CCCP.Helpers.SessionHelper();
+    UserModel user = sessionHelper.CurrentUser;
 }
 
 <!-- Content Header (Page header) -->
@@ -33,7 +37,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">Issue By</label></div>
                                     <div class="col-lg-6">
-                                        @AccessControlService.CurrentUser.GetLastUpdatedBy()
+                                        @user.GetLastUpdatedBy()
                                     </div>
                                 </div>
 

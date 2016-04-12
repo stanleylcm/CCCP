@@ -130,6 +130,8 @@ namespace CCCP.Controllers.WebApi
             IncidentEnvironmentAirEmissionModel incident = new IncidentEnvironmentAirEmissionModel();
             incidentEnvironmentAirEmission.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentEnvironmentAirEmission;
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
             incident.PrepareSave(PrepareSaveMode.Created);
             incidentEnvironmentAirEmission = incident.Entity;
 
@@ -152,6 +154,8 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             // prepare history etc. before save
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
             if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
             {
                 incident.PrepareSave(PrepareSaveMode.Closed);

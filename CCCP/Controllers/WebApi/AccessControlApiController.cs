@@ -24,11 +24,17 @@ namespace CCCP.Controllers.WebApi
             int userId = checkLogin(loginId, password); // try login and return userID if success
             if (userId > 0)
             {
+                // get user details
+                result.Entity = new CCCPDbContext().User.Find(userId);
+
                 // Get access rights
                 result.AccessRights = AccessControlService.GetAccessRights(userId);
 
                 result.IsAuthenticated = true;
                 result.LoginDateTime = DateTime.Now;
+
+                Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+                sessionHelper.CurrentUser = result;
             }
 
             return result;
@@ -36,8 +42,15 @@ namespace CCCP.Controllers.WebApi
 
         private int checkLogin(string loginId, string password)
         {
-            // temp
-            return 1;
+            CCCPDbContext db = new CCCPDbContext();
+            List<User> users = db.User.Where(x => x.LoginName == loginId && x.Password == password).ToList();
+
+            if (users.Count() == 1)
+            {
+                return users.FirstOrDefault().UserId;
+            }
+
+            return 0;
         }
     }
 }

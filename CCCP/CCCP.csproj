@@ -203,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Hubs\ChatRoomHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -796,6 +797,7 @@
     <Content Include="Scripts\localization\methods_pt.js" />
     <Content Include="Scripts\localization\methods_pt.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\respond.js" />
@@ -884,6 +886,7 @@
     <Content Include="Views\Shared\_ChatRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

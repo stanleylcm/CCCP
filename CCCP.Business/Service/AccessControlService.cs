@@ -14,20 +14,6 @@ namespace CCCP.Business.Service
     {
         public static UserModel CurrentUser = new UserModel();
 
-        public static Boolean IsValid(String username, String password)
-        {
-            CCCPDbContext db = new CCCPDbContext();
-            List<User> users = db.User.Where(x => x.LoginName == username && x.Password == password).ToList();
-
-            if (users.Count() == 1)
-            {
-                CurrentUser = new UserModel(users.FirstOrDefault());
-                return true;
-            }
-
-            return false;
-        }
-
         public static AccessRightsModel GetAccessRights()
         {
             return GetAccessRights(CurrentUser.Entity.UserId);

@@ -20,7 +20,8 @@ namespace CCCP
                         "~/Scripts/input-mask/jquery.inputmask.date.extensions.js",
                         "~/Scripts/input-mask/jquery.inputmask.extensions.js",
                         "~/Scripts/timepicker/bootstrap-timepicker.min.js",
-                        "~/Scripts/bootstrap-switch.js"));
+                        "~/Scripts/bootstrap-switch.js",
+                        "~/Scripts/moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

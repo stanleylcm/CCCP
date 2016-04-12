@@ -139,6 +139,8 @@ namespace CCCP.Controllers
 
         public ActionResult ToggleActionStatus(int checklist, int checklistAction)
         {
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
             if (Session != null && Session["incident"] != null)
             {
                 incident = Session["incident"] as IncidentSystemNetworkConnectivityModel;

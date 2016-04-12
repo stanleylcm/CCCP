@@ -130,6 +130,8 @@ namespace CCCP.Controllers.WebApi
             IncidentQualityGenerationModel incident = new IncidentQualityGenerationModel();
             incidentQualityGeneration.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentQualityGeneration;
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
             incident.PrepareSave(PrepareSaveMode.Created);
             incidentQualityGeneration = incident.Entity;
 
@@ -152,6 +154,8 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             // prepare history etc. before save
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
             if (incident.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString())
             {
                 incident.PrepareSave(PrepareSaveMode.Closed);

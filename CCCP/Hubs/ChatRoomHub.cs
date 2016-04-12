@@ -15,7 +15,6 @@ namespace CCCP.Hubs
 
         public void Send(string name, string message, string time)
         {
-            // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage(name, message, time);
         }
 

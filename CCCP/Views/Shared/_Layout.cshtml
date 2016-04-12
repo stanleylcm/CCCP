@@ -54,7 +54,11 @@
 </head>
 @using CCCP.Common;
 @using CCCP.Business.Service;
+@using CCCP.Business.Model;
 @{
+    CCCP.Helpers.SessionHelper sessionHelper = new CCCP.Helpers.SessionHelper();
+    UserModel user = sessionHelper.CurrentUser;
+    
     string curAction = ViewContext.RouteData.Values["action"].ToString();
     string curController = ViewContext.RouteData.Values["controller"].ToString();
 
@@ -105,13 +109,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs" style="height:auto">@AccessControlService.CurrentUser.Entity.DisplayName</span>
+                                <span class="hidden-xs" style="height:auto">@user.Entity.DisplayName</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <p>
-                                        @AccessControlService.CurrentUser.Entity.DisplayName - @(AccessControlService.CurrentUser.Entity.DepartmentId > 0 ? MasterTableService.GetDepartmentStr(AccessControlService.CurrentUser.Entity.DepartmentId) : "")
-                                        <small>@AccessControlService.CurrentUser.Entity.Title</small>
+                                        @user.Entity.DisplayName - @(user.Entity.DepartmentId > 0 ? MasterTableService.GetDepartmentStr(user.Entity.DepartmentId) : "")
+                                        <small>@user.Entity.Title</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->

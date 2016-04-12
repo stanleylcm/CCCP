@@ -13,6 +13,7 @@ using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
 using CCCP.Controllers.WebApi;
+using CCCP.Helpers;
 
 namespace CCCP.Controllers
 {
@@ -31,7 +32,8 @@ namespace CCCP.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (AccessControlService.IsValid(loginId, password.Encode()))
+                    UserModel user = new AccessControlApiController().Authenticate(loginId, password.Encode());
+                    if (user != null && user.Entity.UserId > 0)
                     {
                         FormsAuthentication.SetAuthCookie(loginId, false);
                         return RedirectToAction("Index", "Home");
