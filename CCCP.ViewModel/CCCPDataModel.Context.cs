@@ -39,7 +39,6 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentEnvironmentAirEmission> IncidentEnvironmentAirEmission { get; set; }
         public virtual DbSet<IncidentQualityGeneration> IncidentQualityGeneration { get; set; }
         public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
-        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<IncidentSystemITSystem> IncidentSystemITSystem { get; set; }
         public virtual DbSet<IncidentSystemNetworkConnectivity> IncidentSystemNetworkConnectivity { get; set; }
         public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
@@ -54,6 +53,7 @@ namespace CCCP.ViewModel
         public virtual DbSet<ChatRoomAttachment> ChatRoomAttachment { get; set; }
         public virtual DbSet<ChatRoomMessage> ChatRoomMessage { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
