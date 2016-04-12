@@ -579,12 +579,16 @@ namespace CCCP.ViewModel
         [DataType(DataType.MultilineText)]
         public string NatureOfInjuryOthers { get; set; }
         [Display(Name = "No Of Injury")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInjury { get; set; }
         [Display(Name = "No Of Infectious Disease")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInfectiousDisease { get; set; }
         [Display(Name = "No Of Death")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfDeath { get; set; }
         [Display(Name = "No Of Infected")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInfected { get; set; }
         [Display(Name = "Treatment")]
         public string Treatment { get; set; }

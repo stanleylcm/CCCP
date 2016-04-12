@@ -23,20 +23,20 @@ namespace CCCP.UnitTest
         public void TestCreateIncidentWebApi()
         {
             CCCPDbContext db = new CCCPDbContext();
-            IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(1);
+            IncidentOHS incident = db.IncidentOHS.Find(5);
 
-            incidentSystemBilling.IncidentSystemBillingId = 0;
-            incidentSystemBilling.ChecklistBatchId = 0;
-            incidentSystemBilling.ChatRoomId = 0;
-            incidentSystemBilling.GeneralEnquiryId = 0;
+            incident.IncidentOHSId = 0;
+            incident.ChecklistBatchId = 0;
+            incident.ChatRoomId = 0;
+            incident.GeneralEnquiryId = 0;
             //incidentSystemBilling.NotificationId = 0;
 
             var client = new HttpClient();
 
-            client.BaseAddress = new Uri("http://localhost/");
+            client.BaseAddress = new Uri("http://localhost:8088/");
 
             // HTTP POST
-            var response = client.PostAsJsonAsync("/api/incidentSystemBillingApi/CreateIncident", incidentSystemBilling).Result;
+            var response = client.PostAsJsonAsync("/api/incidentOHSApi/CreateIncident", incident).Result;
 
             if (response.IsSuccessStatusCode)
             {

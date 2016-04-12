@@ -22,7 +22,7 @@ namespace CCCP.Helpers
             {
                 if (HttpContext.Current != null)
                 {
-                    if (HttpContext.Current.Session["CurrentUser"] != null)
+                    if (HttpContext.Current.Session != null && HttpContext.Current.Session["CurrentUser"] != null)
                         return HttpContext.Current.Session["CurrentUser"] as UserModel;
                     else//--- test--data----
                         return new UserModel();
