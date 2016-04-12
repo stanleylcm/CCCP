@@ -87,28 +87,6 @@
 	                } else {
 	                    sList = sList + ", " + $(this).val();
 	                }
-	                if ($(this).val() == "@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#MitigatingAction@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0)More").val() + ")";
-	                }
-	                i++;
-	            }
-	        });
-	        $("#incidentSystemInvoicing_MitigatingAction").val(sList);
-	    });
-
-	    $("#MitigatingAction@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0)More").change(function () {
-	        var sList = "";
-	        var i = 0;
-	        $("input[type=checkbox][id^=MitigatingAction]").each(function () {
-	            if (this.checked) {
-	                if (i == 0) {
-	                    sList = $(this).val();
-	                } else {
-	                    sList = sList + ", " + $(this).val();
-	                }
-	                if ($(this).val() == "@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())") {
-	                    sList = sList + " (" + $("#MitigatingAction@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0)More").val() + ")";
-	                }
 	                i++;
 	            }
 	        });
@@ -131,9 +109,6 @@
                             sList = $(this).val();
                         } else {
                             sList = sList + ", " + $(this).val();
-                        }
-                        if ($(this).val() == "@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())") {
-                            sList = sList + " (" + $("#MitigatingAction@(IncidentSystemInvoicingMitigatingAction.Others_9please_specify0)More").val() + ")";
                         }
                         i++;
                     }
@@ -203,6 +178,13 @@
                 $('#CCCPModal').modal('toggle');
 
                 event.preventDefault();
+            }
+
+            if ($('#incidentSystemInvoicing_RequireMitigatingAction').val() != "Yes") {
+                $("#incidentSystemInvoicing_MitigatingAction").val("");
+                $("#incidentSystemInvoicing_MitigatingActionOthers").val("");
+            } else if ($("#incidentSystemInvoicing_MitigatingAction").val().indexOf("@IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString()") < 0) {
+                $("#incidentSystemInvoicing_MitigatingActionOthers").val("");
             }
 
             return inputValid;
@@ -457,19 +439,11 @@
 												int countMitigatingAction = 0;                                                                                                                     
 												foreach (string one in Model.Options_MitigatingAction)
 												{
-													<input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemInvoicing.MitigatingAction != null ? (incidentSystemInvoicing.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label>
-												if (one != IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())
-												{
-													<br />
-												}
-												else
-												{
-													string sMore = "";
-													if (incidentSystemInvoicing.MitigatingAction != null && incidentSystemInvoicing.MitigatingAction.IsContains(one))
-													{
-														sMore = incidentSystemInvoicing.MitigatingAction.Substring(incidentSystemInvoicing.MitigatingAction.IndexOf('(') + 1, incidentSystemInvoicing.MitigatingAction.IndexOf(')') - incidentSystemInvoicing.MitigatingAction.IndexOf('(') - 1);
-													}
-													<input id="MitigatingAction@(one)More" name="MitigatingAction@(one)More" type="text" value="@sMore" class="form-control thin-control text-box pull-right" style="width:70%" />
+													<input id="MitigatingAction@(countMitigatingAction.ToString())" type="checkbox" value="@one" @(incidentSystemInvoicing.MitigatingAction != null ? (incidentSystemInvoicing.MitigatingAction.IsContains(one) ? "checked" : "") : "") /><label for="MitigatingAction@(countMitigatingAction.ToString())"> @one</label><br />
+                                                    if (one == IncidentSystemInvoicingMitigatingAction.Others_9please_specify0.ToEnumString())
+                                                    {
+                                                        @Html.EditorFor(model => incidentSystemInvoicing.MitigatingActionOthers, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                                    }
 												}
 												countMitigatingAction++;
 												}

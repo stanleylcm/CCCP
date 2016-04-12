@@ -22,5 +22,13 @@ namespace CCCP.Controllers.WebApi
         // compress image
 
         // compress video
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId)
+        {
+            new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId);
+            return true;
+        }
     }
 }
