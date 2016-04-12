@@ -23,7 +23,7 @@
                 dTable.search($(this).val()).draw();
             });
 
-            $("a[name^='LinkIncident']").on('click', function (event) {
+            dTable.$("a[name^='LinkIncident']").on('click', function (event) {
                 var incidentId = $(this).data('incidentid');
                 var incidentNo = $(this).data('incidentno');
                 var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.EnvironmentLeakage)';

@@ -55,7 +55,10 @@
         // Declare a proxy to reference the hub.
         var chatHub = $.connection.chatRoomHub;
         // Create a function that the hub can call to broadcast messages.
-        chatHub.client.broadcastMessage = function (name, message, time) {
+        chatHub.client.broadcastMessage = function (name, message, time, chatId) {
+            
+            if (chatId != '@Model.Entity.ChatRoomId') return;
+
             // Html encode display name and message.
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(message).html();
@@ -69,7 +72,10 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 
-        chatHub.client.broadcastImageMessage = function (name, imageUrl, imageResizeUrl, time) {
+        chatHub.client.broadcastImageMessage = function (name, imageUrl, imageResizeUrl, time, chatId) {
+
+            if (chatId != '@Model.Entity.ChatRoomId') return;
+
             // Html encode display name and message.
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(imageResizeUrl).html();
@@ -83,7 +89,10 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 
-        chatHub.client.broadcastVideoMessage = function (name, videoUrl, time) {
+        chatHub.client.broadcastVideoMessage = function (name, videoUrl, time, chatId) {
+
+            if (chatId != '@Model.Entity.ChatRoomId') return;
+
             // Html encode display name and message.
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(videoUrl).html();
@@ -102,7 +111,7 @@
         $.connection.hub.start().done(function () {
             $('#sendmessage').click(function () {
                 // Call the Send method on the hub.
-                chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'));
+                chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
             });
@@ -176,7 +185,7 @@
                     data: data,
                     success: function (data) {
                         if (data.result) {
-                            chatHub.server.sendImage($('#displayname').val(), data.imageUrl, data.imageResizeUrl, moment().format('YYYY-MM-DD HH:mm:ss'));
+                            chatHub.server.sendImage($('#displayname').val(), data.imageUrl, data.imageResizeUrl, moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
                         }
                         $('#loadImage').attr('src', '#');
                         $("#SendImageMessageForm").dialog("close");
@@ -231,7 +240,7 @@
                     data: data,
                     success: function (data) {
                         if (data.result) {
-                            chatHub.server.sendVideo($('#displayname').val(), data.videoUrl, moment().format('YYYY-MM-DD HH:mm:ss'));
+                            chatHub.server.sendVideo($('#displayname').val(), data.videoUrl, moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
                         }
 
                         $("#SendVideoForm").dialog("close");
