@@ -4,33 +4,62 @@
 @using CCCP.Business.Model
 @using CCCP.Common
 
-<div id="chat" style="height: 400px;overflow-y: scroll;">
+<div id="chat" class="direct-chat-messages" style="height: 400px;overflow-y: scroll; border: solid; border-width: 1px">
     @{
         CCCP.Helpers.SessionHelper sessionHelper = new CCCP.Helpers.SessionHelper();
         UserModel user = sessionHelper.CurrentUser;
-        
+
         foreach (var crMsg in Model.ChatRoomMessagesEntites)
         {
-            <div class="bubble @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "me" : "you")">
+            <div id="@crMsg.Entity.ChatRoomMessageId" class="bubble @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "me" : "you")">
                 @if (crMsg.Entity.SenderUserId != user.Entity.UserId)
                 {
                     <label>@crMsg.Entity.SenderDisplayName</label><br>
                 }
-                @crMsg.Entity.Message<br>
+                @Html.Raw(crMsg.Entity.Message.Replace("\n", "<br/>").Replace(System.Environment.NewLine, "<br/>"))<br>
                 <h6 align="right">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</h6>
             </div>
+        @*
+    <!-- Message. Default to the @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "right" : "left") -->
+    <div class="direct-chat-msg@(crMsg.Entity.SenderUserId == user.Entity.UserId ? " right" : "")">
+        <div class="direct-chat-info clearfix">
+            @if (crMsg.Entity.SenderUserId != user.Entity.UserId)
+            {
+                <span class="direct-chat-name pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "right" : "left")">@crMsg.Entity.SenderDisplayName</span>
+            }
+            <span class="direct-chat-timestamp pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "left" : "right")">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+        </div>
+        <!-- /.direct-chat-info -->
+        <div class="direct-chat-text">
+            @Html.Raw(crMsg.Entity.Message.Replace("\n", "<br/>").Replace(System.Environment.NewLine, "<br/>"))
+        </div>
+        <!-- /.direct-chat-text -->
+    </div>
+    <!-- /.direct-chat-msg -->
+         *@
         }
-    }
+}
 </div>
-<div id="SendMessage">
-    <textarea rows="4" cols="150" id="message"></textarea><br/>
-    <input type="button" id="sendmessage" value="Send" />
+<div id="SendMessage" class="input-group">
+    <span class="input-group-btn">
+        <button type="button" id="addAttachment" title="Attach" class="btn btn-primary btn-flat">
+            <i class="glyphicon glyphicon-paperclip"></i>
+        </button>
+    </span>
+    <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+    <span class="input-group-btn">
+        <button type="button" id="sendmessage" title="Send" class="btn btn-primary btn-flat">
+            <i class="glyphicon glyphicon-send"></i>
+        </button>
+    </span>
+</div>    
+    <!--
     <input type="button" id="sendImage" value="Image" />
     <input type="button" id="sendVideo" value="Upload Video" />
     <div id="SendImageMessageForm"></div>
     <div id="ViewOriImageForm"></div>
     <div id="SendVideoForm"></div>
-</div>
+    -->
 
 <script>
     function translateMsg(inputMsg, outputDiv) {
@@ -51,20 +80,24 @@
         });
     }
 
+    $(document).ready(function () {
+        $("#chat").scrollTop($("#chat")[0].scrollHeight);
+    });
+
     $(function () {
         // Declare a proxy to reference the hub.
         var chatHub = $.connection.chatRoomHub;
         // Create a function that the hub can call to broadcast messages.
-        chatHub.client.broadcastMessage = function (name, message, time, chatId) {
+        chatHub.client.broadcastMessage = function (name, message, time, chatId, messageId) {
             
             if (chatId != '@Model.Entity.ChatRoomId') return;
 
             // Html encode display name and message.
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(message).html();
-            var id = moment().format("YYYYMMDDHHmmss");
+            //var id = moment().format("YYYYMMDDHHmmss");
             // Add the message to the page.
-            $('#chat').append('<div id="' + id + '" class="bubble ' + (encodedName == '@user.Entity.DisplayName' ? "me" : "you") + '">' +
+            $('#chat').append('<div id="' + messageId + '" class="bubble ' + (encodedName == '@user.Entity.DisplayName' ? "me" : "you") + '">' +
                                     (encodedName == '@user.Entity.DisplayName' ? "" : '<label>' + encodedName + '</label><br />') +
                                     encodedMsg.replace('\n', '<br />') + '<br />' +
                                     '<h6 align="right">' + time + '</h6>' +
@@ -72,7 +105,7 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 
-        chatHub.client.broadcastImageMessage = function (name, imageUrl, imageResizeUrl, time, chatId) {
+        chatHub.client.broadcastImageMessage = function (name, imageUrl, imageResizeUrl, time, chatId, messageId) {
 
             if (chatId != '@Model.Entity.ChatRoomId') return;
 
@@ -89,7 +122,7 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 
-        chatHub.client.broadcastVideoMessage = function (name, videoUrl, time, chatId) {
+        chatHub.client.broadcastVideoMessage = function (name, videoUrl, time, chatId, messageId) {
 
             if (chatId != '@Model.Entity.ChatRoomId') return;
 
@@ -110,6 +143,8 @@
         // Start the connection.
         $.connection.hub.start().done(function () {
             $('#sendmessage').click(function () {
+                if ($('#message').val().trim() == '') return false;
+
                 // Call the Send method on the hub.
                 chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
                 // Clear text box and reset focus for next comment.

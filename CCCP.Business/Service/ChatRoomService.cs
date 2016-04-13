@@ -11,7 +11,7 @@ namespace CCCP.Business.Service
 {
     public class ChatRoomService
     {   
-        public static void SaveChatMessage(int chatRoomId, int userId, String message, DateTime sendDateTime)
+        public static int SaveChatMessage(int chatRoomId, int userId, String message, DateTime sendDateTime)
         {
             CCCPDbContext db = new CCCPDbContext();
             UserModel user = new UserModel(db.User.Find(userId));
@@ -29,6 +29,8 @@ namespace CCCP.Business.Service
 
             db.ChatRoomMessage.Add(msgModel.Entity);
             db.SaveChanges();
+
+            return msgModel.Entity.ChatRoomMessageId;
         }
     }
 }

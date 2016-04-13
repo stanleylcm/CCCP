@@ -2751,6 +2751,15 @@ table.text-center th {
 .contacts-list-msg {
   color: #999;
 }
+.right > .direct-chat-text {
+  background: #3c8dbc;
+  border-color: #3c8dbc;
+  color: #ffffff;
+}
+.right > .direct-chat-text:after,
+.right > .direct-chat-text:before {
+  border-left-color: #3c8dbc;
+}
 .direct-chat-danger .right > .direct-chat-text {
   background: #dd4b39;
   border-color: #dd4b39;
