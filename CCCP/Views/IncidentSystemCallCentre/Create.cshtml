@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "IncidentSystemCallCentre"))
                     {
                         @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -210,7 +210,7 @@
                     @Html.HiddenFor(model => incidentSystemCallCentre.IncidentSystemCallCentreId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentSystemCallCentre.ChecklistBatchId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentSystemCallCentre.ChatRoomId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentSystemCallCentre.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemCallCentre.GeneralEnquiryId, new { @Value = incidentSystemCallCentre.GeneralEnquiryId })
                     @Html.HiddenFor(model => incidentSystemCallCentre.CrisisId)
                     @Html.HiddenFor(model => incidentSystemCallCentre.IssueById)
                     @Html.HiddenFor(model => incidentSystemCallCentre.IssueDateTime)

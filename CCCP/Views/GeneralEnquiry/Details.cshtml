@@ -1,28 +1,37 @@
 ﻿@model CCCP.Business.Model.GeneralEnquiryModel
 
 @using CCCP.Business.Service
+@using CCCP.Business.Model
+@using CCCP.ViewModel
 @using CCCP.Common
 @{
     ViewBag.Title = Resources.global.Menu_GeneralEnquiry;
+    string IncidentController = "Incident" + MasterTableService.GetIncidentTypeSubType(Model.Entity.IncidentTypeId);
+    <!--@IncidentController-->
 }
 
 @section Scripts {
     <script>
-	    $(function() {
+    $(function () {
 
-		    $('#btnCloseEnquiry').on('click', function (event) {
-	            bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
-	                if (result) {
-	                    window.location = '@Url.Action("CloseEnquiry", "GeneralEnquiry")';
-	                    return true;
-	                }
-	            });
-		    });
+        $('#btnCloseEnquiry').on('click', function (event) {
+            bootbox.confirm('@Resources.global.Label_CloseEnquiry', function (result) {
+                if (result) {
+                    window.location = '@Url.Action("CloseEnquiry", "GeneralEnquiry")';
+                    return true;
+                }
+            });
+        });
 
-	        $('#btnCreateIncident').on('click', function (event) {
-                // route to different incident create function by incident type id
-	        });
-	    });
+        $('#btnCreateIncident').on('click', function (event) {
+            // route to different incident create function by incident type id
+            bootbox.confirm('@Resources.global.Label_CreateIncident', function (result) {
+                if (result) {
+                    window.location.href = '@Url.Action("CreateIncident", "GeneralEnquiry")';
+                }
+            });
+        });
+    });
     </script>
 }
 
@@ -38,13 +47,37 @@
 <!-- Main content -->
 <section class="content">
     <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.Status)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.Status)</span>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="box box-primary">
                 <div class="box-header">
                     <div class="form-group pull-right">
-                        <button class="btn btn-primary" type="button" id="btnCreateIncident">Create Incident</button>
+                        <button class="btn btn-primary" type="button" id="btnCreateIncident" disabled="@(Model.Entity.IncidentNo != null && Model.Entity.IncidentNo != "")">Create Incident</button>
                         <button class="btn btn-primary" type="button" id="btnCloseEnquiry">Close Enquiry</button>
                         <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "GeneralEnquiry")';">Back</button>
                     </div>

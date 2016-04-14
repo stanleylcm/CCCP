@@ -178,11 +178,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to close this Enquiry?.
+        /// </summary>
+        internal static string Label_CloseEnquiry {
+            get {
+                return ResourceManager.GetString("Label_CloseEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to close this Incident?.
         /// </summary>
         internal static string Label_CloseIncident {
             get {
                 return ResourceManager.GetString("Label_CloseIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to create Incident?.
+        /// </summary>
+        internal static string Label_CreateIncident {
+            get {
+                return ResourceManager.GetString("Label_CreateIncident", resourceCulture);
             }
         }
         

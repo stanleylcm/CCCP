@@ -139,5 +139,127 @@ namespace CCCP.Controllers
 
             return Edit(enquiry.Entity);
         }
+
+        public ActionResult CreateIncident()
+        {
+            if (Session != null && Session["enquiry"] != null)
+            {
+                enquiry = Session["enquiry"] as GeneralEnquiryModel;
+            }
+
+            string targetController = "IncidentEnvironmentAirEmission";
+
+            foreach (IncidentTypeSubType incidentType in Enum.GetValues(typeof(IncidentTypeSubType)))
+            {
+                if (MasterTableService.GetIncidentTypeId(incidentType) == enquiry.Entity.IncidentTypeId)
+                {
+                    targetController = "Incident" + incidentType.ToEnumString();
+                    break;
+                }
+            }
+
+            IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = new IncidentEnvironmentAirEmission();
+            IncidentEnvironmentLeakage incidentEnvironmentLeakage = new IncidentEnvironmentLeakage();
+            IncidentOHS incidentOHS = new IncidentOHS();
+            IncidentQualityCorporateImage incidentQualityCorporateImage = new IncidentQualityCorporateImage();
+            IncidentQualityGeneration incidentQualityGeneration = new IncidentQualityGeneration();
+            IncidentQualityNetwork incidentQualityNetwork = new IncidentQualityNetwork();
+            IncidentSystemBilling incidentSystemBilling = new IncidentSystemBilling();
+            IncidentSystemCallCentre incidentSystemCallCentre = new IncidentSystemCallCentre();
+            IncidentSystemInvoicing incidentSystemInvoicing = new IncidentSystemInvoicing();
+            IncidentSystemITSystem incidentSystemITSystem = new IncidentSystemITSystem();
+            IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = new IncidentSystemNetworkConnectivity();
+            IncidentSystemOTSystem incidentSystemOTSystem = new IncidentSystemOTSystem();
+
+            incidentEnvironmentAirEmission.IncidentBackground = enquiry.Entity.Background;
+            incidentEnvironmentAirEmission.IssueById = enquiry.Entity.IssueById;
+            incidentEnvironmentAirEmission.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentEnvironmentAirEmission.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentEnvironmentLeakage.IncidentBackground = enquiry.Entity.Background;
+            incidentEnvironmentLeakage.IssueById = enquiry.Entity.IssueById;
+            incidentEnvironmentLeakage.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentEnvironmentLeakage.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentOHS.IncidentBackground = enquiry.Entity.Background;
+            incidentOHS.IssueById = enquiry.Entity.IssueById;
+            incidentOHS.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentOHS.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentQualityCorporateImage.IncidentBackground = enquiry.Entity.Background;
+            incidentQualityCorporateImage.IssueById = enquiry.Entity.IssueById;
+            incidentQualityCorporateImage.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentQualityCorporateImage.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentQualityGeneration.IncidentBackground = enquiry.Entity.Background;
+            incidentQualityGeneration.IssueById = enquiry.Entity.IssueById;
+            incidentQualityGeneration.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentQualityGeneration.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentQualityNetwork.IncidentBackground = enquiry.Entity.Background;
+            incidentQualityNetwork.IssueById = enquiry.Entity.IssueById;
+            incidentQualityNetwork.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentQualityNetwork.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemBilling.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemBilling.IssueById = enquiry.Entity.IssueById;
+            incidentSystemBilling.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemBilling.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemCallCentre.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemCallCentre.IssueById = enquiry.Entity.IssueById;
+            incidentSystemCallCentre.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemCallCentre.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemInvoicing.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemInvoicing.IssueById = enquiry.Entity.IssueById;
+            incidentSystemInvoicing.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemInvoicing.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemITSystem.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemITSystem.IssueById = enquiry.Entity.IssueById;
+            incidentSystemITSystem.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemITSystem.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemNetworkConnectivity.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemNetworkConnectivity.IssueById = enquiry.Entity.IssueById;
+            incidentSystemNetworkConnectivity.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemNetworkConnectivity.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            incidentSystemOTSystem.IncidentBackground = enquiry.Entity.Background;
+            incidentSystemOTSystem.IssueById = enquiry.Entity.IssueById;
+            incidentSystemOTSystem.IssueDateTime = enquiry.Entity.IssueDateTime;
+            incidentSystemOTSystem.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
+
+            switch (MasterTableService.GetIncidentTypeSubType(enquiry.Entity.IncidentTypeId))
+            {
+                case IncidentTypeSubType.EnvironmentAirEmission:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentEnvironmentAirEmission);
+                case IncidentTypeSubType.EnvironmentLeakage:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentEnvironmentLeakage);
+                case IncidentTypeSubType.OHS:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentOHS);
+                case IncidentTypeSubType.QualityCorporateImage:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentQualityCorporateImage);
+                case IncidentTypeSubType.QualityGeneration:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentQualityGeneration);
+                case IncidentTypeSubType.QualityNetwork:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentQualityNetwork);
+                case IncidentTypeSubType.SystemBilling:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemBilling);
+                case IncidentTypeSubType.SystemInvoicing:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemInvoicing);
+                case IncidentTypeSubType.SystemCallCentre:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemCallCentre);
+                case IncidentTypeSubType.SystemITSystem:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemITSystem);
+                case IncidentTypeSubType.SystemNetworkConnectivity:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemNetworkConnectivity);
+                case IncidentTypeSubType.SystemOTSystem:
+                    return RedirectToAction("CreateByEnquiry", targetController, incidentSystemOTSystem);
+            }
+
+            return Details(enquiry.Entity.IncidentTypeId, null);
+        }
     }
 }

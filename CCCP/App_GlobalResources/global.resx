@@ -267,4 +267,10 @@
   <data name="Func_Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="Label_CloseEnquiry" xml:space="preserve">
+    <value>Are you sure to close this Enquiry?</value>
+  </data>
+  <data name="Label_CreateIncident" xml:space="preserve">
+    <value>Are you sure to create Incident?</value>
+  </data>
 </root>

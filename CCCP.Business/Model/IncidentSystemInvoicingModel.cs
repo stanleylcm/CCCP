@@ -116,8 +116,11 @@ namespace CCCP.Business.Model
                     Entity.CreatedDateTime = now;
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
-                    Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
-                    Entity.IssueDateTime = now;
+                    if (Entity.IssueById == 0)
+                    {
+                        Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
+                        Entity.IssueDateTime = now;
+                    }
 
                     Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
 

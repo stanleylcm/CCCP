@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "IncidentSystemNetworkConnectivity"))
                     {
                         @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -172,7 +172,7 @@
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChecklistBatchId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.ChatRoomId, new { @Value = 0 })
-                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId, new { @Value = 0 })
+                    @Html.HiddenFor(model => incidentSystemNetworkConnectivity.GeneralEnquiryId, new { @Value = incidentSystemNetworkConnectivity.GeneralEnquiryId })
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.CrisisId)
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueById)
                     @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IssueDateTime)

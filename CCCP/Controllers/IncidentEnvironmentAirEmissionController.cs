@@ -57,6 +57,12 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
+        public ActionResult CreateByEnquiry([Bind(Include = "IncidentEnvironmentAirEmissionId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,Location,PossibleCause,SourceOfInformation,AbatementSystemUnavailable,ComplaintOfBlackSmoke,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentEnvironmentAirEmission incidentEntity)
+        {
+            incident.Entity = incidentEntity;
+            return View("Create", incident);
+        }
+
         // POST: IncidentEnvironmentAirEmissions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

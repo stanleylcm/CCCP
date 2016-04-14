@@ -267,4 +267,10 @@
   <data name="Func_Details" xml:space="preserve">
     <value>細明</value>
   </data>
+  <data name="Label_CloseEnquiry" xml:space="preserve">
+    <value>你確定要關閉這個查詢?</value>
+  </data>
+  <data name="Label_CreateIncident" xml:space="preserve">
+    <value>你確定要建立這個事件?</value>
+  </data>
 </root>

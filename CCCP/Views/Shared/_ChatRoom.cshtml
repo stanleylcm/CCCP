@@ -11,6 +11,7 @@
 
         foreach (var crMsg in Model.ChatRoomMessagesEntites)
         {
+            Boolean isMe = (crMsg.Entity.SenderUserId == user.Entity.UserId);
         @*
             <div id="@crMsg.Entity.ChatRoomMessageId" class="bubble @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "me" : "you")">
                 @if (crMsg.Entity.SenderUserId != user.Entity.UserId)
@@ -21,10 +22,10 @@
                 <h6 align="right">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</h6>
             </div>
         *@
-    <!-- Message. Default to the @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "right" : "left") -->
-    <div id="@crMsg.Entity.ChatRoomMessageId" class="direct-chat-msg@(crMsg.Entity.SenderUserId == user.Entity.UserId ? " right" : "")">
+    <!-- Message. Default to the @(isMe ? "right" : "left") -->
+    <div id="@crMsg.Entity.ChatRoomMessageId" class="direct-chat-msg@(isMe ? " right" : "")">
         <div class="direct-chat-info clearfix">
-            <span class="direct-chat-name pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "right" : "left")"><label>@crMsg.Entity.SenderDisplayName</label></span>
+            <span class="direct-chat-name pull-@(isMe ? "right" : "left")"><label>@crMsg.Entity.SenderDisplayName</label></span>
             <span class="direct-chat-timestamp pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "left" : "right")">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
         </div>
         <!-- /.direct-chat-info -->
@@ -77,8 +78,30 @@
         });
     }
 
+    function generateChatBubbleHtml(messageId, message, name, time, isMe) {
+        var html =
+        @*'<div id="' + messageId + '" class="bubble ' + (encodedName == '@user.Entity.DisplayName' ? "me" : "you") + '">' +
+                                    (encodedName == '@user.Entity.DisplayName' ? "" : '<label>' + encodedName + '</label><br />') +
+                                    encodedMsg.replace('\n', '<br />') + '<br />' +
+                                    '<h6 align="right">' + time + '</h6>' +
+                                '</div>'*@
+        '<div id="' + messageId + '" class="direct-chat-msg' + (isMe ? ' right' : '') + '">' +
+            '<div class="direct-chat-info clearfix">' +
+                '<span class="direct-chat-name pull-' + (isMe ? 'right' : 'left') + '"><label>' + name + '</label></span>' +
+                '<span class="direct-chat-timestamp pull-' + (isMe ? 'left' : 'right') + '">' + time + '</span>' +
+            '</div>' +
+            '<div class="direct-chat-text">' + message + '</div>' +
+        '</div>';
+
+        return html
+    }
+
     $(document).ready(function () {
         $("#chat").scrollTop($("#chat")[0].scrollHeight);
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('#chat').scrollTop($("#chat")[0].scrollHeight);
     });
 
     $(function () {
@@ -95,19 +118,7 @@
             //var id = moment().format("YYYYMMDDHHmmss");
             // Add the message to the page.
             var isMe = (encodedName == '@user.Entity.DisplayName');
-            $('#chat').append(@*'<div id="' + messageId + '" class="bubble ' + (encodedName == '@user.Entity.DisplayName' ? "me" : "you") + '">' +
-                                    (encodedName == '@user.Entity.DisplayName' ? "" : '<label>' + encodedName + '</label><br />') +
-                                    encodedMsg.replace('\n', '<br />') + '<br />' +
-                                    '<h6 align="right">' + time + '</h6>' +
-                                '</div>'*@
-                '<div id="' + messageId + '" class="direct-chat-msg' + (isMe ? ' right' : '') + '">' +
-                    '<div class="direct-chat-info clearfix">' +
-                        '<span class="direct-chat-name pull-' + (isMe ? 'right' : 'left') + '"><label>' + encodedName + '</label></span>' +
-                        '<span class="direct-chat-timestamp pull-' + (isMe ? 'left' : 'right') + '">' + time + '</span>' +
-                    '</div>' +
-                    '<div class="direct-chat-text">' + message + '</div>' +
-                '</div>'
-                                );
+            $('#chat').append(generateChatBubbleHtml(messageId, encodedMsg, encodedName, time, isMe));
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 

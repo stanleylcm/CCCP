@@ -57,6 +57,12 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
+        public ActionResult CreateByEnquiry([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentEntity)
+        {
+            incident.Entity = incidentEntity;
+            return View("Create", incident);
+        }
+
         // POST: IncidentQualityNetworks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

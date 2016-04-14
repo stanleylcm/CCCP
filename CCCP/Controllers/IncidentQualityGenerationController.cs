@@ -57,6 +57,12 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
+        public ActionResult CreateByEnquiry([Bind(Include = "IncidentQualityGenerationId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,NameOfPowerGenerator,PreliminaryCauseOfOutage,ExpectedRestorationTime,IsCEMNetworkBeingAffected,LossOfPower,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityGeneration incidentEntity)
+        {
+            incident.Entity = incidentEntity;
+            return View("Create", incident);
+        }
+
         // POST: IncidentQualityGenerations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
