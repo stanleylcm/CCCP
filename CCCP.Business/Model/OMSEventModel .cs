@@ -108,7 +108,7 @@ namespace CCCP.Business.Model
 
         public IncidentLevel GetCalculatedLevel()
         {
-            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel(this.Entity);
+            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel(this);
             return IncidentService.GetIncidentLevel(incidentModel.Entity);
         }
 
