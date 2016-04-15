@@ -122,8 +122,10 @@ namespace CCCP.ViewModel
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
         [Display(Name = "Expected Affected No Of Bill")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> ExpectedAffectedNoOfBill { get; set; }
         [Display(Name = "Expected Affected Billing Day")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> ExpectedAffectedBillingDay { get; set; }
         [Display(Name = "Contacted By")]
         public string ContactedBy { get; set; }
@@ -389,6 +391,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Affected Area")]
         public string AffectedArea { get; set; }
         [Display(Name = "No Of Affected Substation")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfAffectedSubstation { get; set; }
         [Display(Name = "Expected Restoration Time")]
         public Nullable<System.DateTime> ExpectedRestorationTime { get; set; }
@@ -719,6 +722,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Is CEM Network Being Affected")]
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
         [Display(Name = "Loss Of Power")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> LossOfPower { get; set; }
 
         [Display(Name = "Created By")]
@@ -779,18 +783,24 @@ namespace CCCP.ViewModel
         [Display(Name = "No Of Building")]
         public Nullable<int> NoOfBuilding { get; set; }
         [Display(Name = "No Of Customer Affected")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfCustomerAffected { get; set; }
         [Display(Name = "No Of Platinum Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfPlatinumCustomer { get; set; }
         [Display(Name = "No Of Diamond Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfDiamondCustomer { get; set; }
         [Display(Name = "No Of Gold Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfGoldCustomer { get; set; }
         [Display(Name = "No Of Silver Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
         [Display(Name = "Expected Restoration Time")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Restoration Method")]
         public string RestorationMethod { get; set; }
@@ -799,6 +809,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Root Cause")]
         public string RootCause { get; set; }
         [Display(Name = "Loss Generation (MW)")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> LossGeneration { get; set; }
         [Display(Name = "Loss Interconnection")]
         public string LossInterconnection { get; set; }
