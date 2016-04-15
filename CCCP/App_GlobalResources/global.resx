@@ -273,4 +273,19 @@
   <data name="Label_CreateIncident" xml:space="preserve">
     <value>Are you sure to create Incident?</value>
   </data>
+  <data name="Func_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Func_CloseEnquiry" xml:space="preserve">
+    <value>Close Enquiry</value>
+  </data>
+  <data name="Func_CreateIncident" xml:space="preserve">
+    <value>Create Incident</value>
+  </data>
+  <data name="Func_MarkReviewed" xml:space="preserve">
+    <value>Mark Reviewed</value>
+  </data>
+  <data name="Label_MarkReviewed" xml:space="preserve">
+    <value>Are you sure to mark this OMS Event reviewed?</value>
+  </data>
 </root>

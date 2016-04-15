@@ -100,6 +100,18 @@ namespace CCCP.Business.Model
 
         #region Public Method
 
+        public IncidentQualityNetwork GetCreatedIncident()
+        {
+            if (this.Entity.OMSEventId == 0) return null;
+            return new CCCPDbContext().IncidentQualityNetwork.Where(x => x.OMSEventId == this.Entity.OMSEventId).FirstOrDefault();
+        }
+
+        public IncidentLevel GetCalculatedLevel()
+        {
+            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel(this.Entity);
+            return IncidentService.GetIncidentLevel(incidentModel.Entity);
+        }
+
         public void PrepareSave(PrepareSaveMode saveMode = PrepareSaveMode.Last_Updated)
         {
             DateTime now = DateTime.Now;
@@ -128,6 +140,19 @@ namespace CCCP.Business.Model
             // later need to add logic to retrieve status from master table and append to StatusUpdate
 
             // critical points logic?
+        }
+
+        public void MarkReviewed()
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            Entity.Reviewed = true;
+
+            Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            Entity.LastUpdatedDateTime = DateTime.Now;
+
+            db.OMSEvent.Attach(Entity);
+            db.Entry(Entity).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
         }
 
         #endregion

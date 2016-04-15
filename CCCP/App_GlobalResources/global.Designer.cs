@@ -61,11 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string Func_Back {
+            get {
+                return ResourceManager.GetString("Func_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Func_Cancel {
             get {
                 return ResourceManager.GetString("Func_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Enquiry.
+        /// </summary>
+        internal static string Func_CloseEnquiry {
+            get {
+                return ResourceManager.GetString("Func_CloseEnquiry", resourceCulture);
             }
         }
         
@@ -84,6 +102,15 @@ namespace Resources {
         internal static string Func_Create {
             get {
                 return ResourceManager.GetString("Func_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Incident.
+        /// </summary>
+        internal static string Func_CreateIncident {
+            get {
+                return ResourceManager.GetString("Func_CreateIncident", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace Resources {
         internal static string Func_LinkIncident {
             get {
                 return ResourceManager.GetString("Func_LinkIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark Reviewed.
+        /// </summary>
+        internal static string Func_MarkReviewed {
+            get {
+                return ResourceManager.GetString("Func_MarkReviewed", resourceCulture);
             }
         }
         
@@ -228,6 +264,15 @@ namespace Resources {
         internal static string Label_History {
             get {
                 return ResourceManager.GetString("Label_History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to mark this OMS Event reviewed?.
+        /// </summary>
+        internal static string Label_MarkReviewed {
+            get {
+                return ResourceManager.GetString("Label_MarkReviewed", resourceCulture);
             }
         }
         

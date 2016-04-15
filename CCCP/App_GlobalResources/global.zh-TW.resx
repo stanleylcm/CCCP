@@ -273,4 +273,19 @@
   <data name="Label_CreateIncident" xml:space="preserve">
     <value>你確定要建立這個事件?</value>
   </data>
+  <data name="Func_Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Func_CloseEnquiry" xml:space="preserve">
+    <value>關閉查詢</value>
+  </data>
+  <data name="Func_CreateIncident" xml:space="preserve">
+    <value>建立事件</value>
+  </data>
+  <data name="Func_MarkReviewed" xml:space="preserve">
+    <value>標示為已讀</value>
+  </data>
+  <data name="Label_MarkReviewed" xml:space="preserve">
+    <value>你確定要標示為已讀?</value>
+  </data>
 </root>

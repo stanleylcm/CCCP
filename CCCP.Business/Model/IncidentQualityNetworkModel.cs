@@ -23,6 +23,35 @@ namespace CCCP.Business.Model
             this.Entity = viewModel;
             this.OriginalLevelOfSeverity = viewModel.LevelOfSeverity;
         }
+        public IncidentQualityNetworkModel(OMSEventModel omsEventModel)
+        {
+            init();
+
+            IncidentQualityNetwork incidentQualityNetwork = new IncidentQualityNetwork();
+
+            incidentQualityNetwork.OMSEventId = omsEventModel.Entity.OMSEventId;
+            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea; // chi? affectedBuilding? affectedStreet?
+            incidentQualityNetwork.OutageStartTime = omsEventModel.Entity.OutageStartTime;
+            incidentQualityNetwork.FullRestoration = omsEventModel.Entity.FullRestoration;
+            incidentQualityNetwork.NoOfBuilding = omsEventModel.Entity.NoOfBuilding;
+            incidentQualityNetwork.NoOfCustomerAffected = omsEventModel.Entity.NoOfCustomerAffected;
+            incidentQualityNetwork.NoOfPlatinumCustomer = omsEventModel.Entity.NoOfPlatinumCustomer;
+            incidentQualityNetwork.NoOfDiamondCustomer = omsEventModel.Entity.NoOfDiamondCustomer;
+            incidentQualityNetwork.NoOfGoldCustomer = omsEventModel.Entity.NoOfGoldCustomer;
+            incidentQualityNetwork.NoOfSilverCustomer = omsEventModel.Entity.NoOfSilverCustomer;
+            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause; // chi?
+            incidentQualityNetwork.ExpectedRestorationTime = omsEventModel.Entity.ExpectedRestorationTime;
+            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod; // chi?
+            incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
+            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause; // Chi?
+            //incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage; // type not correct...
+            //incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage; // type not correct...
+            //incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint; // type....
+
+            this.Entity = incidentQualityNetwork;
+
+            this.OriginalLevelOfSeverity = "";
+        }
 
         private void init()
         {

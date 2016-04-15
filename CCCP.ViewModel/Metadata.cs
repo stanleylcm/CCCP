@@ -876,4 +876,85 @@ namespace CCCP.ViewModel
         public String Message { get; set; }
     }
     #endregion
+
+    #region OMS Event Metadata
+    [MetadataType(typeof(OMSEventHelper))]
+    public partial class OMSEvent { }
+
+    public partial class OMSEventHelper
+    {
+        [Display(Name = "ID")]
+        public int OMSEventId { get; set; }
+        [Display(Name = "OMS No")]
+        public string OMSNo { get; set; }
+        [Display(Name = "Affected Area")]
+        public string AffectedArea { get; set; }
+        [Display(Name = "Affected Area")]
+        public string AffectedArea_Chi { get; set; }
+        [Display(Name = "Affected Building")]
+        public string AffectedBuilding { get; set; }
+        [Display(Name = "Affected Building")]
+        public string AffectedBuilding_Chi { get; set; }
+        [Display(Name = "Affected Street")]
+        public string AffectedStreet { get; set; }
+        [Display(Name = "Affected Street")]
+        public string AffectedStreet_Chi { get; set; }
+        [Display(Name = "Outage Start Time")]
+        public Nullable<System.DateTime> OutageStartTime { get; set; }
+        [Display(Name = "Full Restoration")]
+        public Nullable<System.DateTime> FullRestoration { get; set; }
+        [Display(Name = "No Of Building")]
+        public Nullable<short> NoOfBuilding { get; set; }
+        [Display(Name = "No Of Customer Affected")]
+        public Nullable<int> NoOfCustomerAffected { get; set; }
+        [Display(Name = "No Of Platinum Customer")]
+        public Nullable<int> NoOfPlatinumCustomer { get; set; }
+        [Display(Name = "No Of Diamond Customer")]
+        public Nullable<int> NoOfDiamondCustomer { get; set; }
+        [Display(Name = "No Of Gold Customer")]
+        public Nullable<int> NoOfGoldCustomer { get; set; }
+        [Display(Name = "No Of Silver Customer")]
+        public Nullable<int> NoOfSilverCustomer { get; set; }
+        [Display(Name = "Possible Cause")]
+        public string PossibleCause { get; set; }
+        [Display(Name = "Possible Cause")]
+        public string PossibleCause_Chi { get; set; }
+        [Display(Name = "Expected Restoration DateTime")]
+        public Nullable<System.DateTime> ExpectedRestorationDateTime { get; set; }
+        [Display(Name = "Expected Restoration Time (hour)")]
+        public Nullable<short> ExpectedRestorationTime { get; set; }
+        [Display(Name = "Restoration Method")]
+        public string RestorationMethod { get; set; }
+        [Display(Name = "Restoration Method")]
+        public string RestorationMethod_Chi { get; set; }
+        [Display(Name = "Status Update Code")]
+        public string StatusUpdateCode { get; set; }
+        [Display(Name = "Status Update")]
+        public string StatusUpdate { get; set; }
+        [Display(Name = "Root Cause")]
+        public string RootCause { get; set; }
+        [Display(Name = "Root Cause")]
+        public string RootCause_Chi { get; set; }
+        [Display(Name = "MV Outage")]
+        public Nullable<bool> MVOutage { get; set; }
+        [Display(Name = "LV Outage")]
+        public Nullable<bool> LVOutage { get; set; }
+        [Display(Name = "Points")]
+        public string Points { get; set; }
+        [Display(Name = "Critcal PT")]
+        public Nullable<bool> CriticalPoint { get; set; }
+        [Display(Name = "Reviewed")]
+        public Nullable<bool> Reviewed { get; set; }
+        [Display(Name = "OMS Status")]
+        public string OMSStatus { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Created DateTime")]
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        [Display(Name = "Last Updated By")]
+        public string LastUpdatedBy { get; set; }
+        [Display(Name = "Last Update DateTime")]
+        public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
+    }
+    #endregion
 }

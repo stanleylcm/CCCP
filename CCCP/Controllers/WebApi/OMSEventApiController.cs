@@ -15,6 +15,7 @@ namespace CCCP.Controllers.WebApi
 {
     public class OMSEventApiController : ApiController
     {
+        #region WebApi For OMS Interface
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
         public int SubmitOMSEvent(OMSEventApiModel omsEvent)
@@ -139,6 +140,50 @@ namespace CCCP.Controllers.WebApi
             }
 
             return omsEventModel.Entity.OMSEventId > 0;
+        }
+#endregion
+        
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public OMSEventModel GetOMSEvent(int id)
+        {
+            OMSEventModel result = new OMSEventModel();
+            using (CCCPDbContext db = new CCCPDbContext())
+            {
+                // load incident details
+                result.Entity = db.OMSEvent.Find(id);
+            }
+
+            // result
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public OMSEventModel GetNewOMSEvent()
+        {
+            OMSEventModel result = new OMSEventModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public OMSEventModel GetOMSEvent()
+        {
+            OMSEventModel result = new OMSEventModel();
+            return result;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public List<OMSEvent> GetOMSEventList()
+        {
+            List<OMSEvent> result = new List<OMSEvent>();
+            using (CCCPDbContext db = new CCCPDbContext())
+            {
+                result = db.OMSEvent.ToList();
+            }
+            return result;
         }
     }
 }

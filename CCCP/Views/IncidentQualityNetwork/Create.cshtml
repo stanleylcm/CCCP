@@ -326,6 +326,7 @@
                     @Html.HiddenFor(model => incidentQualityNetwork.ChecklistBatchId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentQualityNetwork.ChatRoomId, new { @Value = 0 })
                     @Html.HiddenFor(model => incidentQualityNetwork.GeneralEnquiryId, new { @Value = incidentQualityNetwork.GeneralEnquiryId })
+                    @Html.HiddenFor(model => incidentQualityNetwork.OMSEventId, new { @Value = incidentQualityNetwork.OMSEventId })
                     @Html.HiddenFor(model => incidentQualityNetwork.CrisisId)
                     @Html.HiddenFor(model => incidentQualityNetwork.IssueById)
                     @Html.HiddenFor(model => incidentQualityNetwork.IssueDateTime)
@@ -393,11 +394,21 @@
             $("#incidentQualityNetwork_IsPQEventAffectLargeCustomer").val($("#incidentQualityNetwork_IsPQEventAffectLargeCustomer").checked);
             $("#incidentQualityNetwork_IsCriticalPoint").val($("#incidentQualityNetwork_IsCriticalPoint").checked);
 
-            $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' });
-            $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' });
+            $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("yyyy-MM-dd"))');
+            $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("yyyy-MM-dd"))');
             $('[data-mask]').inputmask();
-            $('.timepicker').timepicker({
-                showMeridian: false
+            $('#FullRestorationTime').timepicker({
+                showMeridian: false,
+                defaultTime: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH:mm"))',
+                hour: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH"))',
+                minute: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("mm"))',
+            });
+
+            $('#OutageStartTimeTime').timepicker({
+                showMeridian: false,
+                defaultTime: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH:mm"))',
+                hour: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH"))',
+                minute: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("mm"))',
             });
         });
 
