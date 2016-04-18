@@ -604,7 +604,7 @@
           <Key>
             <PropertyRef Name="SystemFunctionId" />
           </Key>
-          <Property Name="SystemFunctionId" Type="int" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
         </EntityType>
