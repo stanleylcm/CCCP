@@ -269,7 +269,7 @@
                                 @{
                                     foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
-                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = "" })">
+                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = item.ToString() })">
                                     @(ViewBag.IncidentSummary.ContainsKey("GeneralEnquiry_" + item.ToString()) && ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] : "")
                                 </a></td>        
                                     }
@@ -318,7 +318,7 @@
                                     foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td>
-                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = "" })">
+                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = item.ToString() })">
                                         @(ViewBag.IncidentSummary.ContainsKey("Crisis_" + item.ToString()) && ViewBag.IncidentSummary["Crisis_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["Crisis_" + item.ToString()] : "")
                                     </a>
                                 </td>

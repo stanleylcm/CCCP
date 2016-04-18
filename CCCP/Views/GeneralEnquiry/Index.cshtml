@@ -61,6 +61,7 @@
                                 <th>Issued By</th>
                                 <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
                                 <th>Enquiry Type</th>
+                                <th>@Html.DisplayNameFor(model => model.Entity.Status)</th>
                                 <th>@Html.DisplayNameFor(model => model.Entity.Background)</th>
                                 <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
                                 <th></th>
@@ -73,6 +74,7 @@
                                 <td>@Html.DisplayFor(model => item.IssueBy)</td>
                                 <td>@Html.DisplayFor(model => item.Entity.IssueDateTime)</td>
                                 <td>@Html.DisplayFor(model => item.EnquiryType)</td>
+                                <td>@Html.DisplayFor(model => item.Entity.Status)</td>
                                 <td>@Html.Raw(item.Entity.Background != null ? item.Entity.Background.Replace(System.Environment.NewLine, "<br/>") : "")</td>
                                 <td>@Html.DisplayFor(model => item.Entity.IncidentNo)</td>
                                 <td>

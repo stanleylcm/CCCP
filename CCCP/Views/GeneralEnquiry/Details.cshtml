@@ -77,8 +77,8 @@
             <div class="box box-primary">
                 <div class="box-header">
                     <div class="form-group pull-right">
-                        <button class="btn btn-primary" type="button" id="btnCreateIncident" disabled="@(Model.Entity.IncidentNo != null && Model.Entity.IncidentNo != "")">@Resources.global.Func_CreateIncident</button>
-                        <button class="btn btn-primary" type="button" id="btnCloseEnquiry">@Resources.global.Func_CloseEnquiry</button>
+                        <button class="btn btn-primary" type="button" id="btnCreateIncident" disabled="@(Model.Entity.IncidentNo != null && Model.Entity.IncidentNo != "" && Model.EnquiryStatus == EnquiryStatus.Closed)">@Resources.global.Func_CreateIncident</button>
+                        <button class="btn btn-primary" type="button" id="btnCloseEnquiry" disabled="@(Model.EnquiryStatus == EnquiryStatus.Closed)">@Resources.global.Func_CloseEnquiry</button>
                         <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "GeneralEnquiry")';">@Resources.global.Func_Back</button>
                     </div>
                 </div>

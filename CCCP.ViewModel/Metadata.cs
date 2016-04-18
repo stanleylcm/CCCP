@@ -854,7 +854,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Enquiry Background")]
         [DataType(DataType.MultilineText)]
         public string Background { get; set; }
-        [Display(Name = "Status")]
+        [Display(Name = "Enquiry Status")]
         public string Status { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }

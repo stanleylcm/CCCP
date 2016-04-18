@@ -212,7 +212,7 @@ namespace CCCP.Business.Service
         /// <returns></returns>
         public static IncidentLevel GetIncidentLevel(IncidentQualityNetwork incident)
         {
-            // for later use...
+            // for later use... LV Outage? MV Outage?
             int outageMinute = 0;
             if (incident.IssueDateTime != null && incident.OutageStartTime != null)
             {
