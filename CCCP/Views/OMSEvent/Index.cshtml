@@ -79,7 +79,7 @@
                                     <td>@Html.DisplayFor(model => item.Entity.OutageStartTime)</td>
                                     <td>@Html.DisplayFor(model => item.Entity.NoOfCustomerAffected)</td>
                                     <td>@Html.DisplayFor(model => item.Entity.ExpectedRestorationTime)</td>
-                                    <td>...</td>
+                                    <td>@item.GetCalculatedLevel().ToEnumString()</td>
                                     <td><a href="@(incident != null ? Url.Action("Details", "IncidentQualityNetwork", new { id = incident.IncidentQualityNetworkId }) : "")">@(incident != null ? incident.IncidentNo : "")</a></td>
                                     <td>@(item.Entity.Reviewed != null && item.Entity.Reviewed.Value ? "YES" : "NO")</td>
                                     <td>

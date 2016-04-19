@@ -243,7 +243,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MVOutage)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.MVOutage)</div>
+                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.MVOutage == null ? false : Model.Entity.MVOutage)" /></div>
                                         </div>
 
                                         <div class="row">
@@ -253,7 +253,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.LVOutage)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.LVOutage)</div>
+                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.LVOutage == null ? false : Model.Entity.LVOutage)" /></div>
                                         </div>
 
                                         <div class="row">

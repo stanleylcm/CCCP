@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-lg-3 pull-left">
                         <span class="pull-left"><label>Calculated Level</label></span>
-                        <span class="pull-right">....</span>
+                        <span class="pull-right">@Model.GetCalculatedLevel().ToEnumString()</span>
                     </div>
                     <div class="col-lg-3 pull-right">
                         <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</label></span>

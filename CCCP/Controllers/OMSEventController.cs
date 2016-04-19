@@ -101,28 +101,9 @@ namespace CCCP.Controllers
                 LoadData(id);
             }
             
-            IncidentQualityNetwork incidentQualityNetwork = new IncidentQualityNetwork();
+            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel(omsEventModel);
 
-            incidentQualityNetwork.OMSEventId = omsEventModel.Entity.OMSEventId;
-            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea; // chi? affectedBuilding? affectedStreet?
-            incidentQualityNetwork.OutageStartTime = omsEventModel.Entity.OutageStartTime;
-            incidentQualityNetwork.FullRestoration = omsEventModel.Entity.FullRestoration;
-            incidentQualityNetwork.NoOfBuilding = omsEventModel.Entity.NoOfBuilding;
-            incidentQualityNetwork.NoOfCustomerAffected = omsEventModel.Entity.NoOfCustomerAffected;
-            incidentQualityNetwork.NoOfPlatinumCustomer = omsEventModel.Entity.NoOfPlatinumCustomer;
-            incidentQualityNetwork.NoOfDiamondCustomer = omsEventModel.Entity.NoOfDiamondCustomer;
-            incidentQualityNetwork.NoOfGoldCustomer = omsEventModel.Entity.NoOfGoldCustomer;
-            incidentQualityNetwork.NoOfSilverCustomer = omsEventModel.Entity.NoOfSilverCustomer;
-            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause; // chi?
-            incidentQualityNetwork.ExpectedRestorationTime = omsEventModel.Entity.ExpectedRestorationTime;
-            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod; // chi?
-            incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
-            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause; // Chi?
-            //incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage; // type not correct...
-            //incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage; // type not correct...
-            //incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint; // type....
-
-            return RedirectToAction("CreateByOMSEvent", "IncidentQualityNetwork", incidentQualityNetwork);
+            return RedirectToAction("CreateByOMSEvent", "IncidentQualityNetwork", incidentModel.Entity);
         }
     }
 }

@@ -44,9 +44,9 @@ namespace CCCP.Business.Model
             incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod; // chi?
             incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
             incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause; // Chi?
-            //incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage; // type not correct...
-            //incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage; // type not correct...
-            //incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint; // type....
+            incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage;
+            incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage;
+            incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint;
 
             this.Entity = incidentQualityNetwork;
 
