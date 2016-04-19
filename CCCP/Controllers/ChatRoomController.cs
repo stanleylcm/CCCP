@@ -24,5 +24,44 @@ namespace CCCP.Controllers
         {
             return PartialView("_ChatRoom");
         }
+
+        [HttpPost]
+        public JsonResult SaveChatRoomMessageAttachment(int chatRoomId, int senderUserId, string senderDisplayName, DateTime sendDateTime, string message)
+        {
+            try
+            {
+                int messageId = ChatRoomService.SaveChatMessage(chatRoomId, senderUserId, message, Convert.ToDateTime(sendDateTime));
+
+                if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+                {
+                    // Get the uploaded file from the Files collection
+                    var files = System.Web.HttpContext.Current.Request.Files;
+                    foreach (var httpPostedFile in files)
+                    {
+                        /*
+                        if (httpPostedFile != null)
+                        {
+                            var path = Path.Combine(Server.MapPath("~/temp"), DateTime.Now.ToString("yyyyMMdd-hhmmss")) + ".jpg";
+
+                            // Save the uploaded file to "UploadedFiles" folder
+                            httpPostedFile.SaveAs(path);
+
+                            Uri folder = new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\Views\Home");
+                            Uri file = new Uri(path);
+
+                            var fileSavePath = folder.MakeRelativeUri(file).ToString();
+                            var resizeFileSavePath = folder.MakeRelativeUri(new Uri(ResizeImage(path))).ToString();
+                        }
+                        */
+                    }
+                }
+
+                return Json(new { result = true, id = messageId /* will be the messageId? */ });
+            }
+            catch (Exception e)
+            {
+                return Json(new { result = false, id = 0 });
+            }
+        }
     }
 }

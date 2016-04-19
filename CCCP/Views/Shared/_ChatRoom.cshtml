@@ -12,16 +12,6 @@
         foreach (var crMsg in Model.ChatRoomMessagesEntites)
         {
             Boolean isMe = (crMsg.Entity.SenderUserId == user.Entity.UserId);
-        @*
-            <div id="@crMsg.Entity.ChatRoomMessageId" class="bubble @(crMsg.Entity.SenderUserId == user.Entity.UserId ? "me" : "you")">
-                @if (crMsg.Entity.SenderUserId != user.Entity.UserId)
-                {
-                    <label>@crMsg.Entity.SenderDisplayName</label><br>
-                }
-                @Html.Raw(crMsg.Entity.Message.Replace("\n", "<br/>").Replace(System.Environment.NewLine, "<br/>"))<br>
-                <h6 align="right">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</h6>
-            </div>
-        *@
     <!-- Message. Default to the @(isMe ? "right" : "left") -->
     <div id="@crMsg.Entity.ChatRoomMessageId" class="direct-chat-msg@(isMe ? " right" : "")">
         <div class="direct-chat-info clearfix">
@@ -36,30 +26,30 @@
     </div>
     <!-- /.direct-chat-msg -->
         }
-}
+    }
 </div>
 <div id="SendMessage" class="input-group">
     <span class="input-group-btn">
-        <button type="button" id="addAttachment" title="Attach" class="btn btn-primary btn-flat">
+        <a class='btn btn-primary btn-flat' href='javascript:;'>
             <i class="glyphicon glyphicon-paperclip"></i>
-        </button>
+            <input id="attachUI" type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40" multiple>
+        </a>
     </span>
-    <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+    <div>
+        <textarea name="message" id="message" placeholder="Type Message ..." class="form-control"></textarea><br />
+    </div>
     <span class="input-group-btn">
         <button type="button" id="sendmessage" title="Send" class="btn btn-primary btn-flat">
             <i class="glyphicon glyphicon-send"></i>
         </button>
     </span>
-</div>    
-    <!--
-    <input type="button" id="sendImage" value="Image" />
-    <input type="button" id="sendVideo" value="Upload Video" />
-    <div id="SendImageMessageForm"></div>
-    <div id="ViewOriImageForm"></div>
-    <div id="SendVideoForm"></div>
-    -->
+</div>
+
+<div id="attachment_list">
+</div>
 
 <script>
+
     function translateMsg(inputMsg, outputDiv) {
         $.ajax({
             url: "/Home/TranslateText",
@@ -78,19 +68,26 @@
         });
     }
 
+    $('#attachUI').on('change', function (e) {
+        $('#attachment_list').html("");
+        if (!e.target.files) return;
+
+        if (e.target.files.length > 0) {
+            $('#attachment_list').append("<label>Attachment List:</label><br/>");
+        }
+        
+        $.each(e.target.files, function (index, file) {
+            $('#attachment_list').append("<span class='label label-info'>" + file.name + "</span><br/>");
+        });
+    });
+
     function generateChatBubbleHtml(messageId, message, name, time, isMe) {
-        var html =
-        @*'<div id="' + messageId + '" class="bubble ' + (encodedName == '@user.Entity.DisplayName' ? "me" : "you") + '">' +
-                                    (encodedName == '@user.Entity.DisplayName' ? "" : '<label>' + encodedName + '</label><br />') +
-                                    encodedMsg.replace('\n', '<br />') + '<br />' +
-                                    '<h6 align="right">' + time + '</h6>' +
-                                '</div>'*@
-        '<div id="' + messageId + '" class="direct-chat-msg' + (isMe ? ' right' : '') + '">' +
+        var html = '<div id="' + messageId + '" class="direct-chat-msg' + (isMe ? ' right' : '') + '">' +
             '<div class="direct-chat-info clearfix">' +
                 '<span class="direct-chat-name pull-' + (isMe ? 'right' : 'left') + '"><label>' + name + '</label></span>' +
                 '<span class="direct-chat-timestamp pull-' + (isMe ? 'left' : 'right') + '">' + time + '</span>' +
             '</div>' +
-            '<div class="direct-chat-text">' + message + '</div>' +
+            '<div class="direct-chat-text">' + message.replace(new RegExp('\n', 'g'), '<br/>') + '</div>' +
         '</div>';
 
         return html
@@ -122,50 +119,48 @@
             $("#chat").scrollTop($("#chat")[0].scrollHeight);
         };
 
-        chatHub.client.broadcastImageMessage = function (name, imageUrl, imageResizeUrl, time, chatId, messageId) {
-
-            if (chatId != '@Model.Entity.ChatRoomId') return;
-
-            // Html encode display name and message.
-            var encodedName = $('<div />').text(name).html();
-            var encodedMsg = $('<div />').text(imageResizeUrl).html();
-            var encodedMsg2 = $('<div />').text(imageUrl).html();
-            // Add the message to the page.
-            $('#chat').append('<div class="bubble ' + (encodedName == $('#displayname').val() ? "me" : "you") + '">' +
-                                    '<label>' + (encodedName == $('#displayname').val() ? "You" : encodedName) + '</label><br />' +
-                                    '<img src="' + encodedMsg + '" onclick="$(\'#ViewOriImageForm\').dialog(\'option\', \'open\', function() { $(this).load(\'@Url.Action("viewOriImage", "Home")?image=' + encodeURI(encodedMsg2) + '\'); }).dialog(\'open\');" /><br />' +
-                                '<h6 align="right">(' + time + ')</h6>' +
-                            '</div>');
-            $("#chat").scrollTop($("#chat")[0].scrollHeight);
-        };
-
-        chatHub.client.broadcastVideoMessage = function (name, videoUrl, time, chatId, messageId) {
-
-            if (chatId != '@Model.Entity.ChatRoomId') return;
-
-            // Html encode display name and message.
-            var encodedName = $('<div />').text(name).html();
-            var encodedMsg = $('<div />').text(videoUrl).html();
-            // Add the message to the page.
-            $('#chat').append('<div class="bubble ' + (encodedName == $('#displayname').val() ? "me" : "you") + '">' +
-                                    '<label>' + (encodedName == $('#displayname').val() ? "You" : encodedName) + '</label><br />' +
-                                    '<video width="400" height="300" controls><source src="' + encodedMsg + '" type="video/mp4" /></video><br />' +
-                                    '<h6 align="right">(' + time + ')</h6>' +
-                                '</div>');
-            $("#chat").scrollTop($("#chat")[0].scrollHeight);
-        };
-
         // Set initial focus to message input box.
         $('#message').focus();
+
         // Start the connection.
         $.connection.hub.start().done(function () {
             $('#sendmessage').click(function () {
                 if ($('#message').val().trim() == '') return false;
 
-                // Call the Send method on the hub.
-                chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
-                // Clear text box and reset focus for next comment.
-                $('#message').val('').focus();
+                var data = new FormData();
+                var files = $("#attachUI").get(0).files;
+                $.each(files, function(i, f) {
+                    data.append("uploadFile[" + i + "]", f);
+                });
+
+                data.append("chatRoomId", '@Model.Entity.ChatRoomId');
+                data.append("senderUserId", '@user.Entity.UserId');
+                data.append("senderDisplayName", '@user.Entity.DisplayName');
+                data.append("sendDateTime", moment().format('YYYY-MM-DD HH:mm:ss'));
+                data.append("message", $('#message').val());
+
+                // upload file to temp and send message to Hub...
+                $.ajax({
+                    url: "/ChatRoom/SaveChatRoomMessageAttachment",
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (data) {
+                        if (data.result) {
+
+                            // Call the Send method on the hub.
+                            chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id, files);
+    
+                            // Clear text box and reset focus for next comment.
+                            $('#attachUI').val('');
+                            $('#message').val('').focus();
+                        }
+                    },
+                    error: function () {
+                        alert("An error has occured!!!");
+                    }
+                });
             });
 
             $('#message').keydown(function (event) {
@@ -174,135 +169,6 @@
                     $('#sendmessage').click();
                 }
             });
-
-            $("#ViewOriImageForm").dialog({
-                autoOpen: false,
-                width: 1024,
-                height: 768,
-                top: 100,
-                resizable: false,
-                title: 'View Image',
-                modal: true,
-                buttons: {
-                    "Close": function () {
-                        $('#imageDetail').attr('src', '#');
-                        $(this).dialog("close");
-                    }
-                }
-            });
-
-            $("#SendImageMessageForm").dialog({
-                autoOpen: false,
-                width: 1024,
-                height: 768,
-                top: 100,
-                resizable: false,
-                title: 'Send Image Message',
-                modal: true,
-                open: function () {
-                    $(this).load('@Url.Action("sendImageMessage", "Home")');
-                    setRemoveLoadingIconPerDiv("SendImageMessageFormLoadingDiv");
-                },
-                buttons: {
-                    "Send": function () {
-                        sendImageMsg();
-                    },
-                    Cancel: function () {
-                        $('#loadImage').attr('src', '#');
-                        $(this).dialog("close");
-                    }
-                }
-            });
-
-            $('#sendImage').click(function () {
-                $("#SendImageMessageForm").dialog('open');
-                return false;
-            });
-
-            function sendImageMsg() {
-                var data = new FormData();
-                var files = $("#imgInp").get(0).files;
-                if (files.length > 0) {
-                    data.append("uploadFile", files[0]);
-                }
-
-                setLoadingIconPerDiv(".ui-dialog", "SendImageMessageFormLoadingDiv");
-
-                // upload file to temp and send message to Hub...
-                $.ajax({
-                    url: "/Home/UploadImg",
-                    type: "POST",
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    success: function (data) {
-                        if (data.result) {
-                            chatHub.server.sendImage($('#displayname').val(), data.imageUrl, data.imageResizeUrl, moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
-                        }
-                        $('#loadImage').attr('src', '#');
-                        $("#SendImageMessageForm").dialog("close");
-                    },
-                    error: function () {
-                        alert("An error has occured!!!");
-                    }
-                });
-            }
-
-            $('#sendVideo').click(function () {
-                $("#SendVideoForm").dialog('open');
-                return false;
-            });
-
-            $("#SendVideoForm").dialog({
-                autoOpen: false,
-                width: 1024,
-                top: 100,
-                resizable: false,
-                title: 'Send Video Message',
-                modal: true,
-                open: function () {
-                    $(this).load('@Url.Action("sendVideoMessage", "Home")');
-                    setRemoveLoadingIconPerDiv("SendVideoFormLoadingDiv");
-                },
-                buttons: {
-                    "Send": function () {
-                        sendVideoMsg();
-                    },
-                    Cancel: function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-
-            function sendVideoMsg() {
-                var data = new FormData();
-                var files = $("#videoInp").get(0).files;
-                if (files.length > 0) {
-                    data.append("uploadFile", files[0]);
-                }
-
-                setLoadingIconPerDiv(".ui-dialog", "SendVideoFormLoadingDiv");
-
-                // upload file to temp and send message to Hub...
-                $.ajax({
-                    url: "/Home/UploadVideo",
-                    type: "POST",
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    success: function (data) {
-                        if (data.result) {
-                            chatHub.server.sendVideo($('#displayname').val(), data.videoUrl, moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId');
-                        }
-
-                        $("#SendVideoForm").dialog("close");
-                    },
-                    error: function (xhr, status, error) {
-                        var err = xhr.responseText;
-                        alert(err);
-                    }
-                });
-            }
         });
     });
 

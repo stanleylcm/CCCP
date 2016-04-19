@@ -25,9 +25,9 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId)
+        public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, object[] files)
         {
-            new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId);
+            //new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId, files);
             return true;
         }
     }
