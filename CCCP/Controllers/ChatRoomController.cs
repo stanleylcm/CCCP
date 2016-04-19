@@ -26,17 +26,16 @@ namespace CCCP.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveChatRoomMessageAttachment(int chatRoomId, int senderUserId, string senderDisplayName, DateTime sendDateTime, string message)
+        public JsonResult SaveChatRoomMessageAttachment(int chatRoomId, int senderUserId, string senderDisplayName, DateTime sendDateTime, string message, IEnumerable<HttpPostedFileBase> uploadData)
         {
             try
             {
                 int messageId = ChatRoomService.SaveChatMessage(chatRoomId, senderUserId, message, Convert.ToDateTime(sendDateTime));
 
-                if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+                if (uploadData != null && uploadData.Count() > 0)
                 {
                     // Get the uploaded file from the Files collection
-                    var files = System.Web.HttpContext.Current.Request.Files;
-                    foreach (var httpPostedFile in files)
+                    foreach (var file in uploadData)
                     {
                         /*
                         if (httpPostedFile != null)

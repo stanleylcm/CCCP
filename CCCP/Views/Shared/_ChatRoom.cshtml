@@ -82,6 +82,8 @@
     });
 
     function generateChatBubbleHtml(messageId, message, name, time, isMe) {
+        // get attachment by messageId?
+
         var html = '<div id="' + messageId + '" class="direct-chat-msg' + (isMe ? ' right' : '') + '">' +
             '<div class="direct-chat-info clearfix">' +
                 '<span class="direct-chat-name pull-' + (isMe ? 'right' : 'left') + '"><label>' + name + '</label></span>' +
@@ -112,7 +114,6 @@
             // Html encode display name and message.
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(message).html();
-            //var id = moment().format("YYYYMMDDHHmmss");
             // Add the message to the page.
             var isMe = (encodedName == '@user.Entity.DisplayName');
             $('#chat').append(generateChatBubbleHtml(messageId, encodedMsg, encodedName, time, isMe));
@@ -130,7 +131,7 @@
                 var data = new FormData();
                 var files = $("#attachUI").get(0).files;
                 $.each(files, function(i, f) {
-                    data.append("uploadFile[" + i + "]", f);
+                    data.append("uploadData", f);
                 });
 
                 data.append("chatRoomId", '@Model.Entity.ChatRoomId');
@@ -150,10 +151,11 @@
                         if (data.result) {
 
                             // Call the Send method on the hub.
-                            chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id, files);
+                            chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id);
     
                             // Clear text box and reset focus for next comment.
                             $('#attachUI').val('');
+                            $('#attachment_list').html('');
                             $('#message').val('').focus();
                         }
                     },

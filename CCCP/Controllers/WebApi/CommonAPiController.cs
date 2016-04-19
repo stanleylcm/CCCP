@@ -12,6 +12,7 @@ using CCCP.ViewModel;
 using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
+using Newtonsoft.Json;
 
 namespace CCCP.Controllers.WebApi
 {
@@ -25,9 +26,13 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, object[] files)
+        public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, IEnumerable<HttpPostedFileBase> uploadData)
         {
-            //new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId, files);
+            JsonResult result = new CCCP.Controllers.ChatRoomController().SaveChatRoomMessageAttachment(chatRoomId, userId, name, Convert.ToDateTime(time), message, uploadData);
+
+            dynamic response = Newtonsoft.Json.JsonConvert.DeserializeObject(result.ToString());
+            new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId, response.id);
+            
             return true;
         }
     }

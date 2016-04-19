@@ -9,7 +9,7 @@ namespace CCCP.Hubs
 {
     public class ChatRoomHub : Hub
     {
-        public void Send(string name, string message, string time, int userId, int chatRoomId, int messageId, HttpPostedFile[] files)
+        public void Send(string name, string message, string time, int userId, int chatRoomId, int messageId)
         {
             Clients.All.broadcastMessage(name, message, time, chatRoomId, messageId);
         }
