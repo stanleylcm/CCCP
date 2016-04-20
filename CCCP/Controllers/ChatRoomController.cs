@@ -52,6 +52,10 @@ namespace CCCP.Controllers
                             var resizeFileSavePath = folder.MakeRelativeUri(new Uri(ResizeImage(path))).ToString();
                         }
                         */
+
+                        // convert / compress image and video
+
+                        // save to db...
                     }
                 }
 

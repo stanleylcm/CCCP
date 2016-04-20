@@ -716,6 +716,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Preliminary Cause of Outage")]
         public string PreliminaryCauseOfOutage { get; set; }
         [Display(Name = "Expected Restoration Time")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
@@ -917,14 +918,19 @@ namespace CCCP.ViewModel
         [Display(Name = "No of Building")]
         public Nullable<short> NoOfBuilding { get; set; }
         [Display(Name = "No of Customer Affected")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfCustomerAffected { get; set; }
         [Display(Name = "No of Platinum Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfPlatinumCustomer { get; set; }
         [Display(Name = "No of Diamond Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfDiamondCustomer { get; set; }
         [Display(Name = "No of Gold Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfGoldCustomer { get; set; }
         [Display(Name = "No of Silver Customer")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
@@ -933,6 +939,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Expected Restoration DateTime")]
         public Nullable<System.DateTime> ExpectedRestorationDateTime { get; set; }
         [Display(Name = "Expected Restoration Time (hour)")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Restoration Method")]
         public string RestorationMethod { get; set; }

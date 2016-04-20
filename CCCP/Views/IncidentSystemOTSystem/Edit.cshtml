@@ -316,16 +316,16 @@
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentSystemOTSystem.AffectedSystem)</label></div>
                                             <div class="col-lg-6">
-                                                @{
-                                                    int countAffectedSystem = 0;
-                                                    foreach (string one in Model.Options_AffectedSystem)
-                                                    {
-                                                        <input id="AffectedSystem@(countAffectedSystem.ToString())" type="checkbox" value="@one" @(incidentSystemOTSystem.AffectedSystem.IsContains(one) ? "checked" : "")/><label for="AffectedSystem@(countAffectedSystem.ToString())"> @one</label><br />
-                                                        countAffectedSystem++;
+                                                <select id="incidentSystemOTSystem_AffectedSystem" name="incidentSystemOTSystem.AffectedSystem" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @{
+                                                        foreach (string one in Model.Options_AffectedSystem)
+                                                        {
+                                                    <option value="@one" @(incidentSystemOTSystem.AffectedSystem != null && incidentSystemOTSystem.AffectedSystem.IsEquals(one) ? "selected" : "")>@one</option>
+                                                        }
                                                     }
-                                                }
-                                                <input type="hidden" id="incidentSystemOTSystem_AffectedSystem" name="incidentSystemOTSystem.AffectedSystem" value="@incidentSystemOTSystem.AffectedSystem" />
-                                                @Html.ValidationMessageFor(model => incidentSystemOTSystem.AffectedSystem, "", new { @class = "text-danger" })
+                                                </select>
+
                                             </div>
                                         </div>
 

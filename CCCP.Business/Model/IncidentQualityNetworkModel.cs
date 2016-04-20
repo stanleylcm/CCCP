@@ -140,7 +140,7 @@ namespace CCCP.Business.Model
                     Entity.CreatedDateTime = now;
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
                     Entity.LastUpdatedDateTime = now;
-                    if (Entity.IssueById == 0)
+                    if (Entity.IssueById == null || Entity.IssueById == 0)
                     {
                         Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
                         Entity.IssueDateTime = now;
