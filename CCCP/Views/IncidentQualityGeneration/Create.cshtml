@@ -234,17 +234,17 @@
 
             if ($('#incidentQualityGeneration_IncidentBackground').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + 'Incident Background is required<br />';
+                errMsg = errMsg + 'Incident Background cannot be empty<br />';
             }
 
             if ($('#incidentQualityGeneration_NameOfPowerGenerator').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nName of Power Generator is required<br />';
+                errMsg = errMsg + '\r\nName of Power Generator cannot be empty<br />';
             }
 
             if ($('#incidentQualityGeneration_PreliminaryCauseOfOutage').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\Preliminary Cause of Outage is required<br />';
+                errMsg = errMsg + '\r\Preliminary Cause of Outage cannot be empty<br />';
             }
 
             if ($('#incidentQualityGeneration_ExpectedRestorationTime').val() == '') {
@@ -254,12 +254,12 @@
 
             //if ($('#incidentQualityGeneration_FullRestoration').val() == '') {
             //    inputValid = false;
-            //    errMsg = errMsg + '\r\Full Restoration is required<br />';
+            //    errMsg = errMsg + '\r\Full Restoration cannot be empty<br />';
             //}
 
             if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
                 inputValid = false;
-                errMsg = errMsg + '\r\nLoss of Power Time is required<br />';
+                errMsg = errMsg + '\r\nLoss of Power Time cannot be empty<br />';
             }
 
             if (inputValid == false) {

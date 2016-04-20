@@ -62,5 +62,12 @@ namespace CCCP.Controllers
                 return Json(new { result = false, id = 0 });
             }
         }
+
+        
+        [HttpGet]
+        public JsonResult GetMessageAttachment(int messageId)
+        {
+            return Json(new { result = true });
+        }
     }
 }
