@@ -20,10 +20,6 @@ namespace CCCP.Controllers.WebApi
     {
         private CCCPDbContext db = new CCCPDbContext();
 
-        // compress image
-
-        // compress video
-
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
         public Boolean SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, IEnumerable<HttpPostedFileBase> uploadData)
