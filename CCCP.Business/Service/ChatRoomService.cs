@@ -32,5 +32,26 @@ namespace CCCP.Business.Service
 
             return msgModel.Entity.ChatRoomMessageId;
         }
+
+        public static int SaveChatAttachment(int messageId, int userId, string fileType, byte[] content)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            UserModel user = new UserModel(db.User.Find(userId));
+            ChatRoomAttachment attach = new ChatRoomAttachment();
+
+            attach.ChatRoomAttachmentId = 0;
+            attach.ChatRoomMessageId = messageId;
+            attach.Attachment = content;
+            attach.AttachmentType = fileType;
+            attach.CreatedBy = user.GetLastUpdatedBy();
+            attach.CreatedDateTime = DateTime.Now;
+            attach.LastUpdatedBy = user.GetLastUpdatedBy();
+            attach.LastUpdatedDateTime = DateTime.Now;
+
+            db.ChatRoomAttachment.Add(attach);
+            db.SaveChanges();
+
+            return attach.ChatRoomAttachmentId;
+        }
     }
 }

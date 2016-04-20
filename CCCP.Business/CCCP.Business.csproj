@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,6 +72,7 @@
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Service\AccessControlService.cs" />
     <Compile Include="Service\AuditTrailService.cs" />
+    <Compile Include="Service\MediaService.cs" />
     <Compile Include="Service\IncidentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ChatRoomService.cs" />
