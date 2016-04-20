@@ -38,7 +38,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -106,7 +106,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -121,7 +121,7 @@ namespace CCCP.ViewModel
         public string ProblemArea { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
-        [Display(Name = "Expected Affected No Of Bill")]
+        [Display(Name = "Expected Affected No of Bill")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> ExpectedAffectedNoOfBill { get; set; }
         [Display(Name = "Expected Affected Billing Day")]
@@ -176,7 +176,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -242,7 +242,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -306,7 +306,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -368,7 +368,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -390,7 +390,7 @@ namespace CCCP.ViewModel
         public string AffectedSystem { get; set; }
         [Display(Name = "Affected Area")]
         public string AffectedArea { get; set; }
-        [Display(Name = "No Of Affected Substation")]
+        [Display(Name = "No of Affected Substation")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfAffectedSubstation { get; set; }
         [Display(Name = "Expected Restoration Time")]
@@ -435,7 +435,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -451,11 +451,11 @@ namespace CCCP.ViewModel
         public string Location { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
-        [Display(Name = "Source Of Information")]
+        [Display(Name = "Source of Information")]
         public string SourceOfInformation { get; set; }
         [Display(Name = "Abatement System Unavailable")]
         public Nullable<bool> AbatementSystemUnavailable { get; set; }
-        [Display(Name = "Complaint Of Black Smoke")]
+        [Display(Name = "Complaint of Black Smoke")]
         public Nullable<bool> ComplaintOfBlackSmoke { get; set; }
 
         [Display(Name = "Created By")]
@@ -495,7 +495,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -513,9 +513,9 @@ namespace CCCP.ViewModel
         public string PossibleCause { get; set; }
         [Display(Name = "Damage")]
         public string Damage { get; set; }
-        [Display(Name = "Source Of Information")]
+        [Display(Name = "Source of Information")]
         public string SourceOfInformation { get; set; }
-        [Display(Name = "Type Of Leakage")]
+        [Display(Name = "Type of Leakage")]
         public Nullable<bool> TypeOfLeakage { get; set; }
         [DataType(DataType.MultilineText)]
         public string TypeOfLeakageOthers { get; set; }
@@ -559,7 +559,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -579,20 +579,20 @@ namespace CCCP.ViewModel
         public string PossibleCauseOthers { get; set; }
         [Display(Name = "OHS Type")]
         public string OHSType { get; set; }
-        [Display(Name = "Nature Of Injury")]
+        [Display(Name = "Nature of Injury")]
         public string NatureOfInjury { get; set; }
         [DataType(DataType.MultilineText)]
         public string NatureOfInjuryOthers { get; set; }
-        [Display(Name = "No Of Injury")]
+        [Display(Name = "No of Injury")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInjury { get; set; }
-        [Display(Name = "No Of Infectious Disease")]
+        [Display(Name = "No of Infectious Disease")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInfectiousDisease { get; set; }
-        [Display(Name = "No Of Death")]
+        [Display(Name = "No of Death")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfDeath { get; set; }
-        [Display(Name = "No Of Infected")]
+        [Display(Name = "No of Infected")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfInfected { get; set; }
         [Display(Name = "Treatment")]
@@ -637,7 +637,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -699,7 +699,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -711,9 +711,9 @@ namespace CCCP.ViewModel
         [Display(Name = "History")]
         public string History { get; set; }
 
-        [Display(Name = "Name Of Power Generator")]
+        [Display(Name = "Name of Power Generator")]
         public string NameOfPowerGenerator { get; set; }
-        [Display(Name = "Preliminary Cause Of Outage")]
+        [Display(Name = "Preliminary Cause of Outage")]
         public string PreliminaryCauseOfOutage { get; set; }
         [Display(Name = "Expected Restoration Time")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
@@ -721,7 +721,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> FullRestoration { get; set; }
         [Display(Name = "Is CEM Network Being Affected")]
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
-        [Display(Name = "Loss Of Power")]
+        [Display(Name = "Loss of Power")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> LossOfPower { get; set; }
 
@@ -762,7 +762,7 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> CloseDateTime { get; set; }
         [Display(Name = "Incident No")]
         public string IncidentNo { get; set; }
-        [Display(Name = "Level Of Severity")]
+        [Display(Name = "Level of Severity")]
         public string LevelOfSeverity { get; set; }
         [Display(Name = "Incident Status")]
         public string IncidentStatus { get; set; }
@@ -780,21 +780,21 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> OutageStartTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
-        [Display(Name = "No Of Building")]
+        [Display(Name = "No of Building")]
         public Nullable<int> NoOfBuilding { get; set; }
-        [Display(Name = "No Of Customer Affected")]
+        [Display(Name = "No of Customer Affected")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfCustomerAffected { get; set; }
-        [Display(Name = "No Of Platinum Customer")]
+        [Display(Name = "No of Platinum Customer")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfPlatinumCustomer { get; set; }
-        [Display(Name = "No Of Diamond Customer")]
+        [Display(Name = "No of Diamond Customer")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfDiamondCustomer { get; set; }
-        [Display(Name = "No Of Gold Customer")]
+        [Display(Name = "No of Gold Customer")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfGoldCustomer { get; set; }
-        [Display(Name = "No Of Silver Customer")]
+        [Display(Name = "No of Silver Customer")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
@@ -914,17 +914,17 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> OutageStartTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
-        [Display(Name = "No Of Building")]
+        [Display(Name = "No of Building")]
         public Nullable<short> NoOfBuilding { get; set; }
-        [Display(Name = "No Of Customer Affected")]
+        [Display(Name = "No of Customer Affected")]
         public Nullable<int> NoOfCustomerAffected { get; set; }
-        [Display(Name = "No Of Platinum Customer")]
+        [Display(Name = "No of Platinum Customer")]
         public Nullable<int> NoOfPlatinumCustomer { get; set; }
-        [Display(Name = "No Of Diamond Customer")]
+        [Display(Name = "No of Diamond Customer")]
         public Nullable<int> NoOfDiamondCustomer { get; set; }
-        [Display(Name = "No Of Gold Customer")]
+        [Display(Name = "No of Gold Customer")]
         public Nullable<int> NoOfGoldCustomer { get; set; }
-        [Display(Name = "No Of Silver Customer")]
+        [Display(Name = "No of Silver Customer")]
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }

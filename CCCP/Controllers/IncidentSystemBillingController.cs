@@ -207,7 +207,7 @@ namespace CCCP.Controllers
             returnTable += "\n          <th></th>";
             returnTable += "\n          <th>Incident No</th>";
             returnTable += "\n          <th>Incident Type</th>";
-            returnTable += "\n          <th>Level Of Severity</th>";
+            returnTable += "\n          <th>Level of Severity</th>";
             returnTable += "\n          <th>Incident Status</th>";
             returnTable += "\n          <th>Incident Background</th>";
             returnTable += "\n          <th>Created By</th>";
