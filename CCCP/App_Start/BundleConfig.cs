@@ -24,12 +24,15 @@ namespace CCCP
                         "~/Scripts/moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate-vsdoc.js",
+                        "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery.validate.method.js",
+                        "~/Scripts/jquery.validate.unobtrusive.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Scripts/modernizr-2.6.2.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
@@ -55,6 +58,13 @@ namespace CCCP
                       "~/Content/bootstrap-checkbox.css",
                       "~/Scripts/timepicker/bootstrap-timepicker.min.css",
                       "~/Content/bootstrap-switch.css"));
+
+            bundles.UseCdn = true;
+
+            // bundles code
+
+            var cdnPath = "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic";
+            bundles.Add(new StyleBundle("~/fonts", cdnPath));
         }
     }
 }
