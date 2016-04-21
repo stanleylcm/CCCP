@@ -86,7 +86,7 @@ namespace CCCP.Controllers.WebApi
                 result.LinkedIncidentEntities = db.usp_Incident_GetLinkedIncident(incidentId, MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemNetworkConnectivity)).ToList<usp_Incident_GetLinkedIncident_Result>();
 
                 // load linked general enquiry
-                //
+                result.LinkedGeneralEnquiryEntities = db.usp_Incident_GetLinkedGeneralEnquiry(incidentId, MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemNetworkConnectivity)).ToList<usp_Incident_GetLinkedGeneralEnquiry_Result>();
 
                 // load notification
                 int incidentTypeId = MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemNetworkConnectivity);

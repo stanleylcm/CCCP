@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentQualityGenerationApiController().CreateIncident(incidentQualityGeneration);
                 return RedirectToAction("Index", new { message = "Incident " + incidentQualityGeneration.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentQualityGeneration;
 
             return View(incidentQualityGeneration);
         }

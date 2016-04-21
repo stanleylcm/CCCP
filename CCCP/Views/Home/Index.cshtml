@@ -1,4 +1,5 @@
 ﻿
+@using CCCP.Business.Service
 @using CCCP.Common
 @using CCCP.ViewModel
 @using CCCP.Business
@@ -65,17 +66,17 @@
 
                     <table class="OutstandingGeneralEnquiry table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                        <th>Enquiry No.</th>
-                        <th>Enquiry Type</th>
-                        <th>Date</th>
-                        <th></th>
+                            <th>ID</th>
+                            <th>Enquiry Type</th>
+                            <th>Date</th>
+                            <th></th>
                         </thead>
                         <tbody>
                             @{
-                                foreach (usp_Dashboard_GetOutstandingGeneralEnquiry_Result item in ViewBag.OutStandingGeneralEnquiryList)
+                                foreach (usp_Dashboard_GetOutstandingGeneralEnquiry1_Result item in ViewBag.OutStandingGeneralEnquiryList)
                                 {
                                     <tr>
-                                        <td>@item.IncidentNo</td>
+                                        <td>@item.GeneralEnquiryId</td>
                                         <td>@item.IncidentType</td>
                                         <td>@(item.IssueDateTime != null ? item.IssueDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
                                         <td><a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })"><i class="fa fa-sliders"></i></a></td>
@@ -267,9 +268,9 @@
                             <tr>
                                 <td>General Enquiry</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    foreach (IncidentTypeSubType item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
-                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = item.ToString() })">
+                                <td><a href="@Url.Action("Index", "GeneralEnquiry", new { searchCriteria = MasterTableService.GetIncidentTypeName(item) })">
                                     @(ViewBag.IncidentSummary.ContainsKey("GeneralEnquiry_" + item.ToString()) && ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["GeneralEnquiry_" + item.ToString()] : "")
                                 </a></td>        
                                     }
@@ -315,10 +316,10 @@
                             <tr>
                                 <td>Crisis</td>
                                 @{
-                                    foreach (var item in Enum.GetValues(typeof(IncidentTypeSubType)))
+                                    foreach (IncidentTypeSubType item in Enum.GetValues(typeof(IncidentTypeSubType)))
                                     {
                                 <td>
-                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = item.ToString() })">
+                                    <a href="@Url.Action("Index", "CrisisManagement", new { searchCriteria = MasterTableService.GetIncidentTypeName(item) })">
                                         @(ViewBag.IncidentSummary.ContainsKey("Crisis_" + item.ToString()) && ViewBag.IncidentSummary["Crisis_" + item.ToString()] != 0 ? ViewBag.IncidentSummary["Crisis_" + item.ToString()] : "")
                                     </a>
                                 </td>

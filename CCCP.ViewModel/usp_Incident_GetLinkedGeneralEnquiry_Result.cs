@@ -10,12 +10,10 @@
 namespace CCCP.ViewModel
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class GeneralEnquiry
+    public partial class usp_Incident_GetLinkedGeneralEnquiry_Result
     {
-        public int GeneralEnquiryId { get; set; }
-        public int ChatRoomId { get; set; }
+        public Nullable<int> GeneralEnquiryId { get; set; }
         public Nullable<int> GeneralEnquiryTypeId { get; set; }
         public string Background { get; set; }
         public string Status { get; set; }

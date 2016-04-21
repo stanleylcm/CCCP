@@ -62,7 +62,7 @@ namespace CCCP.Controllers
             #endregion
 
             #region Outstanding General Enquiry List
-            ViewBag.OutstandingGeneralEnquiryList = db.usp_Dashboard_GetOutstandingGeneralEnquiry();
+            ViewBag.OutstandingGeneralEnquiryList = db.usp_Dashboard_GetOutstandingGeneralEnquiry1();
             #endregion
 
             #region Outstanding Incident List

@@ -31,7 +31,9 @@ namespace CCCP.Controllers
         {
             try
             {
-                int messageId = ChatRoomService.SaveChatMessage(chatRoomId, senderUserId, message, Convert.ToDateTime(sendDateTime));
+                string saveDBDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                int messageId = ChatRoomService.SaveChatMessage(chatRoomId, senderUserId, message, Convert.ToDateTime(saveDBDateTime));
 
                 if (messageId > 0 && uploadData != null && uploadData.Count() > 0)
                 {
@@ -79,7 +81,7 @@ namespace CCCP.Controllers
                     }
                 }
 
-                return Json(new { result = true, id = messageId });
+                return Json(new { result = true, id = messageId, sendDateTime = saveDBDateTime });
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {

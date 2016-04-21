@@ -111,8 +111,7 @@
           </Key>
           <Property Name="GeneralEnquiryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ChatRoomId" Type="int" Nullable="false" />
-          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
-          <Property Name="IncidentNo" Type="varchar" MaxLength="50" />
+          <Property Name="GeneralEnquiryTypeId" Type="int" />
           <Property Name="Background" Type="nvarchar(max)" />
           <Property Name="Status" Type="varchar" MaxLength="20" />
           <Property Name="IssueById" Type="int" />
@@ -123,6 +122,15 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GeneralEnquiryIncidentLink">
+          <Key>
+            <PropertyRef Name="GeneralEnquiryIncidentLinkId" />
+          </Key>
+          <Property Name="GeneralEnquiryIncidentLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneralEnquiryId" Type="int" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="IncidentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="IncidentEnvironmentAirEmission">
           <Key>
@@ -648,6 +656,10 @@
           <Parameter Name="IncidentId" Type="nvarchar" Mode="In" />
           <Parameter Name="IncidentTypeId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="usp_Incident_GetLinkedGeneralEnquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IncidentId" Type="int" Mode="In" />
+          <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_Incident_GetLinkedIncident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IncidentId" Type="int" Mode="In" />
           <Parameter Name="IncidentTypeId" Type="int" Mode="In" />
@@ -675,6 +687,7 @@
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneralEnquiry" EntityType="Self.GeneralEnquiry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralEnquiryIncidentLink" EntityType="Self.GeneralEnquiryIncidentLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentEnvironmentAirEmission" EntityType="Self.IncidentEnvironmentAirEmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentEnvironmentLeakage" EntityType="Self.IncidentEnvironmentLeakage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentOHS" EntityType="Self.IncidentOHS" Schema="dbo" store:Type="Tables" />
@@ -751,7 +764,6 @@
             <Parameter Name="IncidentId" Mode="In" Type="Int32" />
             <Parameter Name="IncidentTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="GeneralEnquiry" EntityType="CCCP.ViewModel.GeneralEnquiry" />
           <FunctionImport Name="usp_GeneralEnquiry_PostCreate">
             <Parameter Name="GeneralEnquiryId" Mode="In" Type="Int32" />
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
@@ -767,6 +779,13 @@
           <EntitySet Name="IncidentSystemInvoicing" EntityType="CCCP.ViewModel.IncidentSystemInvoicing" />
           <EntitySet Name="IncidentQualityNetwork" EntityType="CCCP.ViewModel.IncidentQualityNetwork" />
           <EntitySet Name="ChatRoomAttachment" EntityType="CCCP.ViewModel.ChatRoomAttachment" />
+          <EntitySet Name="GeneralEnquiry" EntityType="CCCP.ViewModel.GeneralEnquiry" />
+          <FunctionImport Name="usp_Dashboard_GetOutstandingGeneralEnquiry1" ReturnType="Collection(CCCP.ViewModel.usp_Dashboard_GetOutstandingGeneralEnquiry1_Result)" />
+          <EntitySet Name="GeneralEnquiryIncidentLink" EntityType="CCCP.ViewModel.GeneralEnquiryIncidentLink" />
+          <FunctionImport Name="usp_Incident_GetLinkedGeneralEnquiry" ReturnType="Collection(CCCP.ViewModel.usp_Incident_GetLinkedGeneralEnquiry_Result)">
+            <Parameter Name="IncidentId" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1285,25 +1304,6 @@
           <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Controller" Nullable="true" MaxLength="58" />
         </ComplexType>
-        <EntityType Name="GeneralEnquiry">
-          <Key>
-            <PropertyRef Name="GeneralEnquiryId" />
-          </Key>
-          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
-          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
-          <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Background" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IssueById" Type="Int32" />
-          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CloseById" Type="Int32" />
-          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="OMSEvent">
           <Key>
             <PropertyRef Name="OMSEventId" />
@@ -1613,6 +1613,52 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="GeneralEnquiry">
+          <Key>
+            <PropertyRef Name="GeneralEnquiryId" />
+          </Key>
+          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="GeneralEnquiryTypeId" Type="Int32" />
+          <Property Name="Background" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="usp_Dashboard_GetOutstandingGeneralEnquiry1_Result">
+          <Property Type="Int32" Name="GeneralEnquiryId" Nullable="false" />
+          <Property Type="String" Name="IncidentType" Nullable="true" MaxLength="103" />
+          <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="GeneralEnquiryIncidentLink">
+          <Key>
+            <PropertyRef Name="GeneralEnquiryIncidentLinkId" />
+          </Key>
+          <Property Name="GeneralEnquiryIncidentLinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneralEnquiryId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="usp_Incident_GetLinkedGeneralEnquiry_Result">
+          <Property Type="Int32" Name="GeneralEnquiryId" Nullable="true" />
+          <Property Type="Int32" Name="GeneralEnquiryTypeId" Nullable="true" />
+          <Property Type="String" Name="Background" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IssueById" Nullable="true" />
+          <Property Type="DateTime" Name="IssueDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CloseById" Nullable="true" />
+          <Property Type="DateTime" Name="CloseDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="LastUpdatedDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2021,16 +2067,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetOutstandingGeneralEnquiry" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetOutstandingGeneralEnquiry">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetOutstandingGeneralEnquiry_Result">
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="IncidentType" ColumnName="IncidentType" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_Dashboard_GetOutstandingIncident1" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetOutstandingIncident">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetOutstandingIncident1_Result">
@@ -2076,26 +2112,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="GeneralEnquiry">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.GeneralEnquiry">
-              <MappingFragment StoreEntitySet="GeneralEnquiry">
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
-                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
-                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
-                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Background" ColumnName="Background" />
-                <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
-                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
-                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
-                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_GeneralEnquiry_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_GeneralEnquiry_PostCreate" />
           <EntitySetMapping Name="OMSEvent">
             <EntityTypeMapping TypeName="CCCP.ViewModel.OMSEvent">
@@ -2417,6 +2433,62 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GeneralEnquiry">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.GeneralEnquiry">
+              <MappingFragment StoreEntitySet="GeneralEnquiry">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Background" ColumnName="Background" />
+                <ScalarProperty Name="GeneralEnquiryTypeId" ColumnName="GeneralEnquiryTypeId" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Dashboard_GetOutstandingGeneralEnquiry1" FunctionName="CCCP.ViewModel.Store.usp_Dashboard_GetOutstandingGeneralEnquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Dashboard_GetOutstandingGeneralEnquiry1_Result">
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="IncidentType" ColumnName="IncidentType" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="GeneralEnquiryIncidentLink">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.GeneralEnquiryIncidentLink">
+              <MappingFragment StoreEntitySet="GeneralEnquiryIncidentLink">
+                <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="GeneralEnquiryIncidentLinkId" ColumnName="GeneralEnquiryIncidentLinkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Incident_GetLinkedGeneralEnquiry" FunctionName="CCCP.ViewModel.Store.usp_Incident_GetLinkedGeneralEnquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CCCP.ViewModel.usp_Incident_GetLinkedGeneralEnquiry_Result">
+                <ScalarProperty Name="GeneralEnquiryId" ColumnName="GeneralEnquiryId" />
+                <ScalarProperty Name="GeneralEnquiryTypeId" ColumnName="GeneralEnquiryTypeId" />
+                <ScalarProperty Name="Background" ColumnName="Background" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

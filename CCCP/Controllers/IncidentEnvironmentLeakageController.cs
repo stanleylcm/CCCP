@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentEnvironmentLeakageApiController().CreateIncident(incidentEnvironmentLeakage);
                 return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentLeakage.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentEnvironmentLeakage;
 
             return View(incidentEnvironmentLeakage);
         }

@@ -213,7 +213,7 @@
                         if (data.result) {
 
                             // Call the Send method on the hub.
-                            chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id);
+                            chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), data.sendDateTime, '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id);
 
                             // Clear text box and reset focus for next comment.
                             $('#attachUI').val('');

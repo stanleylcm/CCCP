@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentQualityCorporateImageApiController().CreateIncident(incidentQualityCorporateImage);
                 return RedirectToAction("Index", new { message = "Incident " + incidentQualityCorporateImage.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentQualityCorporateImage;
 
             return View(incidentQualityCorporateImage);
         }

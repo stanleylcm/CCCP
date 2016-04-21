@@ -72,17 +72,16 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">Enquiry Type</label></div>
                                     <div class="col-lg-6">
-                                        <select id="generalEnquiry_IncidentTypeId" name="generalEnquiry.IncidentTypeId" class="form-control thin-control">
+                                        <select id="generalEnquiry_GeneralEnquiryTypeId" name="generalEnquiry.GeneralEnquiryTypeId" class="form-control thin-control">
                                             @{
                                                 foreach (var type in MasterTableService.GetIncidentTypes())
                                                 {
-                                                    <option value="@type.IncidentTypeId">@(type.Type + (type.SubType != null ? " - " + type.SubType : ""))</option>
+                                            <option value="@type.IncidentTypeId">@(type.Type + (type.SubType != null ? " - " + type.SubType : ""))</option>
                                                 }
                                             }
                                         </select>
 
-                                        @Html.HiddenFor(model => generalEnquiry.IncidentTypeId)
-                                        @Html.ValidationMessageFor(model => generalEnquiry.IncidentTypeId, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => generalEnquiry.GeneralEnquiryTypeId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -101,7 +100,6 @@
                     @Html.HiddenFor(model => generalEnquiry.GeneralEnquiryId, new { @Value = 0 })
                     @Html.HiddenFor(model => generalEnquiry.CloseById)
                     @Html.HiddenFor(model => generalEnquiry.CloseDateTime)
-                    @Html.HiddenFor(model => generalEnquiry.IncidentNo)
                     @Html.HiddenFor(model => generalEnquiry.Status)
                     @Html.HiddenFor(model => generalEnquiry.CreatedBy)
                     @Html.HiddenFor(model => generalEnquiry.CreatedDateTime)

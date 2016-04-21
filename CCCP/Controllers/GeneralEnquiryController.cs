@@ -63,7 +63,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GeneralEnquiryId,ChatRoomId,IncidentTypeId,IncidentNo,Background,Status,IssueById,IssueDateTime,CloseById,CloseDateTime,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] GeneralEnquiry generalEnquiry)
+        public ActionResult Create([Bind(Include = "GeneralEnquiryId,ChatRoomId,GeneralEnquiryTypeId,Background,Status,IssueById,IssueDateTime,CloseById,CloseDateTime,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] GeneralEnquiry generalEnquiry)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,12 @@ namespace CCCP.Controllers
                 return RedirectToAction("Index", new { message = "General enquiry " + generalEnquiry.GeneralEnquiryId + " had been created successfully!" });
             }
 
-            return View(generalEnquiry);
+            if (Session != null)
+            {
+                enquiry.Entity = generalEnquiry;
+            }
+
+            return View(enquiry);
         }
 
         // GET: GeneralEnquirys/Edit/5
@@ -98,7 +103,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GeneralEnquiryId,ChatRoomId,IncidentTypeId,IncidentNo,Background,Status,IssueById,IssueDateTime,CloseById,CloseDateTime,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] GeneralEnquiry generalEnquiry)
+        public ActionResult Edit([Bind(Include = "GeneralEnquiryId,ChatRoomId,GeneralEnquiryTypeId,Background,Status,IssueById,IssueDateTime,CloseById,CloseDateTime,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] GeneralEnquiry generalEnquiry)
         {
             if (Session != null && Session["enquiry"] != null)
             {
@@ -151,7 +156,7 @@ namespace CCCP.Controllers
 
             foreach (IncidentTypeSubType incidentType in Enum.GetValues(typeof(IncidentTypeSubType)))
             {
-                if (MasterTableService.GetIncidentTypeId(incidentType) == enquiry.Entity.IncidentTypeId)
+                if (MasterTableService.GetIncidentTypeId(incidentType) == enquiry.Entity.GeneralEnquiryTypeId)
                 {
                     targetController = "Incident" + incidentType.ToEnumString();
                     break;
@@ -231,7 +236,7 @@ namespace CCCP.Controllers
             incidentSystemOTSystem.IssueDateTime = enquiry.Entity.IssueDateTime;
             incidentSystemOTSystem.GeneralEnquiryId = enquiry.Entity.GeneralEnquiryId;
 
-            switch (MasterTableService.GetIncidentTypeSubType(enquiry.Entity.IncidentTypeId))
+            switch (MasterTableService.GetIncidentTypeSubType(enquiry.Entity.GeneralEnquiryTypeId.Value))
             {
                 case IncidentTypeSubType.EnvironmentAirEmission:
                     return RedirectToAction("CreateByEnquiry", targetController, incidentEnvironmentAirEmission);
@@ -259,7 +264,7 @@ namespace CCCP.Controllers
                     return RedirectToAction("CreateByEnquiry", targetController, incidentSystemOTSystem);
             }
 
-            return Details(enquiry.Entity.IncidentTypeId, null);
+            return Details(enquiry.Entity.GeneralEnquiryId, null);
         }
     }
 }

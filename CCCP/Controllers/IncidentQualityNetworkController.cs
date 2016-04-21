@@ -81,6 +81,7 @@ namespace CCCP.Controllers
                 new IncidentQualityNetworkApiController().CreateIncident(incidentQualityNetwork);
                 return RedirectToAction("Index", new { message = "Incident " + incidentQualityNetwork.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentQualityNetwork;
 
             return View(incidentQualityNetwork);
         }

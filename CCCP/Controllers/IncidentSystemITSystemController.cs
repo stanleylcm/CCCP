@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentSystemITSystemApiController().CreateIncident(incidentSystemITSystem);
                 return RedirectToAction("Index", new { message = "Incident " + incidentSystemITSystem.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentSystemITSystem;
 
             return View(incidentSystemITSystem);
         }

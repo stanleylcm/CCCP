@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentSystemCallCentreApiController().CreateIncident(incidentSystemCallCentre);
                 return RedirectToAction("Index", new { message = "Incident " + incidentSystemCallCentre.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentSystemCallCentre;
 
             return View(incidentSystemCallCentre);
         }

@@ -849,9 +849,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Chatroom ID")]
         public int ChatRoomId { get; set; }
         [Display(Name = "Enquiry Type")]
-        public int IncidentTypeId { get; set; }
-        [Display(Name = "Incident No")]
-        public string IncidentNo { get; set; }
+        public Nullable<int> GeneralEnquiryTypeId { get; set; }
         [Display(Name = "Enquiry Background")]
         [DataType(DataType.MultilineText)]
         public string Background { get; set; }

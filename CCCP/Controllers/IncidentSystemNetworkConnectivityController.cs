@@ -75,6 +75,7 @@ namespace CCCP.Controllers
                 new IncidentSystemNetworkConnectivityApiController().CreateIncident(incidentSystemNetworkConnectivity);
                 return RedirectToAction("Index", new { message = "Incident " + incidentSystemNetworkConnectivity.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentSystemNetworkConnectivity;
 
             return View(incidentSystemNetworkConnectivity);
         }

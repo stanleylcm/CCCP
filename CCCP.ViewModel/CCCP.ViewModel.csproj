@@ -92,6 +92,9 @@
     <Compile Include="GeneralEnquiry.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralEnquiryIncidentLink.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IncidentEnvironmentAirEmission.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -175,6 +178,9 @@
     <Compile Include="usp_Dashboard_GetOutstandingCrisis_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_Dashboard_GetOutstandingGeneralEnquiry1_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_Dashboard_GetOutstandingGeneralEnquiry_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
@@ -200,6 +206,9 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_Incident_GetIncidentForLink_Result.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Incident_GetLinkedGeneralEnquiry_Result.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_Incident_GetLinkedIncident_Result.cs">

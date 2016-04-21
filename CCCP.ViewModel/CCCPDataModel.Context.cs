@@ -42,7 +42,6 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentSystemITSystem> IncidentSystemITSystem { get; set; }
         public virtual DbSet<IncidentSystemNetworkConnectivity> IncidentSystemNetworkConnectivity { get; set; }
         public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
-        public virtual DbSet<GeneralEnquiry> GeneralEnquiry { get; set; }
         public virtual DbSet<OMSEvent> OMSEvent { get; set; }
         public virtual DbSet<IncidentEnvironmentLeakage> IncidentEnvironmentLeakage { get; set; }
         public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
@@ -54,6 +53,8 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<ChatRoomAttachment> ChatRoomAttachment { get; set; }
+        public virtual DbSet<GeneralEnquiry> GeneralEnquiry { get; set; }
+        public virtual DbSet<GeneralEnquiryIncidentLink> GeneralEnquiryIncidentLink { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
@@ -206,6 +207,24 @@ namespace CCCP.ViewModel
                 new ObjectParameter("CreatedBy", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GeneralEnquiry_PostCreate", generalEnquiryIdParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<usp_Dashboard_GetOutstandingGeneralEnquiry1_Result> usp_Dashboard_GetOutstandingGeneralEnquiry1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Dashboard_GetOutstandingGeneralEnquiry1_Result>("usp_Dashboard_GetOutstandingGeneralEnquiry1");
+        }
+    
+        public virtual ObjectResult<usp_Incident_GetLinkedGeneralEnquiry_Result> usp_Incident_GetLinkedGeneralEnquiry(Nullable<int> incidentId, Nullable<int> incidentTypeId)
+        {
+            var incidentIdParameter = incidentId.HasValue ?
+                new ObjectParameter("IncidentId", incidentId) :
+                new ObjectParameter("IncidentId", typeof(int));
+    
+            var incidentTypeIdParameter = incidentTypeId.HasValue ?
+                new ObjectParameter("IncidentTypeId", incidentTypeId) :
+                new ObjectParameter("IncidentTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Incident_GetLinkedGeneralEnquiry_Result>("usp_Incident_GetLinkedGeneralEnquiry", incidentIdParameter, incidentTypeIdParameter);
         }
     }
 }

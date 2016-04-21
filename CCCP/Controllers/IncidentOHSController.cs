@@ -76,6 +76,7 @@ namespace CCCP.Controllers
                 new IncidentOHSApiController().CreateIncident(incidentOHS);
                 return RedirectToAction("Index", new { message = "Incident " + incidentOHS.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentOHS;
 
             return View(incidentOHS);
         }

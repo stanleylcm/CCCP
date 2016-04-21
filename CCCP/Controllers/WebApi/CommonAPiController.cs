@@ -34,7 +34,7 @@ namespace CCCP.Controllers.WebApi
             dynamic response = serializer.Deserialize(serializer.Serialize(result.Data), typeof(object));
 
             var context = GlobalHost.ConnectionManager.GetHubContext<ChatRoomHub>();
-            context.Clients.All.broadcastMessage(name, message, time, chatRoomId, response["id"]);
+            context.Clients.All.broadcastMessage(name, message, response["sendDateTime"], chatRoomId, response["id"]);
 
             return response["id"];
         }

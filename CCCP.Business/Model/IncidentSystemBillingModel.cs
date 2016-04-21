@@ -31,6 +31,7 @@ namespace CCCP.Business.Model
             Chatroom = new ChatRoomModel();
             LinkedIncidentEntities = new List<usp_Incident_GetLinkedIncident_Result>();
             NotificationEntities = new List<Notification>();
+            LinkedGeneralEnquiryEntities = new List<usp_Incident_GetLinkedGeneralEnquiry_Result>();
         }
 
         #endregion
@@ -58,6 +59,7 @@ namespace CCCP.Business.Model
         }
         public List<usp_Incident_GetLinkedIncident_Result> LinkedIncidentEntities { get; set; }
         public List<Notification> NotificationEntities { get; set; }
+        public List<usp_Incident_GetLinkedGeneralEnquiry_Result> LinkedGeneralEnquiryEntities { get; set; }
 
         public List<string> Options_ProblemArea = new List<string>();
         public List<string> Options_PossibleCause = new List<string>();

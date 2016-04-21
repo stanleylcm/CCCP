@@ -10,7 +10,8 @@
     <script>
     $(document).ready(function () {
         dTable = $('#IncidentList').DataTable({
-            "sDom": '<"top"l>rt<"bottom"ip><"clear">'
+            "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+            "order": [[1, "desc"]]
         });
 
         $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
@@ -63,7 +64,7 @@
                                 <th>Enquiry Type</th>
                                 <th>@Html.DisplayNameFor(model => model.Entity.Status)</th>
                                 <th>@Html.DisplayNameFor(model => model.Entity.Background)</th>
-                                <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                <th>Incident No</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -72,11 +73,11 @@
                             { 
                             <tr>
                                 <td>@Html.DisplayFor(model => item.IssueBy)</td>
-                                <td>@Html.DisplayFor(model => item.Entity.IssueDateTime)</td>
+                                <td>@(item.Entity.IssueDateTime != null ? item.Entity.IssueDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
                                 <td>@Html.DisplayFor(model => item.EnquiryType)</td>
                                 <td>@Html.DisplayFor(model => item.Entity.Status)</td>
                                 <td>@Html.Raw(item.Entity.Background != null ? item.Entity.Background.Replace(System.Environment.NewLine, "<br/>") : "")</td>
-                                <td>@Html.DisplayFor(model => item.Entity.IncidentNo)</td>
+                                <td><a href="@(item.LinkedIncidentController != "" ? Url.Action("Details", item.LinkedIncidentController, new { id = item.LinkedIncidentId }) : "")">@item.LinkedIncidentNo</a></td>
                                 <td>
                                     <div>
                                         <a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.Entity.GeneralEnquiryId })" title="@Resources.global.Func_Details"><i class="fa fa-sliders"></i></a>

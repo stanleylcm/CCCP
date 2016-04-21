@@ -75,8 +75,9 @@ namespace CCCP.Controllers
                 new IncidentEnvironmentAirEmissionApiController().CreateIncident(incidentEnvironmentAirEmission);
                 return RedirectToAction("Index", new { message = "Incident " + incidentEnvironmentAirEmission.IncidentNo + " had been created successfully!" });
             }
+            incident.Entity = incidentEnvironmentAirEmission;
 
-            return View(incidentEnvironmentAirEmission);
+            return View(incident);
         }
 
         // GET: IncidentEnvironmentAirEmissions/Edit/5
