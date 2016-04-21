@@ -12,7 +12,9 @@ using CCCP.ViewModel;
 using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using CCCP.Hubs;
+using Microsoft.AspNet.SignalR;
 
 namespace CCCP.Controllers.WebApi
 {
@@ -25,11 +27,16 @@ namespace CCCP.Controllers.WebApi
         public int SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, IEnumerable<HttpPostedFileBase> uploadData)
         {
             JsonResult result = new CCCP.Controllers.ChatRoomController().SaveChatRoomMessageAttachment(chatRoomId, userId, name, Convert.ToDateTime(time), message, uploadData);
+            //dynamic response = System.Web.Helpers.Json.Decode(result.Data.ToString());
+            //dynamic response = Newtonsoft.Json.JsonConvert.DeserializeObject(result.Data.ToString());
+            var serializer = new JavaScriptSerializer();
 
-            dynamic response = Newtonsoft.Json.JsonConvert.DeserializeObject(result.ToString());
-            new CCCP.Hubs.ChatRoomHub().Send(name, message, time, userId, chatRoomId, response.id);
-            
-            return response.id;
+            dynamic response = serializer.Deserialize(serializer.Serialize(result.Data), typeof(object));
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<ChatRoomHub>();
+            context.Clients.All.broadcastMessage(name, message, time, chatRoomId, response["id"]);
+
+            return response["id"];
         }
 
         [System.Web.Http.HttpGet]
