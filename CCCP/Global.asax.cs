@@ -59,16 +59,16 @@ namespace CCCP
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Exception ex = Server.GetLastError();
-            Response.Clear();
+            //Exception ex = Server.GetLastError();
+            //Response.Clear();
 
-            // error handling
-            ex.LogError();
+            //// error handling
+            //ex.LogError();
 
-            // route to Error page
-            Server.ClearError();
-            string action = "Error";
-            Response.Redirect(String.Format("~/Error/{0}/?errorMessage={1}", action, ex.Message.Replace("\r\n", "")));
+            //// route to Error page
+            //Server.ClearError();
+            //string action = "Error";
+            //Response.Redirect(String.Format("~/Error/{0}/?errorMessage={1}", action, ex.Message.Replace("\r\n", "")));
         }        
     }
 }

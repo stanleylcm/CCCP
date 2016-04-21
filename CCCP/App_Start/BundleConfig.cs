@@ -39,7 +39,7 @@ namespace CCCP
                       "~/Scripts/app.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-3.3.0.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/ionicons.min.css",
                       "~/Content/AdminLTE.css",
