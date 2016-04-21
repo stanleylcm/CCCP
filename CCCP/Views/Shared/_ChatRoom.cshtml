@@ -14,32 +14,32 @@
         {
             Boolean isMe = (crMsg.Entity.SenderUserId == user.Entity.UserId);
     <!-- Message. Default to the @(isMe ? "right" : "left") -->
-    <div id="@crMsg.Entity.ChatRoomMessageId" class="direct-chat-msg@(isMe ? " right" : "")">
-        <div class="direct-chat-info clearfix">
-            <span class="direct-chat-name pull-@(isMe ? "right" : "left")"><label>@crMsg.Entity.SenderDisplayName</label></span>
-            <span class="direct-chat-timestamp pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "left" : "right")">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
-        </div>
-        <!-- /.direct-chat-info -->
-        <div class="direct-chat-text">
-            @{
-                foreach (ChatRoomAttachment attach in crMsg.ChatRoomAttachmentsEntities)
+            <div id="@crMsg.Entity.ChatRoomMessageId" class="direct-chat-msg@(isMe ? " right" : "")">
+                <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-@(isMe ? "right" : "left")"><label>@crMsg.Entity.SenderDisplayName</label></span>
+                    <span class="direct-chat-timestamp pull-@(crMsg.Entity.SenderUserId == user.Entity.UserId ? "left" : "right")">@crMsg.Entity.SendDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <div class="direct-chat-text">
+                    @{
+            foreach (ChatRoomAttachment attach in crMsg.ChatRoomAttachmentsEntities)
+            {
+                if (attach.AttachmentType == ".jpg")
                 {
-                    if (attach.AttachmentType == ".jpg")
-                    {
-                        var imgSrc = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(attach.Attachment));
-            <img src="@imgSrc" /><br/>
-                    }
-                    if (attach.AttachmentType == ".mp4")
-                    {
-                        var videoSrc = String.Format("data:video/mp4;base64,{0}", Convert.ToBase64String(attach.Attachment));
-            <video width="400" height="300" controls><source src="@videoSrc" type="video/mp4" /></video><br />
-                    }
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(attach.Attachment));
+                    <img src="@imgSrc" /><br />
+                }
+                if (attach.AttachmentType == ".mp4")
+                {
+                    var videoSrc = String.Format("data:video/mp4;base64,{0}", Convert.ToBase64String(attach.Attachment));
+                    <video width="400" height="300" controls><source src="@videoSrc" type="video/mp4" /></video><br />
                 }
             }
-            @Html.Raw(crMsg.Entity.Message.Replace("\n", "<br/>").Replace(System.Environment.NewLine, "<br/>"))
-        </div>
-        <!-- /.direct-chat-text -->
-    </div>
+                    }
+                    @Html.Raw(crMsg.Entity.Message.Replace("\n", "<br/>").Replace(System.Environment.NewLine, "<br/>"))
+                </div>
+                <!-- /.direct-chat-text -->
+            </div>
     <!-- /.direct-chat-msg -->
         }
     }
@@ -99,7 +99,7 @@
         if (e.target.files.length > 0) {
             $('#attachment_list').append("<label>Attachment List:</label><br/>");
         }
-        
+
         $.each(e.target.files, function (index, file) {
             $('#attachment_list').append("<span class='label label-info'>" + file.name + "</span><br/>");
         });
@@ -119,7 +119,7 @@
         data.append("messageId", messageId);
 
         $.ajax({
-            url: "/ChatRoom/GetMessageAttachment",
+            url: '@Url.Action("GetMessageAttachment", "ChatRoom")',
             type: "POST",
             contentType: false,
             processData: false,
@@ -201,7 +201,7 @@
 
                 // upload file to temp and send message to Hub...
                 $.ajax({
-                    url: "/ChatRoom/SaveChatRoomMessageAttachment",
+                    url: '@Url.Action("SaveChatRoomMessageAttachment", "ChatRoom")',
                     type: "POST",
                     contentType: false,
                     processData: false,
@@ -214,7 +214,7 @@
 
                             // Call the Send method on the hub.
                             chatHub.server.send('@user.Entity.DisplayName', $('#message').val(), moment().format('YYYY-MM-DD HH:mm:ss'), '@user.Entity.UserId', '@Model.Entity.ChatRoomId', data.id);
-    
+
                             // Clear text box and reset focus for next comment.
                             $('#attachUI').val('');
                             $('#attachment_list').html('');
