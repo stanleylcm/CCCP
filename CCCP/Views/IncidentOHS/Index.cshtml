@@ -14,80 +14,147 @@
         });
 
         $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
-            if ($('#filterText').val() != "") {
-                $('#filterText').val('"' + $('#filterText').val() + '"');
-            }
-            dTable.search($('#filterText').val()).draw();
+        if ($('#filterText').val() != "") {
+            $('#filterText').val('"' + $('#filterText').val() + '"');
+        }
+        dTable.search($('#filterText').val()).draw();
 
-            $('#filterText').keyup(function() {
-                dTable.search($(this).val()).draw();
-            });
+        $('#filterText').keyup(function () {
+            dTable.search($(this).val()).draw();
+        });
 
-            dTable.$("a[name^='LinkIncident']").on('click', function (event) {
-                var incidentId = $(this).data('incidentid');
-                var incidentNo = $(this).data('incidentno');
-                var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.OHS)';
+        dTable.$("a[name^='LinkIncident']").on('click', function (event) {
+            var incidentId = $(this).data('incidentid');
+            var incidentNo = $(this).data('incidentno');
+            var incidentTypeId = $(this).data('incidenttypeid');
 
-                $.ajax({
-                    url: "@Url.Action("GetIncidentListForLink", "IncidentOHS")",
+            $.ajax({
+                url: "@Url.Action("GetIncidentListForLink", "Incident")",
                     type: "POST",
-                    data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId }),
-                    dataType: "html",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        $('#CCCPModal').find('.modal-dialog').css({ width: '90%' });
-                        $('#CCCPModal').find('.modal-body').html(data);
-                        $('#CCCPModal').find('.modal-title').html('Link Incident - ' + incidentNo);
-                        $('#CCCPModal').modal('toggle');
+                data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'incidentNo': incidentNo }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#CCCPModal').find('.modal-dialog').css({ width: '90%' });
+                    $('#CCCPModal').find('.modal-body').html(data);
+                    $('#CCCPModal').find('.modal-title').html('@Resources.global.Func_LinkIncident - ' + incidentNo);
+                    $('#CCCPModal').modal('toggle');
 
-                        dLinkTable = $('#LinkIncidentList').DataTable({
-                            "sDom": '<"top"l>rt<"bottom"ip><"clear">',
-                            "order": [[1, "desc"]]
-                        });
+                    dLinkTable = $('#LinkIncidentList').DataTable({
+                        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+                        "order": [[1, "desc"]]
+                    });
 
-                        $('#LinkIncidentFilterText').keyup(function () {
-                            dLinkTable.search($(this).val()).draw();
-                        });
+                    $('#LinkIncidentFilterText').keyup(function () {
+                        dLinkTable.search($(this).val()).draw();
+                    });
 
-                        $('button[name=LinkIncident]').on('click', function (event) {
-                            var incidentId = $(this).data('incidentid');
-                            var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.OHS)';
+                    $('button[name=LinkIncident]').on('click', function (event) {
+                        var incidentId = $(this).data('incidentid');
+                        var incidentTypeId = $(this).data('incidenttypeid');
+                        var incidentNo = $(this).data('incidentno');
 
-                            var sList = "";
-                            var i = 0;
-                            dLinkTable.$("input[type=checkbox][id^=chkLinkIncident]").each(function () {
-                                if (this.checked) {
-                                    if (i == 0) {
-                                        sList = $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
-                                    } else {
-                                        sList = sList + ";" + $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
-                                    }
-                                    i++;
+                        var sList = "";
+                        var i = 0;
+                        dLinkTable.$("input[type=checkbox][id^=chkLinkIncident]").each(function () {
+                            if (this.checked) {
+                                if (i == 0) {
+                                    sList = $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
+                                } else {
+                                    sList = sList + ";" + $(this).data('linkincidentid') + ':' + $(this).data('linkincidenttypeid');
                                 }
-                            });
-                            $("#LinkIncidentLinkList").val(sList);
-
-                            $.ajax({
-                                url: "@Url.Action("LinkIncident", "IncidentOHS")",
-                                type: "POST",
-                                data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'linkList': $("#LinkIncidentLinkList").val() }),
-                                dataType: "json",
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    window.location = '\IncidentOHS\?message=Selected incidents had been linked to ' + data.SelectedIncidentNo + ' successfully!';
-                                },
-                                error: function () {
-                                    alert("An error has occured!!!");
-                                }
-                            });
+                                i++;
+                            }
                         });
-                    },
-                    error: function () {
-                        alert("An error has occured!!!");
-                    }
-                });
+                        $("#LinkIncidentLinkList").val(sList);
+
+                        $.ajax({
+                            url: "@Url.Action("LinkIncident", "Incident")",
+                            type: "POST",
+                            data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'incidentNo': incidentNo, 'linkList': $("#LinkIncidentLinkList").val() }),
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                window.location = '@Url.Action("Index", "IncidentOHS")/?message=Selected incidents had been linked to ' + data.SelectedIncidentNo + ' successfully!';
+                            },
+                            error: function () {
+                                alert("An error has occured!!!");
+                            }
+                        });
+                    });
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
             });
         });
+
+        dTable.$("a[name^='LinkGeneralEnquiry']").on('click', function (event) {
+            var incidentId = $(this).data('incidentid');
+            var incidentNo = $(this).data('incidentno');
+            var incidentTypeId = $(this).data('incidenttypeid');
+
+            $.ajax({
+                url: "@Url.Action("GetGeneralEnquiryListForLink", "Incident")",
+                type: "POST",
+                data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'incidentNo': incidentNo }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#CCCPModal').find('.modal-dialog').css({ width: '90%' });
+                    $('#CCCPModal').find('.modal-body').html(data);
+                    $('#CCCPModal').find('.modal-title').html('@Resources.global.Func_LinkGeneralEnquiry - ' + incidentNo);
+                    $('#CCCPModal').modal('toggle');
+
+                    dLinkTable = $('#LinkGeneralEnquiryList').DataTable({
+                        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+                        "order": [[1, "desc"]]
+                    });
+
+                    $('#LinkGeneralEnquiryFilterText').keyup(function () {
+                        dLinkTable.search($(this).val()).draw();
+                    });
+
+                    $('button[name=LinkGeneralEnquiry]').on('click', function (event) {
+                        var incidentId = $(this).data('incidentid');
+                        var incidentTypeId = $(this).data('incidenttypeid');
+                        var incidentNo = $(this).data('incidentno');
+
+                        var sList = "";
+                        var i = 0;
+                        dLinkTable.$("input[type=checkbox][id^=chkLinkGeneralEnquiry]").each(function () {
+                            if (this.checked) {
+                                if (i == 0) {
+                                    sList = $(this).data('linkgeneralid');
+                                } else {
+                                    sList = sList + ";" + $(this).data('linkgeneralid');
+                                }
+                                i++;
+                            }
+                        });
+                        $("#LinkGeneralEnquiryLinkList").val(sList);
+
+                        $.ajax({
+                            url: "@Url.Action("LinkGeneralEnquiry", "Incident")",
+                            type: "POST",
+                            data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'incidentNo': incidentNo, 'linkList': $("#LinkGeneralEnquiryLinkList").val() }),
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                window.location = '@Url.Action("Index", "IncidentOHS")/?message=Selected general enquiries had been linked to ' + data.SelectedIncidentNo + ' successfully!';
+                            },
+                            error: function () {
+                                alert("An error has occured!!!");
+                            }
+                        });
+                    });
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        });
+    });
 
 
     </script>
@@ -153,8 +220,8 @@
                                     <div>
                                         <a href="@Url.Action("Edit", "IncidentOHS", new { id = item.Entity.IncidentOHSId })" title="@Resources.global.Func_Edit"><i class="fa fa-pencil-square-o"></i></a>
                                         <a id="@item.Entity.IncidentOHSId" class="text-red" title="@Resources.global.Func_Cancel" onclick="bootbox.confirm('@Resources.global.Label_Cancelncident', function (result) { if (result) { window.location = '@Url.Action("Cancel", new { id = item.Entity.IncidentOHSId })'; } })"><i class="fa fa-times"></i></a>
-                                        <a name="LinkIncident@(item.Entity.IncidentOHSId)" data-incidentid="@item.Entity.IncidentOHSId" data-incidentno="@item.Entity.IncidentNo" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
-                                        <a href="@Url.Action("Edit", "IncidentOHS", new { id = item.Entity.IncidentOHSId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
+                                        <a name="LinkIncident@(item.Entity.IncidentOHSId)" data-incidentid="@item.Entity.IncidentOHSId" data-incidentno="@item.Entity.IncidentNo" data-incidenttypeid="@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.OHS)" title="@Resources.global.Func_LinkIncident"><i class="fa fa-link"></i></a>
+                                        <a name="LinkGeneralEnquiry@(item.Entity.IncidentOHSId)" data-incidentid="@item.Entity.IncidentOHSId" data-incidentno="@item.Entity.IncidentNo" data-incidenttypeid="@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.OHS)" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-chain-broken"></i></a>
                                     </div>
                                 </td>
                             </tr>
