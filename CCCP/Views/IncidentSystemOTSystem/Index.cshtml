@@ -29,7 +29,7 @@
                 var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemOTSystem)';
 
                 $.ajax({
-                    url: "/IncidentSystemOTSystem/GetIncidentListForLink",
+                    url: "@Url.Action("GetIncidentListForLink", "IncidentSYstemOTSystem")",
                     type: "POST",
                     data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId }),
                     dataType: "html",
@@ -68,7 +68,7 @@
                             $("#LinkIncidentLinkList").val(sList);
 
                             $.ajax({
-                                url: "/IncidentSystemOTSystem/LinkIncident",
+                                url: "@Url.Action("LinkIncident", "IncidentSystemOTSystem")",
                                 type: "POST",
                                 data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'linkList': $("#LinkIncidentLinkList").val() }),
                                 dataType: "json",

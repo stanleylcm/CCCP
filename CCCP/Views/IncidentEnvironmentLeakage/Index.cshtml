@@ -29,7 +29,7 @@
                 var incidentTypeId = '@MasterTableService.GetIncidentTypeId(IncidentTypeSubType.EnvironmentLeakage)';
 
                 $.ajax({
-                    url: "/IncidentEnvironmentLeakage/GetIncidentListForLink",
+                    url: "@Url.Action("GetIncidentListForLink", "IncidentEnvironmentLeakage")",
                     type: "POST",
                     data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId }),
                     dataType: "html",
@@ -68,7 +68,7 @@
                             $("#LinkIncidentLinkList").val(sList);
 
                             $.ajax({
-                                url: "/IncidentEnvironmentLeakage/LinkIncident",
+                                url: "@Url.Action("LinkIncident", "IncidentEnvironmentLeakage")",
                                 type: "POST",
                                 data: JSON.stringify({ 'incidentId': incidentId, 'incidentTypeId': incidentTypeId, 'linkList': $("#LinkIncidentLinkList").val() }),
                                 dataType: "json",

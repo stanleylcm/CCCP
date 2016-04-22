@@ -20,7 +20,7 @@
                 }
                 
                 $.ajax({
-                    url: "/Home/SetLanguage",
+                    url: "@Url.Action("SetLanguage", "Home")",
                     type: "POST",
                     data: JSON.stringify({ 'name': name, 'currentUrl': '@Request.Url.AbsoluteUri' }),
                     dataType: "html",
@@ -38,7 +38,7 @@
 
             $('.sidebar-toggle').on('click', function () {
                 $.ajax({
-                    url: "/Home/ToggleSidebarCollapse",
+                    url: "@Url.Action("ToggleSidebarCollapse", "Home")",
                     type: "POST",
                     dataType: "html",
                     contentType: "application/json; charset=utf-8",

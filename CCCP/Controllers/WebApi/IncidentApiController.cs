@@ -29,5 +29,22 @@ namespace CCCP.Controllers.WebApi
 
             return true;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public Boolean LinkGeneralEnquiry(int id, int typeId, int generalEnquiryId)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            GeneralEnquiryIncidentLink gelink = new GeneralEnquiryIncidentLink();
+            gelink.GeneralEnquiryId = generalEnquiryId;
+            gelink.IncidentId = id;
+            gelink.IncidentTypeId = typeId;
+
+            db.GeneralEnquiryIncidentLink.Add(gelink);
+            db.SaveChanges();
+
+            return true;
+        }
     }
 }

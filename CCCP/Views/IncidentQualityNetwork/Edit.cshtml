@@ -31,7 +31,7 @@
 		    $('.bootstrap-checkbox').on('click', function(evnet){
 
 		        $.ajax({
-		            url: "/IncidentQualityNetwork/ToggleActionStatus",
+		            url: "@Url.Action("ToggleActionStatus", "IncidentQualityNetwork")",
 		            type: "POST",
 		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
 		            dataType: "html",
