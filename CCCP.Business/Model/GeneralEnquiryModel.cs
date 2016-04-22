@@ -58,7 +58,8 @@ namespace CCCP.Business.Model
         {
             get
             {
-                return MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(Entity.GeneralEnquiryTypeId.Value));
+
+                return Entity.GeneralEnquiryTypeId == null ? "" : MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(Entity.GeneralEnquiryTypeId.Value));
             }
         }
 

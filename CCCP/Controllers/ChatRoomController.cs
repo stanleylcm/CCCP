@@ -14,6 +14,7 @@ using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
 using CCCP.Controllers.WebApi;
+using log4net;
 
 namespace CCCP.Controllers
 {
@@ -47,7 +48,7 @@ namespace CCCP.Controllers
                         if (file != null)
                         {
                             var path = Path.Combine(Server.MapPath("~/temp"), cnt.ToString() + fileType);
-
+                            
                             // Save the uploaded file to "UploadedFiles" folder
                             file.SaveAs(path);
                             
