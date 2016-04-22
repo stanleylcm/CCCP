@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Http;
 using System.IO;
 using CCCP.Common;
+using CCCP.Controllers;
 
 namespace CCCP
 {
@@ -69,6 +70,12 @@ namespace CCCP
             //Server.ClearError();
             //string action = "Error";
             //Response.Redirect(String.Format("~/Error/{0}/?errorMessage={1}", action, ex.Message.Replace("\r\n", "")));
-        }        
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+        }
     }
 }
