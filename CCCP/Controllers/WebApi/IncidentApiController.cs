@@ -46,5 +46,13 @@ namespace CCCP.Controllers.WebApi
 
             return true;
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public List<ViewModel.IncidentType> GetIncidentTypeList()
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            return db.IncidentType.Where(m => m.IncidentType1.IndexOf("___") < 0).ToList();
+        }
     }
 }

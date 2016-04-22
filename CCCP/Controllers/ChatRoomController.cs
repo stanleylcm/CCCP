@@ -47,11 +47,11 @@ namespace CCCP.Controllers
 
                         if (file != null)
                         {
-                            var path = Path.Combine(Server.MapPath("~/temp"), cnt.ToString() + fileType);
+                            var path = Path.Combine(Path.GetTempPath(), cnt.ToString() + fileType);
                             
                             // Save the uploaded file to "UploadedFiles" folder
                             file.SaveAs(path);
-                            
+
                             byte[] content = { };
                             // convert / compress image and video
                             switch (fileType)
