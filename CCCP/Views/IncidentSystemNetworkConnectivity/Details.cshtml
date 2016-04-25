@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-lg-3 pull-left">
                     <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</label></span>
-                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo)</span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.IncidentNo) <strong><font color="red" size="4">@Html.DisplayFor(model => model.IsDrillMode)</font></strong></span>
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></span>
@@ -146,10 +146,10 @@
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
 										</div>
 
-										<div class="row">
+										@*<div class="row">
 											<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
 											<div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
-										</div>
+										</div>*@
 									</div>
 								</div>
 

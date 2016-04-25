@@ -81,6 +81,13 @@ namespace CCCP.Business.Model
                 return userModel.GetLastUpdatedBy();
             }
         }
+        public String IsDrillMode
+        {
+            get
+            {
+                return Entity.IsDrillMode.Value ? "(Drill)" : "";
+            }
+        }
 
         #endregion
 

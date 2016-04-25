@@ -10,5 +10,6 @@ namespace CCCP.Business.Model
     {
         List<ChecklistModel> Checklists { get; set; }
         ChatRoomModel Chatroom { get; set; }
+        string IsDrillMode { get; }
     }
 }

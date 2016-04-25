@@ -26,7 +26,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -94,7 +94,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -164,7 +164,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -230,7 +230,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -294,7 +294,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -356,7 +356,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -423,7 +423,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -483,7 +483,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -547,7 +547,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -625,7 +625,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -687,7 +687,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
@@ -751,7 +751,7 @@ namespace CCCP.ViewModel
         public int ChatRoomId { get; set; }
         [Display(Name = "General Enquiry ID")]
         public int GeneralEnquiryId { get; set; }
-        [Display(Name = "Crisis ID")]
+        [Display(Name = "Crisis No")]
         public Nullable<int> CrisisId { get; set; }
         [Display(Name = "Issue By")]
         public Nullable<int> IssueById { get; set; }
