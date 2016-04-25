@@ -10,7 +10,8 @@
     <script>
     $(document).ready(function () {
         dTable = $('#IncidentList').DataTable({
-            "sDom": '<"top"l>rt<"bottom"ip><"clear">'
+            "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+            "order": [[0, "desc"]]
         });
 
         $('#filterText').val('@(ViewBag.SearchCriteria != null && ViewBag.SearchCriteria != "" ? ViewBag.SearchCriteria : "")');
