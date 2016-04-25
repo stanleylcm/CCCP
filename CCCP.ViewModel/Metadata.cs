@@ -776,6 +776,7 @@ namespace CCCP.ViewModel
         public string History { get; set; }
 
         [Display(Name = "Affected Area")]
+        [DataType(DataType.MultilineText)]
         public string AffectedArea { get; set; }
         [Display(Name = "Outage Start Time")]
         public Nullable<System.DateTime> OutageStartTime { get; set; }
@@ -799,15 +800,18 @@ namespace CCCP.ViewModel
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
+        [DataType(DataType.MultilineText)]
         public string PossibleCause { get; set; }
         [Display(Name = "Expected Restoration Time (hour)")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Restoration Method")]
+        [DataType(DataType.MultilineText)]
         public string RestorationMethod { get; set; }
         [Display(Name = "Status Update")]
         public string StatusUpdate { get; set; }
         [Display(Name = "Root Cause")]
+        [DataType(DataType.MultilineText)]
         public string RootCause { get; set; }
         [Display(Name = "Loss Generation")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
@@ -955,8 +959,8 @@ namespace CCCP.ViewModel
         public Nullable<bool> MVOutage { get; set; }
         [Display(Name = "LV Outage")]
         public Nullable<bool> LVOutage { get; set; }
-        [Display(Name = "Points")]
-        public string Points { get; set; }
+        [Display(Name = "Affected Points")]
+        public string AffectedPoints { get; set; }
         [Display(Name = "Critcal PT")]
         public Nullable<bool> CriticalPoint { get; set; }
         [Display(Name = "Reviewed")]

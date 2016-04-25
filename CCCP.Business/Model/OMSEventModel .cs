@@ -50,7 +50,7 @@ namespace CCCP.Business.Model
             oms.RootCause_Chi = viewModel.RootCause_Chi;
             oms.MVOutage = viewModel.MVOutage;
             oms.LVOutage = viewModel.LVOutage;
-            oms.Points = viewModel.Points;
+            oms.AffectedPoints = viewModel.Points;
 
             this.Entity = oms;
         }
@@ -80,7 +80,7 @@ namespace CCCP.Business.Model
             oms.RootCause_Chi = viewModel.RootCause_Chi;
             oms.MVOutage = viewModel.MVOutage;
             oms.LVOutage = viewModel.LVOutage;
-            oms.Points = viewModel.Points;
+            oms.AffectedPoints = viewModel.Points;
 
             this.Entity = oms;
         }

@@ -159,7 +159,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedArea)</div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedArea != null ? Model.Entity.AffectedArea.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -204,7 +204,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.PossibleCause != null ? Model.Entity.PossibleCause.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -214,7 +214,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.RestorationMethod)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RestorationMethod)</div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.RestorationMethod != null ? Model.Entity.RestorationMethod.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -224,7 +224,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RootCause)</label></div>
-                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RootCause)</div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.RootCause != null ? Model.Entity.RootCause.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -244,27 +244,27 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MVOutage)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.MVOutage == null ? false : Model.Entity.MVOutage)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "YES" : "NO")</div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" style="@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "" : "display:none")">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDoubleFault)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDoubleFault == null ? false : Model.Entity.IsDoubleFault)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.IsDoubleFault != null && Model.Entity.IsDoubleFault.Value ? "YES" : "NO")</div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.LVOutage)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.LVOutage == null ? false : Model.Entity.LVOutage)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.LVOutage != null && Model.Entity.LVOutage.Value ? "YES" : "NO")</div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsPQEventAffectLargeCustomer)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsPQEventAffectLargeCustomer == null ? false : Model.Entity.IsPQEventAffectLargeCustomer)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.IsPQEventAffectLargeCustomer != null && Model.Entity.IsPQEventAffectLargeCustomer.Value ? "YES" : "NO")</div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" style="@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "" : "display:none")">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsCriticalPoint)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsCriticalPoint == null ? false : Model.Entity.IsCriticalPoint)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.IsCriticalPoint != null && Model.Entity.IsCriticalPoint.Value ? "YES" : "NO")</div>
                                         </div>
                                     </div>
                                 </div>

@@ -76,7 +76,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedArea)</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedArea, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedArea, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedArea, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.PossibleCause)</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentQualityNetwork.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.EditorFor(model => incidentQualityNetwork.PossibleCause, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityNetwork.PossibleCause, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.RestorationMethod)</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentQualityNetwork.RestorationMethod, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.EditorFor(model => incidentQualityNetwork.RestorationMethod, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityNetwork.RestorationMethod, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.RootCause)</label></div>
                                     <div class="col-lg-6">
-                                        @Html.EditorFor(model => incidentQualityNetwork.RootCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.EditorFor(model => incidentQualityNetwork.RootCause, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityNetwork.RootCause, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -280,7 +280,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row MVOnly">
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsDoubleFault)</label></div>
                                     <div class="col-lg-4">
@@ -313,14 +313,12 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row MVOnly">
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsCriticalPoint)</label></div>
-                                    <div class="col-lg-4">
-                                        <div class="checkbox">
-                                            <input id="incidentQualityNetwork_IsCriticalPoint" name="incidentQualityNetwork.IsCriticalPoint" type="checkbox" value="@(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "true" : "false")" @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                            @Html.ValidationMessageFor(model => incidentQualityNetwork.IsCriticalPoint, "", new { @class = "text-danger" })
-                                        </div>
+                                    <div class="col-lg-6">
+                                        @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "YES" : "NO")
+                                        @Html.HiddenFor(model => incidentQualityNetwork.IsCriticalPoint, new { @Value = incidentQualityNetwork.IsCriticalPoint })
                                     </div>
                                 </div>
                             </div>
@@ -366,6 +364,11 @@
 
         $("#incidentQualityNetwork_MVOutage").on("click", function () {
             $(this).val(this.checked);
+            if (this.checked) {
+                $('.MVOnly').show();
+            } else {
+                $('.MVOnly').hide();
+            }
         });
 
         $("#incidentQualityNetwork_IsDoubleFault").on("click", function () {
@@ -401,6 +404,12 @@
         });
 
         $(document).ready(function () {
+
+            if ($("#incidentQualityNetwork_MVOutage").attr('checked')) {
+                $('.MVOnly').show();
+            } else {
+                $('.MVOnly').hide();
+            }
 
             $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("yyyy-MM-dd"))');
             $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("yyyy-MM-dd"))');

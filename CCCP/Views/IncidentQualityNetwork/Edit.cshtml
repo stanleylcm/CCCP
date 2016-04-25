@@ -52,6 +52,11 @@
 
 	    $("#incidentQualityNetwork_MVOutage").on("click", function () {
 	        $(this).val(this.checked);
+	        if (this.checked) {
+	            $('.MVOnly').show();
+	        } else {
+	            $('.MVOnly').hide();
+	        }
 	    });
 
 	    $("#incidentQualityNetwork_IsDoubleFault").on("click", function () {
@@ -91,6 +96,12 @@
 	    });
 
 	    $(document).ready(function () {
+
+	        if ($("#incidentQualityNetwork_MVOutage").checked) {
+	            $('.MVOnly').show();
+	        } else {
+	            $('.MVOnly').hide();
+	        }
 
 	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("yyyy-MM-dd"))');
 	        $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("yyyy-MM-dd"))');
@@ -526,7 +537,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row MVOnly">
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsDoubleFault)</label></div>
                                             <div class="col-lg-4">
@@ -559,14 +570,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row MVOnly">
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsCriticalPoint)</label></div>
-                                            <div class="col-lg-4">
-                                                <div class="checkbox">
-                                                    <input id="incidentQualityNetwork_IsCriticalPoint" name="incidentQualityNetwork.IsCriticalPoint" type="checkbox" value="@(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "true" : "false")" @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                                    @Html.ValidationMessageFor(model => incidentQualityNetwork.IsCriticalPoint, "", new { @class = "text-danger" })
-                                                </div>
+                                            <div class="col-lg-6">
+                                                @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "YES" : "NO")
+                                                @Html.HiddenFor(model => incidentQualityNetwork.IsCriticalPoint, new { @Value = incidentQualityNetwork.IsCriticalPoint })
                                             </div>
                                         </div>
                                     </div>

@@ -30,7 +30,12 @@ namespace CCCP.Business.Model
             IncidentQualityNetwork incidentQualityNetwork = new IncidentQualityNetwork();
 
             incidentQualityNetwork.OMSEventId = omsEventModel.Entity.OMSEventId;
-            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea; // chi? affectedBuilding? affectedStreet?
+            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea
+                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedArea_Chi
+                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedBuilding
+                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedBuilding_Chi
+                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedStreet
+                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedStreet_Chi;
             incidentQualityNetwork.OutageStartTime = omsEventModel.Entity.OutageStartTime;
             incidentQualityNetwork.FullRestoration = omsEventModel.Entity.FullRestoration;
             incidentQualityNetwork.NoOfBuilding = omsEventModel.Entity.NoOfBuilding;
@@ -39,11 +44,11 @@ namespace CCCP.Business.Model
             incidentQualityNetwork.NoOfDiamondCustomer = omsEventModel.Entity.NoOfDiamondCustomer;
             incidentQualityNetwork.NoOfGoldCustomer = omsEventModel.Entity.NoOfGoldCustomer;
             incidentQualityNetwork.NoOfSilverCustomer = omsEventModel.Entity.NoOfSilverCustomer;
-            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause; // chi?
+            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.PossibleCause_Chi;
             incidentQualityNetwork.ExpectedRestorationTime = omsEventModel.Entity.ExpectedRestorationTime;
-            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod; // chi?
+            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.RestorationMethod_Chi;
             incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
-            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause; // Chi?
+            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.RootCause_Chi;
             incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage;
             incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage;
             incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint;
