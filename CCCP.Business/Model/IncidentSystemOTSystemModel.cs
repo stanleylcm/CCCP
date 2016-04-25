@@ -83,7 +83,7 @@ namespace CCCP.Business.Model
         {
             get
             {
-                return Entity.IsDrillMode.Value ? "(Drill)" : "";
+                return Entity.IsDrillMode != null && Entity.IsDrillMode.Value ? "(Drill)" : "";
             }
         }
 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CCCP.Common;
 using CCCP.Business.Model;
 using CCCP.ViewModel;
+using System.Net;
+using System.IO;
 
 namespace CCCP.Business.Service
 {
@@ -30,6 +32,8 @@ namespace CCCP.Business.Service
 
             db.Notification.Add(notice);
             db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
         }
 
         public static void SendUpdateIncidentLevelNotification(int incidentId, string incidentNo, string oriLevel, string newLevel, IncidentTypeSubType incidentType)
@@ -59,6 +63,8 @@ namespace CCCP.Business.Service
 
             db.Notification.Add(notice);
             db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
         }
 
         public static void SendCreateCrisisNotification(int crisisId, string crisisNo, IncidentTypeSubType incidentType)
@@ -80,6 +86,66 @@ namespace CCCP.Business.Service
 
             db.Notification.Add(notice);
             db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
+        }
+
+        public static void PushNotification(int noticeId)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            Notification notice = db.Notification.Find(noticeId);
+
+            foreach (User user in db.User.ToList())
+            {
+
+                // Create a request using a URL that can receive a post. 
+                string sendNotificationEndPoint = System.Configuration.ConfigurationManager.AppSettings["sendNotificationEndPoint"];
+                WebRequest request = WebRequest.Create(sendNotificationEndPoint);
+                // Set the Method property of the request to POST.
+                request.Method = "POST";
+
+                // Create POST data and convert it to a byte array.
+                string postData = "params=['" + user.LoginName + "', '" + notice.Message + "']";
+                byte[] data = Encoding.UTF8.GetBytes(postData);
+
+                // Set the ContentType property of the WebRequest.
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                // Set the ContentLength property of the WebRequest.
+                request.ContentLength = data.Length;
+
+                // Get the request stream.
+                Stream dataStream = request.GetRequestStream();
+
+                // Write the data to the request stream.
+                dataStream.Write(data, 0, data.Length);
+
+                // Close the Stream object.
+                dataStream.Close();
+
+                // Get the response.
+                WebResponse response = request.GetResponse();
+
+                // Display the status.
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+
+                // Get the stream containing content returned by the server.
+                dataStream = response.GetResponseStream();
+
+                // Open the stream using a StreamReader for easy access.
+                StreamReader reader = new StreamReader(dataStream);
+
+                // Read the content.
+                string responseFromServer = reader.ReadToEnd();
+
+                // Display the content.
+                Console.WriteLine(responseFromServer);
+
+                // Clean up the streams.
+                reader.Close();
+                dataStream.Close();
+                response.Close();
+            }
         }
     }
 }
