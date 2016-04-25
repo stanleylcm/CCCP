@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemITSystem" Width="2.5" PointX="0.75" PointY="3.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" Width="2.5" PointX="0.75" PointY="5.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemOTSystem" Width="2.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.OMSEvent" Width="2.5" PointX="0.75" PointY="7.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentLeakage" Width="2.5" PointX="0.75" PointY="1.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentOHS" Width="2.5" PointX="0.75" PointY="1.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityCorporateImage" Width="2.5" PointX="0.75" PointY="2.25" IsExpanded="false" />
@@ -34,6 +33,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityGeneration" Width="2.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.CriticalPoint" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityNetwork" Width="2.5" PointX="0.75" PointY="4.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.OMSEvent" Width="2.5" PointX="0.75" PointY="7.25" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

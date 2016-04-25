@@ -52,7 +52,6 @@ namespace CCCP.ViewModel
         public Nullable<bool> LVOutage { get; set; }
         public Nullable<bool> IsPQEventAffectLargeCustomer { get; set; }
         public Nullable<bool> IsCriticalPoint { get; set; }
-        public string AffectedPoints { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
