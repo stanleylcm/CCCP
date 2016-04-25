@@ -112,6 +112,14 @@ namespace CCCP.Business.Model
             return IncidentService.GetIncidentLevel(incidentModel.Entity);
         }
 
+        public bool IsCriticalPoint()
+        {
+            List<string> criticalPoints = MasterTableService.GetCriticalPoints();
+            List<string> affectedPoints = Entity.AffectedPoints.Split(',').ToList();
+
+            return criticalPoints.Contains(affectedPoints);
+        }
+
         public void PrepareSave(PrepareSaveMode saveMode = PrepareSaveMode.Last_Updated)
         {
             DateTime now = DateTime.Now;
@@ -139,7 +147,8 @@ namespace CCCP.Business.Model
 
             // later need to add logic to retrieve status from master table and append to StatusUpdate
 
-            // critical points logic?
+            // critical points
+            Entity.CriticalPoint = IsCriticalPoint();
         }
 
         public void MarkReviewed()

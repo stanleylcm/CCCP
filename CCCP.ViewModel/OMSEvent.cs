@@ -42,7 +42,7 @@ namespace CCCP.ViewModel
         public string RootCause_Chi { get; set; }
         public Nullable<bool> MVOutage { get; set; }
         public Nullable<bool> LVOutage { get; set; }
-        public string Points { get; set; }
+        public string AffectedPoints { get; set; }
         public Nullable<bool> CriticalPoint { get; set; }
         public Nullable<bool> Reviewed { get; set; }
         public string OMSStatus { get; set; }

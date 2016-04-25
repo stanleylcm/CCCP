@@ -606,7 +606,7 @@
           <Property Name="RootCause_Chi" Type="nvarchar(max)" />
           <Property Name="MVOutage" Type="bit" />
           <Property Name="LVOutage" Type="bit" />
-          <Property Name="Points" Type="varchar(max)" />
+          <Property Name="AffectedPoints" Type="varchar(max)" />
           <Property Name="CriticalPoint" Type="bit" />
           <Property Name="Reviewed" Type="bit" />
           <Property Name="OMSStatus" Type="varchar" MaxLength="20" />
@@ -1666,7 +1666,7 @@
           <Property Name="RootCause_Chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MVOutage" Type="Boolean" />
           <Property Name="LVOutage" Type="Boolean" />
-          <Property Name="Points" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AffectedPoints" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CriticalPoint" Type="Boolean" />
           <Property Name="Reviewed" Type="Boolean" />
           <Property Name="OMSStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -2481,7 +2481,7 @@
                 <ScalarProperty Name="OMSStatus" ColumnName="OMSStatus" />
                 <ScalarProperty Name="Reviewed" ColumnName="Reviewed" />
                 <ScalarProperty Name="CriticalPoint" ColumnName="CriticalPoint" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="AffectedPoints" ColumnName="AffectedPoints" />
                 <ScalarProperty Name="LVOutage" ColumnName="LVOutage" />
                 <ScalarProperty Name="MVOutage" ColumnName="MVOutage" />
                 <ScalarProperty Name="RootCause_Chi" ColumnName="RootCause_Chi" />
