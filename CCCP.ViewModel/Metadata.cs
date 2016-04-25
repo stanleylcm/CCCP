@@ -716,15 +716,15 @@ namespace CCCP.ViewModel
         [Display(Name = "Preliminary Cause of Outage")]
         public string PreliminaryCauseOfOutage { get; set; }
         [Display(Name = "Expected Restoration Time")]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
-        public Nullable<short> ExpectedRestorationTime { get; set; }
+        [Range((double)0, double.MaxValue, ErrorMessage = "Please enter positive number")]
+        public Nullable<decimal> ExpectedRestorationTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
         [Display(Name = "Is CEM Network Being Affected")]
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
         [Display(Name = "Loss of Power")]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
-        public Nullable<int> LossOfPower { get; set; }
+        [Range((double)0, double.MaxValue, ErrorMessage = "Please enter positive number")]
+        public Nullable<decimal> LossOfPower { get; set; }
 
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }

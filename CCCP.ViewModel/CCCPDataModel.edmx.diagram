@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.Checklist" Width="1.5" PointX="3.5" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemFunction" Width="1.5" PointX="5.625" PointY="3.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentEnvironmentAirEmission" Width="2.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityGeneration" Width="2.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemBilling" Width="2.5" PointX="0.75" PointY="3.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemITSystem" Width="2.5" PointX="0.75" PointY="3.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.IncidentSystemNetworkConnectivity" Width="2.5" PointX="0.75" PointY="5.25" IsExpanded="false" />
@@ -33,6 +32,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.ChatRoomAttachment" Width="1.5" PointX="3.5" PointY="3.875" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.GeneralEnquiry" Width="2.5" PointX="0.75" PointY="6.75" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.GeneralEnquiryIncidentLink" Width="1.5" PointX="3.5" PointY="5.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.IncidentQualityGeneration" Width="2.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

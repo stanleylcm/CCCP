@@ -31,10 +31,10 @@ namespace CCCP.ViewModel
         public string History { get; set; }
         public string NameOfPowerGenerator { get; set; }
         public string PreliminaryCauseOfOutage { get; set; }
-        public Nullable<short> ExpectedRestorationTime { get; set; }
+        public Nullable<decimal> ExpectedRestorationTime { get; set; }
         public Nullable<System.DateTime> FullRestoration { get; set; }
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
-        public Nullable<int> LossOfPower { get; set; }
+        public Nullable<decimal> LossOfPower { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
