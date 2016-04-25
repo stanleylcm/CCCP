@@ -176,6 +176,14 @@ namespace CCCP.Business.Model
             }
         }
 
+        public bool IsCriticalPoint()
+        {
+            List<string> criticalPoints = MasterTableService.GetCriticalPoints();
+            List<string> affectedPoints = Entity.AffectedPoints.Split(',').ToList();
+
+            return criticalPoints.Contains(affectedPoints);
+        }
+
         #endregion
 
         #region Private Method

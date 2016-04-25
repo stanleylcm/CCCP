@@ -214,9 +214,14 @@ namespace CCCP.Business.Service
         {
             // for later use... LV Outage? MV Outage?
             int outageMinute = 0;
-            if (incident.IssueDateTime != null && incident.OutageStartTime != null)
+            if (incident.OutageStartTime != null)
             {
-                outageMinute = Convert.ToInt32((incident.IssueDateTime.Value - incident.OutageStartTime.Value).TotalMinutes);
+                //outageMinute = Convert.ToInt32((incident.IssueDateTime.Value - incident.OutageStartTime.Value).TotalMinutes);
+
+                DateTime outageTime = incident.OutageStartTime.Value;
+                DateTime currentORRestoreTime = DateTime.Now;
+                if (incident.FullRestoration != null) currentORRestoreTime = incident.FullRestoration.Value;
+                outageMinute = Convert.ToInt32((currentORRestoreTime - outageTime).TotalMinutes);
             }
 
             // Level 3

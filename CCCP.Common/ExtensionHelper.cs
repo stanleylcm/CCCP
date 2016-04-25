@@ -113,5 +113,17 @@ namespace CCCP.Common
             foreach (Enum value in Enum.GetValues(self.GetType())) result.Add(value.ToEnumString());
             return result;
         }
+        public static bool Contains<T>(this List<T> self, List<T> comparer, Func<T, T, bool> predicate)
+        {
+            foreach (T itemo in comparer)
+            {
+                foreach (T items in self) if (predicate(items, itemo)) return true;
+            }
+            return false;
+        }
+        public static bool Contains(this List<string> self, List<string> comparer)
+        {
+            return self.Contains<string>(comparer, IsEquals);
+        }
     }
 }

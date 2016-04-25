@@ -86,6 +86,9 @@
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ChecklistExtend.cs" />
+    <Compile Include="CriticalPoint.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>

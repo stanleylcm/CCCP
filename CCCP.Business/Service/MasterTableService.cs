@@ -100,5 +100,16 @@ namespace CCCP.Business.Service
         }
 
         #endregion
+
+        public static List<string> GetCriticalPoints()
+        {
+            List<string> result = new List<string>();
+            using (CCCPDbContext db = new CCCPDbContext())
+            {
+                result = db.CriticalPoint.Select(x => x.AffectedPoint).ToList();
+            }
+
+            return result;
+        }
     }
 }

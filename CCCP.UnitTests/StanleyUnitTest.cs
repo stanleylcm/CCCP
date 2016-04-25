@@ -27,7 +27,7 @@ namespace CCCP.UnitTest
         }
 
         [TestMethod]
-        public void TestEnumExtensionMethod()
+        public void TestExtensionMethod()
         {
             // enum to caption
             IncidentSubType subtype = IncidentSubType.Corporate_Image;
@@ -40,6 +40,10 @@ namespace CCCP.UnitTest
 
             // enum
             List<string> incidentLevels = IncidentLevelWithCrisis.Crisis.ListAll();
+
+            string[] aList = { "1", "2", "3", "4", "5A" };
+            string[] bList = { "5ac", "3_", "5", "5a   " };
+            bool cResult = aList.ToList().Contains(bList.ToList());
         }
 
         [TestMethod]

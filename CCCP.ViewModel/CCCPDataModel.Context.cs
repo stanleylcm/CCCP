@@ -50,11 +50,12 @@ namespace CCCP.ViewModel
         public virtual DbSet<ChatRoomMessage> ChatRoomMessage { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
-        public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<ChatRoomAttachment> ChatRoomAttachment { get; set; }
         public virtual DbSet<GeneralEnquiry> GeneralEnquiry { get; set; }
         public virtual DbSet<GeneralEnquiryIncidentLink> GeneralEnquiryIncidentLink { get; set; }
         public virtual DbSet<IncidentQualityGeneration> IncidentQualityGeneration { get; set; }
+        public virtual DbSet<CriticalPoint> CriticalPoint { get; set; }
+        public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
