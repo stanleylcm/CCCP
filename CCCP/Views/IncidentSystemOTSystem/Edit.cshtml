@@ -141,10 +141,10 @@
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
             }
 
-            if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
-                inputValid = false;
-                errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
-            }
+            //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
+            //    inputValid = false;
+            //    errMsg = errMsg + '\r\nFull Restoration cannot be empty<br />';
+            //}
 
             if (inputValid == false) {
                 $('#CCCPModal').find('.modal-body').html(errMsg);

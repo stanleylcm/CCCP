@@ -715,14 +715,14 @@ namespace CCCP.ViewModel
         public string NameOfPowerGenerator { get; set; }
         [Display(Name = "Preliminary Cause of Outage")]
         public string PreliminaryCauseOfOutage { get; set; }
-        [Display(Name = "Expected Restoration Time")]
+        [Display(Name = "Expected Restoration Time (hour)")]
         [Range((double)0, double.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<decimal> ExpectedRestorationTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
         [Display(Name = "Is CEM Network Being Affected")]
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
-        [Display(Name = "Loss of Power")]
+        [Display(Name = "Loss of Power (MW)")]
         [Range((double)0, double.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<decimal> LossOfPower { get; set; }
 
@@ -800,7 +800,7 @@ namespace CCCP.ViewModel
         public Nullable<int> NoOfSilverCustomer { get; set; }
         [Display(Name = "Possible Cause")]
         public string PossibleCause { get; set; }
-        [Display(Name = "Expected Restoration Time")]
+        [Display(Name = "Expected Restoration Time (hour)")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Restoration Method")]
@@ -809,7 +809,7 @@ namespace CCCP.ViewModel
         public string StatusUpdate { get; set; }
         [Display(Name = "Root Cause")]
         public string RootCause { get; set; }
-        [Display(Name = "Loss Generation (MW)")]
+        [Display(Name = "Loss Generation")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> LossGeneration { get; set; }
         [Display(Name = "Loss Interconnection")]
