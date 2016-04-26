@@ -56,6 +56,17 @@ namespace CCCP.ViewModel
         public virtual DbSet<CriticalPoint> CriticalPoint { get; set; }
         public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<OMSEvent> OMSEvent { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RoleDepartment> RoleDepartment { get; set; }
+        public virtual DbSet<RoleFunction> RoleFunction { get; set; }
+        public virtual DbSet<ChecklistActionTemplate> ChecklistActionTemplate { get; set; }
+        public virtual DbSet<ChecklistTemplate> ChecklistTemplate { get; set; }
+        public virtual DbSet<Function> Function { get; set; }
+        public virtual DbSet<SystemFunctionDepartment> SystemFunctionDepartment { get; set; }
+        public virtual DbSet<SystemFunctionRole> SystemFunctionRole { get; set; }
+        public virtual DbSet<SystemFunctionUser> SystemFunctionUser { get; set; }
+        public virtual DbSet<SystemParameter> SystemParameter { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

@@ -88,11 +88,39 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="ChecklistActionTemplate">
+          <Key>
+            <PropertyRef Name="ChecklistActionTemplateId" />
+          </Key>
+          <Property Name="ChecklistActionTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistTemplateId" Type="int" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsCompulsory" Type="bit" />
+          <Property Name="AlertThreshold" Type="smallint" />
+          <Property Name="SortingOrder" Type="smallint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="ChecklistBatch">
           <Key>
             <PropertyRef Name="ChecklistBatchId" />
           </Key>
           <Property Name="ChecklistBatchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ChecklistTemplate">
+          <Key>
+            <PropertyRef Name="ChecklistTemplateId" />
+          </Key>
+          <Property Name="ChecklistTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="SortingOrder" Type="smallint" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
@@ -111,6 +139,14 @@
           </Key>
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="Department" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="FunctionId" />
+          </Key>
+          <Property Name="FunctionId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="GeneralEnquiry">
           <Key>
@@ -615,6 +651,35 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="History" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RoleDepartment">
+          <Key>
+            <PropertyRef Name="RoleDepartmentId" />
+          </Key>
+          <Property Name="RoleDepartmentId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleFunction">
+          <Key>
+            <PropertyRef Name="RoleFunctionId" />
+          </Key>
+          <Property Name="RoleFunctionId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="FunctionId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="SystemFunction">
           <Key>
             <PropertyRef Name="SystemFunctionId" />
@@ -622,6 +687,51 @@
           <Property Name="SystemFunctionId" Type="int" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SystemFunctionDepartment">
+          <Key>
+            <PropertyRef Name="SystemFunctionDepartment" />
+          </Key>
+          <Property Name="SystemFunctionDepartment" Type="int" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="int" Nullable="false" />
+          <Property Name="UserDepartmentId" Type="int" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="IncidentLevel" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SystemFunctionRole">
+          <Key>
+            <PropertyRef Name="SystemFunctionRoleId" />
+          </Key>
+          <Property Name="SystemFunctionRoleId" Type="int" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="IncidentLevel" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SystemFunctionUser">
+          <Key>
+            <PropertyRef Name="SystemFunctionUser" />
+          </Key>
+          <Property Name="SystemFunctionUser" Type="int" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="IncidentLevel" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SystemParameter">
+          <Key>
+            <PropertyRef Name="SystemParameterId" />
+          </Key>
+          <Property Name="SystemParameterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parameter" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="2000" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -640,6 +750,14 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Function Name="usp_Dashboard_GetGeneralEnquiryProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Dashboard_GetIncidentProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -691,9 +809,12 @@
           <EntitySet Name="ChatRoomMessage" EntityType="Self.ChatRoomMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Checklist" EntityType="Self.Checklist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistAction" EntityType="Self.ChecklistAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChecklistActionTemplate" EntityType="Self.ChecklistActionTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChecklistTemplate" EntityType="Self.ChecklistTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CriticalPoint" EntityType="Self.CriticalPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneralEnquiry" EntityType="Self.GeneralEnquiry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneralEnquiryIncidentLink" EntityType="Self.GeneralEnquiryIncidentLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncidentEnvironmentAirEmission" EntityType="Self.IncidentEnvironmentAirEmission" Schema="dbo" store:Type="Tables" />
@@ -712,8 +833,16 @@
           <EntitySet Name="InputOption" EntityType="Self.InputOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OMSEvent" EntityType="Self.OMSEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleDepartment" EntityType="Self.RoleDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleFunction" EntityType="Self.RoleFunction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemFunction" EntityType="Self.SystemFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemFunctionDepartment" EntityType="Self.SystemFunctionDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemFunctionRole" EntityType="Self.SystemFunctionRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemFunctionUser" EntityType="Self.SystemFunctionUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemParameter" EntityType="Self.SystemParameter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -795,6 +924,17 @@
           <EntitySet Name="CriticalPoint" EntityType="CCCP.ViewModel.CriticalPoint" />
           <EntitySet Name="IncidentQualityNetwork" EntityType="CCCP.ViewModel.IncidentQualityNetwork" />
           <EntitySet Name="OMSEvent" EntityType="CCCP.ViewModel.OMSEvent" />
+          <EntitySet Name="Role" EntityType="CCCP.ViewModel.Role" />
+          <EntitySet Name="RoleDepartment" EntityType="CCCP.ViewModel.RoleDepartment" />
+          <EntitySet Name="RoleFunction" EntityType="CCCP.ViewModel.RoleFunction" />
+          <EntitySet Name="ChecklistActionTemplate" EntityType="CCCP.ViewModel.ChecklistActionTemplate" />
+          <EntitySet Name="ChecklistTemplate" EntityType="CCCP.ViewModel.ChecklistTemplate" />
+          <EntitySet Name="Function" EntityType="CCCP.ViewModel.Function" />
+          <EntitySet Name="SystemFunctionDepartment" EntityType="CCCP.ViewModel.SystemFunctionDepartment" />
+          <EntitySet Name="SystemFunctionRole" EntityType="CCCP.ViewModel.SystemFunctionRole" />
+          <EntitySet Name="SystemFunctionUser" EntityType="CCCP.ViewModel.SystemFunctionUser" />
+          <EntitySet Name="SystemParameter" EntityType="CCCP.ViewModel.SystemParameter" />
+          <EntitySet Name="UserRole" EntityType="CCCP.ViewModel.UserRole" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1675,6 +1815,124 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RoleDepartment">
+          <Key>
+            <PropertyRef Name="RoleDepartmentId" />
+          </Key>
+          <Property Name="RoleDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleFunction">
+          <Key>
+            <PropertyRef Name="RoleFunctionId" />
+          </Key>
+          <Property Name="RoleFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="FunctionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChecklistActionTemplate">
+          <Key>
+            <PropertyRef Name="ChecklistActionTemplateId" />
+          </Key>
+          <Property Name="ChecklistActionTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompulsory" Type="Boolean" />
+          <Property Name="AlertThreshold" Type="Int16" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChecklistTemplate">
+          <Key>
+            <PropertyRef Name="ChecklistTemplateId" />
+          </Key>
+          <Property Name="ChecklistTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="SortingOrder" Type="Int16" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="FunctionId" />
+          </Key>
+          <Property Name="FunctionId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SystemFunctionDepartment">
+          <Key>
+            <PropertyRef Name="SystemFunctionDepartment1" />
+          </Key>
+          <Property Name="SystemFunctionDepartment1" Type="Int32" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="UserDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentLevel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SystemFunctionRole">
+          <Key>
+            <PropertyRef Name="SystemFunctionRoleId" />
+          </Key>
+          <Property Name="SystemFunctionRoleId" Type="Int32" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentLevel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SystemFunctionUser">
+          <Key>
+            <PropertyRef Name="SystemFunctionUser1" />
+          </Key>
+          <Property Name="SystemFunctionUser1" Type="Int32" Nullable="false" />
+          <Property Name="SystemFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IncidentLevel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SystemParameter">
+          <Key>
+            <PropertyRef Name="SystemParameterId" />
+          </Key>
+          <Property Name="SystemParameterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parameter" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2510,6 +2768,135 @@
                 <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
                 <ScalarProperty Name="OMSNo" ColumnName="OMSNo" />
                 <ScalarProperty Name="OMSEventId" ColumnName="OMSEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleDepartment">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.RoleDepartment">
+              <MappingFragment StoreEntitySet="RoleDepartment">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleDepartmentId" ColumnName="RoleDepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleFunction">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.RoleFunction">
+              <MappingFragment StoreEntitySet="RoleFunction">
+                <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleFunctionId" ColumnName="RoleFunctionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChecklistActionTemplate">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistActionTemplate">
+              <MappingFragment StoreEntitySet="ChecklistActionTemplate">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="AlertThreshold" ColumnName="AlertThreshold" />
+                <ScalarProperty Name="IsCompulsory" ColumnName="IsCompulsory" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ChecklistTemplateId" ColumnName="ChecklistTemplateId" />
+                <ScalarProperty Name="ChecklistActionTemplateId" ColumnName="ChecklistActionTemplateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChecklistTemplate">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistTemplate">
+              <MappingFragment StoreEntitySet="ChecklistTemplate">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="ChecklistTemplateId" ColumnName="ChecklistTemplateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Function">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Function">
+              <MappingFragment StoreEntitySet="Function">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemFunctionDepartment">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.SystemFunctionDepartment">
+              <MappingFragment StoreEntitySet="SystemFunctionDepartment">
+                <ScalarProperty Name="IncidentLevel" ColumnName="IncidentLevel" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="UserDepartmentId" ColumnName="UserDepartmentId" />
+                <ScalarProperty Name="SystemFunctionId" ColumnName="SystemFunctionId" />
+                <ScalarProperty Name="SystemFunctionDepartment1" ColumnName="SystemFunctionDepartment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemFunctionRole">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.SystemFunctionRole">
+              <MappingFragment StoreEntitySet="SystemFunctionRole">
+                <ScalarProperty Name="IncidentLevel" ColumnName="IncidentLevel" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="SystemFunctionId" ColumnName="SystemFunctionId" />
+                <ScalarProperty Name="SystemFunctionRoleId" ColumnName="SystemFunctionRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemFunctionUser">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.SystemFunctionUser">
+              <MappingFragment StoreEntitySet="SystemFunctionUser">
+                <ScalarProperty Name="IncidentLevel" ColumnName="IncidentLevel" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SystemFunctionId" ColumnName="SystemFunctionId" />
+                <ScalarProperty Name="SystemFunctionUser1" ColumnName="SystemFunctionUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemParameter">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.SystemParameter">
+              <MappingFragment StoreEntitySet="SystemParameter">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Parameter" ColumnName="Parameter" />
+                <ScalarProperty Name="SystemParameterId" ColumnName="SystemParameterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
