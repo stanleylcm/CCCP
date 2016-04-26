@@ -271,7 +271,7 @@
     <value>Are you sure to close this Enquiry?</value>
   </data>
   <data name="Label_CreateIncident" xml:space="preserve">
-    <value>Are you sure to create Incident?</value>
+    <value>Are you sure to create a new Incident?</value>
   </data>
   <data name="Func_Back" xml:space="preserve">
     <value>Back</value>
