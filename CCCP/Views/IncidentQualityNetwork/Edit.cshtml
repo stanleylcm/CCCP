@@ -97,7 +97,7 @@
 
 	    $(document).ready(function () {
 
-	        if ($("#incidentQualityNetwork_MVOutage").checked) {
+	        if ("@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "true" : "false")" == "true") {
 	            $('.MVOnly').show();
 	        } else {
 	            $('.MVOnly').hide();

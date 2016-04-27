@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentSystemOTSystemModel incident = new IncidentSystemOTSystemModel();
-            incidentSystemOTSystem.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentSystemOTSystem;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
-            incidentSystemOTSystem.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentSystemOTSystemModel incidentModel = new IncidentSystemOTSystemModel();
+            incidentModel.Entity = incidentSystemOTSystem;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentSystemOTSystem.IncidentSystemOTSystemId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
-            incidentSystemOTSystem.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentSystemOTSystemModel incidentModel = new IncidentSystemOTSystemModel();
+            incidentModel.Entity = incidentSystemOTSystem;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentSystemOTSystem.IncidentSystemOTSystemId;

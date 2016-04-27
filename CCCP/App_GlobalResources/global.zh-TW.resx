@@ -288,4 +288,22 @@
   <data name="Label_MarkReviewed" xml:space="preserve">
     <value>你確定要標示為已讀?</value>
   </data>
+  <data name="Label_DeleteSelectedRole" xml:space="preserve">
+    <value>你確定要刪除所選取的角色?</value>
+  </data>
+  <data name="Label_Department" xml:space="preserve">
+    <value>部門</value>
+  </data>
+  <data name="Label_Function" xml:space="preserve">
+    <value>功能</value>
+  </data>
+  <data name="Func_Approve" xml:space="preserve">
+    <value>批准</value>
+  </data>
+  <data name="Func_Reject" xml:space="preserve">
+    <value>拒絕</value>
+  </data>
+  <data name="Label_EscalateToCrisis" xml:space="preserve">
+    <value>你確定要升級這個事件到危機級別?</value>
+  </data>
 </root>

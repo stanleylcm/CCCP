@@ -174,6 +174,16 @@ namespace CCCP.Controllers
             return Edit(incident.Entity);
         }
 
+        public ActionResult EscalateToCrisis()
+        {
+            if (Session != null && Session["incident"] != null)
+            {
+                incident = Session["incident"] as IncidentSystemNetworkConnectivityModel;
+            }
+            int id = new IncidentApiController().EscalateToCrisis(incident.Entity.IncidentSystemNetworkConnectivityId, MasterTableService.GetIncidentTypeId(IncidentTypeSubType.SystemNetworkConnectivity));
+            return RedirectToAction("Details", new { id = id, message = "Incident had been escalated to crisis successfully! The crisis is now pending for approval." });
+        }
+
         public void Test()
         {
             incident.Checklists[1].ChecklistActions[1].ToggleActionStatus();

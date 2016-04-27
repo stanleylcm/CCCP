@@ -288,4 +288,22 @@
   <data name="Label_MarkReviewed" xml:space="preserve">
     <value>Are you sure to mark this OMS Event reviewed?</value>
   </data>
+  <data name="Label_DeleteSelectedRole" xml:space="preserve">
+    <value>Are you sure to delete the selected Role(s)?</value>
+  </data>
+  <data name="Label_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Label_Function" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="Func_Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Func_Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Label_EscalateToCrisis" xml:space="preserve">
+    <value>Are you sure to escalate this incident to crisis?</value>
+  </data>
 </root>

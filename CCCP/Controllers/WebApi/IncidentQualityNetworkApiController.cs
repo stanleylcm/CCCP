@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,6 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentQualityNetworkModel incident = new IncidentQualityNetworkModel();
+
             incidentQualityNetwork.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentQualityNetwork;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
@@ -216,7 +222,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
-            incidentQualityNetwork.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel();
+            incidentModel.Entity = incidentQualityNetwork;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentQualityNetwork.IncidentQualityNetworkId;
@@ -229,7 +239,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
-            incidentQualityNetwork.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentQualityNetworkModel incidentModel = new IncidentQualityNetworkModel();
+            incidentModel.Entity = incidentQualityNetwork;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentQualityNetwork.IncidentQualityNetworkId;

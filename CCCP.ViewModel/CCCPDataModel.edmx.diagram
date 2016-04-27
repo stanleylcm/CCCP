@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemFunctionUser" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.SystemParameter" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="false" />
         <EntityTypeShape EntityType="CCCP.ViewModel.UserRole" Width="1.5" PointX="5.625" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="CCCP.ViewModel.Crisis" Width="2.5" PointX="0.75" PointY="7.75" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

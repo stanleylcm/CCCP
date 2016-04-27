@@ -92,6 +92,9 @@
     <Compile Include="ChecklistTemplate.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Crisis.cs">
+      <DependentUpon>CCCPDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CriticalPoint.cs">
       <DependentUpon>CCCPDataModel.tt</DependentUpon>
     </Compile>

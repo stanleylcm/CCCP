@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Model\ChatRoomMessageModel.cs" />
     <Compile Include="Model\ChatRoomModel.cs" />
+    <Compile Include="Model\CrisisModel.cs" />
     <Compile Include="Model\OMSEventModel .cs" />
     <Compile Include="Model\OMSEventApiModel.cs" />
     <Compile Include="Model\AccessRightsModel.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="Model\IncidentSystemCallCentreModel.cs" />
     <Compile Include="Model\IncidentSystemInvoicingModel.cs" />
     <Compile Include="Model\IncidentSystemBillingModel.cs" />
+    <Compile Include="Model\RoleDepartmentModel.cs" />
+    <Compile Include="Model\RoleFunctionModel.cs" />
+    <Compile Include="Model\RoleModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Service\AccessControlService.cs" />
     <Compile Include="Service\AuditTrailService.cs" />

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approve.
+        /// </summary>
+        internal static string Func_Approve {
+            get {
+                return ResourceManager.GetString("Func_Approve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         internal static string Func_Back {
@@ -187,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        internal static string Func_Reject {
+            get {
+                return ResourceManager.GetString("Func_Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Func_Save {
@@ -250,11 +268,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete the selected Role(s)?.
+        /// </summary>
+        internal static string Label_DeleteSelectedRole {
+            get {
+                return ResourceManager.GetString("Label_DeleteSelectedRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        internal static string Label_Department {
+            get {
+                return ResourceManager.GetString("Label_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         internal static string Label_Details {
             get {
                 return ResourceManager.GetString("Label_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to escalate this incident to crisis?.
+        /// </summary>
+        internal static string Label_EscalateToCrisis {
+            get {
+                return ResourceManager.GetString("Label_EscalateToCrisis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Function.
+        /// </summary>
+        internal static string Label_Function {
+            get {
+                return ResourceManager.GetString("Label_Function", resourceCulture);
             }
         }
         

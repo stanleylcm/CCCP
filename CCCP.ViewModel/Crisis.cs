@@ -12,16 +12,22 @@ namespace CCCP.ViewModel
     using System;
     using System.Collections.Generic;
     
-    public partial class ChecklistTemplate
+    public partial class Crisis
     {
-        public int ChecklistTemplateId { get; set; }
-        public int IncidentTypeId { get; set; }
-        public int DepartmentId { get; set; }
-        public Nullable<short> SortingOrder { get; set; }
+        public int CrisisId { get; set; }
+        public int ChecklistBatchId { get; set; }
+        public int ChatRoomId { get; set; }
+        public string CrisisNo { get; set; }
+        public string Status { get; set; }
+        public string History { get; set; }
+        public Nullable<int> IssueById { get; set; }
+        public Nullable<System.DateTime> IssueDateTime { get; set; }
+        public Nullable<int> CloseById { get; set; }
+        public Nullable<System.DateTime> CloseDateTime { get; set; }
+        public string RejectReason { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
-        public int CrisisTypeId { get; set; }
     }
 }

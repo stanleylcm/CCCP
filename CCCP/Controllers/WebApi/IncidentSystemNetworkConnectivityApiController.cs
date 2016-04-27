@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentSystemNetworkConnectivityModel incident = new IncidentSystemNetworkConnectivityModel();
-            incidentSystemNetworkConnectivity.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentSystemNetworkConnectivity;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
-            incidentSystemNetworkConnectivity.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentSystemNetworkConnectivityModel incidentModel = new IncidentSystemNetworkConnectivityModel();
+            incidentModel.Entity = incidentSystemNetworkConnectivity;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
-            incidentSystemNetworkConnectivity.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentSystemNetworkConnectivityModel incidentModel = new IncidentSystemNetworkConnectivityModel();
+            incidentModel.Entity = incidentSystemNetworkConnectivity;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId;

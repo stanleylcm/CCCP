@@ -119,8 +119,29 @@
           </Key>
           <Property Name="ChecklistTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IncidentTypeId" Type="int" Nullable="false" />
+          <Property Name="CrisisTypeId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="SortingOrder" Type="smallint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdatedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Crisis">
+          <Key>
+            <PropertyRef Name="CrisisId" />
+          </Key>
+          <Property Name="CrisisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistBatchId" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="CrisisNo" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="History" Type="nvarchar(max)" />
+          <Property Name="IssueById" Type="int" />
+          <Property Name="IssueDateTime" Type="datetime" />
+          <Property Name="CloseById" Type="int" />
+          <Property Name="CloseDateTime" Type="datetime" />
+          <Property Name="RejectReason" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
@@ -759,6 +780,11 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="usp_Crisis_PostCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CrisisId" Type="int" Mode="In" />
+          <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="DefaultActionStatus" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_Dashboard_GetGeneralEnquiryProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Dashboard_GetIncidentProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Dashboard_GetIncidentSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -812,6 +838,7 @@
           <EntitySet Name="ChecklistActionTemplate" EntityType="Self.ChecklistActionTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistBatch" EntityType="Self.ChecklistBatch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChecklistTemplate" EntityType="Self.ChecklistTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Crisis" EntityType="Self.Crisis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CriticalPoint" EntityType="Self.CriticalPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
@@ -935,6 +962,12 @@
           <EntitySet Name="SystemFunctionUser" EntityType="CCCP.ViewModel.SystemFunctionUser" />
           <EntitySet Name="SystemParameter" EntityType="CCCP.ViewModel.SystemParameter" />
           <EntitySet Name="UserRole" EntityType="CCCP.ViewModel.UserRole" />
+          <EntitySet Name="Crisis" EntityType="CCCP.ViewModel.Crisis" />
+          <FunctionImport Name="usp_Crisis_PostCreate">
+            <Parameter Name="CrisisId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="DefaultActionStatus" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1871,6 +1904,7 @@
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CrisisTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Function">
           <Key>
@@ -1932,6 +1966,26 @@
           <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crisis">
+          <Key>
+            <PropertyRef Name="CrisisId" />
+          </Key>
+          <Property Name="CrisisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistBatchId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="CrisisNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IssueById" Type="Int32" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseById" Type="Int32" />
+          <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2822,6 +2876,7 @@
           <EntitySetMapping Name="ChecklistTemplate">
             <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistTemplate">
               <MappingFragment StoreEntitySet="ChecklistTemplate">
+                <ScalarProperty Name="CrisisTypeId" ColumnName="CrisisTypeId" />
                 <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
@@ -2900,6 +2955,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Crisis">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.Crisis">
+              <MappingFragment StoreEntitySet="Crisis">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+                <ScalarProperty Name="CloseDateTime" ColumnName="CloseDateTime" />
+                <ScalarProperty Name="CloseById" ColumnName="CloseById" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueById" ColumnName="IssueById" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CrisisNo" ColumnName="CrisisNo" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChecklistBatchId" ColumnName="ChecklistBatchId" />
+                <ScalarProperty Name="CrisisId" ColumnName="CrisisId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Crisis_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_Crisis_PostCreate" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
