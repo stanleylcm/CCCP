@@ -32,52 +32,61 @@ namespace CCCP.Controllers.WebApi
                 // load enquiry details
                 result.Entity = db.Crisis.Find(Id);
 
+                // may not have chatroom and checklist if the crisis is pending for approval...
+
                 // load chatroom
-                result.Chatroom = new ChatRoomModel(result.Entity.ChatRoomId);
-
-                result.Chatroom.ChatRoomMessagesEntites = (from crMessage in db.ChatRoomMessage
-                                                           where crMessage.ChatRoomId.Equals(result.Chatroom.Entity.ChatRoomId)
-                                                           orderby crMessage.SendDateTime
-                                                           select new ChatRoomMessageModel()
-                                                           {
-                                                               Entity = crMessage
-                                                           }).ToList<ChatRoomMessageModel>();
-
-                foreach (ChatRoomMessageModel crMessage in result.Chatroom.ChatRoomMessagesEntites)
+                if (result.Entity.ChatRoomId > 0)
                 {
-                    crMessage.ChatRoomAttachmentsEntities = (from crAttachment in db.ChatRoomAttachment
-                                                             where crAttachment.ChatRoomMessageId.Equals(crMessage.Entity.ChatRoomMessageId)
-                                                             select crAttachment).ToList<ChatRoomAttachment>();
+                    result.Chatroom = new ChatRoomModel(result.Entity.ChatRoomId);
+
+                    result.Chatroom.ChatRoomMessagesEntites = (from crMessage in db.ChatRoomMessage
+                                                               where crMessage.ChatRoomId.Equals(result.Chatroom.Entity.ChatRoomId)
+                                                               orderby crMessage.SendDateTime
+                                                               select new ChatRoomMessageModel()
+                                                               {
+                                                                   Entity = crMessage
+                                                               }).ToList<ChatRoomMessageModel>();
+                
+
+                    foreach (ChatRoomMessageModel crMessage in result.Chatroom.ChatRoomMessagesEntites)
+                    {
+                        crMessage.ChatRoomAttachmentsEntities = (from crAttachment in db.ChatRoomAttachment
+                                                                 where crAttachment.ChatRoomMessageId.Equals(crMessage.Entity.ChatRoomMessageId)
+                                                                 select crAttachment).ToList<ChatRoomAttachment>();
+                    }
                 }
 
                 // load checklists
                 int checklistBatchID = result.Entity.ChecklistBatchId;
-                result.ChecklistEntities = (from checklist in db.Checklist
-                                            join department in db.Department on checklist.DepartmentId equals department.DepartmentId
-                                            where checklist.ChecklistBatchId.Equals(checklistBatchID)
-                                            orderby checklist.SortingOrder
-                                            select new ChecklistExtend()
-                                            {
-                                                ChecklistId = checklist.ChecklistId,
-                                                ChecklistBatchId = checklist.ChecklistBatchId,
-                                                DepartmentId = checklist.DepartmentId,
-                                                SortingOrder = checklist.SortingOrder,
-                                                History = checklist.History,
-                                                CreatedBy = checklist.CreatedBy,
-                                                CreatedDateTime = checklist.CreatedDateTime,
-                                                LastUpdatedBy = checklist.LastUpdatedBy,
-                                                LastUpdatedDateTime = checklist.LastUpdatedDateTime,
-                                                Department = department.Department1
-                                            }).ToList<ChecklistExtend>();
-
-                // load checklist actions
-                foreach (ChecklistModel checklist in result.Checklists)
+                if (checklistBatchID > 0)
                 {
-                    List<ChecklistAction> actionEntities = (from checklistAction in db.ChecklistAction
-                                                            where checklistAction.ChecklistId.Equals(checklist.Entity.ChecklistId)
-                                                            orderby checklistAction.SortingOrder
-                                                            select checklistAction).ToList<ChecklistAction>();
-                    checklist.ChecklistActionEntities = actionEntities;
+                    result.ChecklistEntities = (from checklist in db.Checklist
+                                                join department in db.Department on checklist.DepartmentId equals department.DepartmentId
+                                                where checklist.ChecklistBatchId.Equals(checklistBatchID)
+                                                orderby checklist.SortingOrder
+                                                select new ChecklistExtend()
+                                                {
+                                                    ChecklistId = checklist.ChecklistId,
+                                                    ChecklistBatchId = checklist.ChecklistBatchId,
+                                                    DepartmentId = checklist.DepartmentId,
+                                                    SortingOrder = checklist.SortingOrder,
+                                                    History = checklist.History,
+                                                    CreatedBy = checklist.CreatedBy,
+                                                    CreatedDateTime = checklist.CreatedDateTime,
+                                                    LastUpdatedBy = checklist.LastUpdatedBy,
+                                                    LastUpdatedDateTime = checklist.LastUpdatedDateTime,
+                                                    Department = department.Department1
+                                                }).ToList<ChecklistExtend>();
+
+                    // load checklist actions
+                    foreach (ChecklistModel checklist in result.Checklists)
+                    {
+                        List<ChecklistAction> actionEntities = (from checklistAction in db.ChecklistAction
+                                                                where checklistAction.ChecklistId.Equals(checklist.Entity.ChecklistId)
+                                                                orderby checklistAction.SortingOrder
+                                                                select checklistAction).ToList<ChecklistAction>();
+                        checklist.ChecklistActionEntities = actionEntities;
+                    }
                 }
             }
 
