@@ -44,10 +44,43 @@ namespace CCCP.Business.Model
             }
         }
 
+        public IncidentTypeSubType IncidentType
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                if (db.IncidentEnvironmentAirEmission.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.EnvironmentAirEmission;
+                if (db.IncidentEnvironmentLeakage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.EnvironmentLeakage;
+                if (db.IncidentOHS.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.OHS;
+                if (db.IncidentQualityCorporateImage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.QualityCorporateImage;
+                if (db.IncidentQualityGeneration.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.QualityGeneration;
+                if (db.IncidentQualityNetwork.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.QualityNetwork;
+                if (db.IncidentSystemBilling.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemBilling;
+                if (db.IncidentSystemCallCentre.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemCallCentre;
+                if (db.IncidentSystemInvoicing.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemInvoicing;
+                if (db.IncidentSystemITSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemITSystem;
+                if (db.IncidentSystemNetworkConnectivity.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemNetworkConnectivity;
+                if (db.IncidentSystemOTSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return IncidentTypeSubType.SystemOTSystem;
+
+                return IncidentTypeSubType.EnvironmentAirEmission;
+            }
+        }
+
         #endregion
 
         #region Public Method
-
         public bool IsReadyForClose()
         {
             foreach (ChecklistModel checklist in this.Checklists) if (!checklist.IsAllCompulsoryCompleted()) return false;

@@ -473,6 +473,7 @@
                             @Html.HiddenFor(model => incidentSystemInvoicing.History, new { @Value = incidentSystemInvoicing.History })
                             @Html.HiddenFor(model => incidentSystemInvoicing.IncidentNo, new { @Value = incidentSystemInvoicing.IncidentNo })
                             @Html.HiddenFor(model => incidentSystemInvoicing.IncidentStatus, new { @Value = incidentSystemInvoicing.IncidentStatus })
+                            @Html.HiddenFor(model => incidentSystemInvoicing.IsDrillMode, new { @Value = incidentSystemInvoicing.IsDrillMode != null && incidentSystemInvoicing.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

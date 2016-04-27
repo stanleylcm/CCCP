@@ -102,7 +102,7 @@ namespace CCCP.Controllers.WebApi
             {
                 string PendingForApproval = CrisisStatus.Pending_For_Approval.ToEnumString();
                 string Rejected = CrisisStatus.Rejected.ToEnumString();
-                result = db.Crisis.Where(m => m.Status == PendingForApproval || m.Status == Rejected).ToList();
+                result = db.Crisis.Where(m => m.Status == PendingForApproval).ToList();
             }
             return result;
         }
@@ -155,7 +155,7 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
-        public int CloseCrisis(int id)
+        public int Close(int id)
         {
             CCCPDbContext db = new CCCPDbContext();
 

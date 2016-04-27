@@ -83,8 +83,6 @@
 	    });
 
 	    $(document).ready(function () {
-	        $("#incidentQualityGeneration_IsDrillMode").val($("#incidentQualityGeneration_IsDrillMode").checked);
-	        $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").val($("#incidentQualityGeneration_IsCEMNetworkBeingAffected").checked);
 
 	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityGeneration.FullRestoration == null ? "" : incidentQualityGeneration.FullRestoration.Value.ToString("yyyy-MM-dd"))');
 	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityGeneration.ExpectedRestorationTime == null ? "" : incidentQualityGeneration.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
@@ -372,6 +370,7 @@
             @Html.HiddenFor(model => incidentQualityGeneration.History, new { @Value = incidentQualityGeneration.History })
             @Html.HiddenFor(model => incidentQualityGeneration.IncidentNo, new { @Value = incidentQualityGeneration.IncidentNo })
             @Html.HiddenFor(model => incidentQualityGeneration.IncidentStatus, new { @Value = incidentQualityGeneration.IncidentStatus })
+            @Html.HiddenFor(model => incidentQualityGeneration.IsDrillMode, new { @Value = incidentQualityGeneration.IsDrillMode != null && incidentQualityGeneration.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

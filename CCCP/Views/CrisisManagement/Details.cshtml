@@ -1,0 +1,214 @@
+﻿@model CCCP.Business.Model.OMSEventModel
+
+@using CCCP.Business
+@using CCCP.ViewModel
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_OMSEventManagement;
+    IncidentQualityNetwork incident = Model.GetCreatedIncident();
+}
+
+@section Scripts {
+    <script>
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
+
+		    $('#LinkedIncidentTable').DataTable();
+
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
+            // read mode, disabled change state functionality for the tri-state checkbox
+		    $('.bootstrap-checkbox').off('click');
+
+		    $('input[type=checkbox]').click(function(event) {
+		        event.preventDefault();
+		    });
+
+	        $('#btnCloseIncident').on('click', function (event) {
+	            bootbox.confirm('@Resources.global.Label_CloseIncident', function (result) {
+	                if (result) {
+	                    window.location = '@Url.Action("CloseIncident", "OMSEvent")';
+	                    return true;
+	                }
+	            });
+	        });
+	    });
+    </script>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
+
+    <h1>
+        <i class="fa fa-gears"></i> <a href="@Url.Action("Index", "OMSEvent")">@Resources.global.Menu_IncidentManagement - @Resources.global.Menu_OMSEventManagement</a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3 pull-left">
+                        <span class="pull-left"><label>@Html.DisplayNameFor(model => incident.IncidentNo)</label></span>
+                        <span class="pull-right"><a href="@(incident != null ? Url.Action("Details", "IncidentQualityNetwork", new { id = incident.IncidentQualityNetworkId }) : "")">@Html.DisplayFor(model => incident.IncidentNo)</a></span>
+                    </div>
+                    <div class="col-lg-3 pull-right">
+                        <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</label></span>
+                        <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 pull-left">
+                        <span class="pull-left"><label>Calculated Level</label></span>
+                        <span class="pull-right">@Model.GetCalculatedLevel().ToEnumString()</span>
+                    </div>
+                    <div class="col-lg-3 pull-right">
+                        <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</label></span>
+                        <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 pull-left">
+                        <span class="pull-left"><label>Crisis No</label></span>
+                        <span class="pull-right"><a href="#"></a></span>
+                    </div>
+                    <div class="col-lg-3 pull-right">
+                        <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.OMSStatus)</label></span>
+                        <span class="pull-right"><span class="pull-left">@Html.DisplayFor(model => model.Entity.OMSStatus)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedArea)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.AffectedBuilding)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedBuilding)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.AffectedStreet)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedStreet)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.OutageStartTime)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.OutageStartTime)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfBuilding)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfBuilding)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfCustomerAffected)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfCustomerAffected)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfPlatinumCustomer)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfPlatinumCustomer)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfDiamondCustomer)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfDiamondCustomer)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfGoldCustomer)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfGoldCustomer)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfSilverCustomer)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfSilverCustomer)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.ExpectedRestorationTime)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RestorationMethod)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RestorationMethod)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.StatusUpdate)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RootCause)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.RootCause)</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.LVOutage)</label></div>
+                                    <div class="col-lg-6">@(Model.Entity.LVOutage != null && Model.Entity.LVOutage.Value ? "YES" : "NO")</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MVOutage)</label></div>
+                                    <div class="col-lg-6">@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "YES" : "NO")</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CriticalPoint)</label></div>
+                                    <div class="col-lg-6">@(Model.Entity.CriticalPoint != null && Model.Entity.CriticalPoint.Value ? "YES" : "NO")</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="button" onclick="bootbox.confirm('@Resources.global.Label_CreateIncident', function (result) { if (result) { window.location = '@Url.Action("CreateIncident", new { id = Model.Entity.OMSEventId })'; } })" disabled="@(incident != null)">@Resources.global.Func_CreateIncident</button>
+                <button class="btn btn-primary" type="button" onclick="bootbox.confirm('@Resources.global.Label_MarkReviewed', function (result) { if (result) { window.location = '@Url.Action("MarkReviewed", new { id = Model.Entity.OMSEventId })'; } })" disabled="@(Model.Entity.Reviewed != null && Model.Entity.Reviewed.Value)">@Resources.global.Func_MarkReviewed</button>
+                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "OMSEvent")';">@Resources.global.Func_Back</button>
+            </div>
+            <br/>
+        </div>
+    </div>
+</section><!-- /.content -->

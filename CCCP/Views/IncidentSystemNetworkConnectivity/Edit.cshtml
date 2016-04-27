@@ -87,7 +87,6 @@
 	    });
 
 	    $(document).ready(function () {
-	        $("#incidentSystemNetworkConnectivity_IsDrillMode").val($("#incidentSystemNetworkConnectivity_IsDrillMode").checked);
 
 	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemNetworkConnectivity.FullRestoration == null ? "" : incidentSystemNetworkConnectivity.FullRestoration.Value.ToString("yyyy-MM-dd"))');
 	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemNetworkConnectivity.ExpectedRestorationTime == null ? "" : incidentSystemNetworkConnectivity.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
@@ -399,6 +398,7 @@
                             @Html.HiddenFor(model => incidentSystemNetworkConnectivity.History, new { @Value = incidentSystemNetworkConnectivity.History })
                             @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentNo, new { @Value = incidentSystemNetworkConnectivity.IncidentNo })
                             @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IncidentStatus, new { @Value = incidentSystemNetworkConnectivity.IncidentStatus })
+                            @Html.HiddenFor(model => incidentSystemNetworkConnectivity.IsDrillMode, new { @Value = incidentSystemNetworkConnectivity.IsDrillMode != null && incidentSystemNetworkConnectivity.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

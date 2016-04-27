@@ -470,6 +470,7 @@
             @Html.HiddenFor(model => incidentSystemBilling.IncidentNo, new { @Value = incidentSystemBilling.IncidentNo })
             @Html.HiddenFor(model => incidentSystemBilling.BillingErrorSeriousness, new { @Value = incidentSystemBilling.BillingErrorSeriousness })
             @Html.HiddenFor(model => incidentSystemBilling.IncidentStatus, new { @Value = incidentSystemBilling.IncidentStatus })
+            @Html.HiddenFor(model => incidentSystemBilling.IsDrillMode, new { @Value = incidentSystemBilling.IsDrillMode != null && incidentSystemBilling.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

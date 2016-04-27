@@ -599,6 +599,7 @@
             @Html.HiddenFor(model => incidentQualityNetwork.History, new { @Value = incidentQualityNetwork.History })
             @Html.HiddenFor(model => incidentQualityNetwork.IncidentNo, new { @Value = incidentQualityNetwork.IncidentNo })
             @Html.HiddenFor(model => incidentQualityNetwork.IncidentStatus, new { @Value = incidentQualityNetwork.IncidentStatus })
+            @Html.HiddenFor(model => incidentQualityNetwork.IsDrillMode, new { @Value = incidentQualityNetwork.IsDrillMode != null && incidentQualityNetwork.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>
