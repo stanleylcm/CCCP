@@ -60,7 +60,6 @@ namespace CCCP.ViewModel
         public virtual DbSet<RoleDepartment> RoleDepartment { get; set; }
         public virtual DbSet<RoleFunction> RoleFunction { get; set; }
         public virtual DbSet<ChecklistActionTemplate> ChecklistActionTemplate { get; set; }
-        public virtual DbSet<ChecklistTemplate> ChecklistTemplate { get; set; }
         public virtual DbSet<Function> Function { get; set; }
         public virtual DbSet<SystemFunctionDepartment> SystemFunctionDepartment { get; set; }
         public virtual DbSet<SystemFunctionRole> SystemFunctionRole { get; set; }
@@ -68,6 +67,7 @@ namespace CCCP.ViewModel
         public virtual DbSet<SystemParameter> SystemParameter { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Crisis> Crisis { get; set; }
+        public virtual DbSet<ChecklistTemplate> ChecklistTemplate { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {

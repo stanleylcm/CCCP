@@ -955,7 +955,6 @@
           <EntitySet Name="RoleDepartment" EntityType="CCCP.ViewModel.RoleDepartment" />
           <EntitySet Name="RoleFunction" EntityType="CCCP.ViewModel.RoleFunction" />
           <EntitySet Name="ChecklistActionTemplate" EntityType="CCCP.ViewModel.ChecklistActionTemplate" />
-          <EntitySet Name="ChecklistTemplate" EntityType="CCCP.ViewModel.ChecklistTemplate" />
           <EntitySet Name="Function" EntityType="CCCP.ViewModel.Function" />
           <EntitySet Name="SystemFunctionDepartment" EntityType="CCCP.ViewModel.SystemFunctionDepartment" />
           <EntitySet Name="SystemFunctionRole" EntityType="CCCP.ViewModel.SystemFunctionRole" />
@@ -968,6 +967,7 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
             <Parameter Name="DefaultActionStatus" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ChecklistTemplate" EntityType="CCCP.ViewModel.ChecklistTemplate" />
         </EntityContainer>
         <ComplexType Name="usp_Checklist_LoadData_Result">
           <Property Type="Int32" Name="ChecklistActionId" Nullable="false" />
@@ -1892,20 +1892,6 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="ChecklistTemplate">
-          <Key>
-            <PropertyRef Name="ChecklistTemplateId" />
-          </Key>
-          <Property Name="ChecklistTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="SortingOrder" Type="Int16" />
-          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CrisisTypeId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Function">
           <Key>
             <PropertyRef Name="FunctionId" />
@@ -1982,6 +1968,20 @@
           <Property Name="CloseById" Type="Int32" />
           <Property Name="CloseDateTime" Type="DateTime" Precision="3" />
           <Property Name="RejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ChecklistTemplate">
+          <Key>
+            <PropertyRef Name="ChecklistTemplateId" />
+          </Key>
+          <Property Name="ChecklistTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CrisisTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="SortingOrder" Type="Int16" />
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -2873,21 +2873,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ChecklistTemplate">
-            <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistTemplate">
-              <MappingFragment StoreEntitySet="ChecklistTemplate">
-                <ScalarProperty Name="CrisisTypeId" ColumnName="CrisisTypeId" />
-                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
-                <ScalarProperty Name="ChecklistTemplateId" ColumnName="ChecklistTemplateId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Function">
             <EntityTypeMapping TypeName="CCCP.ViewModel.Function">
               <MappingFragment StoreEntitySet="Function">
@@ -2977,6 +2962,21 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_Crisis_PostCreate" FunctionName="CCCP.ViewModel.Store.usp_Crisis_PostCreate" />
+          <EntitySetMapping Name="ChecklistTemplate">
+            <EntityTypeMapping TypeName="CCCP.ViewModel.ChecklistTemplate">
+              <MappingFragment StoreEntitySet="ChecklistTemplate">
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SortingOrder" ColumnName="SortingOrder" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CrisisTypeId" ColumnName="CrisisTypeId" />
+                <ScalarProperty Name="IncidentTypeId" ColumnName="IncidentTypeId" />
+                <ScalarProperty Name="ChecklistTemplateId" ColumnName="ChecklistTemplateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

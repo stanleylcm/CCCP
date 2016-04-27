@@ -16,12 +16,12 @@ namespace CCCP.ViewModel
     {
         public int ChecklistTemplateId { get; set; }
         public int IncidentTypeId { get; set; }
+        public int CrisisTypeId { get; set; }
         public int DepartmentId { get; set; }
         public Nullable<short> SortingOrder { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
-        public int CrisisTypeId { get; set; }
     }
 }
