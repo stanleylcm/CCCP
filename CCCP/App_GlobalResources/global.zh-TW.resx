@@ -306,4 +306,16 @@
   <data name="Label_EscalateToCrisis" xml:space="preserve">
     <value>你確定要升級這個事件到危機級別?</value>
   </data>
+  <data name="Func_CloseCrisis" xml:space="preserve">
+    <value>關閉危機</value>
+  </data>
+  <data name="Label_ApproveCrisis" xml:space="preserve">
+    <value>你確定要批准這個危機?</value>
+  </data>
+  <data name="Label_CloseCrisis" xml:space="preserve">
+    <value>你確定要關閉這個危機?</value>
+  </data>
+  <data name="Label_RejectReason" xml:space="preserve">
+    <value>拒絕原因</value>
+  </data>
 </root>

@@ -306,4 +306,16 @@
   <data name="Label_EscalateToCrisis" xml:space="preserve">
     <value>Are you sure to escalate this incident to crisis?</value>
   </data>
+  <data name="Func_CloseCrisis" xml:space="preserve">
+    <value>Close Crisis</value>
+  </data>
+  <data name="Label_ApproveCrisis" xml:space="preserve">
+    <value>Are you sure to approve this Crisis?</value>
+  </data>
+  <data name="Label_CloseCrisis" xml:space="preserve">
+    <value>Are you sure to close this Crisis?</value>
+  </data>
+  <data name="Label_RejectReason" xml:space="preserve">
+    <value>Reject Reason</value>
+  </data>
 </root>

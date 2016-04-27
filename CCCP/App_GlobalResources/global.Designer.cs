@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Crisis.
+        /// </summary>
+        internal static string Func_CloseCrisis {
+            get {
+                return ResourceManager.GetString("Func_CloseCrisis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close Enquiry.
         /// </summary>
         internal static string Func_CloseEnquiry {
@@ -223,11 +232,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to approve this Crisis?.
+        /// </summary>
+        internal static string Label_ApproveCrisis {
+            get {
+                return ResourceManager.GetString("Label_ApproveCrisis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to cancel this incident?.
         /// </summary>
         internal static string Label_Cancelncident {
             get {
                 return ResourceManager.GetString("Label_Cancelncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to close this Crisis?.
+        /// </summary>
+        internal static string Label_CloseCrisis {
+            get {
+                return ResourceManager.GetString("Label_CloseCrisis", resourceCulture);
             }
         }
         
@@ -327,6 +354,15 @@ namespace Resources {
         internal static string Label_MarkReviewed {
             get {
                 return ResourceManager.GetString("Label_MarkReviewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject Reason.
+        /// </summary>
+        internal static string Label_RejectReason {
+            get {
+                return ResourceManager.GetString("Label_RejectReason", resourceCulture);
             }
         }
         
