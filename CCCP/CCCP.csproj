@@ -169,6 +169,7 @@
     <Compile Include="Controllers\IncidentController.cs" />
     <Compile Include="Controllers\CrisisManagementController.cs" />
     <Compile Include="Controllers\CrisisApprovalController.cs" />
+    <Compile Include="Controllers\ChecklistMaintenanceController.cs" />
     <Compile Include="Controllers\RoleMaintenanceController.cs" />
     <Compile Include="Controllers\OMSEventController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

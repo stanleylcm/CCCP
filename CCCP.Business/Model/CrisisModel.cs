@@ -25,7 +25,9 @@ namespace CCCP.Business.Model
 
         private void init()
         {
-
+            Chatroom = new ChatRoomModel();
+            Checklists = new List<ChecklistModel>();
+            ChecklistEntities = new List<ChecklistExtend>();
         }
 
         #endregion

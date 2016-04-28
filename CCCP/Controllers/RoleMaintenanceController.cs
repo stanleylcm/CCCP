@@ -185,7 +185,7 @@ namespace CCCP.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "The selected role(s) had been deleted!" });
         }
 
         // POST: RoleMaintenance/BatchDelete/1,2,3,4...
@@ -218,7 +218,7 @@ namespace CCCP.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "The selected role(s) had been deleted!" });
         }
 
         protected override void Dispose(bool disposing)

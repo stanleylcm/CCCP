@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ChatRoomMessageModel.cs" />
+    <Compile Include="Model\ChecklistActionTemplateModel.cs" />
+    <Compile Include="Model\ChecklistTemplateModel.cs" />
     <Compile Include="Model\ChatRoomModel.cs" />
     <Compile Include="Model\CrisisModel.cs" />
     <Compile Include="Model\OMSEventModel .cs" />
