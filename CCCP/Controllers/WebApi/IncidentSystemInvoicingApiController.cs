@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentSystemInvoicingModel incident = new IncidentSystemInvoicingModel();
-            incidentSystemInvoicing.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentSystemInvoicing;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
-            incidentSystemInvoicing.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentSystemInvoicingModel incidentModel = new IncidentSystemInvoicingModel();
+            incidentModel.Entity = incidentSystemInvoicing;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentSystemInvoicing.IncidentSystemInvoicingId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
-            incidentSystemInvoicing.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentSystemInvoicingModel incidentModel = new IncidentSystemInvoicingModel();
+            incidentModel.Entity = incidentSystemInvoicing;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentSystemInvoicing.IncidentSystemInvoicingId;

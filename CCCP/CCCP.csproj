@@ -167,6 +167,9 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ChatRoomController.cs" />
     <Compile Include="Controllers\IncidentController.cs" />
+    <Compile Include="Controllers\CrisisManagementController.cs" />
+    <Compile Include="Controllers\CrisisApprovalController.cs" />
+    <Compile Include="Controllers\RoleMaintenanceController.cs" />
     <Compile Include="Controllers\OMSEventController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -185,6 +188,7 @@
     <Compile Include="Controllers\IncidentSystemBillingController.cs" />
     <Compile Include="Controllers\WebApi\AccessControlApiController.cs" />
     <Compile Include="Controllers\WebApi\CommonApiController.cs" />
+    <Compile Include="Controllers\WebApi\CrisisApiController.cs" />
     <Compile Include="Controllers\WebApi\IncidentApiController.cs" />
     <Compile Include="Controllers\WebApi\GeneralEnquiryApiController.cs" />
     <Compile Include="Controllers\WebApi\OMSEventApiController.cs" />
@@ -989,6 +993,13 @@
     <None Include="Temp\ffmpeg\presets\ffprobe.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\RoleMaintenance\Create.cshtml" />
+    <Content Include="Views\RoleMaintenance\Edit.cshtml" />
+    <Content Include="Views\RoleMaintenance\Index.cshtml" />
+    <Content Include="Views\CrisisApproval\Details.cshtml" />
+    <Content Include="Views\CrisisApproval\Index.cshtml" />
+    <Content Include="Views\CrisisManagement\Details.cshtml" />
+    <Content Include="Views\CrisisManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

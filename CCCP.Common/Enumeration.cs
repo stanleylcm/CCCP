@@ -64,7 +64,8 @@ namespace CCCP.Common
 
     public enum SequenceType
     {
-        Incident
+        Incident,
+        Crisis
     }
 
 
@@ -104,6 +105,8 @@ namespace CCCP.Common
 
     public enum CrisisStatus
     {
+        Pending_For_Approval,
+        Rejected,
         Pending,
         In_Progress,
         Ready_For_Close,
@@ -112,7 +115,7 @@ namespace CCCP.Common
 
     public enum MenuItem
     {
-        RoleMaintainenance = 0,
+        RoleMaintenance = 0,
         UserAccountMaintenance,
         Home_Index, // Home_Dashboard;
         GeneralEnquiry,
@@ -133,7 +136,7 @@ namespace CCCP.Common
         OMSEvent,
         CrisisManagement,
         CrisisApproval,
-        BusinessDataMainteneance,
+        BusinessDataMaintenance,
         ChecklistMaintenance,
         AuditTrial,
         Report,
@@ -153,7 +156,10 @@ namespace CCCP.Common
     {
         Created,
         Last_Updated,
-        Closed
+        Closed,
+        Approved,
+        Rejected,
+        Cancelled
     }
 
     public enum SystemFunctionCode

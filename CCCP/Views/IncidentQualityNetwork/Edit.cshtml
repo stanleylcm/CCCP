@@ -10,28 +10,28 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-    $(function() {
-        $('#accordion').on('show.bs.collapse', function () {
-            $('#HistoryIcon').removeClass("fa-angle-left");
-            $('#HistoryIcon').addClass("fa-angle-down");
-        });
-        $('#accordion').on('hide.bs.collapse', function () {
-            $('#HistoryIcon').removeClass("fa-angle-down");
-            $('#HistoryIcon').addClass("fa-angle-left");
-        });
+	    $(function() {
+		    $('#accordion').on('show.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-left");
+			    $('#HistoryIcon').addClass("fa-angle-down");
+		    });
+		    $('#accordion').on('hide.bs.collapse', function () {
+			    $('#HistoryIcon').removeClass("fa-angle-down");
+			    $('#HistoryIcon').addClass("fa-angle-left");
+		    });
 
-        $('#LinkedIncidentTable').DataTable();
-        $('#LinkedGeneralEnquiryTable').DataTable();
+		    $('#LinkedIncidentTable').DataTable();
+		    $('#LinkedGeneralEnquiryTable').DataTable();
 
-        $('#Checklists input[type="checkbox"]').each(function () {
-            value = $(this).val();
-            $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
-        });
+		    $('#Checklists input[type="checkbox"]').each(function () {
+			    value = $(this).val();
+			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
 
-        $('.bootstrap-checkbox').on('click', function(evnet){
+		    $('.bootstrap-checkbox').on('click', function(evnet){
 
-            $.ajax({
-                url: "@Url.Action("ToggleActionStatus", "IncidentQualityNetwork")",
+		        $.ajax({
+		            url: "@Url.Action("ToggleActionStatus", "IncidentQualityNetwork")",
 		            type: "POST",
 		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
 		            dataType: "html",
@@ -97,109 +97,109 @@
 
 	    $(document).ready(function () {
 
-	        if ("@(incidentQualityNetwork.MVOutage != null && incidentQualityNetwork.MVOutage.Value ? "true" : "false")" == "true") {
+	        if ("@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "true" : "false")" == "true") {
 	            $('.MVOnly').show();
 	        } else {
 	            $('.MVOnly').hide();
 	        }
 
 	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("yyyy-MM-dd"))');
-        $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("yyyy-MM-dd"))');
-        $('[data-mask]').inputmask();
-        $('#FullRestorationTime').timepicker({
-            showMeridian: false,
-            defaultTime: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH:mm"))',
-            hour: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH"))',
-            minute: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("mm"))',
-        });
+	        $('#OutageStartTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("yyyy-MM-dd"))');
+	        $('[data-mask]').inputmask();
+	        $('#FullRestorationTime').timepicker({
+	            showMeridian: false,
+	            defaultTime: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH:mm"))',
+	            hour: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("HH"))',
+	            minute: '@(incidentQualityNetwork.FullRestoration == null ? "" : incidentQualityNetwork.FullRestoration.Value.ToString("mm"))',
+	        });
 
-        $('#OutageStartTimeTime').timepicker({
-            showMeridian: false,
-            defaultTime: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH:mm"))',
-            hour: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH"))',
-            minute: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("mm"))',
-        });
-    });
+	        $('#OutageStartTimeTime').timepicker({
+	            showMeridian: false,
+	            defaultTime: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH:mm"))',
+	            hour: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("HH"))',
+	            minute: '@(incidentQualityNetwork.OutageStartTime == null ? "" : incidentQualityNetwork.OutageStartTime.Value.ToString("mm"))',
+	        });
+	    });
 
-    $('#btnCreate').on('click', function (event) {
-        var inputValid = true;
-        var errMsg = '';
+	    $('#btnCreate').on('click', function (event) {
+	        var inputValid = true;
+	        var errMsg = '';
 
-        if ($('#incidentQualityNetwork_IncidentBackground').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + 'Incident Background cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_IncidentBackground').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + 'Incident Background cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_AffectedArea').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_AffectedArea').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
+	        }
 
-        if ($("#OutageStartTimeDate").val() == '' || $("#OutageStartTimeTime").val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nOutage Start Time cannot be empty<br />';
-        }
+	        if ($("#OutageStartTimeDate").val() == '' || $("#OutageStartTimeTime").val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nOutage Start Time cannot be empty<br />';
+	        }
 
-        //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
-        //    inputValid = false;
-        //    errMsg = errMsg + '\r\Full Restoration cannot be empty<br />';
-        //}
+	        //if ($("#FullRestorationDate").val() == '' || $("#FullRestorationTime").val() == '') {
+	        //    inputValid = false;
+	        //    errMsg = errMsg + '\r\Full Restoration cannot be empty<br />';
+	        //}
 
-        if ($('#incidentQualityNetwork_NoOfBuilding').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Building cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfBuilding').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Building cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_NoOfCustomerAffected').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Customer Affected cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfCustomerAffected').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Customer Affected cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_NoOfPlatinumCustomer').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Platinum Customer cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfPlatinumCustomer').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Platinum Customer cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_NoOfDiamondCustomer').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Diamond Customer cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfDiamondCustomer').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Diamond Customer cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_NoOfGoldCustomer').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Gold Customer cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfGoldCustomer').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Gold Customer cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_NoOfSilverCustomer').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nNo of Silver Customer cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_NoOfSilverCustomer').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nNo of Silver Customer cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_PossibleCause').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_PossibleCause').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_ExpectedRestorationTime').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_ExpectedRestorationTime').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
+	        }
 
-        if ($('#incidentQualityNetwork_RestorationMethod').val() == '') {
-            inputValid = false;
-            errMsg = errMsg + '\r\nRestoration Method cannot be empty<br />';
-        }
+	        if ($('#incidentQualityNetwork_RestorationMethod').val() == '') {
+	            inputValid = false;
+	            errMsg = errMsg + '\r\nRestoration Method cannot be empty<br />';
+	        }
 
-        if (inputValid == false) {
-            $('#CCCPModal').find('.modal-body').html(errMsg);
-            $('#CCCPModal').find('.modal-title').html('Validation Summary');
-            $('#CCCPModal').modal('toggle');
+	        if (inputValid == false) {
+	            $('#CCCPModal').find('.modal-body').html(errMsg);
+	            $('#CCCPModal').find('.modal-title').html('Validation Summary');
+	            $('#CCCPModal').modal('toggle');
 
-            event.preventDefault();
-        }
+	            event.preventDefault();
+	        }
 
-        return inputValid;
-    });
+	        return inputValid;
+	    });
     </script>
 }
 
@@ -599,6 +599,7 @@
             @Html.HiddenFor(model => incidentQualityNetwork.History, new { @Value = incidentQualityNetwork.History })
             @Html.HiddenFor(model => incidentQualityNetwork.IncidentNo, new { @Value = incidentQualityNetwork.IncidentNo })
             @Html.HiddenFor(model => incidentQualityNetwork.IncidentStatus, new { @Value = incidentQualityNetwork.IncidentStatus })
+            @Html.HiddenFor(model => incidentQualityNetwork.IsDrillMode, new { @Value = incidentQualityNetwork.IsDrillMode != null && incidentQualityNetwork.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

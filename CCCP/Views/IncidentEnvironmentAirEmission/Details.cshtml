@@ -40,6 +40,15 @@
 		                return true;
 		            }
 		        });
+		    });
+
+	        $('#btnEscalate').on('click', function (event) {
+	            bootbox.confirm('@Resources.global.Label_EscalateToCrisis', function (result) {
+	                if (result) {
+	                    window.location = '@Url.Action("EscalateToCrisis")';
+	                    return true;
+	                }
+	            });
 	        });
 	    });
     </script>
@@ -73,7 +82,19 @@
             <div class="row">
                 <div class="col-lg-3 pull-left">
                     <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisId)</span></a>
+                    @{
+                        if (Model.Entity.CrisisId != null && Model.Entity.CrisisId.Value > 0)
+                        {
+                            if (Model.CrisisEntity.Entity.Status == CrisisStatus.Pending_For_Approval.ToEnumString() || Model.CrisisEntity.Entity.Status == CrisisStatus.Rejected.ToEnumString())
+                            {
+                    <span class="pull-right">@(Model.CrisisEntity.Entity.CrisisNo + " (" + Model.CrisisEntity.Entity.Status + ")")</span>
+                            }
+                            else
+                            {
+                    <a href="@Url.Action("Detals", "CrisisManagement", new { id = Model.Entity.CrisisId.Value })"><span class="pull-right">@(Model.CrisisEntity.Entity.CrisisNo + " (" + Model.CrisisEntity.Entity.Status + ")")</span></a>
+                            }
+                        }
+                    }
                 </div>
                 <div class="col-lg-3 pull-right">
                     <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</label></span>
@@ -128,7 +149,7 @@
 											<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
 											<div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
 											<div class="col-lg-5">
-												<button class="btn btn-primary" type="button" onclick="window.location = '#';">@Resources.global.Func_EscalateToCrisis</button>
+                                                <button class="btn btn-primary" type="button" id="btnEscalate" disabled="@(!Model.IsAbleToEscalate())">@Resources.global.Func_EscalateToCrisis</button>
 											</div>
 										</div>
 

@@ -291,6 +291,7 @@
                             @Html.HiddenFor(model => incidentEnvironmentAirEmission.History, new { @Value = incidentEnvironmentAirEmission.History })
                             @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentNo, new { @Value = incidentEnvironmentAirEmission.IncidentNo })
                             @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentStatus, new { @Value = incidentEnvironmentAirEmission.IncidentStatus })
+                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IsDrillMode, new { @Value = incidentEnvironmentAirEmission.IsDrillMode != null && incidentEnvironmentAirEmission.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

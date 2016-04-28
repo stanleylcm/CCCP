@@ -977,4 +977,17 @@ namespace CCCP.ViewModel
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
     }
     #endregion
+
+    #region Department Metadata
+    [MetadataType(typeof(DepartmentHelper))]
+    public partial class Department { }
+
+    public partial class DepartmentHelper
+    {
+        [Display(Name = "ID")]
+        public int DepartmentId { get; set; }
+        [Display(Name = "Department")]
+        public string Department1 { get; set; }
+    }
+    #endregion
 }

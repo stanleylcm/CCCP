@@ -32,6 +32,7 @@ namespace CCCP.Business.Model
             LinkedIncidentEntities = new List<usp_Incident_GetLinkedIncident_Result>();
             NotificationEntities = new List<Notification>();
             LinkedGeneralEnquiryEntities = new List<usp_Incident_GetLinkedGeneralEnquiry_Result>();
+            CrisisEntity = new CrisisModel();
         }
 
         #endregion
@@ -53,6 +54,7 @@ namespace CCCP.Business.Model
         public List<usp_Incident_GetLinkedIncident_Result> LinkedIncidentEntities { get; set; }
         public List<Notification> NotificationEntities { get; set; }
         public List<usp_Incident_GetLinkedGeneralEnquiry_Result> LinkedGeneralEnquiryEntities { get; set; }
+        public CrisisModel CrisisEntity { get; set; }
 
         public List<string> Options_PossibleCause = new List<string>();
         public List<string> Options_Impact = new List<string>();
@@ -111,6 +113,13 @@ namespace CCCP.Business.Model
             IncidentStatus originalStatus = Entity.IncidentStatus.ToEnum<IncidentStatus>();
             return IncidentService.GetIncidentStatus(this, originalStatus);
         }
+        public bool IsAbleToEscalate()
+        {
+            if (Entity.CrisisId != null && Entity.CrisisId.Value > 0) return false;
+            if (Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString()) return false;
+            if (Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString()) return false;
+            return true;
+        }
         public void PrepareSave(PrepareSaveMode saveMode = PrepareSaveMode.Last_Updated)
         {
             DateTime now = DateTime.Now;
@@ -132,6 +141,8 @@ namespace CCCP.Business.Model
                     Entity.IncidentNo = IncidentService.GetNewIncidentNo(SequenceType.Incident, DateTime.Now.Year);
 
                     Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
+
+                    Entity.IncidentStatus = IncidentStatus.Pending.ToEnumString();
                     break;
                 case PrepareSaveMode.Last_Updated:
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
@@ -146,6 +157,14 @@ namespace CCCP.Business.Model
                     Entity.LastUpdatedDateTime = now;
                     Entity.CloseById = AccessControlService.CurrentUser.Entity.UserId;
                     Entity.CloseDateTime = now;
+
+                    Entity.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+                    break;
+                case PrepareSaveMode.Cancelled:
+                    Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+                    Entity.LastUpdatedDateTime = now;
+
+                    Entity.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
                     break;
             }
         }

@@ -56,6 +56,18 @@ namespace CCCP.ViewModel
         public virtual DbSet<CriticalPoint> CriticalPoint { get; set; }
         public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
         public virtual DbSet<OMSEvent> OMSEvent { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RoleDepartment> RoleDepartment { get; set; }
+        public virtual DbSet<RoleFunction> RoleFunction { get; set; }
+        public virtual DbSet<ChecklistActionTemplate> ChecklistActionTemplate { get; set; }
+        public virtual DbSet<Function> Function { get; set; }
+        public virtual DbSet<SystemFunctionDepartment> SystemFunctionDepartment { get; set; }
+        public virtual DbSet<SystemFunctionRole> SystemFunctionRole { get; set; }
+        public virtual DbSet<SystemFunctionUser> SystemFunctionUser { get; set; }
+        public virtual DbSet<SystemParameter> SystemParameter { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
+        public virtual DbSet<Crisis> Crisis { get; set; }
+        public virtual DbSet<ChecklistTemplate> ChecklistTemplate { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
@@ -226,6 +238,23 @@ namespace CCCP.ViewModel
                 new ObjectParameter("IncidentTypeId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Incident_GetLinkedGeneralEnquiry_Result>("usp_Incident_GetLinkedGeneralEnquiry", incidentIdParameter, incidentTypeIdParameter);
+        }
+    
+        public virtual int usp_Crisis_PostCreate(Nullable<int> crisisId, string createdBy, string defaultActionStatus)
+        {
+            var crisisIdParameter = crisisId.HasValue ?
+                new ObjectParameter("CrisisId", crisisId) :
+                new ObjectParameter("CrisisId", typeof(int));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var defaultActionStatusParameter = defaultActionStatus != null ?
+                new ObjectParameter("DefaultActionStatus", defaultActionStatus) :
+                new ObjectParameter("DefaultActionStatus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Crisis_PostCreate", crisisIdParameter, createdByParameter, defaultActionStatusParameter);
         }
     }
 }

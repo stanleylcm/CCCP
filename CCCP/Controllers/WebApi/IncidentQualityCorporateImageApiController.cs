@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentQualityCorporateImageModel incident = new IncidentQualityCorporateImageModel();
-            incidentQualityCorporateImage.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentQualityCorporateImage;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
-            incidentQualityCorporateImage.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentQualityCorporateImageModel incidentModel = new IncidentQualityCorporateImageModel();
+            incidentModel.Entity = incidentQualityCorporateImage;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentQualityCorporateImage.IncidentQualityCorporateImageId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
-            incidentQualityCorporateImage.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentQualityCorporateImageModel incidentModel = new IncidentQualityCorporateImageModel();
+            incidentModel.Entity = incidentQualityCorporateImage;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentQualityCorporateImage.IncidentQualityCorporateImageId;

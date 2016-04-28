@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentSystemCallCentreModel incident = new IncidentSystemCallCentreModel();
-            incidentSystemCallCentre.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentSystemCallCentre;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
-            incidentSystemCallCentre.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentSystemCallCentreModel incidentModel = new IncidentSystemCallCentreModel();
+            incidentModel.Entity = incidentSystemCallCentre;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentSystemCallCentre.IncidentSystemCallCentreId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
-            incidentSystemCallCentre.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentSystemCallCentreModel incidentModel = new IncidentSystemCallCentreModel();
+            incidentModel.Entity = incidentSystemCallCentre;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentSystemCallCentre.IncidentSystemCallCentreId;

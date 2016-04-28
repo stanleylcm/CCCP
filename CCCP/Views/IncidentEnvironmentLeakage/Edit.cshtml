@@ -64,8 +64,6 @@
             } else {
                 $('#TypeOfLeakageOthers').hide();
             }
-
-            $("#incidentEnvironmentLeakage_IsDrillMode").val($("#incidentEnvironmentLeakage_IsDrillMode").checked);
         });
 
         $('#btnUpdate').on('click', function (event) {
@@ -325,6 +323,7 @@
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.History, new { @Value = incidentEnvironmentLeakage.History })
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.IncidentNo, new { @Value = incidentEnvironmentLeakage.IncidentNo })
                             @Html.HiddenFor(model => incidentEnvironmentLeakage.IncidentStatus, new { @Value = incidentEnvironmentLeakage.IncidentStatus })
+                            @Html.HiddenFor(model => incidentEnvironmentLeakage.IsDrillMode, new { @Value = incidentEnvironmentLeakage.IsDrillMode != null && incidentEnvironmentLeakage.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

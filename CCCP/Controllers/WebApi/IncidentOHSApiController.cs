@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,6 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentOHSModel incident = new IncidentOHSModel();
-            incidentOHS.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentOHS;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +220,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
-            incidentOHS.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentOHSModel incidentModel = new IncidentOHSModel();
+            incidentModel.Entity = incidentOHS;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentOHS.IncidentOHSId;
@@ -229,7 +237,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
-            incidentOHS.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentOHSModel incidentModel = new IncidentOHSModel();
+            incidentModel.Entity = incidentOHS;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentOHS.IncidentOHSId;

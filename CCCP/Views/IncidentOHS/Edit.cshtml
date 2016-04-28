@@ -434,6 +434,7 @@
             @Html.HiddenFor(model => incidentOHS.History, new { @Value = incidentOHS.History })
             @Html.HiddenFor(model => incidentOHS.IncidentNo, new { @Value = incidentOHS.IncidentNo })
             @Html.HiddenFor(model => incidentOHS.IncidentStatus, new { @Value = incidentOHS.IncidentStatus })
+            @Html.HiddenFor(model => incidentOHS.IsDrillMode, new { @Value = incidentOHS.IsDrillMode != null && incidentOHS.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

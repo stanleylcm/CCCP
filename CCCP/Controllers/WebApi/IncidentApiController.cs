@@ -54,5 +54,81 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
             return db.IncidentType.Where(m => m.IncidentType1.IndexOf("___") < 0).ToList();
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int EscalateToCrisis(int id, int typeId)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
+
+            CrisisModel crisis = new CrisisModel();
+
+            crisis.Entity.CrisisId = 0;
+            crisis.Entity.ChatRoomId = 0;
+            crisis.Entity.ChecklistBatchId = 0;
+            crisis.PrepareSave(PrepareSaveMode.Created);
+
+            db.Crisis.Add(crisis.Entity);
+            db.SaveChanges();
+            
+            switch(MasterTableService.GetIncidentTypeSubType(typeId))
+            {
+                case IncidentTypeSubType.EnvironmentAirEmission:
+                    IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = db.IncidentEnvironmentAirEmission.Find(id);
+                    incidentEnvironmentAirEmission.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.EnvironmentLeakage:
+                    IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
+                    incidentEnvironmentLeakage.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.OHS:
+                    IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
+                    incidentOHS.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.QualityCorporateImage:
+                    IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
+                    incidentQualityCorporateImage.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.QualityGeneration:
+                    IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
+                    incidentQualityGeneration.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.QualityNetwork:
+                    IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
+                    incidentQualityNetwork.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemBilling:
+                    IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
+                    incidentSystemBilling.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemCallCentre:
+                    IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
+                    incidentSystemCallCentre.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemInvoicing:
+                    IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
+                    incidentSystemInvoicing.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemITSystem:
+                    IncidentSystemITSystem incidentSystemITSystem = db.IncidentSystemITSystem.Find(id);
+                    incidentSystemITSystem.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemNetworkConnectivity:
+                    IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
+                    incidentSystemNetworkConnectivity.CrisisId = crisis.Entity.CrisisId;
+                    break;
+                case IncidentTypeSubType.SystemOTSystem:
+                    IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
+                    incidentSystemOTSystem.CrisisId = crisis.Entity.CrisisId;
+                    break;
+            }
+
+            db.SaveChanges();
+
+            return id;
+        }
     }
 }

@@ -129,8 +129,6 @@
                 $('#StatusUpdateOthers').hide();
             }
 
-            $("#incidentSystemCallCentre_IsDrillMode").val($("#incidentSystemCallCentre_IsDrillMode").checked);
-
             $("#incidentSystemCallCentre_RequireMitigatingAction").val($("#incidentSystemCallCentre_RequireMitigatingAction").checked ? "Yes" : "No");
 
             $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemCallCentre.FullRestoration == null ? "" : incidentSystemCallCentre.FullRestoration.Value.ToString("yyyy-MM-dd"))');
@@ -501,6 +499,7 @@
                             @Html.HiddenFor(model => incidentSystemCallCentre.History, new { @Value = incidentSystemCallCentre.History })
                             @Html.HiddenFor(model => incidentSystemCallCentre.IncidentNo, new { @Value = incidentSystemCallCentre.IncidentNo })
                             @Html.HiddenFor(model => incidentSystemCallCentre.IncidentStatus, new { @Value = incidentSystemCallCentre.IncidentStatus })
+                            @Html.HiddenFor(model => incidentSystemCallCentre.IsDrillMode, new { @Value = incidentSystemCallCentre.IsDrillMode != null && incidentSystemCallCentre.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>

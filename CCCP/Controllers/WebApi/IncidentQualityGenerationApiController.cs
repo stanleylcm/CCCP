@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,7 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentQualityGenerationModel incident = new IncidentQualityGenerationModel();
-            incidentQualityGeneration.IncidentStatus = Common.IncidentStatus.Pending.ToString();
+
             incident.Entity = incidentQualityGeneration;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +221,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            incidentQualityGeneration.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentQualityGenerationModel incidentModel = new IncidentQualityGenerationModel();
+            incidentModel.Entity = incidentQualityGeneration;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentQualityGeneration.IncidentQualityGenerationId;
@@ -229,7 +238,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
-            incidentQualityGeneration.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentQualityGenerationModel incidentModel = new IncidentQualityGenerationModel();
+            incidentModel.Entity = incidentQualityGeneration;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentQualityGeneration.IncidentQualityGenerationId;

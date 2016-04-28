@@ -96,6 +96,11 @@ namespace CCCP.Controllers.WebApi
                                                orderby notice.CreatedDateTime descending
                                                select notice).ToList<Notification>();
                 //
+
+                if (result.Entity.CrisisId != null && result.Entity.CrisisId > 0)
+                {
+                    result.CrisisEntity.Entity = db.Crisis.Find(result.Entity.CrisisId);
+                }
             }
 
             // result
@@ -128,7 +133,6 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
             IncidentEnvironmentLeakageModel incident = new IncidentEnvironmentLeakageModel();
-            incidentEnvironmentLeakage.IncidentStatus = Common.IncidentStatus.Pending.ToString();
             incident.Entity = incidentEnvironmentLeakage;
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
@@ -216,7 +220,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
-            incidentEnvironmentLeakage.IncidentStatus = IncidentStatus.Cancelled.ToEnumString();
+
+            IncidentEnvironmentLeakageModel incidentModel = new IncidentEnvironmentLeakageModel();
+            incidentModel.Entity = incidentEnvironmentLeakage;
+            incidentModel.PrepareSave(PrepareSaveMode.Cancelled);
+
             db.SaveChanges();
 
             return incidentEnvironmentLeakage.IncidentEnvironmentLeakageId;
@@ -229,7 +237,11 @@ namespace CCCP.Controllers.WebApi
             CCCPDbContext db = new CCCPDbContext();
 
             IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
-            incidentEnvironmentLeakage.IncidentStatus = IncidentStatus.Closed.ToEnumString();
+
+            IncidentEnvironmentLeakageModel incidentModel = new IncidentEnvironmentLeakageModel();
+            incidentModel.Entity = incidentEnvironmentLeakage;
+            incidentModel.PrepareSave(PrepareSaveMode.Closed);
+
             db.SaveChanges();
 
             return incidentEnvironmentLeakage.IncidentEnvironmentLeakageId;

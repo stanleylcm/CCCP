@@ -71,7 +71,6 @@
 	    });
 
 	    $(document).ready(function () {
-	        $("#incidentSystemITSystem_IsDrillMode").val($("#incidentSystemITSystem_IsDrillMode").checked);
 
 	        $('#FullRestorationDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemITSystem.FullRestoration == null ? "" : incidentSystemITSystem.FullRestoration.Value.ToString("yyyy-MM-dd"))');
 	        $('#ExpectedRestorationTimeDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', '@(incidentSystemITSystem.ExpectedRestorationTime == null ? "" : incidentSystemITSystem.ExpectedRestorationTime.Value.ToString("yyyy-MM-dd"))');
@@ -402,6 +401,7 @@
                             @Html.HiddenFor(model => incidentSystemITSystem.History, new { @Value = incidentSystemITSystem.History })
                             @Html.HiddenFor(model => incidentSystemITSystem.IncidentNo, new { @Value = incidentSystemITSystem.IncidentNo })
                             @Html.HiddenFor(model => incidentSystemITSystem.IncidentStatus, new { @Value = incidentSystemITSystem.IncidentStatus })
+                            @Html.HiddenFor(model => incidentSystemITSystem.IsDrillMode, new { @Value = incidentSystemITSystem.IsDrillMode != null && incidentSystemITSystem.IsDrillMode.Value ? "true" : "false" })
                         </div>
                         <!-- /.box-body -->
                     </div>
