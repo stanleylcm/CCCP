@@ -89,7 +89,9 @@ namespace CCCP.Controllers
             #endregion
 
             #region Crisis Approval List
-
+            List<Crisis> crisiss = new CrisisApiController().GetCrisisApprovalList();
+            List<CrisisModel> crisisModels = crisiss.ConvertAll(x => new CrisisModel(x));
+            ViewBag.CrisisApprovalList = crisisModels.OrderByDescending(x => x.Entity.IssueDateTime).Take(5);
             #endregion
 
             return View();

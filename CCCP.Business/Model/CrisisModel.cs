@@ -79,6 +79,39 @@ namespace CCCP.Business.Model
                 return IncidentTypeSubType.EnvironmentAirEmission;
             }
         }
+        public int IncidentId
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                if (db.IncidentEnvironmentAirEmission.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentEnvironmentAirEmission.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentEnvironmentAirEmissionId;
+                if (db.IncidentEnvironmentLeakage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentEnvironmentLeakage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentEnvironmentLeakageId;
+                if (db.IncidentOHS.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentOHS.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentOHSId;
+                if (db.IncidentQualityCorporateImage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityCorporateImage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentQualityCorporateImageId;
+                if (db.IncidentQualityGeneration.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityGeneration.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentQualityGenerationId;
+                if (db.IncidentQualityNetwork.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityNetwork.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentQualityNetworkId;
+                if (db.IncidentSystemBilling.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemBilling.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemBillingId;
+                if (db.IncidentSystemCallCentre.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemCallCentre.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemCallCentreId;
+                if (db.IncidentSystemInvoicing.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemInvoicing.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemInvoicingId;
+                if (db.IncidentSystemITSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemITSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemITSystemId;
+                if (db.IncidentSystemNetworkConnectivity.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemNetworkConnectivity.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemNetworkConnectivityId;
+                if (db.IncidentSystemOTSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemOTSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentSystemOTSystemId;
+
+                return 0;
+            }
+        }
 
         #endregion
 
