@@ -66,10 +66,6 @@
 	        $(this).val(this.checked);
 	    });
 
-	    $("#incidentQualityGeneration_IsCEMNetworkBeingAffected").on("click", function () {
-	        $(this).val(this.checked);
-	    });
-
 	    $("#FullRestorationDate").change(function () {
 	        if ($("#FullRestorationDate").val() != '' && $("#FullRestorationTime").val() != '') {
 	            $("#incidentQualityGeneration_FullRestoration").val($("#FullRestorationDate").val() + " " + $("#FullRestorationTime").val());
@@ -128,6 +124,11 @@
             //    inputValid = false;
             //    errMsg = errMsg + '\r\Full Restoration cannot be empty<br />';
             //}
+
+            if ($('#incidentQualityGeneration_IsCEMNetworkBeingAffected').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nCEM Network Being Affected cannot be empty<br />';
+            }
 
             if ($('#incidentQualityGeneration_LossOfPower').val() == '') {
                 inputValid = false;
@@ -337,7 +338,13 @@
                                             <div class="col-lg-1"></div>
                                             <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected)</label></div>
                                             <div class="col-lg-6">
-                                                <input id="incidentQualityGeneration_IsCEMNetworkBeingAffected" name="incidentQualityGeneration.IsCEMNetworkBeingAffected" type="checkbox" value="@(incidentQualityGeneration.IsCEMNetworkBeingAffected != null && incidentQualityGeneration.IsCEMNetworkBeingAffected.Value ? "true" : "false")" @(incidentQualityGeneration.IsCEMNetworkBeingAffected != null && incidentQualityGeneration.IsCEMNetworkBeingAffected.Value ? "checked" : "") style="top:-10px; left: 20px" />
+                                                <select id="incidentQualityGeneration_IsCEMNetworkBeingAffected" name="incidentQualityGeneration.IsCEMNetworkBeingAffected" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_IsCEMNetworkBeingAffected)
+                                                    {
+                                                        <option value="@(one.IsEquals("Yes") ? "true" : "false")" @(incidentQualityGeneration.IsCEMNetworkBeingAffected != null && incidentQualityGeneration.IsCEMNetworkBeingAffected.Value ? (one.IsEquals("Yes") ? "selected" : "") : (one.IsEquals("No") ? "selected" : ""))>@one</option>
+                                                    }
+                                                </select>
                                                 @Html.ValidationMessageFor(model => incidentQualityGeneration.IsCEMNetworkBeingAffected, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

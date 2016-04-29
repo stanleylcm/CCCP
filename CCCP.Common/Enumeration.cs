@@ -382,7 +382,8 @@ namespace CCCP.Common
     #region Enum for Incident - Quality (Generation)
     public enum IncidentQualityGenerationInputKey
     {
-        IncidentQualityGeneration_NameOfPowerGenerator
+        IncidentQualityGeneration_NameOfPowerGenerator,
+        IncidentQualityGeneration_IsCEMNetworkBeingAffected
     }
     #endregion
 

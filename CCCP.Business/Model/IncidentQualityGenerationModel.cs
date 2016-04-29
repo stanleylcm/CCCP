@@ -89,6 +89,7 @@ namespace CCCP.Business.Model
         }
 
         public List<string> Options_NameOfPowerGenerator = new List<string>();
+        public List<string> Options_IsCEMNetworkBeingAffected = new List<string>();
 
         #endregion
 
@@ -177,6 +178,7 @@ namespace CCCP.Business.Model
         private void initOptions()
         {
             this.Options_NameOfPowerGenerator = InputOptionsService.GetIncidentQualityGenerationInputOptions(IncidentQualityGenerationInputKey.IncidentQualityGeneration_NameOfPowerGenerator);
+            this.Options_IsCEMNetworkBeingAffected = InputOptionsService.GetIncidentQualityGenerationInputOptions(IncidentQualityGenerationInputKey.IncidentQualityGeneration_IsCEMNetworkBeingAffected);
         }
 
         #endregion

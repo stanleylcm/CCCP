@@ -209,7 +209,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IsCEMNetworkBeingAffected)</label></div>
-                                            <div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsCEMNetworkBeingAffected == null ? false : Model.Entity.IsCEMNetworkBeingAffected)" /></div>
+                                            <div class="col-lg-6">@(Model.Entity.IsCEMNetworkBeingAffected != null && Model.Entity.IsCEMNetworkBeingAffected.Value ? "Yes" : "No")</div>
                                         </div>
 
                                         <div class="row">
