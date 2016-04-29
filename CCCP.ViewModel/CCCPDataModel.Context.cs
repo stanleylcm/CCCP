@@ -36,23 +36,12 @@ namespace CCCP.ViewModel
         public virtual DbSet<IncidentType> IncidentType { get; set; }
         public virtual DbSet<Checklist> Checklist { get; set; }
         public virtual DbSet<SystemFunction> SystemFunction { get; set; }
-        public virtual DbSet<IncidentEnvironmentAirEmission> IncidentEnvironmentAirEmission { get; set; }
-        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
-        public virtual DbSet<IncidentSystemITSystem> IncidentSystemITSystem { get; set; }
-        public virtual DbSet<IncidentSystemNetworkConnectivity> IncidentSystemNetworkConnectivity { get; set; }
-        public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
-        public virtual DbSet<IncidentEnvironmentLeakage> IncidentEnvironmentLeakage { get; set; }
-        public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
-        public virtual DbSet<IncidentQualityCorporateImage> IncidentQualityCorporateImage { get; set; }
-        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
         public virtual DbSet<ChatRoom> ChatRoom { get; set; }
         public virtual DbSet<ChatRoomMessage> ChatRoomMessage { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
         public virtual DbSet<ChatRoomAttachment> ChatRoomAttachment { get; set; }
         public virtual DbSet<GeneralEnquiry> GeneralEnquiry { get; set; }
         public virtual DbSet<GeneralEnquiryIncidentLink> GeneralEnquiryIncidentLink { get; set; }
-        public virtual DbSet<IncidentQualityGeneration> IncidentQualityGeneration { get; set; }
         public virtual DbSet<CriticalPoint> CriticalPoint { get; set; }
         public virtual DbSet<OMSEvent> OMSEvent { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -67,7 +56,18 @@ namespace CCCP.ViewModel
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Crisis> Crisis { get; set; }
         public virtual DbSet<ChecklistTemplate> ChecklistTemplate { get; set; }
+        public virtual DbSet<IncidentEnvironmentAirEmission> IncidentEnvironmentAirEmission { get; set; }
+        public virtual DbSet<IncidentEnvironmentLeakage> IncidentEnvironmentLeakage { get; set; }
+        public virtual DbSet<IncidentOHS> IncidentOHS { get; set; }
+        public virtual DbSet<IncidentQualityCorporateImage> IncidentQualityCorporateImage { get; set; }
+        public virtual DbSet<IncidentQualityGeneration> IncidentQualityGeneration { get; set; }
         public virtual DbSet<IncidentQualityNetwork> IncidentQualityNetwork { get; set; }
+        public virtual DbSet<IncidentSystemBilling> IncidentSystemBilling { get; set; }
+        public virtual DbSet<IncidentSystemCallCentre> IncidentSystemCallCentre { get; set; }
+        public virtual DbSet<IncidentSystemInvoicing> IncidentSystemInvoicing { get; set; }
+        public virtual DbSet<IncidentSystemITSystem> IncidentSystemITSystem { get; set; }
+        public virtual DbSet<IncidentSystemNetworkConnectivity> IncidentSystemNetworkConnectivity { get; set; }
+        public virtual DbSet<IncidentSystemOTSystem> IncidentSystemOTSystem { get; set; }
     
         public virtual ObjectResult<usp_IncidentSystemBilling_Test_Result> usp_IncidentSystemBilling_Test()
         {
