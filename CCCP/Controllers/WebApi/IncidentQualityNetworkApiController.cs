@@ -229,6 +229,8 @@ namespace CCCP.Controllers.WebApi
 
             db.SaveChanges();
 
+            NotificationService.SendCancelIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.QualityNetwork);
+
             return incidentQualityNetwork.IncidentQualityNetworkId;
         }
 
@@ -245,6 +247,8 @@ namespace CCCP.Controllers.WebApi
             incidentModel.PrepareSave(PrepareSaveMode.Closed);
 
             db.SaveChanges();
+
+            NotificationService.SendCloseIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.QualityNetwork);
 
             return incidentQualityNetwork.IncidentQualityNetworkId;
         }

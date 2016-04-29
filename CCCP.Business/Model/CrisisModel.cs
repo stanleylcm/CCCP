@@ -112,6 +112,39 @@ namespace CCCP.Business.Model
                 return 0;
             }
         }
+        public String IncidentNo
+        {
+            get
+            {
+                CCCPDbContext db = new CCCPDbContext();
+                if (db.IncidentEnvironmentAirEmission.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentEnvironmentAirEmission.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentEnvironmentLeakage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentEnvironmentLeakage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentOHS.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentOHS.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentQualityCorporateImage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityCorporateImage.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentQualityGeneration.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityGeneration.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentQualityNetwork.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentQualityNetwork.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemBilling.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemBilling.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemCallCentre.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemCallCentre.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemInvoicing.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemInvoicing.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemITSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemITSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemNetworkConnectivity.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemNetworkConnectivity.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+                if (db.IncidentSystemOTSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault() != null)
+                    return db.IncidentSystemOTSystem.Where(m => m.CrisisId != null && m.CrisisId.Value == Entity.CrisisId).FirstOrDefault().IncidentNo;
+
+                return "";
+            }
+        }
 
         #endregion
 
@@ -137,8 +170,6 @@ namespace CCCP.Business.Model
                         Entity.IssueById = AccessControlService.CurrentUser.Entity.UserId;
                         Entity.IssueDateTime = now;
                     }
-
-                    Entity.CrisisNo = IncidentService.GetNewIncidentNo(SequenceType.Crisis, DateTime.Now.Year);
                     Entity.Status = CrisisStatus.Pending_For_Approval.ToEnumString();
                     break;
                 case PrepareSaveMode.Last_Updated:
@@ -149,6 +180,8 @@ namespace CCCP.Business.Model
                     break;
                 case PrepareSaveMode.Approved:
                     Entity.Status = CrisisStatus.Pending.ToEnumString();
+
+                    Entity.CrisisNo = IncidentService.GetNewIncidentNo(SequenceType.Crisis, DateTime.Now.Year);
                     break;
                 case PrepareSaveMode.Rejected:
                     Entity.Status = CrisisStatus.Rejected.ToEnumString();

@@ -177,7 +177,8 @@ namespace CCCP.Common
     {
         GeneralEnquiry,
         Incident,
-        Crisis
+        Crisis,
+        Escalate_Crisis
     }
 
     #region Enum for Incident - System (Billing)

@@ -227,6 +227,8 @@ namespace CCCP.Controllers.WebApi
 
             db.SaveChanges();
 
+            NotificationService.SendCancelIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.OHS);
+
             return incidentOHS.IncidentOHSId;
         }
 
@@ -243,6 +245,8 @@ namespace CCCP.Controllers.WebApi
             incidentModel.PrepareSave(PrepareSaveMode.Closed);
 
             db.SaveChanges();
+
+            NotificationService.SendCloseIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.OHS);
 
             return incidentOHS.IncidentOHSId;
         }

@@ -143,6 +143,8 @@ namespace CCCP.Controllers.WebApi
             db.SaveChanges();
             db.usp_Crisis_PostCreate(crisis.Entity.CrisisId, crisis.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToEnumString());
 
+            NotificationService.SendApproveCrisisNotification(id, crisis.Entity.CrisisNo, crisis.IncidentNo, crisis.IncidentType);
+
             return crisis.Entity.CrisisId;
         }
 
@@ -157,6 +159,7 @@ namespace CCCP.Controllers.WebApi
             crisis.Entity.RejectReason = rejectReason;
             crisis.PrepareSave(PrepareSaveMode.Rejected);
             db.Crisis.Attach(crisis.Entity);
+            db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
 
             return crisis.Entity.CrisisId;
@@ -172,6 +175,7 @@ namespace CCCP.Controllers.WebApi
             crisis.Entity = db.Crisis.Find(id);
             crisis.PrepareSave(PrepareSaveMode.Closed);
             db.Crisis.Attach(crisis.Entity);
+            db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
 
             return crisis.Entity.CrisisId;

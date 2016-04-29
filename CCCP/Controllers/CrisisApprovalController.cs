@@ -11,6 +11,7 @@ using CCCP.Business.Model;
 using CCCP.Business.Service;
 using CCCP.Common;
 using CCCP.Controllers.WebApi;
+using System.IO;
 
 namespace CCCP.Controllers
 {
@@ -48,6 +49,63 @@ namespace CCCP.Controllers
                 Session["crisis"] = crisis;
             }
 
+            int incidentId = crisis.IncidentId;
+
+            if (incidentId > 0)
+            {
+                switch (crisis.IncidentType)
+                {
+                    case IncidentTypeSubType.EnvironmentAirEmission:
+                        IncidentEnvironmentAirEmissionModel incidentEnvironmentAirEmissionModel = new IncidentEnvironmentAirEmissionApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentEnvironmentAirEmissionModel));
+                        break;
+                    case IncidentTypeSubType.EnvironmentLeakage:
+                        IncidentEnvironmentLeakageModel incidentEnvironmentLeakageModel = new IncidentEnvironmentLeakageApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentEnvironmentLeakageModel));
+                        break;
+                    case IncidentTypeSubType.OHS:
+                        IncidentOHSModel incidentOHSModel = new IncidentOHSApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentOHSModel));
+                        break;
+                    case IncidentTypeSubType.QualityCorporateImage:
+                        IncidentQualityCorporateImageModel incidentQualityCorporateImageModel = new IncidentQualityCorporateImageApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentQualityCorporateImageModel));
+                        break;
+                    case IncidentTypeSubType.QualityGeneration:
+                        IncidentQualityGenerationModel incidentQualityGenerationModel = new IncidentQualityGenerationApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentQualityGenerationModel));
+                        break;
+                    case IncidentTypeSubType.QualityNetwork:
+                        IncidentQualityNetworkModel incidentQualityNetworkModel = new IncidentQualityNetworkApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentQualityNetworkModel));
+                        break;
+                    case IncidentTypeSubType.SystemBilling:
+                        IncidentSystemBillingModel incidentSystemBillingModel = new IncidentSystemBillingApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemBillingModel));
+                        break;
+                    case IncidentTypeSubType.SystemCallCentre:
+                        IncidentSystemCallCentreModel incidentSystemCallCentreModel = new IncidentSystemCallCentreApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemCallCentreModel));
+                        break;
+                    case IncidentTypeSubType.SystemInvoicing:
+                        IncidentSystemInvoicingModel incidentSystemInvoicingModel = new IncidentSystemInvoicingApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemInvoicingModel));
+                        break;
+                    case IncidentTypeSubType.SystemITSystem:
+                        IncidentSystemITSystemModel incidentSystemITSystemModel = new IncidentSystemITSystemApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemITSystemModel));
+                        break;
+                    case IncidentTypeSubType.SystemNetworkConnectivity:
+                        IncidentSystemNetworkConnectivityModel incidentSystemNetworkConnectivityModel = new IncidentSystemNetworkConnectivityApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemNetworkConnectivityModel));
+                        break;
+                    case IncidentTypeSubType.SystemOTSystem:
+                        IncidentSystemOTSystemModel incidentSystemOTSystemModel = new IncidentSystemOTSystemApiController().GetIncident(incidentId);
+                        ViewBag.PartialView = ConvertPartialViewToString(PartialView("_Details" + crisis.IncidentType.ToEnumString(), incidentSystemOTSystemModel));
+                        break;
+                }
+            }
+
             return View(crisis);
         }
 
@@ -69,6 +127,11 @@ namespace CCCP.Controllers
         {
             new CrisisApiController().Approve(id);
 
+            if (Session != null && Session["crisis"] != null)
+            {
+                crisis = Session["crisis"] as CrisisModel;
+            }
+
             return RedirectToAction("Details", "CrisisManagement", new { id = crisis.Entity.CrisisId, message = "Crisis " + crisis.Entity.CrisisNo + " had been approved!" });
         }
 
@@ -76,12 +139,34 @@ namespace CCCP.Controllers
         {
             new CrisisApiController().Reject(id, rejectReason);
 
+            if (Session != null && Session["crisis"] != null)
+            {
+                crisis = Session["crisis"] as CrisisModel;
+            }
+
             return RedirectToAction("Details", new { id = crisis.Entity.CrisisId, message = "Crisis " + crisis.Entity.CrisisNo + " had been rejected!" });
         }
 
         public void Test()
         {
             crisis.Checklists[1].ChecklistActions[1].ToggleActionStatus();
+        }
+
+        protected string ConvertPartialViewToString(PartialViewResult partialView)
+        {
+            using (var sw = new StringWriter())
+            {
+                partialView.View = ViewEngines.Engines
+                  .FindPartialView(ControllerContext, partialView.ViewName).View;
+
+                var vc = new ViewContext(
+                  ControllerContext, partialView.View, partialView.ViewData, partialView.TempData, sw);
+                partialView.View.Render(vc, sw);
+
+                var partialViewString = sw.GetStringBuilder().ToString();
+
+                return partialViewString;
+            }
         }
     }
 }

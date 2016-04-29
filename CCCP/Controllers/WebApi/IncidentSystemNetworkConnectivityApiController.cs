@@ -228,6 +228,8 @@ namespace CCCP.Controllers.WebApi
 
             db.SaveChanges();
 
+            NotificationService.SendCancelIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.SystemNetworkConnectivity);
+
             return incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId;
         }
 
@@ -244,6 +246,8 @@ namespace CCCP.Controllers.WebApi
             incidentModel.PrepareSave(PrepareSaveMode.Closed);
 
             db.SaveChanges();
+
+            NotificationService.SendCloseIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.SystemNetworkConnectivity);
 
             return incidentSystemNetworkConnectivity.IncidentSystemNetworkConnectivityId;
         }

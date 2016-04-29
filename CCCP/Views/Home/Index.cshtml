@@ -347,12 +347,12 @@
 
                     <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                            <th>Crisis No)</th>
-                            <th>Crisis Type</th>
-                            <th>Levelt of Severity</th>
+                            <th>Incident No</th>
+                            <th>Incident Type</th>
+                            <th>Level of Severity</th>
                             <th>Description</th>
-                            <th>Created By)</th>
-                            <th>Issued Date Time)</th>
+                            <th>Created By</th>
+                            <th>Issued Date Time</th>
                             <th></th>
                         </thead>
                         <tbody>
@@ -362,6 +362,7 @@
                                     int id = item.IncidentId;
                                     String Desc = "";
                                     String LevelOfSeverity = "";
+                                    String IncidentNo = "";
                                     IncidentLevel iLevel = IncidentLevel.None;
                                     CCCPDbContext db = new CCCPDbContext();
 
@@ -372,79 +373,91 @@
                                             case IncidentTypeSubType.EnvironmentAirEmission:
                                                 IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = db.IncidentEnvironmentAirEmission.Find(id);
                                                 Desc = incidentEnvironmentAirEmission.IncidentBackground;
+                                                IncidentNo = incidentEnvironmentAirEmission.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentEnvironmentAirEmission.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.EnvironmentLeakage:
                                                 IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
                                                 Desc = incidentEnvironmentLeakage.IncidentBackground;
+                                                IncidentNo = incidentEnvironmentLeakage.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentEnvironmentLeakage.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.OHS:
                                                 IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
                                                 Desc = incidentOHS.IncidentBackground;
+                                                IncidentNo = incidentOHS.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentOHS.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.QualityCorporateImage:
                                                 IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
                                                 Desc = incidentQualityCorporateImage.IncidentBackground;
+                                                IncidentNo = incidentQualityCorporateImage.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentQualityCorporateImage.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.QualityGeneration:
                                                 IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
                                                 Desc = incidentQualityGeneration.IncidentBackground;
+                                                IncidentNo = incidentQualityGeneration.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentQualityGeneration.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.QualityNetwork:
                                                 IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
                                                 Desc = incidentQualityNetwork.IncidentBackground;
+                                                IncidentNo = incidentQualityNetwork.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentQualityNetwork.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemBilling:
                                                 IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
                                                 Desc = incidentSystemBilling.IncidentBackground;
+                                                IncidentNo = incidentSystemBilling.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemBilling.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemCallCentre:
                                                 IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
                                                 Desc = incidentSystemCallCentre.IncidentBackground;
+                                                IncidentNo = incidentSystemCallCentre.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemCallCentre.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemInvoicing:
                                                 IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
                                                 Desc = incidentSystemInvoicing.IncidentBackground;
+                                                IncidentNo = incidentSystemInvoicing.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemInvoicing.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemITSystem:
                                                 IncidentSystemITSystem incidentSystemITSystem = db.IncidentSystemITSystem.Find(id);
                                                 Desc = incidentSystemITSystem.IncidentBackground;
+                                                IncidentNo = incidentSystemITSystem.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemITSystem.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemNetworkConnectivity:
                                                 IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
                                                 Desc = incidentSystemNetworkConnectivity.IncidentBackground;
+                                                IncidentNo = incidentSystemNetworkConnectivity.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemNetworkConnectivity.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                             case IncidentTypeSubType.SystemOTSystem:
                                                 IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
                                                 Desc = incidentSystemOTSystem.IncidentBackground;
+                                                IncidentNo = incidentSystemOTSystem.IncidentNo;
                                                 iLevel = (IncidentLevel)Convert.ToInt32(incidentSystemOTSystem.LevelOfSeverity);
                                                 LevelOfSeverity = iLevel.ToEnumString();
                                                 break;
                                         }
                                     } 
                             <tr>
-                                <td>@Html.DisplayFor(model => item.Entity.CrisisNo)</td>
+                                <td>@Html.DisplayFor(model => IncidentNo)</td>
                                 <td>@MasterTableService.GetIncidentTypeName(item.IncidentType)</td>
                                 <td>@Html.DisplayFor(model => LevelOfSeverity)</td>
                                 <td>@Html.DisplayFor(model => Desc)</td>

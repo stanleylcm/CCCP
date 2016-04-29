@@ -228,6 +228,8 @@ namespace CCCP.Controllers.WebApi
 
             db.SaveChanges();
 
+            NotificationService.SendCancelIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.SystemCallCentre);
+
             return incidentSystemCallCentre.IncidentSystemCallCentreId;
         }
 
@@ -244,6 +246,8 @@ namespace CCCP.Controllers.WebApi
             incidentModel.PrepareSave(PrepareSaveMode.Closed);
 
             db.SaveChanges();
+
+            NotificationService.SendCloseIncidentNotification(id, incidentModel.Entity.IncidentNo, IncidentTypeSubType.SystemCallCentre);
 
             return incidentSystemCallCentre.IncidentSystemCallCentreId;
         }

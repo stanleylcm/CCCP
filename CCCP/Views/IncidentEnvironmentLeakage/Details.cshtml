@@ -244,14 +244,6 @@
                                         <div class="col-lg-10">Completed</div>
                                     </div>
                                 </fieldset>
-
-                                <br /><br />
-                                <div class="row">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-9">
-                                        <button class="btn btn-primary" type="button" id="btnCloseIncident" @(Model.IsReadyForClose() && Model.Entity.IncidentStatus != IncidentStatus.Closed.ToEnumString() ? "" : "disabled")>@Resources.global.Func_CloseIncident</button>
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-lg-8">
                                 <ul class="nav nav-pills">
@@ -439,6 +431,7 @@
 
             <div>
                 <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentEnvironmentLeakage", new { id = Model.Entity.IncidentEnvironmentLeakageId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" id="btnCloseIncident" @(Model.IsReadyForClose() && Model.Entity.IncidentStatus != IncidentStatus.Closed.ToEnumString() ? "" : "disabled")>@Resources.global.Func_CloseIncident</button>
             </div>
             <br/>
 

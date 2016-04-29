@@ -67,7 +67,76 @@ namespace CCCP.Business.Service
             PushNotification(notice.NotificationId);
         }
 
-        public static void SendCreateCrisisNotification(int crisisId, string crisisNo, IncidentTypeSubType incidentType)
+        public static void SendCloseIncidentNotification(int incidentId, string incidentNo, IncidentTypeSubType incidentType)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            Notification notice = new Notification();
+            notice.UserId = AccessControlService.CurrentUser.Entity.UserId;
+            notice.IncidentId = incidentId;
+            notice.IncidentTypeId = MasterTableService.GetIncidentTypeId(incidentType);
+            notice.MessageType = NotificationMessageType.Incident.ToEnumString();
+            notice.Message = string.Format("Incident {0} for type {1} has been closed.",
+                                            incidentNo,
+                                            MasterTableService.GetIncidentTypeName(incidentType)
+                                            );
+            notice.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.CreatedDateTime = DateTime.Now;
+            notice.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.LastUpdatedDateTime = DateTime.Now;
+
+            db.Notification.Add(notice);
+            db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
+        }
+
+        public static void SendCancelIncidentNotification(int incidentId, string incidentNo, IncidentTypeSubType incidentType)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            Notification notice = new Notification();
+            notice.UserId = AccessControlService.CurrentUser.Entity.UserId;
+            notice.IncidentId = incidentId;
+            notice.IncidentTypeId = MasterTableService.GetIncidentTypeId(incidentType);
+            notice.MessageType = NotificationMessageType.Incident.ToEnumString();
+            notice.Message = string.Format("Incident {0} for type {1} has been cancelled.",
+                                            incidentNo,
+                                            MasterTableService.GetIncidentTypeName(incidentType)
+                                            );
+            notice.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.CreatedDateTime = DateTime.Now;
+            notice.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.LastUpdatedDateTime = DateTime.Now;
+
+            db.Notification.Add(notice);
+            db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
+        }
+
+        public static void SendEscalateCrisisNotification(int crisisId, string incidentNo, IncidentTypeSubType incidentType)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            Notification notice = new Notification();
+            notice.UserId = AccessControlService.CurrentUser.Entity.UserId;
+            notice.CrisisId = crisisId;
+            notice.IncidentTypeId = MasterTableService.GetIncidentTypeId(incidentType);
+            notice.MessageType = NotificationMessageType.Escalate_Crisis.ToEnumString();
+            notice.Message = string.Format("Incident {0} for type {1} has been escalated and pending for approval.",
+                                            incidentNo,
+                                            MasterTableService.GetIncidentTypeName(incidentType)
+                                            );
+            notice.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.CreatedDateTime = DateTime.Now;
+            notice.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
+            notice.LastUpdatedDateTime = DateTime.Now;
+
+            db.Notification.Add(notice);
+            db.SaveChanges();
+
+            PushNotification(notice.NotificationId);
+        }
+
+        public static void SendApproveCrisisNotification(int crisisId, string crisisNo, string incidentNo, IncidentTypeSubType incidentType)
         {
             CCCPDbContext db = new CCCPDbContext();
             Notification notice = new Notification();
@@ -75,8 +144,9 @@ namespace CCCP.Business.Service
             notice.CrisisId = crisisId;
             notice.IncidentTypeId = MasterTableService.GetIncidentTypeId(incidentType);
             notice.MessageType = NotificationMessageType.Crisis.ToEnumString();
-            notice.Message = string.Format("Crisis {0} for type {1} has been created.",
+            notice.Message = string.Format("Crisis {0} for incident {1} of type {2} has been approved.",
                                             crisisNo,
+                                            incidentNo,
                                             MasterTableService.GetIncidentTypeName(incidentType)
                                             );
             notice.CreatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();

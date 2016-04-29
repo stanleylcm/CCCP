@@ -89,6 +89,18 @@ namespace CCCP.Business.Model
                 return Entity.IsDrillMode != null && Entity.IsDrillMode.Value ? "(Drill)" : "";
             }
         }
+        public String CrisisRejectReason
+        {
+            get
+            {
+                if (Entity.CrisisId != null && Entity.CrisisId.Value > 0)
+                {
+                    return CrisisEntity.Entity.RejectReason;
+                }
+
+                return "";
+            }
+        }
 
         #endregion
 
@@ -112,7 +124,11 @@ namespace CCCP.Business.Model
         }
         public bool IsAbleToEscalate()
         {
-            if (Entity.CrisisId != null && Entity.CrisisId.Value > 0) return false;
+            if (Entity.CrisisId != null && Entity.CrisisId.Value > 0)
+            {
+                if (this.CrisisEntity.Entity.Status != CrisisStatus.Rejected.ToEnumString())
+                    return false;
+            }
             if (Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString()) return false;
             if (Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString()) return false;
             return true;

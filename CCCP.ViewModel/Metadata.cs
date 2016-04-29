@@ -45,7 +45,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -113,7 +113,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -183,7 +183,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -249,7 +249,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -313,7 +313,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -375,7 +375,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -442,7 +442,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -502,7 +502,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -566,7 +566,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -644,7 +644,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -706,7 +706,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -720,7 +720,7 @@ namespace CCCP.ViewModel
         public Nullable<decimal> ExpectedRestorationTime { get; set; }
         [Display(Name = "Full Restoration")]
         public Nullable<System.DateTime> FullRestoration { get; set; }
-        [Display(Name = "Is CEM Network Being Affected")]
+        [Display(Name = "CEM Network Being Affected")]
         public Nullable<bool> IsCEMNetworkBeingAffected { get; set; }
         [Display(Name = "Loss of Power (MW)")]
         [Range((double)0, double.MaxValue, ErrorMessage = "Please enter positive number")]
@@ -770,7 +770,7 @@ namespace CCCP.ViewModel
         [Display(Name = "Incident Background")]
         [DataType(DataType.MultilineText)]
         public string IncidentBackground { get; set; }
-        [Display(Name = "Is Drill Mode?")]
+        [Display(Name = "Drill Mode")]
         public Nullable<bool> IsDrillMode { get; set; }
         [Display(Name = "History")]
         public string History { get; set; }
@@ -822,13 +822,13 @@ namespace CCCP.ViewModel
         public string LossTransmission { get; set; }
         [Display(Name = "MV Outage")]
         public Nullable<bool> MVOutage { get; set; }
-        [Display(Name = "Is Double Fault?")]
+        [Display(Name = "Double Fault")]
         public Nullable<bool> IsDoubleFault { get; set; }
         [Display(Name = "LV Outage")]
         public Nullable<bool> LVOutage { get; set; }
-        [Display(Name = "Is PQ Event Affect Large Customer?")]
+        [Display(Name = "PQ Event Affect Large Customer")]
         public Nullable<bool> IsPQEventAffectLargeCustomer { get; set; }
-        [Display(Name = "Is Critical Point?")]
+        [Display(Name = "Critical Point")]
         public Nullable<bool> IsCriticalPoint { get; set; }
 
         [Display(Name = "Created By")]

@@ -58,8 +58,8 @@
                     <table id="CrisisApprovalList" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Entity.CrisisNo)</th>
-                                <th>Crisis Type</th>
+                                <th>Incident No</th>
+                                <th>Incident Type</th>
                                 <th>Levelt of Severity</th>
                                 <th>Description</th>
                                 <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Entity.CreatedBy)</th>
@@ -156,7 +156,7 @@
                                 }
                                 
                                 <tr>
-                                    <td>@Html.DisplayFor(model => item.Entity.CrisisNo)</td>
+                                    <td>@Html.DisplayFor(model => item.IncidentNo)</td>
                                     <td>@MasterTableService.GetIncidentTypeName(item.IncidentType)</td>
                                     <td>@Html.DisplayFor(model => LevelOfSeverity)</td>
                                     <td>@Html.DisplayFor(model => Desc)</td>

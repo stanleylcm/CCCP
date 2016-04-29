@@ -137,7 +137,7 @@ namespace CCCP.Business.Model
 
         public bool IsReadyForClose()
         {
-            return IncidentService.IsReadyForClose(this) && (Entity.FullRestoration != null);
+            return IncidentService.IsReadyForClose(this);
         }
         public IncidentStatus GetIncidentStatus()
         {
@@ -146,7 +146,11 @@ namespace CCCP.Business.Model
         }
         public bool IsAbleToEscalate()
         {
-            if (Entity.CrisisId != null && Entity.CrisisId.Value > 0) return false;
+            if (Entity.CrisisId != null && Entity.CrisisId.Value > 0)
+            {
+                if (this.CrisisEntity.Entity.Status != CrisisStatus.Rejected.ToEnumString())
+                    return false;
+            }
             if (Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString()) return false;
             if (Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString()) return false;
             return true;

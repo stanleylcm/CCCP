@@ -61,6 +61,8 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
 
+            string incidentNo = "";
+
             Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
             AccessControlService.CurrentUser = sessionHelper.CurrentUser;
 
@@ -79,54 +81,68 @@ namespace CCCP.Controllers.WebApi
                 case IncidentTypeSubType.EnvironmentAirEmission:
                     IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = db.IncidentEnvironmentAirEmission.Find(id);
                     incidentEnvironmentAirEmission.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentEnvironmentAirEmission.IncidentNo;
                     break;
                 case IncidentTypeSubType.EnvironmentLeakage:
                     IncidentEnvironmentLeakage incidentEnvironmentLeakage = db.IncidentEnvironmentLeakage.Find(id);
                     incidentEnvironmentLeakage.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentEnvironmentLeakage.IncidentNo;
                     break;
                 case IncidentTypeSubType.OHS:
                     IncidentOHS incidentOHS = db.IncidentOHS.Find(id);
                     incidentOHS.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentOHS.IncidentNo;
                     break;
                 case IncidentTypeSubType.QualityCorporateImage:
                     IncidentQualityCorporateImage incidentQualityCorporateImage = db.IncidentQualityCorporateImage.Find(id);
                     incidentQualityCorporateImage.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentQualityCorporateImage.IncidentNo;
                     break;
                 case IncidentTypeSubType.QualityGeneration:
                     IncidentQualityGeneration incidentQualityGeneration = db.IncidentQualityGeneration.Find(id);
                     incidentQualityGeneration.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentQualityGeneration.IncidentNo;
                     break;
                 case IncidentTypeSubType.QualityNetwork:
                     IncidentQualityNetwork incidentQualityNetwork = db.IncidentQualityNetwork.Find(id);
                     incidentQualityNetwork.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentQualityNetwork.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemBilling:
                     IncidentSystemBilling incidentSystemBilling = db.IncidentSystemBilling.Find(id);
                     incidentSystemBilling.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemBilling.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemCallCentre:
                     IncidentSystemCallCentre incidentSystemCallCentre = db.IncidentSystemCallCentre.Find(id);
                     incidentSystemCallCentre.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemCallCentre.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemInvoicing:
                     IncidentSystemInvoicing incidentSystemInvoicing = db.IncidentSystemInvoicing.Find(id);
                     incidentSystemInvoicing.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemInvoicing.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemITSystem:
                     IncidentSystemITSystem incidentSystemITSystem = db.IncidentSystemITSystem.Find(id);
                     incidentSystemITSystem.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemITSystem.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemNetworkConnectivity:
                     IncidentSystemNetworkConnectivity incidentSystemNetworkConnectivity = db.IncidentSystemNetworkConnectivity.Find(id);
                     incidentSystemNetworkConnectivity.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemNetworkConnectivity.IncidentNo;
                     break;
                 case IncidentTypeSubType.SystemOTSystem:
                     IncidentSystemOTSystem incidentSystemOTSystem = db.IncidentSystemOTSystem.Find(id);
                     incidentSystemOTSystem.CrisisId = crisis.Entity.CrisisId;
+                    incidentNo = incidentSystemOTSystem.IncidentNo;
                     break;
             }
 
             db.SaveChanges();
+
+            NotificationService.SendEscalateCrisisNotification(crisis.Entity.CrisisId, incidentNo, MasterTableService.GetIncidentTypeSubType(typeId));
 
             return id;
         }
