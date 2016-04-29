@@ -1,0 +1,377 @@
+﻿@model CCCP.Business.Model.IncidentSystemOTSystemModel
+@using CCCP.Business.Service
+@using CCCP.Common
+@{
+    ViewBag.Title = Resources.global.Menu_IncidentSystemOTSystem;
+}
+
+<script>
+	$(function() {
+		$('#LinkedIncidentTable').DataTable();
+		$('#LinkedGeneralEnquiryTable').DataTable();
+
+		$('#Checklists input[type="checkbox"]').each(function () {
+			value = $(this).val();
+			$(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		});
+
+        // read mode, disabled change state functionality for the tri-state checkbox
+		$('.bootstrap-checkbox').off('click');
+
+		$('input[type=checkbox]').click(function(event) {
+		    event.preventDefault();
+		});
+	});
+</script>
+
+<div class="col-lg-12">
+    <!-- content -->
+
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
+        <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+        <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
+        <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
+        <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
+        <li><a href="#Notification" data-toggle="tab">Notification</a></li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+
+        <div class="tab-pane fade active in" id="IncidentDetails">
+            <div class="box box-primary">
+                <div class="box-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+								@*<div class="row">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IssueDateTime)</div>
+								</div>*@
+
+								@{
+									string sLevelOfSeverity = "";
+									if (Model.Entity.LevelOfSeverity != null)
+									{
+										int level = Convert.ToInt32(Model.Entity.LevelOfSeverity);
+										IncidentLevel iLevel = (IncidentLevel)level;
+										sLevelOfSeverity = iLevel.ToEnumString();
+									}
+								}
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</label></div>
+									<div class="col-lg-1">@Html.DisplayFor(model => sLevelOfSeverity)</div>
+								</div>
+
+								@*<div class="row">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.IncidentStatus)</div>
+								</div>*@
+
+								<div class="row" style="display:none">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.CrisisId)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.CrisisId)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</label></div>
+                                    <div class="col-lg-6">@Html.Raw(Model.Entity.IncidentBackground != null ? Model.Entity.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+								</div>
+
+								@*<div class="row">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDrillMode)</label></div>
+									<div class="col-lg-6"><input type="checkbox" checked="@(Model.Entity.IsDrillMode == null ? false : Model.Entity.IsDrillMode)" /></div>
+								</div>*@
+							</div>
+						</div>
+
+						<div class="panel panel-primary">
+							<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+							<div class="panel panel-body">
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Location)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Location)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.PossibleCause)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.Damage)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.Damage)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedSystem)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedSystem)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.AffectedArea)</div>
+								</div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.NoOfAffectedSubstation)</label></div>
+                                    <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfAffectedSubstation)</div>
+                                </div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.ExpectedRestorationTime)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.FullRestoration)</label></div>
+									<div class="col-lg-6">@Html.DisplayFor(model => model.Entity.FullRestoration)</div>
+								</div>
+							</div>
+						</div>
+
+                        <div class="panel panel-danger" style="@(Model.CrisisRejectReason != null && Model.CrisisRejectReason != "" ? "" : "display:none")">
+                            <div class="panel panel-heading"><label>Crisis @Html.DisplayNameFor(model => model.CrisisEntity.Entity.RejectReason)</label></div>
+                            <div class="panel panel-body">
+                                @Html.Raw(Model.CrisisRejectReason != null ? Model.CrisisRejectReason.Replace(System.Environment.NewLine, "<br/>") : "")
+                            </div>
+                        </div>
+					</div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="tab-pane fade" id="Checklists">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-lg-3">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Legend</legend>
+
+                            <div class="row">
+                                <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                <div class="col-lg-10">Pending</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                <div class="col-lg-10">In Progress</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                <div class="col-lg-10">Completed</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-8">
+                        <ul class="nav nav-pills">
+                            @{
+                                int countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                            <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                    countChecklist++;
+                                }
+                            }
+                        </ul>
+                        <div id="TabList" class="tab-content">
+                            @{
+                                countChecklist = 1;
+                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                {
+                                    int countChecklistAction = 1;
+                            <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <th></th>
+                                    <th>Action</th>
+                                    <th>Last Updated By</th>
+                                    <th>Last Updated Datetime</th>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
+                                            <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                            <td>@action.Entity.LastUpdatedBy</td>
+                                            <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                        </tr>
+                                        countChecklistAction++;
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                                    countChecklist++;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="IncidentEnquiry">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        @Html.Partial("_ChatRoom", Model.Chatroom)
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="LinkedIncident">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <table id="LinkedIncidentTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
+                                    <th>Incident Type</th>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.LinkedIncidentEntities)
+                                {
+                                    string sLevelOfSeverity1 = "";
+                                    if (item.LevelOfSeverity != null)
+                                    {
+                                        int level = Convert.ToInt32(item.LevelOfSeverity);
+                                        IncidentLevel iLevel = (IncidentLevel)level;
+                                        sLevelOfSeverity1 = iLevel.ToEnumString();
+                                    }
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.IncidentNo)</td>
+                                        <td>@Html.DisplayFor(model => item.IncidentType)</td>
+                                        <td>@Html.DisplayFor(model => sLevelOfSeverity1)</td>
+                                        <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
+                                        <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                        <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                        <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                        <td>
+                                            <div class="tools">
+                                                <a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-sliders"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="LinkedGeneralEnquiry">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <table id="LinkedGeneralEnquiryTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().GeneralEnquiryId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().GeneralEnquiryTypeId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().Background)</th>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().CreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().IssueDateTime)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.LinkedGeneralEnquiryEntities)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.GeneralEnquiryId)</td>
+                                        <td>@MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(item.GeneralEnquiryTypeId.Value))</td>
+                                        <td>@Html.DisplayFor(model => item.Status)</td>
+                                        <td>@Html.Raw(item.Background != null ? item.Background.Replace(System.Environment.NewLine, "<br/>") : "")</td>
+                                        <td>@Html.DisplayFor(model => item.CreatedBy)</td>
+                                        <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
+                                        <td>
+                                            <div class="tools">
+                                                <a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-sliders"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="Notification">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <table id="NotificationTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.NotificationEntities.FirstOrDefault().CreatedDateTime)</th>
+                                    <th>@Html.DisplayNameFor(model => model.NotificationEntities.FirstOrDefault().Message)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.NotificationEntities)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.CreatedDateTime)</td>
+                                        <td>@Html.DisplayFor(model => item.Message)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="button" disabled='@(Model.Entity.IncidentStatus == IncidentStatus.Closed.ToEnumString() || Model.Entity.IncidentStatus == IncidentStatus.Cancelled.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "IncidentSystemOTSystem", new { id = Model.Entity.IncidentSystemOTSystemId })';">@Resources.global.Func_Edit</button>
+        <button class="btn btn-primary" type="button" id="btnCloseIncident" @(Model.IsReadyForClose() && Model.Entity.IncidentStatus != IncidentStatus.Closed.ToEnumString() ? "" : "disabled")>@Resources.global.Func_CloseIncident</button>
+    </div>
+    <br/>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                    </h4>
+                </div>
+            </a>
+            <div id="History" class="panel-collapse collapse">
+                <div class="panel-body multiline">
+                    @Html.Raw(Model.Entity.History)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

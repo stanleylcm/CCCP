@@ -332,28 +332,23 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.MVOutage)</label></div>
-                                            <div class="col-lg-6">@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "YES" : "NO")</div>
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.OutageLevel)</label></div>
+                                            <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.OutageLevel)</div>
                                         </div>
 
-                                        <div class="row" style="@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "" : "display:none")">
+                                        <div class="row" style="@(Model.Entity.OutageLevel != null && Model.Entity.OutageLevel.IsEquals("MV Outage") ? "" : "display:none")">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsDoubleFault)</label></div>
                                             <div class="col-lg-6">@(Model.Entity.IsDoubleFault != null && Model.Entity.IsDoubleFault.Value ? "YES" : "NO")</div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.LVOutage)</label></div>
-                                            <div class="col-lg-6">@(Model.Entity.LVOutage != null && Model.Entity.LVOutage.Value ? "YES" : "NO")</div>
+                                        <div class="row" style="@(Model.Entity.OutageLevel != null && Model.Entity.OutageLevel.IsEquals("MV Outage") ? "" : "display:none")">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsCriticalPoint)</label></div>
+                                            <div class="col-lg-6">@(Model.Entity.IsCriticalPoint != null && Model.Entity.IsCriticalPoint.Value ? "YES" : "NO")</div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsPQEventAffectLargeCustomer)</label></div>
                                             <div class="col-lg-6">@(Model.Entity.IsPQEventAffectLargeCustomer != null && Model.Entity.IsPQEventAffectLargeCustomer.Value ? "YES" : "NO")</div>
-                                        </div>
-
-                                        <div class="row" style="@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "" : "display:none")">
-                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.IsCriticalPoint)</label></div>
-                                            <div class="col-lg-6">@(Model.Entity.IsCriticalPoint != null && Model.Entity.IsCriticalPoint.Value ? "YES" : "NO")</div>
                                         </div>
                                     </div>
                                 </div>

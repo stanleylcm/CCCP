@@ -844,12 +844,10 @@ namespace CCCP.ViewModel
         public string LossInterconnection { get; set; }
         [Display(Name = "Loss Transmission")]
         public string LossTransmission { get; set; }
-        [Display(Name = "MV Outage")]
-        public Nullable<bool> MVOutage { get; set; }
+        [Display(Name = "Outage Level")]
+        public string OutageLevel { get; set; }
         [Display(Name = "Double Fault")]
         public Nullable<bool> IsDoubleFault { get; set; }
-        [Display(Name = "LV Outage")]
-        public Nullable<bool> LVOutage { get; set; }
         [Display(Name = "PQ Event Affect Large Customer")]
         public Nullable<bool> IsPQEventAffectLargeCustomer { get; set; }
         [Display(Name = "Critical Point")]

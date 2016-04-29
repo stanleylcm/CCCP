@@ -242,7 +242,7 @@ namespace CCCP.Business.Service
                 (incident.LossTransmission != null && incident.LossTransmission.IsEquals("Cable overload")) ||
                 (incident.LossTransmission != null && incident.LossTransmission.IsEquals("TR overload")) ||
                 (incident.LossTransmission != null && incident.LossTransmission.IsEquals("66/11kV loss two TR")) ||
-                (incident.MVOutage != null && incident.MVOutage.Value && outageMinute > 240 && outageMinute <= 360) ||
+                (incident.OutageLevel != null && incident.OutageLevel.IsEquals("MV Outage") && outageMinute > 240 && outageMinute <= 360) ||
                 (incident.IsDoubleFault != null && incident.IsDoubleFault.Value == true) ||
                 // More than 1 condition (at least 2...) of the below had been met
                 // No. of Diamond customer > 0
@@ -252,14 +252,14 @@ namespace CCCP.Business.Service
                 // Critical PT is TRUE
                 (incident.NoOfDiamondCustomer > 0 && incident.NoOfPlatinumCustomer > 0) ||
                 (incident.NoOfDiamondCustomer > 0 && incident.NoOfCustomerAffected > 0) ||
-                (incident.NoOfDiamondCustomer > 0 && incident.LVOutage != null && incident.LVOutage.Value && outageMinute >= 240) ||
+                (incident.NoOfDiamondCustomer > 0 && incident.OutageLevel != null && incident.OutageLevel.IsEquals("LV Outage") && outageMinute >= 240) ||
                 (incident.NoOfDiamondCustomer > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
                 (incident.NoOfPlatinumCustomer > 0 && incident.NoOfCustomerAffected > 0) ||
-                (incident.NoOfPlatinumCustomer > 0 && incident.LVOutage != null && incident.LVOutage.Value && outageMinute >= 240) ||
+                (incident.NoOfPlatinumCustomer > 0 && incident.OutageLevel != null && incident.OutageLevel.IsEquals("LV Outage") && outageMinute >= 240) ||
                 (incident.NoOfPlatinumCustomer > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
-                (incident.NoOfCustomerAffected > 0 && incident.LVOutage != null && incident.LVOutage.Value && outageMinute >= 240) ||
+                (incident.NoOfCustomerAffected > 0 && incident.OutageLevel != null && incident.OutageLevel.IsEquals("LV Outage") && outageMinute >= 240) ||
                 (incident.NoOfCustomerAffected > 0 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true) ||
-                (incident.LVOutage != null && incident.LVOutage.Value && outageMinute >= 240 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true)
+                (incident.OutageLevel != null && incident.OutageLevel.IsEquals("LV Outage") && outageMinute >= 240 && incident.IsCriticalPoint != null && incident.IsCriticalPoint.Value == true)
                 )
                 return IncidentLevel.Level_2;
 

@@ -140,6 +140,7 @@ namespace CCCP.Controllers.WebApi
             crisis.Entity = db.Crisis.Find(id);
             crisis.PrepareSave(PrepareSaveMode.Approved);
             db.Crisis.Attach(crisis.Entity);
+            db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
             db.usp_Crisis_PostCreate(crisis.Entity.CrisisId, crisis.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToEnumString());
 

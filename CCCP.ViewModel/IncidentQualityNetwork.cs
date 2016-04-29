@@ -55,9 +55,8 @@ namespace CCCP.ViewModel
         public Nullable<int> LossGeneration { get; set; }
         public string LossInterconnection { get; set; }
         public string LossTransmission { get; set; }
-        public Nullable<bool> MVOutage { get; set; }
+        public string OutageLevel { get; set; }
         public Nullable<bool> IsDoubleFault { get; set; }
-        public Nullable<bool> LVOutage { get; set; }
         public Nullable<bool> IsPQEventAffectLargeCustomer { get; set; }
         public Nullable<bool> IsCriticalPoint { get; set; }
         public string CreatedBy { get; set; }

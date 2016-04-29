@@ -52,8 +52,8 @@ namespace CCCP.Business.Model
             incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
             incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause;
             incidentQualityNetwork.RootCause_Chi = omsEventModel.Entity.RootCause_Chi;
-            incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage;
-            incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage;
+            incidentQualityNetwork.OutageLevel = (omsEventModel.Entity.MVOutage != null && omsEventModel.Entity.MVOutage.Value ? "MV Outage" :
+                                                    (omsEventModel.Entity.LVOutage != null && omsEventModel.Entity.LVOutage.Value ? "LV Outage" : null));
             incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint;
 
             this.Entity = incidentQualityNetwork;
@@ -125,6 +125,18 @@ namespace CCCP.Business.Model
             get
             {
                 return Entity.IsDrillMode != null && Entity.IsDrillMode.Value ? "(Drill)" : "";
+            }
+        }
+        public String CrisisRejectReason
+        {
+            get
+            {
+                if (Entity.CrisisId != null && Entity.CrisisId.Value > 0)
+                {
+                    return CrisisEntity.Entity.RejectReason;
+                }
+
+                return "";
             }
         }
 

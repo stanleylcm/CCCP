@@ -50,9 +50,8 @@
 	        $(this).val(this.checked);
 	    });
 
-	    $("#incidentQualityNetwork_MVOutage").on("click", function () {
-	        $(this).val(this.checked);
-	        if (this.checked) {
+	    $("#incidentQualityNetwork_OutageLevel").on("click", function () {
+	        if ($(this).val() == 'MV Outage') {
 	            $('.MVOnly').show();
 	        } else {
 	            $('.MVOnly').hide();
@@ -60,10 +59,6 @@
 	    });
 
 	    $("#incidentQualityNetwork_IsDoubleFault").on("click", function () {
-	        $(this).val(this.checked);
-	    });
-
-	    $("#incidentQualityNetwork_LVOutage").on("click", function () {
 	        $(this).val(this.checked);
 	    });
 
@@ -97,7 +92,7 @@
 
 	    $(document).ready(function () {
 
-	        if ("@(Model.Entity.MVOutage != null && Model.Entity.MVOutage.Value ? "true" : "false")" == "true") {
+	        if ($("#incidentQualityNetwork_OutageLevel").val() == 'MV Outage') {
 	            $('.MVOnly').show();
 	        } else {
 	            $('.MVOnly').hide();
@@ -635,12 +630,16 @@
 
                                         <div class="row">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.MVOutage)</label></div>
-                                            <div class="col-lg-4">
-                                                <div class="checkbox">
-                                                    <input id="incidentQualityNetwork_MVOutage" name="incidentQualityNetwork.MVOutage" type="checkbox" value="@(incidentQualityNetwork.MVOutage != null && incidentQualityNetwork.MVOutage.Value ? "true" : "false")" @(incidentQualityNetwork.MVOutage != null && incidentQualityNetwork.MVOutage.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                                    @Html.ValidationMessageFor(model => incidentQualityNetwork.MVOutage, "", new { @class = "text-danger" })
-                                                </div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => model.Entity.OutageLevel)</label></div>
+                                            <div class="col-lg-6">
+                                                <select id="incidentQualityNetwork_OutageLevel" name="incidentQualityNetwork.OutageLevel" class="form-control thin-control">
+                                                    <option value=""></option>
+                                                    @foreach (string one in Model.Options_OutageLevel)
+                                                    {
+                                                        <option value="@one" @(incidentQualityNetwork.OutageLevel != null && incidentQualityNetwork.OutageLevel.IsEquals(one) ? "selected" : "")>@one</option>
+                                                    }
+                                                </select>
+                                                @Html.ValidationMessageFor(model => incidentQualityNetwork.OutageLevel, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
@@ -655,14 +654,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row MVOnly">
                                             <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.LVOutage)</label></div>
-                                            <div class="col-lg-4">
-                                                <div class="checkbox">
-                                                    <input id="incidentQualityNetwork_LVOutage" name="incidentQualityNetwork.LVOutage" type="checkbox" value="@(incidentQualityNetwork.LVOutage != null && incidentQualityNetwork.LVOutage.Value ? "true" : "false")" @(incidentQualityNetwork.LVOutage != null && incidentQualityNetwork.LVOutage.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                                    @Html.ValidationMessageFor(model => incidentQualityNetwork.LVOutage, "", new { @class = "text-danger" })
-                                                </div>
+                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsCriticalPoint)</label></div>
+                                            <div class="col-lg-6">
+                                                @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "YES" : "NO")
+                                                @Html.HiddenFor(model => incidentQualityNetwork.IsCriticalPoint, new { @Value = incidentQualityNetwork.IsCriticalPoint })
                                             </div>
                                         </div>
 
@@ -674,15 +671,6 @@
                                                     <input id="incidentQualityNetwork_IsPQEventAffectLargeCustomer" name="incidentQualityNetwork.IsPQEventAffectLargeCustomer" type="checkbox" value="@(incidentQualityNetwork.IsPQEventAffectLargeCustomer != null && incidentQualityNetwork.IsPQEventAffectLargeCustomer.Value ? "true" : "false")" @(incidentQualityNetwork.IsPQEventAffectLargeCustomer != null && incidentQualityNetwork.IsPQEventAffectLargeCustomer.Value ? "checked" : "") style="top:-10px; left: 20px" />
                                                     @Html.ValidationMessageFor(model => incidentQualityNetwork.IsPQEventAffectLargeCustomer, "", new { @class = "text-danger" })
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row MVOnly">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.IsCriticalPoint)</label></div>
-                                            <div class="col-lg-6">
-                                                @(incidentQualityNetwork.IsCriticalPoint != null && incidentQualityNetwork.IsCriticalPoint.Value ? "YES" : "NO")
-                                                @Html.HiddenFor(model => incidentQualityNetwork.IsCriticalPoint, new { @Value = incidentQualityNetwork.IsCriticalPoint })
                                             </div>
                                         </div>
                                     </div>

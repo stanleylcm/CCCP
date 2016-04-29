@@ -57,13 +57,13 @@ namespace CCCP.Controllers
             return View(incident);
         }
 
-        public ActionResult CreateByEnquiry([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentEntity)
+        public ActionResult CreateByEnquiry([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,OutageLevel,IsDoubleFault,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentEntity)
         {
             incident.Entity = incidentEntity;
             return View("Create", incident);
         }
 
-        public ActionResult CreateByOMSEvent([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentEntity)
+        public ActionResult CreateByOMSEvent([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,OutageLevel,IsDoubleFault,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentEntity)
         {
             incident.Entity = incidentEntity;
             return View("Create", incident);
@@ -74,7 +74,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
+        public ActionResult Create([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,OutageLevel,IsDoubleFault,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace CCCP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,MVOutage,IsDoubleFault,LVOutage,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
+        public ActionResult Edit([Bind(Include = "IncidentQualityNetworkId,ChecklistBatchId,ChatRoomId,GeneralEnquiryId,OMSEventId,CrisisIdIssueById,IssueDateTime,CloseById,CloseDateTime,IncidentNo,LevelOfSeverity,IncidentStatus,IncidentBackground,IsDrillMode,History,AffectedArea,OutageStartTime,FullRestoration,NoOfBuilding,NoOfCustomerAffected,NoOfPlatinumCustomer,NoOfDiamondCustomer,NoOfGoldCustomer,NoOfSilverCustomer,PossibleCause,ExpectedRestorationTime,RestorationMethod,StatusUpdate,RootCause,LossGeneration,LossInterconnection,LossTransmission,OutageLevel,IsDoubleFault,IsPQEventAffectLargeCustomer,IsCriticalPoint,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] IncidentQualityNetwork incidentQualityNetwork)
         {
             if (Session != null && Session["incident"] != null)
             {

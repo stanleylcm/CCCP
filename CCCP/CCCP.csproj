@@ -1002,6 +1002,17 @@
     <Content Include="Views\CrisisManagement\Details.cshtml" />
     <Content Include="Views\CrisisManagement\Index.cshtml" />
     <Content Include="Views\Shared\_DetailsEnvironmentAirEmission.cshtml" />
+    <Content Include="Views\Shared\_DetailsEnvironmentLeakage.cshtml" />
+    <Content Include="Views\Shared\_DetailsOHS.cshtml" />
+    <Content Include="Views\Shared\_DetailsQualityCorporateImage.cshtml" />
+    <Content Include="Views\Shared\_DetailsQualityGeneration.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemBilling.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemCallCentre.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemInvoicing.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemITSystem.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemNetworkConnectivity.cshtml" />
+    <Content Include="Views\Shared\_DetailsSystemOTSystem.cshtml" />
+    <Content Include="Views\Shared\_DetailsQualityNetwork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

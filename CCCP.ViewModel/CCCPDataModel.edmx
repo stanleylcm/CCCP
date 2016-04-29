@@ -397,9 +397,8 @@
           <Property Name="LossGeneration" Type="int" />
           <Property Name="LossInterconnection" Type="nvarchar" MaxLength="255" />
           <Property Name="LossTransmission" Type="nvarchar" MaxLength="255" />
-          <Property Name="MVOutage" Type="bit" />
+          <Property Name="OutageLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDoubleFault" Type="bit" />
-          <Property Name="LVOutage" Type="bit" />
           <Property Name="IsPQEventAffectLargeCustomer" Type="bit" />
           <Property Name="IsCriticalPoint" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
@@ -1993,9 +1992,8 @@
           <Property Name="LossGeneration" Type="Int32" />
           <Property Name="LossInterconnection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LossTransmission" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MVOutage" Type="Boolean" />
+          <Property Name="OutageLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDoubleFault" Type="Boolean" />
-          <Property Name="LVOutage" Type="Boolean" />
           <Property Name="IsPQEventAffectLargeCustomer" Type="Boolean" />
           <Property Name="IsCriticalPoint" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -2954,9 +2952,8 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="IsCriticalPoint" ColumnName="IsCriticalPoint" />
                 <ScalarProperty Name="IsPQEventAffectLargeCustomer" ColumnName="IsPQEventAffectLargeCustomer" />
-                <ScalarProperty Name="LVOutage" ColumnName="LVOutage" />
                 <ScalarProperty Name="IsDoubleFault" ColumnName="IsDoubleFault" />
-                <ScalarProperty Name="MVOutage" ColumnName="MVOutage" />
+                <ScalarProperty Name="OutageLevel" ColumnName="OutageLevel" />
                 <ScalarProperty Name="LossTransmission" ColumnName="LossTransmission" />
                 <ScalarProperty Name="LossInterconnection" ColumnName="LossInterconnection" />
                 <ScalarProperty Name="LossGeneration" ColumnName="LossGeneration" />

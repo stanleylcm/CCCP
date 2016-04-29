@@ -87,6 +87,18 @@ namespace CCCP.Business.Model
                 return Entity.IsDrillMode != null && Entity.IsDrillMode.Value ? "(Drill)" : "";
             }
         }
+        public String CrisisRejectReason
+        {
+            get
+            {
+                if (Entity.CrisisId != null && Entity.CrisisId.Value > 0)
+                {
+                    return CrisisEntity.Entity.RejectReason;
+                }
+
+                return "";
+            }
+        }
 
         public List<string> Options_NameOfPowerGenerator = new List<string>();
         public List<string> Options_IsCEMNetworkBeingAffected = new List<string>();
