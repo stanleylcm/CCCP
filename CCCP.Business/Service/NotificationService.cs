@@ -121,7 +121,7 @@ namespace CCCP.Business.Service
             notice.CrisisId = crisisId;
             notice.IncidentTypeId = MasterTableService.GetIncidentTypeId(incidentType);
             notice.MessageType = NotificationMessageType.Escalate_Crisis.ToEnumString();
-            notice.Message = string.Format("Incident {0} for type {1} has been escalated and pending for approval.",
+            notice.Message = string.Format("Incident {0} for type {1} has been escalated to crisis and pending for approval.",
                                             incidentNo,
                                             MasterTableService.GetIncidentTypeName(incidentType)
                                             );

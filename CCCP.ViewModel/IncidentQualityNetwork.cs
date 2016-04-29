@@ -31,6 +31,11 @@ namespace CCCP.ViewModel
         public Nullable<bool> IsDrillMode { get; set; }
         public string History { get; set; }
         public string AffectedArea { get; set; }
+        public string AffectedArea_Chi { get; set; }
+        public string AffectedBuilding { get; set; }
+        public string AffectedBuilding_Chi { get; set; }
+        public string AffectedStreet { get; set; }
+        public string AffectedStreet_Chi { get; set; }
         public Nullable<System.DateTime> OutageStartTime { get; set; }
         public Nullable<System.DateTime> FullRestoration { get; set; }
         public Nullable<int> NoOfBuilding { get; set; }
@@ -40,10 +45,13 @@ namespace CCCP.ViewModel
         public Nullable<int> NoOfGoldCustomer { get; set; }
         public Nullable<int> NoOfSilverCustomer { get; set; }
         public string PossibleCause { get; set; }
+        public string PossibleCause_Chi { get; set; }
         public Nullable<short> ExpectedRestorationTime { get; set; }
         public string RestorationMethod { get; set; }
+        public string RestorationMethod_Chi { get; set; }
         public string StatusUpdate { get; set; }
         public string RootCause { get; set; }
+        public string RootCause_Chi { get; set; }
         public Nullable<int> LossGeneration { get; set; }
         public string LossInterconnection { get; set; }
         public string LossTransmission { get; set; }

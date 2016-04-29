@@ -30,12 +30,12 @@ namespace CCCP.Business.Model
             IncidentQualityNetwork incidentQualityNetwork = new IncidentQualityNetwork();
 
             incidentQualityNetwork.OMSEventId = omsEventModel.Entity.OMSEventId;
-            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea
-                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedArea_Chi
-                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedBuilding
-                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedBuilding_Chi
-                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedStreet
-                                                 + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.AffectedStreet_Chi;
+            incidentQualityNetwork.AffectedArea = omsEventModel.Entity.AffectedArea;
+            incidentQualityNetwork.AffectedArea_Chi = omsEventModel.Entity.AffectedArea_Chi;
+            incidentQualityNetwork.AffectedBuilding = omsEventModel.Entity.AffectedBuilding;
+            incidentQualityNetwork.AffectedBuilding_Chi = omsEventModel.Entity.AffectedBuilding_Chi;
+            incidentQualityNetwork.AffectedStreet = omsEventModel.Entity.AffectedStreet;
+            incidentQualityNetwork.AffectedStreet_Chi = omsEventModel.Entity.AffectedStreet_Chi;
             incidentQualityNetwork.OutageStartTime = omsEventModel.Entity.OutageStartTime;
             incidentQualityNetwork.FullRestoration = omsEventModel.Entity.FullRestoration;
             incidentQualityNetwork.NoOfBuilding = omsEventModel.Entity.NoOfBuilding;
@@ -44,11 +44,14 @@ namespace CCCP.Business.Model
             incidentQualityNetwork.NoOfDiamondCustomer = omsEventModel.Entity.NoOfDiamondCustomer;
             incidentQualityNetwork.NoOfGoldCustomer = omsEventModel.Entity.NoOfGoldCustomer;
             incidentQualityNetwork.NoOfSilverCustomer = omsEventModel.Entity.NoOfSilverCustomer;
-            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.PossibleCause_Chi;
+            incidentQualityNetwork.PossibleCause = omsEventModel.Entity.PossibleCause;
+            incidentQualityNetwork.PossibleCause_Chi = omsEventModel.Entity.PossibleCause_Chi;
             incidentQualityNetwork.ExpectedRestorationTime = omsEventModel.Entity.ExpectedRestorationTime;
-            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.RestorationMethod_Chi;
+            incidentQualityNetwork.RestorationMethod = omsEventModel.Entity.RestorationMethod;
+            incidentQualityNetwork.RestorationMethod_Chi = omsEventModel.Entity.RestorationMethod_Chi;
             incidentQualityNetwork.StatusUpdate = omsEventModel.Entity.StatusUpdate;
-            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause + System.Environment.NewLine + System.Environment.NewLine + omsEventModel.Entity.RootCause_Chi;
+            incidentQualityNetwork.RootCause = omsEventModel.Entity.RootCause;
+            incidentQualityNetwork.RootCause_Chi = omsEventModel.Entity.RootCause_Chi;
             incidentQualityNetwork.MVOutage = omsEventModel.Entity.MVOutage;
             incidentQualityNetwork.LVOutage = omsEventModel.Entity.LVOutage;
             incidentQualityNetwork.IsCriticalPoint = omsEventModel.Entity.CriticalPoint;
@@ -92,6 +95,7 @@ namespace CCCP.Business.Model
 
         public List<string> Options_LossInterconnection = new List<string>();
         public List<string> Options_LossTransmission = new List<string>();
+        public List<string> Options_OutageLevel = new List<string>();
         public String IssueBy
         {
             get
@@ -212,6 +216,7 @@ namespace CCCP.Business.Model
         {
             this.Options_LossInterconnection = InputOptionsService.GetIncidentQualityNetworkInputOptions(IncidentQualityNetworkInputKey.IncidentQualityNetwork_LossInterconnection);
             this.Options_LossTransmission = InputOptionsService.GetIncidentQualityNetworkInputOptions(IncidentQualityNetworkInputKey.IncidentQualityNetwork_LossTransmission);
+            this.Options_OutageLevel = InputOptionsService.GetIncidentQualityNetworkInputOptions(IncidentQualityNetworkInputKey.IncidentQualityNetwork_OutageLevel);
         }
 
         #endregion

@@ -778,6 +778,21 @@ namespace CCCP.ViewModel
         [Display(Name = "Affected Area")]
         [DataType(DataType.MultilineText)]
         public string AffectedArea { get; set; }
+        [Display(Name = "Affected Area (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string AffectedArea_Chi { get; set; }
+        [Display(Name = "Affected Building")]
+        [DataType(DataType.MultilineText)]
+        public string AffectedBuilding { get; set; }
+        [Display(Name = "Affected Building (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string AffectedBuilding_Chi { get; set; }
+        [Display(Name = "Affected Street")]
+        [DataType(DataType.MultilineText)]
+        public string AffectedStreet { get; set; }
+        [Display(Name = "Affected Street (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string AffectedStreet_Chi { get; set; }
         [Display(Name = "Outage Start Time")]
         public Nullable<System.DateTime> OutageStartTime { get; set; }
         [Display(Name = "Full Restoration")]
@@ -802,17 +817,26 @@ namespace CCCP.ViewModel
         [Display(Name = "Possible Cause")]
         [DataType(DataType.MultilineText)]
         public string PossibleCause { get; set; }
+        [Display(Name = "Possible Cause (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string PossibleCause_Chi { get; set; }
         [Display(Name = "Expected Restoration Time (hour)")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<short> ExpectedRestorationTime { get; set; }
         [Display(Name = "Restoration Method")]
         [DataType(DataType.MultilineText)]
         public string RestorationMethod { get; set; }
+        [Display(Name = "Restoration Method (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string RestorationMethod_Chi { get; set; }
         [Display(Name = "Status Update")]
         public string StatusUpdate { get; set; }
         [Display(Name = "Root Cause")]
         [DataType(DataType.MultilineText)]
         public string RootCause { get; set; }
+        [Display(Name = "Root Cause (Chi)")]
+        [DataType(DataType.MultilineText)]
+        public string RootCause_Chi { get; set; }
         [Display(Name = "Loss Generation")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter positive number")]
         public Nullable<int> LossGeneration { get; set; }

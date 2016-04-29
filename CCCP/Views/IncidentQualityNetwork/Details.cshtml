@@ -7,6 +7,8 @@
 
 @section Scripts {
     <script>
+        var sLang = "network_eng";
+
 	    $(function() {
 		    $('#accordion').on('show.bs.collapse', function () {
 			    $('#HistoryIcon').removeClass("fa-angle-left");
@@ -57,6 +59,23 @@
 	                    return true;
 	                }
 	            });
+	        });
+
+	        $('.network_chi').hide();
+	        $('.network_eng').show();
+
+	        $('#btnChangeDisplayLang').on('click', function(event) {
+	            if (sLang == "network_eng") {
+	                $('.network_chi').show();
+	                $('.network_eng').hide();
+	                sLang = "network_chi";
+	                $(this).html('Show English');
+	            } else {
+	                $('.network_chi').hide();
+	                $('.network_eng').show();
+	                sLang = "network_eng";
+	                $(this).html('Show Chinese');
+	            }
 	        });
 	    });
     </script>
@@ -184,12 +203,37 @@
                                 </div>
 
                                 <div class="panel panel-primary">
-                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
+                                    <div class="panel panel-heading"><label>@Resources.global.Label_Details</label><button class="btn btn-primary pull-right" type="button" id="btnChangeDisplayLang">Show Chinese</button></div>
                                     <div class="panel panel-body">
 
-                                        <div class="row">
+                                        <div class="row network_eng">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedArea != null ? Model.Entity.AffectedArea.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedArea_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedArea_Chi != null ? Model.Entity.AffectedArea_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_eng">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedBuilding)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedBuilding != null ? Model.Entity.AffectedBuilding.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedBuilding_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedBuilding_Chi != null ? Model.Entity.AffectedBuilding_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_eng">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedStreet)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedStreet != null ? Model.Entity.AffectedStreet.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.AffectedStreet_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.AffectedStreet_Chi != null ? Model.Entity.AffectedStreet_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -232,9 +276,14 @@
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.NoOfSilverCustomer)</div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row network_eng">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.PossibleCause != null ? Model.Entity.PossibleCause.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.PossibleCause_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.PossibleCause_Chi != null ? Model.Entity.PossibleCause_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -242,9 +291,14 @@
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.ExpectedRestorationTime)</div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row network_eng">
                                             <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.RestorationMethod)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.RestorationMethod != null ? Model.Entity.RestorationMethod.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => model.Entity.RestorationMethod_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.RestorationMethod_Chi != null ? Model.Entity.RestorationMethod_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">
@@ -252,9 +306,14 @@
                                             <div class="col-lg-6">@Html.DisplayFor(model => model.Entity.StatusUpdate)</div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row network_eng">
                                             <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RootCause)</label></div>
                                             <div class="col-lg-6">@Html.Raw(Model.Entity.RootCause != null ? Model.Entity.RootCause.Replace(System.Environment.NewLine, "<br/>") : "")</div>
+                                        </div>
+
+                                        <div class="row network_chi">
+                                            <div class="col-lg-6 text-right"><label>@Html.DisplayNameFor(model => model.Entity.RootCause_Chi)</label></div>
+                                            <div class="col-lg-6">@Html.Raw(Model.Entity.RootCause_Chi != null ? Model.Entity.RootCause_Chi.Replace(System.Environment.NewLine, "<br/>") : "")</div>
                                         </div>
 
                                         <div class="row">

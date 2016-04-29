@@ -83,6 +83,51 @@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedArea_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedArea_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedArea_Chi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedBuilding)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedBuilding, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedBuilding, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedBuilding_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedBuilding_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedBuilding_Chi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedStreet)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedStreet, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedStreet, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.AffectedStreet_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.AffectedStreet_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.AffectedStreet_Chi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.OutageStartTime)</label></div>
                                     <div class="col-lg-6">
                                         <div class="col-lg-6">
@@ -196,6 +241,15 @@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.PossibleCause_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.PossibleCause_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.PossibleCause_Chi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.ExpectedRestorationTime)</label></div>
                                     <div class="col-lg-6">
                                         @Html.EditorFor(model => incidentQualityNetwork.ExpectedRestorationTime, new { htmlAttributes = new { @class = "form-control thin-control" } })
@@ -214,6 +268,15 @@
 
                                 <div class="row">
                                     <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentQualityNetwork.RestorationMethod_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.RestorationMethod_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.RestorationMethod_Chi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
                                     <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.StatusUpdate)</label></div>
                                     <div class="col-lg-6">
                                         @Html.EditorFor(model => incidentQualityNetwork.StatusUpdate, new { htmlAttributes = new { @class = "form-control thin-control" } })
@@ -227,6 +290,15 @@
                                     <div class="col-lg-6">
                                         @Html.EditorFor(model => incidentQualityNetwork.RootCause, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
                                         @Html.ValidationMessageFor(model => incidentQualityNetwork.RootCause, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentQualityNetwork.RootCause_Chi)</label></div>
+                                    <div class="col-lg-6">
+                                        @Html.EditorFor(model => incidentQualityNetwork.RootCause_Chi, new { htmlAttributes = new { @class = "form-control", @style = "height:150px" } })
+                                        @Html.ValidationMessageFor(model => incidentQualityNetwork.RootCause_Chi, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -443,6 +515,31 @@
                 errMsg = errMsg + '\r\nAffected Area cannot be empty<br />';
             }
 
+            if ($('#incidentQualityNetwork_AffectedArea_Chi').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Area (Chi) cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityNetwork_AffectedBuilding').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Building cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityNetwork_AffectedBuilding_Chi').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Building (Chi) cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityNetwork_AffectedStreet').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Street cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityNetwork_AffectedStreet_Chi').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nAffected Street (Chi) cannot be empty<br />';
+            }
+
             if ($("#OutageStartTimeDate").val() == '' || $("#OutageStartTimeTime").val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nOutage Start Time cannot be empty<br />';
@@ -488,6 +585,11 @@
                 errMsg = errMsg + '\r\nPossible Cause cannot be empty<br />';
             }
 
+            if ($('#incidentQualityNetwork_PossibleCause_Chi').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nPossible Cause (Chi) cannot be empty<br />';
+            }
+
             if ($('#incidentQualityNetwork_ExpectedRestorationTime').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nExpected Restoration Time cannot be empty<br />';
@@ -496,6 +598,11 @@
             if ($('#incidentQualityNetwork_RestorationMethod').val() == '') {
                 inputValid = false;
                 errMsg = errMsg + '\r\nRestoration Method cannot be empty<br />';
+            }
+
+            if ($('#incidentQualityNetwork_RestorationMethod_Chi').val() == '') {
+                inputValid = false;
+                errMsg = errMsg + '\r\nRestoration Method (Chi) cannot be empty<br />';
             }
 
             if (inputValid == false) {

@@ -416,7 +416,8 @@ namespace CCCP.Common
     public enum IncidentQualityNetworkInputKey
     {
         IncidentQualityNetwork_LossInterconnection,
-        IncidentQualityNetwork_LossTransmission
+        IncidentQualityNetwork_LossTransmission,
+        IncidentQualityNetwork_OutageLevel
     }
     #endregion
 }
