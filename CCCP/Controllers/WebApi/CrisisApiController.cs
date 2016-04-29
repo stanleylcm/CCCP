@@ -136,13 +136,14 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
 
-            CrisisModel crisis = new CrisisModel();
-            crisis.Entity = db.Crisis.Find(id);
+            CrisisModel crisis = GetCrisis(id);
             crisis.PrepareSave(PrepareSaveMode.Approved);
             db.Crisis.Attach(crisis.Entity);
             db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
             db.usp_Crisis_PostCreate(crisis.Entity.CrisisId, crisis.Entity.CreatedBy, Common.CheckListActionStatus.Pending.ToEnumString());
+
+            new IncidentApiController().SetIncidentStatus(crisis.IncidentId, MasterTableService.GetIncidentTypeId(crisis.IncidentType), IncidentStatus.In_Crisis.ToEnumString());
 
             NotificationService.SendApproveCrisisNotification(id, crisis.Entity.CrisisNo, crisis.IncidentNo, crisis.IncidentType);
 
@@ -155,13 +156,14 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
 
-            CrisisModel crisis = new CrisisModel();
-            crisis.Entity = db.Crisis.Find(id);
+            CrisisModel crisis = GetCrisis(id);
             crisis.Entity.RejectReason = rejectReason;
             crisis.PrepareSave(PrepareSaveMode.Rejected);
             db.Crisis.Attach(crisis.Entity);
             db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
+
+            new IncidentApiController().SetIncidentStatus(crisis.IncidentId, MasterTableService.GetIncidentTypeId(crisis.IncidentType), IncidentStatus.In_Progress.ToEnumString());
 
             return crisis.Entity.CrisisId;
         }
@@ -172,12 +174,13 @@ namespace CCCP.Controllers.WebApi
         {
             CCCPDbContext db = new CCCPDbContext();
 
-            CrisisModel crisis = new CrisisModel();
-            crisis.Entity = db.Crisis.Find(id);
+            CrisisModel crisis = GetCrisis(id);
             crisis.PrepareSave(PrepareSaveMode.Closed);
             db.Crisis.Attach(crisis.Entity);
             db.Entry(crisis.Entity).State = EntityState.Modified;
             db.SaveChanges();
+
+            new IncidentApiController().SetIncidentStatus(crisis.IncidentId, MasterTableService.GetIncidentTypeId(crisis.IncidentType), IncidentStatus.In_Progress.ToEnumString());
 
             return crisis.Entity.CrisisId;
         }
