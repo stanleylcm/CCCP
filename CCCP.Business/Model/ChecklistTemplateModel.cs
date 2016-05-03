@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CCCP.Common;
 using CCCP.ViewModel;
 using CCCP.Business.Service;
+using System.ComponentModel.DataAnnotations;
 
 namespace CCCP.Business.Model
 {
@@ -39,6 +40,35 @@ namespace CCCP.Business.Model
 
         public ChecklistTemplate Entity = new ChecklistTemplate();
         public List<ChecklistActionTemplateModel> ChecklistActionTemplateEntites = new List<ChecklistActionTemplateModel>();
+
+        [Display(Name = "Incident Type")]
+        public String IncidentType
+        {
+            get
+            {
+                if (Entity.IncidentTypeId > 0)
+                    return MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(Entity.IncidentTypeId));
+                return MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(Entity.CrisisTypeId)) + " (Crisis)";
+            }
+        }
+
+        [Display(Name = "Department")]
+        public String Department
+        {
+            get
+            {
+                return new CCCPDbContext().Department.Where(m => m.DepartmentId == Entity.DepartmentId).FirstOrDefault().Department1;
+            }
+        }
+
+        [Display(Name = "No of Actions")]
+        public int NoOfActions
+        {
+            get
+            {
+                return new CCCPDbContext().ChecklistActionTemplate.Where(m => m.ChecklistTemplateId == Entity.ChecklistTemplateId).Count();
+            }
+        }
 
         #endregion 
 

@@ -318,4 +318,13 @@
   <data name="Label_RejectReason" xml:space="preserve">
     <value>拒絕原因</value>
   </data>
+  <data name="Label_DeleteChecklistTemplate" xml:space="preserve">
+    <value>你確定要刪除已選取的清單模板?</value>
+  </data>
+  <data name="Label_NoChecklistSelected" xml:space="preserve">
+    <value>沒有選取清單模板</value>
+  </data>
+  <data name="Label_ValidationSummary" xml:space="preserve">
+    <value>驗證摘要</value>
+  </data>
 </root>

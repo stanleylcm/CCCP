@@ -318,4 +318,13 @@
   <data name="Label_RejectReason" xml:space="preserve">
     <value>Reject Reason</value>
   </data>
+  <data name="Label_DeleteChecklistTemplate" xml:space="preserve">
+    <value>Are you sure to delete the selected Checklist Template(s)?</value>
+  </data>
+  <data name="Label_NoChecklistSelected" xml:space="preserve">
+    <value>No Checklist Template have been selected for batch delete.</value>
+  </data>
+  <data name="Label_ValidationSummary" xml:space="preserve">
+    <value>Validation Summary</value>
+  </data>
 </root>

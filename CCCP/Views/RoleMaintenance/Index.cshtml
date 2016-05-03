@@ -23,13 +23,19 @@
             dTable.search($(this).val()).draw();
         });
 
-        $('$chkCheckAll').on('click', function (event) {
-            var checked = $(this).checked;
-            alert(this.checked);
-            $("input[type=checkbox][id^=role]").each(function () {
-                $(this).attr("checked", checked);
+        $('#chkCheckAll').on('click', function (event) {
+            var checked = this.checked;
+            dTable.$("input[type=checkbox][id^=role]").each(function () {
+                $(this).prop('checked', checked);
             });
-            event.preventDefault();
+        });
+
+        dTable.$("input[type=checkbox][id^=role]").on('click', function (event) {
+            var allchecked = true;
+            dTable.$("input[type=checkbox][id^=role]").each(function () {
+                allchecked = allchecked && this.checked;
+            });
+            $('#chkCheckAll').prop('checked', allchecked);
         });
 
         $('#btnBatchDelete').on('click', function (event) {

@@ -1014,6 +1014,9 @@
     <Content Include="Views\Shared\_DetailsSystemOTSystem.cshtml" />
     <Content Include="Views\Shared\_DetailsQualityNetwork.cshtml" />
     <Content Include="Views\CrisisManagement\Edit.cshtml" />
+    <Content Include="Views\ChecklistMaintenance\Index.cshtml" />
+    <Content Include="Views\ChecklistMaintenance\Create.cshtml" />
+    <Content Include="Views\ChecklistMaintenance\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

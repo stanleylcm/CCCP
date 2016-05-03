@@ -1,0 +1,102 @@
+﻿@model CCCP.Business.Model.ChecklistTemplateModel
+
+@using CCCP.Common
+@using CCCP.Business.Service
+@using CCCP.Business.Model
+@using CCCP.ViewModel
+@{
+    ViewBag.Title = Resources.global.Menu_ChecklistMaintenance;
+    CCCP.ViewModel.ChecklistTemplate checklistTemplate = Model.Entity; // variable for binding
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <i class="fa fa-check-square-o"></i> @Resources.global.Menu_ChecklistMaintenance - @Resources.global.Func_Create
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @using (Html.BeginForm("Create", "ChecklistMaintenanace"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel panel-body">
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => checklistTemplate.IncidentTypeId)</label></div>
+									<div class="col-lg-4">
+                                        @Html.EditorFor(model => checklistTemplate.IncidentTypeId, new { htmlAttributes = new { @class = "form-control thin-control" } })
+										@Html.ValidationMessageFor(model => checklistTemplate.IncidentTypeId, "", new { @class = "text-danger" })
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => checklistTemplate.DepartmentId)</label></div>
+									<div class="col-lg-4">
+                                        @Html.EditorFor(model => checklistTemplate.DepartmentId, new { htmlAttributes = new { @class = "form-control thin-control" } })
+                                        @Html.ValidationMessageFor(model => checklistTemplate.DepartmentId, "", new { @class = "text-danger" })
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                            
+                    @Html.HiddenFor(model => checklistTemplate.ChecklistTemplateId, new { @Value = 0 })
+                    @Html.HiddenFor(model => checklistTemplate.CreatedBy)
+                    @Html.HiddenFor(model => checklistTemplate.CreatedDateTime)
+                    @Html.HiddenFor(model => checklistTemplate.LastUpdatedBy)
+                    @Html.HiddenFor(model => checklistTemplate.LastUpdatedDateTime)
+
+                    <div class="panel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel panel-heading"><label>@Resources.global.Label_Function</label></div>
+                            <div class="panel panel-body">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" id="btnCreate">@Resources.global.Func_Save</button>
+                            <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Index", "ChecklistMaintenance")';">@Resources.global.Func_Cancel</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $('#btnCreate').on('click', function (event) {
+            var inputValid = true;
+            var errMsg = '';
+
+            if (inputValid == false) {
+                $('#CCCPModal').find('.modal-body').html(errMsg);
+                $('#CCCPModal').find('.modal-title').html('@Resources.global.Label_ValidationSummary');
+                $('#CCCPModal').modal('toggle');
+
+                event.preventDefault();
+            }
+
+            return inputValid;
+        });
+</script>
+}

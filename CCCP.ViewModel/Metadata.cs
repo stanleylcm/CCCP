@@ -1012,4 +1012,60 @@ namespace CCCP.ViewModel
         public string Department1 { get; set; }
     }
     #endregion
+
+    #region ChecklistTemplate Metadata
+    [MetadataType(typeof(ChecklistTemplateHelper))]
+    public partial class ChecklistTemplate { }
+
+    public partial class ChecklistTemplateHelper
+    {
+        [Display(Name = "ID")]
+        public int ChecklistTemplateId { get; set; }
+        [Display(Name = "Incident Type ID")]
+        public int IncidentTypeId { get; set; }
+        [Display(Name = "Crisis Type ID")]
+        public int CrisisTypeId { get; set; }
+        [Display(Name = "Department ID")]
+        public int DepartmentId { get; set; }
+        [Display(Name = "Sorting Order")]
+        public Nullable<short> SortingOrder { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Created DateTime")]
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        [Display(Name = "Last Updated By")]
+        public string LastUpdatedBy { get; set; }
+        [Display(Name = "Last Updated DateTime")]
+        public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
+    }
+    #endregion
+
+    #region ChecklistActionTemplate Metadata
+    [MetadataType(typeof(ChecklistActionTemplateHelper))]
+    public partial class ChecklistActionTemplate { }
+
+    public partial class ChecklistActionTemplateHelper
+    {
+        [Display(Name = "ID")]
+        public int ChecklistActionTemplateId { get; set; }
+        [Display(Name = "Checklist Template ID")]
+        public int ChecklistTemplateId { get; set; }
+        [Display(Name = "Action")]
+        public string Action { get; set; }
+        [Display(Name = "Is Compulsory?")]
+        public Nullable<bool> IsCompulsory { get; set; }
+        [Display(Name = "ID")]
+        public Nullable<short> AlertThreshold { get; set; }
+        [Display(Name = "Sorting Order")]
+        public Nullable<short> SortingOrder { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Created DateTime")]
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        [Display(Name = "Last Updated By")]
+        public string LastUpdatedBy { get; set; }
+        [Display(Name = "Last Updated DateTime")]
+        public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
+    }
+    #endregion
 }
