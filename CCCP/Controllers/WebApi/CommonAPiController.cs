@@ -15,6 +15,11 @@ using CCCP.Common;
 using System.Web.Script.Serialization;
 using CCCP.Hubs;
 using Microsoft.AspNet.SignalR;
+using System.Collections.Specialized;
+using System.Web.Security;
+using System.IO;
+using System.Net;
+using System.Text;
 
 namespace CCCP.Controllers.WebApi
 {
@@ -37,6 +42,39 @@ namespace CCCP.Controllers.WebApi
             context.Clients.All.broadcastMessage(name, message, response["sendDateTime"], chatRoomId, response["id"]);
 
             return response["id"];
+        }
+
+        [System.Web.Http.HttpPost]
+        public int SendChatRoomAttachment()
+        {
+            HttpPostedFile file = HttpContext.Current.Request.Files["file"];
+            HttpPostedFileBase fileBase = new HttpPostedFileWrapper(file);
+
+            List<HttpPostedFileBase> uploadList = new List<HttpPostedFileBase>();
+            uploadList.Add(fileBase);
+            
+            string allParams = "";
+            NameValueCollection parameters = HttpContext.Current.Request.Params;
+            string[] param1 = parameters.GetValues("chatRoomId");
+            for (int j = 0; j < param1.Length; j++)
+            {
+                allParams += param1[j].ToString();
+            }
+            int chatRoomId = Convert.ToInt32(allParams);
+
+            string[] param2 = parameters.GetValues("userId");
+            allParams = "";
+            for (int j = 0; j < param2.Length; j++)
+            {
+                allParams += param2[j].ToString();
+            }
+            int userId = Convert.ToInt32(allParams);
+
+            string name = new CCCPDbContext().User.Find(userId).DisplayName;
+            string time = (DateTime.Now).ToString("yyyy-MM-dd hh:mm:ss");
+            string message = "";
+
+            return SendChatRoomMessage(name, message, time, userId, chatRoomId, uploadList);
         }
 
         [System.Web.Http.HttpGet]
