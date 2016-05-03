@@ -47,28 +47,27 @@ namespace CCCP.Controllers.WebApi
         [System.Web.Http.HttpPost]
         public int SendChatRoomAttachment()
         {
+            List<HttpPostedFileBase> uploadList = new List<HttpPostedFileBase>();
             HttpPostedFile file = HttpContext.Current.Request.Files["file"];
             HttpPostedFileBase fileBase = new HttpPostedFileWrapper(file);
-
-            List<HttpPostedFileBase> uploadList = new List<HttpPostedFileBase>();
             uploadList.Add(fileBase);
             
-            string allParams = "";
+            string tempValue = "";
             NameValueCollection parameters = HttpContext.Current.Request.Params;
             string[] param1 = parameters.GetValues("chatRoomId");
-            for (int j = 0; j < param1.Length; j++)
+            for (int len = 0; len < param1.Length; len++)
             {
-                allParams += param1[j].ToString();
+                tempValue += param1[len].ToString();
             }
-            int chatRoomId = Convert.ToInt32(allParams);
+            int chatRoomId = Convert.ToInt32(tempValue);
 
             string[] param2 = parameters.GetValues("userId");
-            allParams = "";
-            for (int j = 0; j < param2.Length; j++)
+            tempValue = "";
+            for (int len = 0; len < param2.Length; len++)
             {
-                allParams += param2[j].ToString();
+                tempValue += param2[len].ToString();
             }
-            int userId = Convert.ToInt32(allParams);
+            int userId = Convert.ToInt32(tempValue);
 
             string name = new CCCPDbContext().User.Find(userId).DisplayName;
             string time = (DateTime.Now).ToString("yyyy-MM-dd hh:mm:ss");

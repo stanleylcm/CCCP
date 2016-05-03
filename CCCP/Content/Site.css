@@ -151,3 +151,8 @@ section.content ul.nav li
     width: 250px;
     left: 50px;
 }
+
+.alert-success {
+  border-color: #008d4c;
+  background-image:none!important;
+}

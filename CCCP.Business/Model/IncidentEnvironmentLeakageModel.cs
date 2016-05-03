@@ -163,8 +163,9 @@ namespace CCCP.Business.Model
                     Entity.LastUpdatedDateTime = now;
 
                     Entity.IncidentStatus = GetIncidentStatus().ToEnumString();
-
-                    Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
+                    
+                    if (this.OriginalLevelOfSeverity == Entity.LevelOfSeverity)
+                        Entity.LevelOfSeverity = IncidentService.GetIncidentLevel(Entity) == IncidentLevel.None ? Entity.LevelOfSeverity : (Convert.ToInt32(IncidentService.GetIncidentLevel(Entity))).ToString();
                     break;
                 case PrepareSaveMode.Closed:
                     Entity.LastUpdatedBy = AccessControlService.CurrentUser.GetLastUpdatedBy();
