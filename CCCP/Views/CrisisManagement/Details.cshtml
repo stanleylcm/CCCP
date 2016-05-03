@@ -19,6 +19,11 @@
 			    $('#HistoryIcon').addClass("fa-angle-left");
 		    });
 
+		    $('#ChecklistSummary input[type="checkbox"]').each(function () {
+		        value = $(this).val();
+		        $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+		    });
+
 		    $('#Checklists input[type="checkbox"]').each(function () {
 			    value = $(this).val();
 			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
@@ -84,6 +89,189 @@
                 <div class="col-lg-3 pull-left">
                     <span class="pull-left"><label>Incident No</label></span>
                     <span class="pull-right"><a href="@Url.Action("Details", "Incident" + Model.IncidentType.ToEnumString(), new { id = Model.IncidentId })">@Model.IncidentNo</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- content -->
+
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#ChecklistSummary" data-toggle="tab">Checklist Summary</a></li>
+                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#CrisisEnquiry" data-toggle="tab">Chatroom</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade active in" id="ChecklistSummary">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-3">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8" id="read_only_checklist_summary">
+                                @{
+                                    int checklistCnt = 0;
+                                    foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                    {
+                                        if (checklistCnt++ > 0)
+                                        {
+                                            <hr />
+                                        }
+                                <label>@(checklist.Entity.Department)</label><br/>
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <th></th>
+                                        <th>Action</th>
+                                        <th>Last Updated By</th>
+                                        <th>Last Updated Datetime</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                        {
+                                            <tr>
+                                                <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
+                                                <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                <td>@action.Entity.LastUpdatedBy</td>
+                                                <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                    }
+                                }
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="tab-pane fade" id="Checklists">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-3">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Legend</legend>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"></div></div>
+                                        <div class="col-lg-10">Pending</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-minus"></i></div></div>
+                                        <div class="col-lg-10">In Progress</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2"><div class="bootstrap-checkbox"><i class="fa fa-check"></i></div></div>
+                                        <div class="col-lg-10">Completed</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="nav nav-pills ">
+                                    @{
+                                        int countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </ul>
+                                <div id="TabList" class="tab-content">
+                                    @{
+                                        countChecklist = 1;
+                                        foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+                                        {
+                                            int countChecklistAction = 1;
+                                            <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <th></th>
+                                                    <th>Action</th>
+                                                    <th>Last Updated By</th>
+                                                    <th>Last Updated Datetime</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                                                        {
+                                                            <tr>
+                                                                <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)"></td>
+                                                                <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                                                <td>@action.Entity.LastUpdatedBy</td>
+                                                                <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                                                            </tr>
+                                                            countChecklistAction++;
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            countChecklist++;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="CrisisEnquiry">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                @Html.Partial("_ChatRoom", Model.Chatroom)
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="button" disabled='@(Model.Entity.Status == CrisisStatus.Closed.ToEnumString())' onclick="window.location = '@Url.Action("Edit", "CrisisManagement", new { id = Model.Entity.CrisisId })';">@Resources.global.Func_Edit</button>
+                <button class="btn btn-primary" type="button" id="btnCloseCrisis" @(Model.IsReadyForClose() && Model.Entity.Status != CrisisStatus.Closed.ToEnumString() ? "" : "disabled")>@Resources.global.Func_CloseCrisis</button>
+            </div>
+            <br />
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#History">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                @Resources.global.Label_History <i id="HistoryIcon" class="fa fa-angle-left"></i>
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="History" class="panel-collapse collapse">
+                        <div class="panel-body multiline">
+                            @Html.Raw(Model.Entity.History)
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

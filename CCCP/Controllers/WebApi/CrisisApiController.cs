@@ -132,6 +132,59 @@ namespace CCCP.Controllers.WebApi
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.HttpPost]
+        public int Edit(CrisisModel crisis)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+
+            // prepare history etc. before save
+            Helpers.SessionHelper sessionHelper = new Helpers.SessionHelper();
+            AccessControlService.CurrentUser = sessionHelper.CurrentUser;
+            if (crisis.Entity.Status == CrisisStatus.Closed.ToEnumString())
+            {
+                crisis.PrepareSave(PrepareSaveMode.Closed);
+            }
+            else
+            {
+                crisis.PrepareSave();
+            }
+
+            db.Crisis.Attach(crisis.Entity);
+            foreach (ChecklistModel cl in crisis.Checklists)
+            {
+                foreach (ChecklistActionModel clAction in cl.ChecklistActions)
+                {
+                    db.ChecklistAction.Attach(clAction.Entity);
+                    db.Entry(clAction.Entity).State = EntityState.Modified;
+                }
+            }
+
+            db.Entry(crisis.Entity).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                // output validation errors
+                Console.WriteLine(sb.ToString());
+            }
+
+            return crisis.Entity.CrisisId;
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public int Approve(int id)
         {
             CCCPDbContext db = new CCCPDbContext();

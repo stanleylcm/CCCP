@@ -1,135 +1,100 @@
-﻿@model CCCP.Business.Model.IncidentEnvironmentAirEmissionModel
-@using CCCP.Business.Service
+﻿@model CCCP.Business.Model.CrisisModel
+
+@using CCCP.Business
+@using CCCP.ViewModel
 @using CCCP.Common
 @{
-    ViewBag.Title = Resources.global.Menu_IncidentEnvironmentAirEmission;
-    CCCP.ViewModel.IncidentEnvironmentAirEmission incidentEnvironmentAirEmission = Model.Entity;
+    ViewBag.Title = Resources.global.Menu_CrisisManagement;
+    Crisis crisisInst = Model.Entity;
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
     <script>
-	    $(function() {
-		    $('#accordion').on('show.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-left");
-			    $('#HistoryIcon').addClass("fa-angle-down");
-		    });
-		    $('#accordion').on('hide.bs.collapse', function () {
-			    $('#HistoryIcon').removeClass("fa-angle-down");
-			    $('#HistoryIcon').addClass("fa-angle-left");
-		    });
+        $(function () {
+            $('#accordion').on('show.bs.collapse', function () {
+                $('#HistoryIcon').removeClass("fa-angle-left");
+                $('#HistoryIcon').addClass("fa-angle-down");
+            });
+            $('#accordion').on('hide.bs.collapse', function () {
+                $('#HistoryIcon').removeClass("fa-angle-down");
+                $('#HistoryIcon').addClass("fa-angle-left");
+            });
 
-		    $('#LinkedIncidentTable').DataTable();
-		    $('#LinkedGeneralEnquiryTable').DataTable();
+            $('#ChecklistSummary input[type="checkbox"]').each(function () {
+                value = $(this).val();
+                $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+            });
 
-		    $('#Checklists input[type="checkbox"]').each(function () {
-			    value = $(this).val();
-			    $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
-		    });
+            $('#Checklists input[type="checkbox"]').each(function () {
+                value = $(this).val();
+                $(this).checkbox().chbxChecked(value == '2' ? true : (value == '0' ? false : null));
+            });
 
-		    $('.bootstrap-checkbox').on('click', function(evnet){
+            $('.bootstrap-checkbox').on('click', function(evnet){
 
-		        $.ajax({
-		            url: "@Url.Action("ToggleActionStatus", "IncidentEnvironmentAirEmission")",
-		            type: "POST",
-		            data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
-		            dataType: "html",
-		            contentType: "application/json; charset=utf-8",
-		            success: function (data) {
-		                return true;
-		            },
-		            error: function () {
-		                alert("An error has occured!!!");
-		            }
-		        });
-		    });
-	    });
-
-        $("#incidentEnvironmentAirEmission_IsDrillMode").on("click", function () {
-	        $(this).val(this.checked);
+                $.ajax({
+                    url: "@Url.Action("ToggleActionStatus", "CrisisManagement")",
+                    type: "POST",
+                data: JSON.stringify({ 'checklist': $(this).data('checklist'), 'checklistAction': $(this).data('checklistaction') }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    return true;
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
         });
-
-        $("#incidentEnvironmentAirEmission_AbatementSystemUnavailable").on("click", function () {
-            $(this).val(this.checked);
-        });
-
-        $("#incidentEnvironmentAirEmission_ComplaintOfBlackSmoke").on("click", function () {
-            $(this).val(this.checked);
-        });
-
-        $('#btnUpdate').on('click', function (event) {
-            var inputValid = true;
-            var errMsg = '';
-
-            if ($('#incidentEnvironmentAirEmission_LevelOfSeverity').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + 'Level of Severity cannot be empty<br />';
-            }
-
-            if ($('#incidentEnvironmentAirEmission_IncidentBackground').val() == '') {
-                inputValid = false;
-                errMsg = errMsg + 'Incident Background cannot be empty<br />';
-            }
-
-            if (inputValid == false) {
-                $('#CCCPModal').find('.modal-body').html(errMsg);
-                $('#CCCPModal').find('.modal-title').html('Validation Summary');
-                $('#CCCPModal').modal('toggle');
-
-                event.preventDefault();
-            }
-
-            return inputValid;
         });
     </script>
 }
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
+    @{ Html.RenderAction("AlertSuccess", "Home", new { message = ViewBag.Message }); }
+
     <h1>
-        <i class="fa fa-clipboard"></i> <a href="@Url.Action("Index", "IncidentEnvironmentAirEmission")">@Resources.global.Menu_IncidentManagement - @Resources.global.Func_Edit @Resources.global.Menu_IncidentEnvironmentAirEmission</a>
+        <i class="fa fa-gears"></i> <a href="@Url.Action("Index", "CrisisManagement")">@Resources.global.Menu_CrisisManagement</a>
     </h1>
 </section>
 
 <!-- Main content -->
 <section class="content">
     <!-- Small boxes (Stat box) -->
+
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IncidentNo)</label></span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentEnvironmentAirEmission.IncidentNo) <strong><font color="red" size="4">@Html.DisplayFor(model => model.IsDrillMode)</font></strong></span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CrisisNo)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.CrisisNo)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IncidentStatus)</label></span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentEnvironmentAirEmission.IncidentStatus)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.CreatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.CreatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-3 pull-left">
-                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.CrisisId)</label></span>
-                    <a href="#"><span class="pull-right">@Html.DisplayFor(model => incidentEnvironmentAirEmission.CrisisId)</span></a>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.Status)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.Status)</span>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.CreatedDateTime)</label></span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentEnvironmentAirEmission.CreatedDateTime)</span>
+                    <span class="pull-left"><label>@Html.DisplayNameFor(model => model.Entity.LastUpdatedDateTime)</label></span>
+                    <span class="pull-right">@Html.DisplayFor(model => model.Entity.LastUpdatedDateTime)</span>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-3 pull-right">
-                    <span class="pull-left"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.LastUpdatedDateTime)</label></span>
-                    <span class="pull-right">@Html.DisplayFor(model => incidentEnvironmentAirEmission.LastUpdatedDateTime)</span>
+                <div class="col-lg-3 pull-left">
+                    <span class="pull-left"><label>Incident No</label></span>
+                    <span class="pull-right"><a href="@Url.Action("Details", "Incident" + Model.IncidentType.ToEnumString(), new { id = Model.IncidentId })">@Model.IncidentNo</a></span>
                 </div>
             </div>
         </div>
     </div>
-
-    <br />
-
     <div class="row">
         <div class="col-lg-12">
             <!-- content -->
@@ -138,167 +103,14 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentEnvironmentAirEmissionId)
             <ul class="nav nav-pills">
-                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a></li>
-                <li><a href="#Checklists" data-toggle="tab">Checklists</a></li>
-                <li><a href="#IncidentEnquiry" data-toggle="tab">Chatroom</a></li>
-                <li><a href="#LinkedIncident" data-toggle="tab">Linked Incidents</a></li>
-                <li><a href="#LinkedGeneralEnquiry" data-toggle="tab">Linked General Enquiry</a></li>
-                <li><a href="#Notification" data-toggle="tab">Notification</a></li>
+                <li class="active"><a href="#Checklists" data-toggle="tab">Checklists</a></li>
+                <li><a href="#CrisisEnquiry" data-toggle="tab">Chatroom</a></li>
             </ul>
 
             <div id="myTabContent" class="tab-content">
-
-                <div class="tab-pane fade active in" id="IncidentDetails">
-                    <div class="box box-primary">
-                        <div class="box-body">
-						
-							<div class="panel-group">
-								<div class="panel panel-default">
-									<div class="panel panel-body">
-										<div class="row">
-											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.LevelOfSeverity)</label></div>
-											<div class="col-lg-4">
-												<select id="incidentEnvironmentAirEmission_LevelOfSeverity" name="incidentEnvironmentAirEmission.LevelOfSeverity" class="form-control thin-control">
-													@foreach (IncidentLevel one in Enum.GetValues(typeof(IncidentLevel)))
-													{
-														if (one != IncidentLevel.None)
-														{
-															<option value="@(Convert.ToInt32(one))" @( (Convert.ToInt32(one)).ToString() == incidentEnvironmentAirEmission.LevelOfSeverity ? "selected" : "")>@one.ToEnumString()</option>
-														}
-													}
-												</select>
-												@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.LevelOfSeverity, "", new { @class = "text-danger" })
-											</div>
-										</div>
-
-										@*<div class="row">
-											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IncidentStatus)</label></div>
-											<div class="col-lg-4">
-												<select id="incidentEnvironmentAirEmission_IncidentStatus" name="incidentEnvironmentAirEmission.IncidentStatus" class="form-control thin-control">
-													<option value=""></option>
-													@foreach (IncidentStatus one in Enum.GetValues(typeof(IncidentStatus)))
-													{
-														<option value="@one.ToEnumString()" @( one.ToEnumString() == incidentEnvironmentAirEmission.IncidentStatus ? "selected" : "")>@one.ToEnumString()</option>
-													}
-												</select>
-												@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.IncidentStatus, "", new { @class = "text-danger" })
-											</div>
-										</div>*@
-
-										<div class="row">
-											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label class="mandatory-field">@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IncidentBackground)</label></div>
-											<div class="col-lg-4">
-                                                @Html.EditorFor(model => incidentEnvironmentAirEmission.IncidentBackground, new { htmlAttributes = new { @class = "form-control", @style = "height:150px; width:400px" } })
-												@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.IncidentBackground, "", new { @class = "text-danger" })
-											</div>
-										</div>
-
-										@*<div class="row">
-											<div class="col-lg-1"></div>
-											<div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.IsDrillMode)</label></div>
-											<div class="col-lg-4">
-												<div class="checkbox">
-                                                    <input id="incidentEnvironmentAirEmission_IsDrillMode" name="incidentEnvironmentAirEmission.IsDrillMode" type="checkbox" value="@(incidentEnvironmentAirEmission.IsDrillMode != null && incidentEnvironmentAirEmission.IsDrillMode.Value ? "true" : "false")" @(incidentEnvironmentAirEmission.IsDrillMode != null && incidentEnvironmentAirEmission.IsDrillMode.Value ? "checked" : "") style="top:-10px; left: 20px" />
-													@Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.IsDrillMode, "", new { @class = "text-danger" })
-												</div>
-											</div>
-										</div>*@
-									</div>
-								</div>
-
-								<div class="panel panel-primary">
-									<div class="panel panel-heading"><label>@Resources.global.Label_Details</label></div>
-									<div class="panel panel-body">
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.Location)</label></div>
-                                            <div class="col-lg-6">
-                                                <select id="incidentEnvironmentAirEmission_Location" name="incidentEnvironmentAirEmission.Location" class="form-control thin-control">
-                                                    <option value=""></option>
-                                                    @foreach (string one in Model.Options_Location)
-                                                    {
-                                                        <option value="@one" @(incidentEnvironmentAirEmission.Location == one ? "selected" : "")>@one</option>
-                                                    }
-                                                </select>
-                                                @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.Location, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.PossibleCause)</label></div>
-                                            <div class="col-lg-6">
-                                                @Html.EditorFor(model => incidentEnvironmentAirEmission.PossibleCause, new { htmlAttributes = new { @class = "form-control thin-control" } })
-                                                @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.PossibleCause, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.SourceOfInformation)</label></div>
-                                            <div class="col-lg-6">
-                                                <select id="incidentEnvironmentAirEmission_SourceOfInformation" name="incidentEnvironmentAirEmission.SourceOfInformation" class="form-control thin-control">
-                                                    <option value=""></option>
-                                                    @foreach (string one in Model.Options_SourceOfInformation)
-                                                    {
-                                                        <option value="@one" @(incidentEnvironmentAirEmission.SourceOfInformation == one ? "selected" : "")>@one</option>
-                                                    }
-                                                </select>
-                                                @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.SourceOfInformation, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.AbatementSystemUnavailable)</label></div>
-                                            <div class="col-lg-6">
-                                                <input id="incidentEnvironmentAirEmission_AbatementSystemUnavailable" name="incidentEnvironmentAirEmission.AbatementSystemUnavailable" type="checkbox" value="@(incidentEnvironmentAirEmission.AbatementSystemUnavailable != null && incidentEnvironmentAirEmission.AbatementSystemUnavailable.Value ? "true" : "false")" @(incidentEnvironmentAirEmission.AbatementSystemUnavailable != null && incidentEnvironmentAirEmission.AbatementSystemUnavailable.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                                @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.AbatementSystemUnavailable, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-1"></div>
-                                            <div class="col-lg-3 text-right"><label>@Html.DisplayNameFor(model => incidentEnvironmentAirEmission.ComplaintOfBlackSmoke)</label></div>
-                                            <div class="col-lg-6">
-                                                <input id="incidentEnvironmentAirEmission_ComplaintOfBlackSmoke" name="incidentEnvironmentAirEmission.ComplaintOfBlackSmoke" type="checkbox" value="@(incidentEnvironmentAirEmission.ComplaintOfBlackSmoke != null && incidentEnvironmentAirEmission.ComplaintOfBlackSmoke.Value ? "true" : "false")" @(incidentEnvironmentAirEmission.ComplaintOfBlackSmoke != null && incidentEnvironmentAirEmission.ComplaintOfBlackSmoke.Value ? "checked" : "") style="top:-10px; left: 20px" />
-                                                @Html.ValidationMessageFor(model => incidentEnvironmentAirEmission.ComplaintOfBlackSmoke, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-									</div>
-								</div>
-							</div>
-
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentEnvironmentAirEmissionId, new { @Value = incidentEnvironmentAirEmission.IncidentEnvironmentAirEmissionId })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.ChecklistBatchId, new { @Value = incidentEnvironmentAirEmission.ChecklistBatchId })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.ChatRoomId, new { @Value = incidentEnvironmentAirEmission.ChatRoomId })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.GeneralEnquiryId, new { @Value = incidentEnvironmentAirEmission.GeneralEnquiryId })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.CrisisId, new { @Value = incidentEnvironmentAirEmission.CrisisId })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IssueById, new { @Value = incidentEnvironmentAirEmission.IssueById })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IssueDateTime, new { @Value = incidentEnvironmentAirEmission.IssueDateTime == null ? "" : incidentEnvironmentAirEmission.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.CloseById, new { @Value = incidentEnvironmentAirEmission.CloseById })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.CloseDateTime, new { @Value = incidentEnvironmentAirEmission.CloseDateTime == null ? "" : incidentEnvironmentAirEmission.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.CreatedBy, new { @Value = incidentEnvironmentAirEmission.CreatedBy })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.CreatedDateTime, new { @Value = incidentEnvironmentAirEmission.CreatedDateTime == null ? "" : incidentEnvironmentAirEmission.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.LastUpdatedBy, new { @Value = incidentEnvironmentAirEmission.LastUpdatedBy })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.LastUpdatedDateTime, new { @Value = incidentEnvironmentAirEmission.LastUpdatedDateTime == null ? "" : incidentEnvironmentAirEmission.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.History, new { @Value = incidentEnvironmentAirEmission.History })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentNo, new { @Value = incidentEnvironmentAirEmission.IncidentNo })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IncidentStatus, new { @Value = incidentEnvironmentAirEmission.IncidentStatus })
-                            @Html.HiddenFor(model => incidentEnvironmentAirEmission.IsDrillMode, new { @Value = incidentEnvironmentAirEmission.IsDrillMode != null && incidentEnvironmentAirEmission.IsDrillMode.Value ? "true" : "false" })
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
-                <div class="tab-pane fade" id="Checklists">
+                
+                <div class="tab-pane fade active in" id="Checklists">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-3">
@@ -324,44 +136,44 @@
                             <div class="col-lg-8">
                                 <ul class="nav nav-pills ">
                                     @{
-                                int countChecklist = 1;
-                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
-                                {
-                                    <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
-                                    countChecklist++;
-                                }
+    int countChecklist = 1;
+    foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+    {
+            <li @(countChecklist == 1 ? "class=active" : "")><a href="#list@(countChecklist)" data-toggle="tab">@(checklist.Entity.Department)</a></li>
+        countChecklist++;
+    }
                                     }
                                 </ul>
                                 <div id="TabList" class="tab-content">
                                     @{
-                                countChecklist = 1;
-                                foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
-                                {
-                                    int countChecklistAction = 1;
-                                    <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
-                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                            <th></th>
-                                            <th>Action</th>
-                                            <th>Last Updated By</th>
-                                            <th>Last Updated Datetime</th>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
-                                                {
-                                                    <tr>
-                                                        <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
-                                                        <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
-                                                        <td>@action.Entity.LastUpdatedBy</td>
-                                                        <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
-                                                    </tr>
-                                                    countChecklistAction++;
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                                countChecklist++;
-                                }
+    countChecklist = 1;
+    foreach (CCCP.Business.Model.ChecklistModel checklist in Model.Checklists)
+    {
+        int countChecklistAction = 1;
+            <div class="tab-pane fade @(countChecklist == 1 ? "active in" : "")" id="list@(countChecklist)">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <th></th>
+                    <th>Action</th>
+                    <th>Last Updated By</th>
+                    <th>Last Updated Datetime</th>
+                    </thead>
+                    <tbody>
+                        @foreach (CCCP.Business.Model.ChecklistActionModel action in checklist.ChecklistActions)
+                        {
+                            <tr>
+                                <td><input type="checkbox" value="@Convert.ToInt32(action.ActionStatus)" data-checklist="@(countChecklist-1)" data-checklistaction="@(countChecklistAction-1)"></td>
+                                <td><span @(@action.IsCompulsory ? "class=mandatory-field" : "")></span>@action.Entity.Action</td>
+                                <td>@action.Entity.LastUpdatedBy</td>
+                                <td>@(action.Entity.LastUpdatedDateTime == null ? "" : action.Entity.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss"))</td>
+                            </tr>
+                            countChecklistAction++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+                        countChecklist++;
+    }
                                     }
                                 </div>
                             </div>
@@ -370,7 +182,9 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="IncidentEnquiry">
+
+
+                <div class="tab-pane fade" id="CrisisEnquiry">
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-lg-2"></div>
@@ -381,135 +195,26 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="tab-pane fade" id="LinkedIncident">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-10">
-                                <table id="LinkedIncidentTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentNo)</th>
-                                            <th>Incident Type</th>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.LevelOfSeverity)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentStatus)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.IncidentBackground)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.CreatedBy)</th>
-                                            <th>@Html.DisplayNameFor(model => model.Entity.IssueDateTime)</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.LinkedIncidentEntities)
-                                        {
-                                            string sLevelOfSeverity1 = "";
-                                            if (item.LevelOfSeverity != null)
-                                            {
-                                                int level = Convert.ToInt32(item.LevelOfSeverity);
-                                                IncidentLevel iLevel = (IncidentLevel)level;
-                                                sLevelOfSeverity1 = iLevel.ToEnumString();
-                                            }
-                                            <tr>
-                                                <td>@Html.DisplayFor(model => item.IncidentNo)</td>
-                                                <td>@Html.DisplayFor(model => item.IncidentType)</td>
-                                                <td>@Html.DisplayFor(model => sLevelOfSeverity1)</td>
-                                                <td>@Html.DisplayFor(model => item.IncidentStatus)</td>
-                                                <td>@Html.Raw(item.IncidentBackground != null ? item.IncidentBackground.Replace(System.Environment.NewLine, "<br/>") : "")</td>
-                                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
-                                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
-                                                <td>
-                                                    <div class="tools">
-                                                        <a href="@Url.Action("Details", item.Controller, new { id = item.IncidentId })" title="@Resources.global.Func_LinkIncident"><i class="fa fa-sliders"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-1"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="LinkedGeneralEnquiry">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-10">
-                                <table id="LinkedGeneralEnquiryTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().GeneralEnquiryId)</th>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().GeneralEnquiryTypeId)</th>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().Status)</th>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().Background)</th>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().CreatedBy)</th>
-                                            <th>@Html.DisplayNameFor(model => model.LinkedGeneralEnquiryEntities.FirstOrDefault().IssueDateTime)</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.LinkedGeneralEnquiryEntities)
-                                        {
-                                            <tr>
-                                                <td>@Html.DisplayFor(model => item.GeneralEnquiryId)</td>
-                                                <td>@MasterTableService.GetIncidentTypeName(MasterTableService.GetIncidentTypeSubType(item.GeneralEnquiryTypeId.Value))</td>
-                                                <td>@Html.DisplayFor(model => item.Status)</td>
-                                                <td>@Html.Raw(item.Background != null ? item.Background.Replace(System.Environment.NewLine, "<br/>") : "")</td>
-                                                <td>@Html.DisplayFor(model => item.CreatedBy)</td>
-                                                <td>@Html.DisplayFor(model => item.IssueDateTime)</td>
-                                                <td>
-                                                    <div class="tools">
-                                                        <a href="@Url.Action("Details", "GeneralEnquiry", new { id = item.GeneralEnquiryId })" title="@Resources.global.Func_LinkGeneralEnquiry"><i class="fa fa-sliders"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-1"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="Notification">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-10">
-                                <table id="NotificationTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>@Html.DisplayNameFor(model => model.NotificationEntities.FirstOrDefault().CreatedDateTime)</th>
-                                            <th>@Html.DisplayNameFor(model => model.NotificationEntities.FirstOrDefault().Message)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.NotificationEntities)
-                                        {
-                                            <tr>
-                                                <td>@Html.DisplayFor(model => item.CreatedDateTime)</td>
-                                                <td>@Html.DisplayFor(model => item.Message)</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-1"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-            <div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
-                    <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "IncidentEnvironmentAirEmission", new { id = incidentEnvironmentAirEmission.IncidentEnvironmentAirEmissionId })';">@Resources.global.Func_Cancel</button>
-                </div>
+            <div>                
+                @Html.HiddenFor(model => crisisInst.CrisisId, new { @Value = crisisInst.CrisisId })
+                @Html.HiddenFor(model => crisisInst.ChecklistBatchId, new { @Value = crisisInst.ChecklistBatchId })
+                @Html.HiddenFor(model => crisisInst.ChatRoomId, new { @Value = crisisInst.ChatRoomId })
+                @Html.HiddenFor(model => crisisInst.CrisisNo, new { @Value = crisisInst.CrisisNo })
+                @Html.HiddenFor(model => crisisInst.Status, new { @Value = crisisInst.Status })
+                @Html.HiddenFor(model => crisisInst.History, new { @Value = crisisInst.History })
+                @Html.HiddenFor(model => crisisInst.IssueById, new { @Value = crisisInst.IssueById })
+                @Html.HiddenFor(model => crisisInst.IssueDateTime, new { @Value = crisisInst.IssueDateTime == null ? "" : crisisInst.IssueDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                @Html.HiddenFor(model => crisisInst.CloseById, new { @Value = crisisInst.CloseById })
+                @Html.HiddenFor(model => crisisInst.CloseDateTime, new { @Value = crisisInst.CloseDateTime == null ? "" : crisisInst.CloseDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                @Html.HiddenFor(model => crisisInst.RejectReason, new { @Value = crisisInst.RejectReason })
+                @Html.HiddenFor(model => crisisInst.CreatedBy, new { @Value = crisisInst.CreatedBy })
+                @Html.HiddenFor(model => crisisInst.CreatedDateTime, new { @Value = crisisInst.CreatedDateTime == null ? "" : crisisInst.CreatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                @Html.HiddenFor(model => crisisInst.LastUpdatedBy, new { @Value = crisisInst.LastUpdatedBy })
+                @Html.HiddenFor(model => crisisInst.LastUpdatedDateTime, new { @Value = crisisInst.LastUpdatedDateTime == null ? "" : crisisInst.LastUpdatedDateTime.Value.ToString("yyyy-MM-dd tthh:mm:ss") })
+                <button class="btn btn-primary" type="submit" id="btnUpdate">@Resources.global.Func_Update</button>
+                <button class="btn btn-primary" type="button" onclick="window.location = '@Url.Action("Details", "CrisisManagement", new { id = Model.Entity.CrisisId })';">@Resources.global.Func_Cancel</button>
             </div>
             <br />
 }
@@ -524,7 +229,7 @@
                     </a>
                     <div id="History" class="panel-collapse collapse">
                         <div class="panel-body multiline">
-                            @Html.Raw(incidentEnvironmentAirEmission.History)
+                            @Html.Raw(Model.Entity.History)
                         </div>
                     </div>
                 </div>

@@ -51,6 +51,47 @@ namespace CCCP.Controllers
             return View(crisis);
         }
 
+        // GET: CrisisManagement/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Crisis crisisInst = db.Crisis.Find(id);
+            if (crisisInst == null) return HttpNotFound();
+            else
+            {
+                LoadData(id.Value);
+                if (Session != null)
+                {
+                    Session["crisis"] = crisis;
+                }
+
+                return View(crisis);
+            }
+        }
+
+        // POST: CrisisManagement/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "CrisisId,ChecklistBatchId,ChatRoomId,CrisisNo,Status,History,IssueById,IssueDateTime,CloseById,CloseDateTime,RejectReason,CreatedBy,CreatedDateTime,LastUpdatedBy,LastUpdatedDateTime")] Crisis crisisInst)
+        {
+            if (Session != null && Session["crisis"] != null)
+            {
+                crisis = Session["crisis"] as CrisisModel;
+                crisis.Entity = crisisInst;
+            }
+
+            if (ModelState.IsValid)
+            {
+                new CrisisApiController().Edit(crisis);
+
+                return RedirectToAction("Details", new { id = crisis.Entity.CrisisId, message = "Crisis had been updated successfully!" });
+            }
+            return View(crisis);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
