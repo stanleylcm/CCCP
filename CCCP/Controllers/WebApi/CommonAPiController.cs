@@ -17,9 +17,6 @@ using CCCP.Hubs;
 using Microsoft.AspNet.SignalR;
 using System.Collections.Specialized;
 using System.Web.Security;
-using System.IO;
-using System.Net;
-using System.Text;
 
 namespace CCCP.Controllers.WebApi
 {
@@ -32,8 +29,6 @@ namespace CCCP.Controllers.WebApi
         public int SendChatRoomMessage(string name, string message, string time, int userId, int chatRoomId, IEnumerable<HttpPostedFileBase> uploadData)
         {
             JsonResult result = new CCCP.Controllers.ChatRoomController().SaveChatRoomMessageAttachment(chatRoomId, userId, name, Convert.ToDateTime(time), message, uploadData);
-            //dynamic response = System.Web.Helpers.Json.Decode(result.Data.ToString());
-            //dynamic response = Newtonsoft.Json.JsonConvert.DeserializeObject(result.Data.ToString());
             var serializer = new JavaScriptSerializer();
 
             dynamic response = serializer.Deserialize(serializer.Serialize(result.Data), typeof(object));
@@ -98,6 +93,17 @@ namespace CCCP.Controllers.WebApi
             }
 
             return messageList;
+        }
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
+        public int SendChatRoomSystemMessage(string message, string time, int userId, int chatRoomId)
+        {
+            int msgId = ChatRoomService.SaveSystemMessage(chatRoomId, userId, message, Convert.ToDateTime(time));
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<ChatRoomHub>();
+            context.Clients.All.broadcastMessage("System Message", message, time, chatRoomId, msgId);
+
+            return msgId;
         }
     }
 }

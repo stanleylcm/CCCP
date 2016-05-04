@@ -53,5 +53,27 @@ namespace CCCP.Business.Service
 
             return attach.ChatRoomAttachmentId;
         }
+
+        public static int SaveSystemMessage(int chatRoomId, int userId, String message, DateTime sendDateTime)
+        {
+            CCCPDbContext db = new CCCPDbContext();
+            UserModel user = new UserModel(db.User.Find(userId));
+            ChatRoomMessage crMsg = new ChatRoomMessage();
+
+            crMsg.ChatRoomId = chatRoomId;
+            crMsg.SenderUserId = 0; // userId = 0 as system message?
+            crMsg.SenderDisplayName = "System Message";
+            crMsg.SendDateTime = sendDateTime;
+            crMsg.Message = message;
+            crMsg.CreatedBy = user.GetLastUpdatedBy();
+            crMsg.CreatedDateTime = DateTime.Now;
+            crMsg.LastUpdatedBy = user.GetLastUpdatedBy();
+            crMsg.LastUpdatedDateTime = DateTime.Now;
+
+            db.ChatRoomMessage.Add(crMsg);
+            db.SaveChanges();
+
+            return crMsg.ChatRoomMessageId;
+        }
     }
 }
