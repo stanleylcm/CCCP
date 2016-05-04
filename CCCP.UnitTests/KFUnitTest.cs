@@ -123,7 +123,7 @@ namespace CCCP.UnitTest
             test.StatusUpdateCode = "1";
             test.MVOutage = true;
             test.LVOutage = true;
-            test.Points = "11,22,33,44,55,66,77";
+            test.AffectedPoints = "11,22,33,44,55,66,77";
 
 
             client.BaseAddress = new Uri("http://localhost/");
@@ -162,7 +162,7 @@ namespace CCCP.UnitTest
             test.StatusUpdateCode = "1";
             test.MVOutage = true;
             test.LVOutage = true;
-            test.Points = "11,22,33,44,55,66,77";
+            test.AffectedPoints = "11,22,33,44,55,66,77";
 
 
             client.BaseAddress = new Uri("http://localhost/");
@@ -226,7 +226,7 @@ namespace CCCP.UnitTest
             test.StatusUpdateCode = "1";
             test.MVOutage = true;
             test.LVOutage = true;
-            test.Points = "11,22,33,44,55,66,77";
+            test.AffectedPoints = "11,22,33,44,55,66,77";
 
             client.BaseAddress = new Uri("http://localhost/");
 

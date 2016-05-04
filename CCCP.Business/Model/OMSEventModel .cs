@@ -50,7 +50,7 @@ namespace CCCP.Business.Model
             oms.RootCause_Chi = viewModel.RootCause_Chi;
             oms.MVOutage = viewModel.MVOutage;
             oms.LVOutage = viewModel.LVOutage;
-            oms.AffectedPoints = viewModel.Points;
+            oms.AffectedPoints = viewModel.AffectedPoints;
 
             this.Entity = oms;
         }
@@ -80,7 +80,7 @@ namespace CCCP.Business.Model
             oms.RootCause_Chi = viewModel.RootCause_Chi;
             oms.MVOutage = viewModel.MVOutage;
             oms.LVOutage = viewModel.LVOutage;
-            oms.AffectedPoints = viewModel.Points;
+            oms.AffectedPoints = viewModel.AffectedPoints;
 
             this.Entity = oms;
         }
@@ -115,7 +115,8 @@ namespace CCCP.Business.Model
         public bool IsCriticalPoint()
         {
             List<string> criticalPoints = MasterTableService.GetCriticalPoints();
-            List<string> affectedPoints = Entity.AffectedPoints.Split(',').ToList();
+            string affectedPointsStr = Entity.AffectedPoints == null ? "" : Entity.AffectedPoints;
+            List<string> affectedPoints = affectedPointsStr.Split(',').ToList();
 
             return criticalPoints.Contains(affectedPoints);
         }

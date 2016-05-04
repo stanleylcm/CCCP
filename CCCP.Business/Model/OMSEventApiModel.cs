@@ -39,6 +39,6 @@ namespace CCCP.Business.Model
         public String RootCause_Chi { get; set; }
         public Boolean? MVOutage { get; set; }
         public Boolean? LVOutage { get; set; }
-        public String Points { get; set; }
+        public String AffectedPoints { get; set; }
     }
 }
